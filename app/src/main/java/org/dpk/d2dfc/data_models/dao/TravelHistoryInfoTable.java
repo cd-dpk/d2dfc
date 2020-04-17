@@ -2,6 +2,12 @@ package org.dpk.d2dfc.data_models.dao;
 
 import android.content.ContentValues;
 import android.database.Cursor;
+import android.util.Log;
+
+import androidx.annotation.NonNull;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class TravelHistoryInfoTable implements ITable{
 
@@ -42,7 +48,11 @@ public class TravelHistoryInfoTable implements ITable{
 
     @Override
     public String toSelectString() {
-        return null;
+        if (getWhereClause().equals("")){
+            return "select * from "+ tableName();
+        }else {
+            return "select * from "+ tableName()+" where "+ getWhereClause();
+        }
     }
 
     @Override
@@ -62,12 +72,54 @@ public class TravelHistoryInfoTable implements ITable{
 
     @Override
     public ITable toITableFromCursor(Cursor cursor) {
-        return null;
+
+        TravelHistoryInfoTable travelHistoryInfoTable= new TravelHistoryInfoTable();
+
+        if (cursor.getColumnIndex(Variable.STRNIGreporterPhone)!=-1){
+            travelHistoryInfoTable.reporterPhone= cursor.getString(
+                    cursor.getColumnIndex(Variable.STRNIGreporterPhone));
+        }
+        if (cursor.getColumnIndex(Variable.STRNGreportingDate)!=-1){
+            travelHistoryInfoTable.reportingDate= cursor.getString(
+                    cursor.getColumnIndex(Variable.STRNGreportingDate));
+        }
+        if (cursor.getColumnIndex(Variable.STRNGpersonID)!=-1){
+            travelHistoryInfoTable.personID= cursor.getString(
+                    cursor.getColumnIndex(Variable.STRNGpersonID));
+        }
+        if (cursor.getColumnIndex(Variable.STRINGdhaka)!=-1){
+            travelHistoryInfoTable.dhaka= cursor.getString(
+                    cursor.getColumnIndex(Variable.STRINGdhaka));
+        }
+        if (cursor.getColumnIndex(Variable.STRINGnaraynganj)!=-1){
+            travelHistoryInfoTable.naraynganj= cursor.getString(
+                    cursor.getColumnIndex(Variable.STRINGnaraynganj));
+        }
+        if (cursor.getColumnIndex(Variable.STRINGsylhet)!=-1){
+            travelHistoryInfoTable.sylhet= cursor.getString(
+                    cursor.getColumnIndex(Variable.STRINGsylhet));
+        }
+        if (cursor.getColumnIndex(Variable.STRINGoutOfSarail)!=-1){
+            travelHistoryInfoTable.outOfSarail= cursor.getString(
+                    cursor.getColumnIndex(Variable.STRINGoutOfSarail));
+        }
+        if (cursor.getColumnIndex(Variable.STRINGoutOfBrahmanbaria)!=-1){
+            travelHistoryInfoTable.outOfBrahmanbaria= cursor.getString(
+                    cursor.getColumnIndex(Variable.STRINGoutOfBrahmanbaria));
+        }
+        if (cursor.getColumnIndex(Variable.STRINGoutOfBangladesh)!=-1){
+            travelHistoryInfoTable.outOfBangladesh= cursor.getString(
+                    cursor.getColumnIndex(Variable.STRINGoutOfBangladesh));
+        }
+
+        return travelHistoryInfoTable;
+
     }
 
     @Override
     public boolean isCloned(ITable iTable) {
-        return false;
+        if (iTable.toString().equals(this.toString())) return true;
+        else return false;
     }
 
     @Override
@@ -77,12 +129,32 @@ public class TravelHistoryInfoTable implements ITable{
 
     @Override
     public ITable toClone() {
-        return null;
+        TravelHistoryInfoTable travelHistoryInfoTable=new TravelHistoryInfoTable();
+        travelHistoryInfoTable.reporterPhone = reporterPhone;
+                travelHistoryInfoTable.reportingDate = reportingDate;
+                travelHistoryInfoTable.personID = personID;
+                travelHistoryInfoTable.dhaka = dhaka;
+                travelHistoryInfoTable.naraynganj = naraynganj;
+                travelHistoryInfoTable.sylhet = sylhet;
+                travelHistoryInfoTable.outOfSarail = outOfSarail;
+                travelHistoryInfoTable.outOfBrahmanbaria = outOfBrahmanbaria;
+                travelHistoryInfoTable.outOfBangladesh = outOfBangladesh;
+                return travelHistoryInfoTable;
     }
 
     @Override
     public ContentValues getInsertContentValues() {
-        return null;
+        ContentValues contentValues= new ContentValues();
+        contentValues.put(Variable.STRNIGreporterPhone,reporterPhone);
+        contentValues.put(Variable.STRNGreportingDate,reportingDate);
+        contentValues.put(Variable.STRNGpersonID,personID);
+        contentValues.put(Variable.STRINGdhaka,dhaka);
+        contentValues.put(Variable.STRINGnaraynganj,naraynganj);
+        contentValues.put(Variable.STRINGsylhet,sylhet);
+        contentValues.put(Variable.STRINGoutOfSarail,outOfSarail);
+        contentValues.put(Variable.STRINGoutOfBrahmanbaria,outOfBrahmanbaria);
+        contentValues.put(Variable.STRINGoutOfBangladesh,outOfBangladesh);
+        return contentValues;
     }
 
     @Override
@@ -102,8 +174,36 @@ public class TravelHistoryInfoTable implements ITable{
 
     @Override
     public String toDropTableString() {
-        return null;
+        return "DROP TABLE "+" "+tableName();
     }
+
+    @NonNull
+    @Override
+    public String toString() {
+        return reporterPhone+","+
+                personID+","+
+                reportingDate+","+
+                dhaka+","+
+                naraynganj+","+
+                sylhet+","+
+                outOfSarail+","+
+                outOfBrahmanbaria+","+
+                outOfBangladesh;
+
+    }
+
+    public List<TravelHistoryInfoTable> toTablesFromITables(List<ITable> iTables) {
+        List<TravelHistoryInfoTable> travelHistoryInfoTables = new ArrayList<TravelHistoryInfoTable>();
+        for (ITable iTable: iTables) {
+
+            TravelHistoryInfoTable travelHistoryInfoTable = (TravelHistoryInfoTable) iTable.toClone();
+            Log.d("TRANS-I", iTable.toString());
+            Log.d("TRANS", travelHistoryInfoTable.toString());
+           travelHistoryInfoTables.add(travelHistoryInfoTable);
+        }
+        return travelHistoryInfoTables;
+    }
+
     public static class Variable {
         public final static String STRNIGreporterPhone="reporterPhone",
                 STRNGpersonID="personID",

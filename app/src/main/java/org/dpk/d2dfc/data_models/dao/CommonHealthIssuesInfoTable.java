@@ -2,6 +2,10 @@ package org.dpk.d2dfc.data_models.dao;
 
 import android.content.ContentValues;
 import android.database.Cursor;
+import android.util.Log;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class CommonHealthIssuesInfoTable implements ITable{
 
@@ -53,7 +57,11 @@ public class CommonHealthIssuesInfoTable implements ITable{
 
     @Override
     public String toSelectString() {
-        return null;
+        if (getWhereClause().equals("")){
+            return "select * from "+ tableName();
+        }else {
+            return "select * from "+ tableName()+" where "+ getWhereClause();
+        }
     }
 
     @Override
@@ -73,12 +81,75 @@ public class CommonHealthIssuesInfoTable implements ITable{
 
     @Override
     public ITable toITableFromCursor(Cursor cursor) {
-        return null;
+        CommonHealthIssuesInfoTable commonHealthIssuesInfoTable= new CommonHealthIssuesInfoTable();
+        if (cursor.getColumnIndex(Variable.STRINGreporterPhone)!=-1){
+            commonHealthIssuesInfoTable.reporterPhone= cursor.getString(
+                    cursor.getColumnIndex(Variable.STRINGreporterPhone));
+        }
+        if (cursor.getColumnIndex(Variable.STRINGreportingDate)!=-1){
+            commonHealthIssuesInfoTable.reportingDate= cursor.getString(
+                    cursor.getColumnIndex(Variable.STRINGreportingDate));
+        }
+        if (cursor.getColumnIndex(Variable.STRINGdiabetesRecorded)!=-1){
+            commonHealthIssuesInfoTable.diabetesRecorded= cursor.getString(
+                    cursor.getColumnIndex(Variable.STRINGdiabetesRecorded));
+        }
+        if (cursor.getColumnIndex(Variable.STRINGdiabetesNow)!=-1){
+            commonHealthIssuesInfoTable.diabetesNow= cursor.getString(
+                    cursor.getColumnIndex(Variable.STRINGdiabetesNow));
+        }
+        if (cursor.getColumnIndex(Variable.STRINGcardiovascularRecorded)!=-1){
+            commonHealthIssuesInfoTable.cardiovascularRecorded= cursor.getString(
+                    cursor.getColumnIndex(Variable.STRINGcardiovascularRecorded));
+        }
+        if (cursor.getColumnIndex(Variable.STRINGcardiovascularNow)!=-1){
+            commonHealthIssuesInfoTable.cardiovascularNow= cursor.getString(
+                    cursor.getColumnIndex(Variable.STRINGcardiovascularNow));
+        }
+        if (cursor.getColumnIndex(Variable.STRINGhypertensionRecorded)!=-1){
+            commonHealthIssuesInfoTable.hypertensionRecorded= cursor.getString(
+                    cursor.getColumnIndex(Variable.STRINGhypertensionRecorded));
+        }
+        if (cursor.getColumnIndex(Variable.STRINGhypertensionNow)!=-1){
+            commonHealthIssuesInfoTable.hypertensionNow= cursor.getString(
+                    cursor.getColumnIndex(Variable.STRINGhypertensionNow));
+        }
+        if (cursor.getColumnIndex(Variable.STRINGstrokeRecorded)!=-1){
+            commonHealthIssuesInfoTable.strokeRecorded= cursor.getString(
+                    cursor.getColumnIndex(Variable.STRINGstrokeRecorded));
+        }
+        if (cursor.getColumnIndex(Variable.STRINGstrokeNow)!=-1){
+            commonHealthIssuesInfoTable.strokeNow= cursor.getString(
+                    cursor.getColumnIndex(Variable.STRINGstrokeNow));
+        }
+        if (cursor.getColumnIndex(Variable.STRINGcancerRecorded)!=-1){
+            commonHealthIssuesInfoTable.cancerRecorded= cursor.getString(
+                    cursor.getColumnIndex(Variable.STRINGcancerRecorded));
+        }
+        if (cursor.getColumnIndex(Variable.STRINGcancerNow)!=-1){
+            commonHealthIssuesInfoTable.cancerNow= cursor.getString(
+                    cursor.getColumnIndex(Variable.STRINGcancerNow));
+        }
+        if (cursor.getColumnIndex(Variable.STRINGtubercolosisRecorded)!=-1){
+            commonHealthIssuesInfoTable.tubercolosisRecorded= cursor.getString(
+                    cursor.getColumnIndex(Variable.STRINGtubercolosisRecorded));
+        }
+        if (cursor.getColumnIndex(Variable.STRINGtubercolosisNow)!=-1){
+            commonHealthIssuesInfoTable.tubercolosisNow= cursor.getString(
+                    cursor.getColumnIndex(Variable.STRINGtubercolosisNow));
+        }
+        if (cursor.getColumnIndex(Variable.STRINGothers)!=-1){
+            commonHealthIssuesInfoTable.others= cursor.getString(
+                    cursor.getColumnIndex(Variable.STRINGothers));
+        }
+        return commonHealthIssuesInfoTable;
+
     }
 
     @Override
     public boolean isCloned(ITable iTable) {
-        return false;
+        if (iTable.toString().equals(this.toString())) return true;
+        else return false;
     }
 
     @Override
@@ -87,13 +158,48 @@ public class CommonHealthIssuesInfoTable implements ITable{
     }
 
     @Override
-    public ITable toClone() {
-        return null;
+    public ITable toClone(){
+        CommonHealthIssuesInfoTable commonHealthIssuesInfoTable= new CommonHealthIssuesInfoTable();
+        commonHealthIssuesInfoTable.reporterPhone=reporterPhone;
+        commonHealthIssuesInfoTable.reportingDate = reportingDate;
+        commonHealthIssuesInfoTable.personID= personID;
+        commonHealthIssuesInfoTable.diabetesRecorded = diabetesRecorded;
+        commonHealthIssuesInfoTable.diabetesNow = diabetesNow;
+        commonHealthIssuesInfoTable.cardiovascularRecorded=cardiovascularRecorded;
+        commonHealthIssuesInfoTable.cardiovascularNow=cardiovascularNow;
+        commonHealthIssuesInfoTable.hypertensionRecorded = hypertensionRecorded;
+        commonHealthIssuesInfoTable.hypertensionNow = hypertensionNow;
+        commonHealthIssuesInfoTable.strokeRecorded = strokeRecorded;
+        commonHealthIssuesInfoTable.strokeNow=strokeNow;
+        commonHealthIssuesInfoTable.cancerRecorded=cancerRecorded;
+        commonHealthIssuesInfoTable.cancerNow=cancerNow;
+        commonHealthIssuesInfoTable.tubercolosisRecorded=tubercolosisRecorded;
+        commonHealthIssuesInfoTable.tubercolosisNow=tubercolosisNow;
+        commonHealthIssuesInfoTable.others=others;
+        return commonHealthIssuesInfoTable;
     }
 
     @Override
     public ContentValues getInsertContentValues() {
-        return null;
+        ContentValues contentValues= new ContentValues();
+        contentValues.put(Variable.STRINGreporterPhone, reporterPhone);
+        contentValues.put(Variable.STRINGreportingDate, reportingDate);
+        contentValues.put(Variable.STRINGpersonID,personID);
+        contentValues.put(Variable.STRINGdiabetesRecorded,diabetesRecorded);
+        contentValues.put(Variable.STRINGdiabetesNow,diabetesNow);
+        contentValues.put(Variable.STRINGcardiovascularRecorded,cardiovascularRecorded);
+        contentValues.put(Variable.STRINGcardiovascularNow,cardiovascularNow);
+        contentValues.put(Variable.STRINGhypertensionRecorded,hypertensionRecorded);
+        contentValues.put(Variable.STRINGhypertensionNow,hypertensionNow);
+        contentValues.put(Variable.STRINGstrokeRecorded,strokeRecorded);
+        contentValues.put(Variable.STRINGstrokeNow,strokeNow);
+        contentValues.put(Variable.STRINGcancerRecorded,cancerRecorded);
+        contentValues.put(Variable.STRINGcancerNow,cancerNow);
+        contentValues.put(Variable.STRINGtubercolosisRecorded,tubercolosisRecorded);
+        contentValues.put(Variable.STRINGtubercolosisNow,tubercolosisNow);
+        contentValues.put(Variable.STRINGothers,others);
+
+        return contentValues;
     }
 
     @Override
@@ -113,7 +219,37 @@ public class CommonHealthIssuesInfoTable implements ITable{
 
     @Override
     public String toDropTableString() {
-        return null;
+        return "DROP TABLE "+" "+tableName();
+    }
+    public String toString() {
+        return reporterPhone+","+
+                reportingDate+","+
+                personID+","+
+                diabetesRecorded+","+
+                diabetesNow+","+
+                cardiovascularRecorded+","+
+                cardiovascularNow+","+
+                hypertensionRecorded+","+
+                hypertensionNow+","+
+                strokeRecorded+","+
+                strokeNow+","+
+                cancerRecorded+","+
+                cancerNow+","+
+                tubercolosisRecorded+","+
+                tubercolosisNow+","+
+                others;
+    }
+
+    public List<CommonHealthIssuesInfoTable> toTablesFromITables(List<ITable> iTables) {
+        List<CommonHealthIssuesInfoTable> commonHealthIssuesInfoTables = new ArrayList<CommonHealthIssuesInfoTable>();
+        for (ITable iTable: iTables) {
+
+            CommonHealthIssuesInfoTable commonHealthIssuesInfoTable = (CommonHealthIssuesInfoTable) iTable.toClone();
+            Log.d("TRANS-I", iTable.toString());
+            Log.d("TRANS", commonHealthIssuesInfoTable.toString());
+            commonHealthIssuesInfoTables.add(commonHealthIssuesInfoTable);
+        }
+        return commonHealthIssuesInfoTables;
     }
 
     public static class Variable {

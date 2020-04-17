@@ -53,6 +53,8 @@ public class Tuple implements ITable{
         }else {
             return selectString+" where "+ getWhereClauseString();
         }
+
+
     }
 
     @Override
@@ -103,7 +105,8 @@ public class Tuple implements ITable{
 
     @Override
     public boolean isCloned(ITable iTable) {
-        return false;
+        if (iTable.toString().equals(this.toString())) return true;
+        else return false;
     }
 
     @Override
@@ -139,7 +142,7 @@ public class Tuple implements ITable{
 
     @Override
     public String toDropTableString() {
-        return null;
+        return "DROP TABLE "+" "+tableName();
     }
     public List<Tuple> toTuples(List<ITable> iTables){
         List<Tuple> tuples = new ArrayList<Tuple>();

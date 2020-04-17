@@ -2,6 +2,10 @@ package org.dpk.d2dfc.data_models.dao;
 
 import android.content.ContentValues;
 import android.database.Cursor;
+import android.util.Log;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class DailyFollowUpContactPersonsTable implements ITable {
 
@@ -22,6 +26,7 @@ public class DailyFollowUpContactPersonsTable implements ITable {
         return "contact_persons";
     }
 
+
     @Override
     public String toCreateTableString() {
         return "create table if not exists "+tableName()+" ("+
@@ -36,7 +41,11 @@ public class DailyFollowUpContactPersonsTable implements ITable {
 
     @Override
     public String toSelectString() {
-        return null;
+        if (getWhereClause().equals("")){
+            return "select * from "+ tableName();
+        }else {
+            return "select * from "+ tableName()+" where "+ getWhereClause();
+        }
     }
 
     @Override
@@ -56,12 +65,32 @@ public class DailyFollowUpContactPersonsTable implements ITable {
 
     @Override
     public ITable toITableFromCursor(Cursor cursor) {
-        return null;
+
+        DailyFollowUpContactPersonsTable dialyContactPersonsTable = new DailyFollowUpContactPersonsTable();
+
+        if (cursor.getColumnIndex(Variable.STRINGreporterPhone)!=-1){
+            dialyContactPersonsTable.reporterPhone= cursor.getString(
+                    cursor.getColumnIndex(Variable.STRINGreporterPhone));
+        }
+        if (cursor.getColumnIndex(Variable.STRINGreportingDate)!=-1){
+            dialyContactPersonsTable.reportingDate= cursor.getString(
+                    cursor.getColumnIndex(Variable.STRINGreportingDate));
+        }
+        if (cursor.getColumnIndex(Variable.STRINGpersonOnePhone)!=-1){
+            dialyContactPersonsTable.personOnePhone= cursor.getString(
+                    cursor.getColumnIndex(Variable.STRINGpersonOnePhone));
+        }
+        if (cursor.getColumnIndex(Variable.STRINGpersonTwoPhone)!=-1){
+            dialyContactPersonsTable.personTwoPhone= cursor.getString(
+                    cursor.getColumnIndex(Variable.STRINGpersonTwoPhone));
+        }
+        return dialyContactPersonsTable;
     }
 
     @Override
     public boolean isCloned(ITable iTable) {
-        return false;
+        if (iTable.toString().equals(this.toString())) return true;
+        else return false;
     }
 
     @Override
@@ -71,12 +100,23 @@ public class DailyFollowUpContactPersonsTable implements ITable {
 
     @Override
     public ITable toClone() {
-        return null;
+        DailyFollowUpContactPersonsTable dailyFollowUpContactPersonsTable = new DailyFollowUpContactPersonsTable();
+        dailyFollowUpContactPersonsTable.reporterPhone=reporterPhone;
+        dailyFollowUpContactPersonsTable.reportingDate=reportingDate;
+        dailyFollowUpContactPersonsTable.personOnePhone=personOnePhone;
+        dailyFollowUpContactPersonsTable.personTwoPhone=personTwoPhone;
+        return dailyFollowUpContactPersonsTable;
     }
 
     @Override
     public ContentValues getInsertContentValues() {
-        return null;
+        ContentValues contentValues= new ContentValues();
+        contentValues.put(Variable.STRINGreporterPhone, reporterPhone);
+        contentValues.put(Variable.STRINGreportingDate, reportingDate);
+        contentValues.put(Variable.STRINGpersonOnePhone,personOnePhone);
+        contentValues.put(Variable.STRINGpersonTwoPhone,personTwoPhone);
+        return contentValues;
+
     }
 
     @Override
@@ -96,8 +136,28 @@ public class DailyFollowUpContactPersonsTable implements ITable {
 
     @Override
     public String toDropTableString() {
-        return null;
+        return "DROP TABLE "+" "+tableName();
     }
+
+    public String toString() {
+        return reporterPhone+","+
+                reportingDate+","+
+                personOnePhone+","+
+                personTwoPhone;
+    }
+
+    public List<DailyFollowUpContactPersonsTable> toTablesFromITables(List<ITable> iTables) {
+        List<DailyFollowUpContactPersonsTable> dailyFollowUpContactPersonsTables = new ArrayList<DailyFollowUpContactPersonsTable>();
+        for (ITable iTable: iTables) {
+
+            DailyFollowUpContactPersonsTable dailyFollowUpContactPersonsTable = (DailyFollowUpContactPersonsTable) iTable.toClone();
+            Log.d("TRANS-I", iTable.toString());
+            Log.d("TRANS", dailyFollowUpContactPersonsTable.toString());
+            dailyFollowUpContactPersonsTables.add(dailyFollowUpContactPersonsTable);
+        }
+        return dailyFollowUpContactPersonsTables;
+    }
+
     public static class Variable {
 
         public final static String STRINGreporterPhone="reporterPhone",

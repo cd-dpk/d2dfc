@@ -2,6 +2,10 @@ package org.dpk.d2dfc.data_models.dao;
 
 import android.content.ContentValues;
 import android.database.Cursor;
+import android.util.Log;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class RecentCoronaRelatedIssuesTable implements ITable{
     String reporterPhone, personID, reportingDate;
@@ -52,7 +56,11 @@ public class RecentCoronaRelatedIssuesTable implements ITable{
 
     @Override
     public String toSelectString() {
-        return null;
+        if (getWhereClause().equals("")){
+            return "select * from "+ tableName();
+        }else {
+            return "select * from "+ tableName()+" where "+ getWhereClause();
+        }
     }
 
     @Override
@@ -72,12 +80,67 @@ public class RecentCoronaRelatedIssuesTable implements ITable{
 
     @Override
     public ITable toITableFromCursor(Cursor cursor) {
-        return null;
+        RecentCoronaRelatedIssuesTable recentCoronaRelatedIssuesTable = new RecentCoronaRelatedIssuesTable();
+        if (cursor.getColumnIndex(Variable.STRINGreporterPhone)!=-1){
+            recentCoronaRelatedIssuesTable.reporterPhone= cursor.getString(
+                    cursor.getColumnIndex(Variable.STRINGreporterPhone));
+        }
+        if (cursor.getColumnIndex(Variable.STRINGreportingDate)!=-1){
+            recentCoronaRelatedIssuesTable.reportingDate= cursor.getString(
+                    cursor.getColumnIndex(Variable.STRINGreportingDate));
+        }
+        if (cursor.getColumnIndex(Variable.STRINGpersonID)!=-1){
+            recentCoronaRelatedIssuesTable.personID= cursor.getString(
+                    cursor.getColumnIndex(Variable.STRINGpersonID));
+        }
+        if (cursor.getColumnIndex(Variable.STRINGachesNPain)!=-1){
+            recentCoronaRelatedIssuesTable.achesNPain= cursor.getString(
+                    cursor.getColumnIndex(Variable.STRINGachesNPain));
+        }
+        if (cursor.getColumnIndex(Variable.STRINGchillis)!=-1){
+            recentCoronaRelatedIssuesTable.chillis= cursor.getString(
+                    cursor.getColumnIndex(Variable.STRINGchillis));
+        }
+        if (cursor.getColumnIndex(Variable.STRINGcoughMucus)!=-1){
+            recentCoronaRelatedIssuesTable.coughMucus= cursor.getString(
+                    cursor.getColumnIndex(Variable.STRINGcoughMucus));
+        }
+        if (cursor.getColumnIndex(Variable.STRINGdiarrhea)!=-1){
+            recentCoronaRelatedIssuesTable.diarrhea= cursor.getString(
+                    cursor.getColumnIndex(Variable.STRINGdiarrhea));
+        }
+        if (cursor.getColumnIndex(Variable.STRINGdryCough)!=-1){
+            recentCoronaRelatedIssuesTable.dryCough= cursor.getString(
+                    cursor.getColumnIndex(Variable.STRINGdryCough));
+        }
+        if (cursor.getColumnIndex(Variable.STRINGfatigue)!=-1){
+            recentCoronaRelatedIssuesTable.fatigue= cursor.getString(
+                    cursor.getColumnIndex(Variable.STRINGfatigue));
+        }
+        if (cursor.getColumnIndex(Variable.STRINGfever)!=-1){
+            recentCoronaRelatedIssuesTable.fever= cursor.getString(
+                    cursor.getColumnIndex(Variable.STRINGfever));
+        }
+        if (cursor.getColumnIndex(Variable.STRINGnasalCongestion)!=-1){
+            recentCoronaRelatedIssuesTable.nasalCongestion= cursor.getString(
+                    cursor.getColumnIndex(Variable.STRINGnasalCongestion));
+        }
+        if (cursor.getColumnIndex(Variable.STRINGnausea)!=-1){
+            recentCoronaRelatedIssuesTable.nausea= cursor.getString(
+                    cursor.getColumnIndex(Variable.STRINGnausea));
+        }
+        if (cursor.getColumnIndex(Variable.STRINGother)!=-1){
+            recentCoronaRelatedIssuesTable.other= cursor.getString(
+                    cursor.getColumnIndex(Variable.STRINGother));
+        }
+        return recentCoronaRelatedIssuesTable;
+
     }
 
     @Override
     public boolean isCloned(ITable iTable) {
-        return false;
+        if (iTable.toString().equals(this.toString())) return true;
+        else return false;
     }
 
     @Override
@@ -87,12 +150,45 @@ public class RecentCoronaRelatedIssuesTable implements ITable{
 
     @Override
     public ITable toClone() {
-        return null;
+
+        RecentCoronaRelatedIssuesTable recentCoronaRelatedIssuesTable= new RecentCoronaRelatedIssuesTable();
+        recentCoronaRelatedIssuesTable.reporterPhone = reporterPhone;
+                recentCoronaRelatedIssuesTable.reportingDate = reportingDate;
+                recentCoronaRelatedIssuesTable.personID = personID;
+                recentCoronaRelatedIssuesTable.fever = fever;
+                recentCoronaRelatedIssuesTable.dryCough = dryCough;
+                recentCoronaRelatedIssuesTable.fatigue = fatigue;
+                recentCoronaRelatedIssuesTable.coughMucus = coughMucus;
+                recentCoronaRelatedIssuesTable.shortnessOfBreath = shortnessOfBreath;
+                recentCoronaRelatedIssuesTable.soreThroat = soreThroat;
+                recentCoronaRelatedIssuesTable.achesNPain = achesNPain;
+                recentCoronaRelatedIssuesTable.chillis = chillis;
+                recentCoronaRelatedIssuesTable.nausea = nausea;
+                recentCoronaRelatedIssuesTable.nasalCongestion = nasalCongestion;
+                recentCoronaRelatedIssuesTable.diarrhea = diarrhea;
+                recentCoronaRelatedIssuesTable.other = other;
+         return recentCoronaRelatedIssuesTable;
     }
 
     @Override
     public ContentValues getInsertContentValues() {
-        return null;
+        ContentValues contentValues= new ContentValues();
+        contentValues.put(Variable.STRINGreporterPhone,reporterPhone);
+        contentValues.put(Variable.STRINGreportingDate,reportingDate);
+        contentValues.put(Variable.STRINGpersonID,personID);
+        contentValues.put(Variable.STRINGfever,fever);
+        contentValues.put(Variable.STRINGdryCough,dryCough);
+        contentValues.put(Variable.STRINGfatigue,fatigue);
+        contentValues.put(Variable.STRINGcoughMucus,coughMucus);
+        contentValues.put(Variable.STRINGshortnessOfBreath,shortnessOfBreath);
+        contentValues.put(Variable.STRINGsoreThroat,soreThroat);
+        contentValues.put(Variable.STRINGachesNPain,achesNPain);
+        contentValues.put(Variable.STRINGchillis,chillis);
+        contentValues.put(Variable.STRINGnausea,nausea);
+        contentValues.put(Variable.STRINGnasalCongestion,nasalCongestion);
+        contentValues.put(Variable.STRINGdiarrhea,diarrhea);
+        contentValues.put(Variable.STRINGother,other);
+        return contentValues;
     }
 
     @Override
@@ -112,9 +208,28 @@ public class RecentCoronaRelatedIssuesTable implements ITable{
 
     @Override
     public String toDropTableString() {
-        return null;
+        return "DROP TABLE "+" "+tableName();
     }
 
+
+    public String toString() {
+        return reporterPhone+","+
+                reportingDate+","+ personID+","+fever+","+dryCough+","+fatigue+","+
+                coughMucus+","+shortnessOfBreath+","+achesNPain+","+soreThroat+","+
+                chillis+","+nausea+","+nasalCongestion+","+diarrhea+","+other;
+    }
+
+    public List<RecentCoronaRelatedIssuesTable> toTablesFromITables(List<ITable> iTables) {
+        List<RecentCoronaRelatedIssuesTable> recentCoronaRelatedIssuesTables = new ArrayList<RecentCoronaRelatedIssuesTable>();
+        for (ITable iTable: iTables) {
+
+            RecentCoronaRelatedIssuesTable recentCoronaRelatedIssuesTable = (RecentCoronaRelatedIssuesTable) iTable.toClone();
+            Log.d("TRANS-I", iTable.toString());
+            Log.d("TRANS", recentCoronaRelatedIssuesTable.toString());
+            recentCoronaRelatedIssuesTables.add(recentCoronaRelatedIssuesTable);
+        }
+        return recentCoronaRelatedIssuesTables;
+    }
     public static class Variable {
 
         public final static String STRINGreporterPhone="reporterPhone",

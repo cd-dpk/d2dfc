@@ -2,10 +2,14 @@ package org.dpk.d2dfc.data_models.dao;
 
 import android.content.ContentValues;
 import android.database.Cursor;
+import android.util.Log;
 
 import androidx.annotation.NonNull;
 
 import org.dpk.d2dfc.data_models.PersonBasicInfo;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class FamilyInfoTable implements ITable{
     private String phone;
@@ -59,7 +63,11 @@ public class FamilyInfoTable implements ITable{
 
     @Override
     public String toSelectString() {
-        return null;
+        if (getWhereClause().equals("")){
+            return "select * from "+ tableName();
+        }else {
+            return "select * from "+ tableName()+" where "+ getWhereClause();
+        }
     }
 
     @Override
@@ -104,12 +112,18 @@ public class FamilyInfoTable implements ITable{
 
     @Override
     public ITable toClone() {
-        return null;
+        FamilyInfoTable familyInfoTable = new FamilyInfoTable();
+        familyInfoTable.phone = phone;
+        familyInfoTable.members  = members;
+        return familyInfoTable;
     }
 
     @Override
     public ContentValues getInsertContentValues() {
-        return null;
+        ContentValues contentValues= new ContentValues();
+        contentValues.put(Variable.STRING_FAMILY_PHONE, phone);
+        contentValues.put(Variable.STRING_MEMBER_COUNT, members);
+        return contentValues;
     }
 
     @Override
@@ -139,6 +153,18 @@ public class FamilyInfoTable implements ITable{
         return "("+
                 phone+","+
                 members+")";
+    }
+
+    public List<FamilyInfoTable> toTablesFromITables(List<ITable> iTables) {
+        List<FamilyInfoTable> familyInfoTables = new ArrayList<FamilyInfoTable>();
+        for (ITable iTable: iTables) {
+
+            FamilyInfoTable familyInfoTable = (FamilyInfoTable) iTable.toClone();
+            Log.d("TRANS-I", iTable.toString());
+            Log.d("TRANS", familyInfoTable.toString());
+            familyInfoTables.add(familyInfoTable);
+        }
+        return familyInfoTables;
     }
 
     public static class Variable {

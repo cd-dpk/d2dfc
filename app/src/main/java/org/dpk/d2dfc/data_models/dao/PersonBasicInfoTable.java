@@ -162,7 +162,7 @@ public class PersonBasicInfoTable implements ITable{
                 personBasicInfo.getAge()+")";
     }
 
-    public List<PersonBasicInfoTable> toTransactionTables(List<ITable> iTables) {
+    public List<PersonBasicInfoTable> toTablesFromITables(List<ITable> iTables) {
         List<PersonBasicInfoTable> personBasicInfoTables = new ArrayList<PersonBasicInfoTable>();
         for (ITable iTable: iTables) {
 
@@ -173,6 +173,8 @@ public class PersonBasicInfoTable implements ITable{
         }
         return personBasicInfoTables;
     }
+
+
 
     public static class Variable {
 
