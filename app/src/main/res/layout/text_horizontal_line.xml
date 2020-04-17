@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/text_length"
+    android:background="@color/colorPrimary">
+    <include layout="@layout/horizontal_line"/>
+    <TextView
+        android:paddingLeft="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Text Here"
+        android:id="@+id/text_horizontal_line_text"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:textColor="@android:color/white"
+        />
+    <include layout="@layout/horizontal_line"/>
+</LinearLayout>
