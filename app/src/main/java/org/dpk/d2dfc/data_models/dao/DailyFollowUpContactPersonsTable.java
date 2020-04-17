@@ -5,16 +5,33 @@ import android.database.Cursor;
 
 public class DailyFollowUpContactPersonsTable implements ITable {
 
-    private String reportingDate, personOneID, personTwoID;
+    private String reporterPhone, reportingDate, personOnePhone, personTwoPhone;
+
+    private String whereClause="";
+
+    public String getWhereClause() {
+        return whereClause;
+    }
+
+    public void setWhereClause(String whereClause) {
+        this.whereClause = whereClause;
+    }
 
     @Override
     public String tableName() {
-        return null;
+        return "contact_persons";
     }
 
     @Override
     public String toCreateTableString() {
-        return null;
+        return "create table if not exists "+tableName()+" ("+
+                Variable.STRINGreporterPhone+" text," +
+                Variable.STRINGreportingDate+" text," +
+                Variable.STRINGpersonOnePhone+" text," +
+                Variable.STRINGpersonTwoPhone+" text,"+
+                "primary key ("+ Variable.STRINGreporterPhone+","+Variable.STRINGreportingDate
+                +","+Variable.STRINGpersonOnePhone+","+Variable.STRINGpersonTwoPhone+")"+")";
+
     }
 
     @Override
@@ -81,4 +98,12 @@ public class DailyFollowUpContactPersonsTable implements ITable {
     public String toDropTableString() {
         return null;
     }
+    public static class Variable {
+
+        public final static String STRINGreporterPhone="reporterPhone",
+                STRINGreportingDate="reportingDate",
+                STRINGpersonOnePhone="personOnePhone", STRINGpersonTwoPhone="personTwoPhone";
+
+    }
+
 }

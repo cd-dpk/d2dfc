@@ -4,7 +4,7 @@ import android.content.ContentValues;
 import android.database.Cursor;
 
 public class RespiratoryIssuesInfoTable implements ITable{
-    String personID, reportingDate;
+    String reporterPhone, personID, reportingDate;
     String asthmaRecorded, asthamaNow;
     String chronicBronchitisRecorded, chronicBronchitisNow;
     String lungCancerRecorded, lungCancerNow;
@@ -13,14 +13,44 @@ public class RespiratoryIssuesInfoTable implements ITable{
     String others;
     String smoking,betelLeaf,hooka,otherBadHabits;
 
+    private String whereClause="";
+
+    public String getWhereClause() {
+        return whereClause;
+    }
+
+    public void setWhereClause(String whereClause) {
+        this.whereClause = whereClause;
+    }
     @Override
     public String tableName() {
-        return null;
+        return "respiratoryissuesinfo";
     }
 
     @Override
     public String toCreateTableString() {
-        return null;
+        return "create table if not exists "+tableName()+" ("+
+                Variable.STRINGreporterPhone+" text," +
+                Variable.STRINGreportingDate+" text," +
+                Variable.STRINGpersonID+" text," +
+                Variable.STRINGasthmaRecorded+" text," +
+                Variable.STRINGasthamaNow+" text," +
+                Variable.STRINGchronicBronchitisRecorded+" text," +
+                Variable.STRINGchronicBronchitisNow+" text," +
+                Variable.STRINGlungCancerRecorded+" text," +
+                Variable.STRINGlungCancerNow+" text," +
+                Variable.STRINGPnemoniaRecorded+" text," +
+                Variable.STRINGPnemoniaNow+" text," +
+                Variable.STRINGtubercolosisRecorded+" text," +
+                Variable.STRNGtubercolosisNow+" text," +
+                Variable.STRINGothers+" text," +
+                Variable.STRINGsmoking+" text," +
+                Variable.STRINGbetelLeaf+" text," +
+                Variable.STRINGhooka+" text," +
+                Variable.STRINGotherBadHabits+" text," +
+                "primary key ("+ Variable.STRINGreporterPhone+","+Variable.STRINGreportingDate
+                +","+Variable.STRINGpersonID+")"+")";
+
     }
 
     @Override
@@ -87,4 +117,28 @@ public class RespiratoryIssuesInfoTable implements ITable{
     public String toDropTableString() {
         return null;
     }
+
+    public static class Variable {
+
+        public final static String STRINGreporterPhone="reporterPhone",
+                STRINGpersonID="personID",
+                STRINGreportingDate="reportingDate",
+                STRINGasthmaRecorded="asthmaRecorded",
+                STRINGasthamaNow="asthamaNow",
+                STRINGchronicBronchitisRecorded="chronicBronchitisRecorded",
+                STRINGchronicBronchitisNow="chronicBronchitisNow",
+                STRINGlungCancerRecorded="lungCancerRecorded",
+                STRINGlungCancerNow="lungCancerNow",
+                STRINGPnemoniaRecorded="PnemoniaRecorded",
+                STRINGPnemoniaNow="PnemoniaNow",
+                STRINGtubercolosisRecorded="tubercolosisRecorded",
+                STRNGtubercolosisNow="tubercolosisNow",
+                STRINGothers="others",
+                STRINGsmoking="smoking",
+                STRINGbetelLeaf="betelLeaf",
+                STRINGhooka="hooka",
+                STRINGotherBadHabits="otherBadHabits";
+        ;
+    }
+
 }

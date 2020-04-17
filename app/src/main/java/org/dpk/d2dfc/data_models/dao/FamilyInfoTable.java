@@ -50,8 +50,6 @@ public class FamilyInfoTable implements ITable{
 
     public String getWhereClause() {
         return whereClause;
-    } {
-        this.personBasicInfo = personBasicInfo;
     }
 
     public void setWhereClause(String whereClause) {

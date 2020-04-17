@@ -5,16 +5,39 @@ import android.database.Cursor;
 
 public class TravelHistoryInfoTable implements ITable{
 
-    String personID, reportingDate, dhaka, naraynganj, sylhet, outOfSarail, outOfBrahmanbaria,outOfBangladesh;
+    String reporterPhone, personID, reportingDate, dhaka, naraynganj,
+            sylhet, outOfSarail, outOfBrahmanbaria,outOfBangladesh;
+
+    private String whereClause="";
+
+    public String getWhereClause() {
+        return whereClause;
+    }
+
+    public void setWhereClause(String whereClause) {
+        this.whereClause = whereClause;
+    }
 
     @Override
     public String tableName() {
-        return null;
+        return "travelhistoryinformation";
     }
 
     @Override
     public String toCreateTableString() {
-        return null;
+        return "create table if not exists "+tableName()+" ("+
+                Variable.STRNIGreporterPhone+" text," +
+                Variable.STRNGreportingDate+" text," +
+                Variable.STRNGpersonID+" text," +
+                Variable.STRINGdhaka+" text,"+
+                Variable.STRINGnaraynganj+" text,"+
+                Variable.STRINGsylhet+" text,"+
+                Variable.STRINGoutOfSarail+" text,"+
+                Variable.STRINGoutOfBrahmanbaria+" text,"+
+                Variable.STRINGoutOfBangladesh+" text,"+
+                "primary key ("+ Variable.STRNIGreporterPhone+","+Variable.STRNGreportingDate
+                +","+Variable.STRNGpersonID+")"+")";
+
     }
 
     @Override
@@ -80,5 +103,16 @@ public class TravelHistoryInfoTable implements ITable{
     @Override
     public String toDropTableString() {
         return null;
+    }
+    public static class Variable {
+        public final static String STRNIGreporterPhone="reporterPhone",
+                STRNGpersonID="personID",
+                STRNGreportingDate="reportingDate",
+                STRINGdhaka="dhaka",
+                STRINGnaraynganj="naraynganj",
+                STRINGsylhet="sylhet",
+                STRINGoutOfSarail="outOfSarail",
+                STRINGoutOfBrahmanbaria="outOfBrahmanbaria",
+                STRINGoutOfBangladesh="outOfBangladesh";
     }
 }
