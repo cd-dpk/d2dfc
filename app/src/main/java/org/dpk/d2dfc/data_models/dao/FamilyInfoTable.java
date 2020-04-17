@@ -46,6 +46,18 @@ public class FamilyInfoTable implements ITable{
                 "primary key ("+ Variable.STRING_FAMILY_PHONE+")"+
                 ")";
     }
+    private String whereClause="";
+
+    public String getWhereClause() {
+        return whereClause;
+    } {
+        this.personBasicInfo = personBasicInfo;
+    }
+
+    public void setWhereClause(String whereClause) {
+        this.whereClause = whereClause;
+    }
+
 
     @Override
     public String toSelectString() {
