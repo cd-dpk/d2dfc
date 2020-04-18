@@ -8,6 +8,7 @@ import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -22,9 +23,12 @@ import org.dpk.d2dfc.R;
 import org.dpk.d2dfc.data.constants.ApplicationConstants;
 import org.dpk.d2dfc.data_models.IRegistration;
 import org.dpk.d2dfc.data_models.dao.FamilyInfoTable;
+import org.dpk.d2dfc.data_models.dao.PersonBasicInfoTable;
 import org.dpk.d2dfc.pages.HomeActivity;
 import org.dpk.d2dfc.pages.WelcomeActivity;
 import org.dpk.d2dfc.utils.TimeHandler;
+
+import java.util.List;
 
 public class FamilyAddActivity extends AppCompatActivity implements IRegistration {
     TextInputEditText phoneText, membersText;
@@ -66,23 +70,15 @@ public class FamilyAddActivity extends AppCompatActivity implements IRegistratio
             Intent intent = new Intent(FamilyAddActivity.this, HomeActivity.class);
             startActivity(intent);
         }
-        else if (id == R.id.menu_insert_close) {
+        else if (id == R.id.menu_insert_done) {
             phone = phoneText.getText().toString();
-            members = Double.parseDouble(membersText.getText().toString());
+            members = membersText.getText().toString().equals("")?0:Double.parseDouble(membersText.getText().toString());
             if (phone.equals("") && membersText.equals("") ) {
-                /*Toast.makeText(AccountOpenActivity.this, R.string.warning_account_open_phone_name_entry,
-                        Toast.LENGTH_LONG).show();*/
                 Snackbar.
                         make(coordinatorLayout,R.string.warning_family_add_phone_members_entry,Snackbar.LENGTH_LONG)
                         .show();
-//                    phoneText.setFocusable(true);
-            } else if (phone.equals("")) {
-                /*Toast.makeText(AccountOpenActivity.this, R.string.warning_account_open_phone_entry,
-                        Toast.LENGTH_LONG).show();*/
-                Snackbar.
-                        make(coordinatorLayout,R.string.warning_account_open_phone_entry,Snackbar.LENGTH_LONG)
-                        .show();
-            } else if (membersText.getText().toString().equals("")) {
+            }
+            else if (membersText.getText().toString().equals("")) {
                /* Toast.makeText(AccountOpenActivity.this, R.string.warning_account_open_name_entry,
                         Toast.LENGTH_LONG).show();*/
                 Snackbar.
@@ -126,27 +122,21 @@ public class FamilyAddActivity extends AppCompatActivity implements IRegistratio
 
         @Override
         protected String doInBackground(String... strings) {
-        /*
-            List<AccountTable> accountTables = personalAccountant.getAllAccountsExcept(
-                    new AccountTable(ApplicationConstants.LOGGED_PHONE_NUMBER,""));
+
+            List<FamilyInfoTable> allFamilies = d2DFC_handler.getAllFamilies();
             boolean doesExist = false;
-            if (accountTable.getPhone().equals(ApplicationConstants.LOGGED_PHONE_NUMBER))
-                doesExist = true;
-            for (AccountTable accTable: accountTables){
-                Log.d("AC", accTable.toString());
-                if (accTable.getPhone().equals(accountTable.getPhone())){
+            for (FamilyInfoTable infoTable: allFamilies){
+                Log.d("FI", infoTable.toString());
+                if (familyInfoTable.getPhone().equals(infoTable.getPhone())){
                     doesExist = true;
                     break;
                 }
             }
-            if (doesExist) return ApplicationConstants.ACCOUNT_EXIST_ERROR;
-            else if (personalAccountant.insertAccountIntoDB(accountTable)) {
-                Log.d("PA", ApplicationConstants.LOGGED_PHONE_NUMBER);
-                if (personalAccountant.insertTransactionIntoDB(transactionTable)) {
-                    return Boolean.TRUE.toString();
-                }
+            if (doesExist) return ApplicationConstants.FAMILY_PHONE_EXIST_ERROR;
+            else if (d2DFC_handler.insertTableIntoDB(familyInfoTable)) {
+                return Boolean.TRUE.toString();
             }
-*/
+
             return Boolean.FALSE.toString();
         }
 
@@ -154,18 +144,18 @@ public class FamilyAddActivity extends AppCompatActivity implements IRegistratio
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
             progressView.setVisibility(View.GONE);
-           /* if(s.equals(ApplicationConstants.ACCOUNT_EXIST_ERROR)){
+           if(s.equals(ApplicationConstants.FAMILY_PHONE_EXIST_ERROR)){
                 errorMessageView.setVisibility(View.VISIBLE);
-                errorMessageTextView.setText(R.string.account_exist);
+                errorMessageTextView.setText(R.string.family_phone_exists);
             }
             else if (s.equals(Boolean.TRUE.toString())) {
-                Intent intent = new Intent(AccountOpenActivity.this, TransactionHomeActivity.class);
+                Intent intent = new Intent(FamilyAddActivity.this, FamilyListActivity.class);
                 startActivity(intent);
             }
             else {
                 errorMessageView.setVisibility(View.VISIBLE);
                 errorMessageTextView.setText(R.string.unknown_error);
             }
-*/        }
+        }
     }
 }

@@ -103,7 +103,7 @@ public class FamilyListActivity extends AppCompatActivity implements OnRecyclerV
 
     @Override
     public void listenItem(View view, final int position) {
-        FamilyInfoTable familyInfoTable = families.get(position);
+        final FamilyInfoTable familyInfoTable = families.get(position);
         TextView phoneText, nameText;
         ImageButton rightArrowButton;
         phoneText = (TextView) view.findViewById(R.id.text_view_card_family_phone);
@@ -115,10 +115,10 @@ public class FamilyListActivity extends AppCompatActivity implements OnRecyclerV
         rightArrowButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                /*Intent intent = new Intent(HomeActivity.this, TransactionListActivity.class);
-                ApplicationConstants.TARGET_USER_PHONE = accounts.get(position).getPhone();
+                Intent intent = new Intent(FamilyListActivity.this, PersonListActivity.class);
+                ApplicationConstants.SELECTED_FAMILY_PHONE=familyInfoTable.getPhone();
                 startActivity(intent);
-                 */
+
             }
         });
     }

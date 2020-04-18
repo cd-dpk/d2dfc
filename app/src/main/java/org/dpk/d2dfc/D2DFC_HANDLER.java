@@ -61,12 +61,24 @@ public class D2DFC_HANDLER {
         families = familyInfoTable.toTablesFromITables(iTables);
         return families;
     }
-
-    /*
-    public boolean insertAccountIntoDB(AccountTable accountTable){
+    public List<PersonBasicInfoTable> getAllMembers(){
         DataBaseHelper dataBaseHelper = new DataBaseHelper(context);
-        return dataBaseHelper.insertRow(accountTable);
+        List<PersonBasicInfoTable> members = new ArrayList<PersonBasicInfoTable>();
+        PersonBasicInfoTable personBasicInfoTable = new PersonBasicInfoTable();
+        if (ApplicationConstants.SELECTED_FAMILY_PHONE.equals(RegistrationConstants.COMPLEX_VALUE)){
+            personBasicInfoTable.setWhereClause(PersonBasicInfoTable.Variable.STRING_FAMILY_PHONE+"='"+ApplicationConstants.SELECTED_FAMILY_PHONE+"'");
+        }
+        Log.d("CHECK", personBasicInfoTable.toSelectString());
+        List<ITable> iTables = dataBaseHelper.selectRows(personBasicInfoTable);
+        members = personBasicInfoTable.toTablesFromITables(iTables);
+        return members;
     }
+
+    public boolean insertTableIntoDB(ITable iTable){
+        DataBaseHelper dataBaseHelper = new DataBaseHelper(context);
+        return dataBaseHelper.insertRow(iTable);
+    }
+     /*
     public List<AccountTable> getAllAccountsExcept(AccountTable exclusiveAccountTable){
         DataBaseHelper dataBaseHelper = new DataBaseHelper(context);
         AccountTable accountTable = new AccountTable();

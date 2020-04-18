@@ -25,8 +25,11 @@
         <activity android:name=".pages.PersonListActivity"
             android:parentActivityName=".pages.FamilyListActivity"
             android:label="@string/person_list"></activity>
-        <activity android:name=".pages.DailyCoronaFollowup"></activity>
-        <activity android:name=".pages.MemberTravelAndHeathHistory" />
+        <activity android:name=".pages.DailyCoronaFollowupHealthInfo">
+        </activity>
+        <activity android:name=".pages.MemberTravelAndHeathHistory">
+
+        </activity>
         <activity android:name=".pages.WelcomeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

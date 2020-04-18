@@ -300,21 +300,12 @@
                 android:text="@string/now"/>
         </LinearLayout>
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:layout_width="match_parent"
+        <EditText
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:counterEnabled="true"
-            app:counterMaxLength="100"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
-            <com.google.android.material.textfield.TextInputEditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textColorHighlight="@color/colorPrimary"
-                android:inputType="number"
-                android:maxLength="100"
-                android:id="@+id/edit_text_other_disease_desc"
-                android:hint="@string/other_disease_desc_hint"/>
-        </com.google.android.material.textfield.TextInputLayout>
+            android:layout_weight="1"
+            android:id="@+id/edit_text_other_disease_desc"
+            android:hint="@string/other_disease_desc_hint"/>
     </LinearLayout>
 
     <LinearLayout
@@ -425,6 +416,13 @@
                 android:layout_height="wrap_content"
                 android:text="@string/now"/>
         </LinearLayout>
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:id="@+id/respiratory_issues_others"
+            android:hint="@string/respiratory_issues_others_hint"
+            />
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
@@ -455,12 +453,13 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/hooka"/>
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:id="@+id/common_respiratory_issues_related_bad_habits_others"
+                android:hint="@string/bad_habits_others_hint"
+                />
         </LinearLayout>
 
-    <Button
-        android:layout_gravity="center"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/button_registration_complete"
-        android:id="@+id/button_registration_complete"        />
 </LinearLayout>

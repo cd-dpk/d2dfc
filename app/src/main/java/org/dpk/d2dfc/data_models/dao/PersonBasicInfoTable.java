@@ -18,6 +18,32 @@ import java.util.List;
 public class PersonBasicInfoTable implements ITable{
 
     public PersonBasicInfo personBasicInfo;
+    private String familyPhone;
+    private String reporterPhone, reportingDate;
+
+    public String getFamilyPhone() {
+        return familyPhone;
+    }
+
+    public void setFamilyPhone(String familyPhone) {
+        this.familyPhone = familyPhone;
+    }
+
+    public String getReporterPhone() {
+        return reporterPhone;
+    }
+
+    public void setReporterPhone(String reporterPhone) {
+        this.reporterPhone = reporterPhone;
+    }
+
+    public String getReportingDate() {
+        return reportingDate;
+    }
+
+    public void setReportingDate(String reportingDate) {
+        this.reportingDate = reportingDate;
+    }
 
     private String whereClause="";
 
@@ -50,35 +76,44 @@ public class PersonBasicInfoTable implements ITable{
 
     @Override
     public ITable toITableFromCursor(Cursor cursor) {
-        PersonBasicInfo personBasicInfo = new PersonBasicInfo();
-        if (cursor.getColumnIndex(Variable.STRING_PERSON_ID)!=-1){
-            personBasicInfo.setPersonID(cursor.getString(cursor.getColumnIndex(Variable.STRING_PERSON_ID)));
+        PersonBasicInfoTable personBasicInfoTable = new PersonBasicInfoTable();
+        if (cursor.getColumnIndex(Variable.STRING_FAMILY_PHONE)!=-1){
+            personBasicInfoTable.setFamilyPhone(cursor.getString(cursor.getColumnIndex(Variable.STRING_FAMILY_PHONE)));
         }
+        if (cursor.getColumnIndex(Variable.STRING_REPORTER_PHONE)!=-1){
+            personBasicInfoTable.setReporterPhone(cursor.getString(
+                    cursor.getColumnIndex(Variable.STRING_REPORTER_PHONE)));
+        }
+        if (cursor.getColumnIndex(Variable.STRING_REPORTING_DATE)!=-1){
+            personBasicInfoTable.setReportingDate(cursor.getString(
+                    cursor.getColumnIndex(Variable.STRING_REPORTING_DATE)));
+        }
+
         if (cursor.getColumnIndex(Variable.STRING_PERSON_PHONE)!=-1){
-            personBasicInfo.setMobile(cursor.getString(
+            personBasicInfoTable.personBasicInfo.setMobile(cursor.getString(
                     cursor.getColumnIndex(Variable.STRING_PERSON_PHONE)));
         }
         if (cursor.getColumnIndex(Variable.STRING_PERSON_NAME)!=-1){
-            personBasicInfo.setName(cursor.getString(
+            personBasicInfoTable.personBasicInfo.setName(cursor.getString(
                     cursor.getColumnIndex(Variable.STRING_PERSON_NAME)));
         }
         if (cursor.getColumnIndex(Variable.STRING_FATHER)!=-1){
-            personBasicInfo.setFather(cursor.getString(
+            personBasicInfoTable.personBasicInfo.setFather(cursor.getString(
                     cursor.getColumnIndex(Variable.STRING_FATHER)));
         }
         if (cursor.getColumnIndex(Variable.STRING_MOTHER)!=-1){
-            personBasicInfo.setMother(  cursor.getString(
+            personBasicInfoTable.personBasicInfo.setMother(  cursor.getString(
                     cursor.getColumnIndex(Variable.STRING_MOTHER)));
         }
         if (cursor.getColumnIndex(Variable.STRING_OCCUPATION )!=-1){
-            personBasicInfo.setOccupation(  cursor.getString(
+            personBasicInfoTable.personBasicInfo.setOccupation(  cursor.getString(
                     cursor.getColumnIndex(Variable.STRING_OCCUPATION)));
         }
         if (cursor.getColumnIndex(Variable.STRING_AGE)!=-1){
-            personBasicInfo.setAge(cursor.getDouble(
+            personBasicInfoTable.personBasicInfo.setAge(cursor.getDouble(
                     cursor.getColumnIndex(Variable.STRING_AGE)));
         }
-        return new PersonBasicInfoTable(personBasicInfo);
+        return personBasicInfoTable;
     }
 
     @Override
@@ -100,14 +135,16 @@ public class PersonBasicInfoTable implements ITable{
     @Override
     public String toCreateTableString() {
         return "create table if not exists "+tableName()+" ("+
-                Variable.STRING_PERSON_ID+" text," +
+                Variable.STRING_REPORTER_PHONE+" text,"+
+                Variable.STRING_REPORTING_DATE+" text,"+
+                Variable.STRING_FAMILY_PHONE+" text," +
                 Variable.STRING_PERSON_PHONE+" text," +
                 Variable.STRING_PERSON_NAME+" text," +
                 Variable.STRING_FATHER+" text,"+
                 Variable.STRING_MOTHER+" text,"+
                 Variable.STRING_OCCUPATION+" text,"+
                 Variable.STRING_AGE+" double,"+
-                "primary key ("+ Variable.STRING_PERSON_ID+")"+
+                "primary key ("+ Variable.STRING_REPORTER_PHONE+","+Variable.STRING_FAMILY_PHONE+","+Variable.STRING_PERSON_NAME+")"+
                 ")";
     }
 
@@ -127,13 +164,19 @@ public class PersonBasicInfoTable implements ITable{
     }
     @Override
     public ITable toClone(){
-        return  new PersonBasicInfoTable(personBasicInfo);
+        PersonBasicInfoTable personBasicInfoTable =  new PersonBasicInfoTable(personBasicInfo);
+        personBasicInfoTable.setFamilyPhone(familyPhone);
+        personBasicInfoTable.setReporterPhone(reporterPhone);
+        personBasicInfoTable.setReportingDate(reportingDate);
+        return personBasicInfoTable;
     }
 
     @Override
     public ContentValues getInsertContentValues() {
         ContentValues contentValues= new ContentValues();
-        contentValues.put(Variable.STRING_PERSON_ID, personBasicInfo.getPersonID());
+        contentValues.put(Variable.STRING_REPORTER_PHONE, reporterPhone);
+        contentValues.put(Variable.STRING_REPORTING_DATE, reportingDate);
+        contentValues.put(Variable.STRING_FAMILY_PHONE, familyPhone);
         contentValues.put(Variable.STRING_PERSON_PHONE,personBasicInfo.getMobile());
         contentValues.put(Variable.STRING_PERSON_NAME,personBasicInfo.getName());
         contentValues.put(Variable.STRING_FATHER,personBasicInfo.getFather());
@@ -160,7 +203,9 @@ public class PersonBasicInfoTable implements ITable{
     @Override
     public String toString() {
         return "("+
-                personBasicInfo.getPersonID()+","+
+                reporterPhone+","+
+                reportingDate+","+
+                familyPhone+","+
                 personBasicInfo.getMobile()+","+
                 personBasicInfo.getName()+","+
                 personBasicInfo.getFather()+","+
@@ -191,7 +236,11 @@ public class PersonBasicInfoTable implements ITable{
                 STRING_AGE="age",
                 STRING_FATHER="father",
                 STRING_MOTHER="mother",
-                STRING_OCCUPATION="occupation";
+                STRING_OCCUPATION="occupation",
+                STRING_REPORTER_PHONE="r_phone",
+                STRING_REPORTING_DATE="r_date",
+                STRING_FAMILY_PHONE="f_phone";
+        ;
     }
     @Override
     public String toDropTableString() {

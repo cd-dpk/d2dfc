@@ -6,7 +6,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:theme="@style/AppTheme.GrayColorPrimary"
     tools:context=".pages.PersonAddActivity"
+    android:layout_margin="10dp"
     android:id="@+id/coordinate_layout_member_create">
+    <ScrollView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/scrollbar_wish">
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
@@ -135,15 +141,6 @@
                 android:id="@+id/edit_text_person_occupation"
                 android:hint="@string/registration_person_occupation_hint"/>
         </com.google.android.material.textfield.TextInputLayout>
-
-
-        <Button
-            android:layout_gravity="center"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/button_registration_complete"
-            android:id="@+id/button_registration_complete"        />
-
         <include
             android:id="@+id/member_open_progress_view"
             layout="@layout/view_progress_bar"
@@ -163,4 +160,5 @@
             android:layout_weight="1">
         </include>
     </LinearLayout>
+    </ScrollView>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

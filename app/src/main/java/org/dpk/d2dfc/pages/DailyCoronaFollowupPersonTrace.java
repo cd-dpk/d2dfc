@@ -1,16 +1,16 @@
 package org.dpk.d2dfc.pages;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import org.dpk.d2dfc.R;
 
-public class DailyCoronaFollowup extends AppCompatActivity {
+public class DailyCoronaFollowupPersonTrace extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_daily_corona_followup);
+        setContentView(R.layout.activity_daily_corona_followup_first);
     }
 }

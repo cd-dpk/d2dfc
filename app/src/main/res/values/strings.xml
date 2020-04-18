@@ -68,7 +68,6 @@
         <item>21 days ago</item>
         <item>28 days ago</item>
         <item>35 days ago</item>
-        <item>42 days ago</item>
     </string-array>
     <string-array name="corona_symptoms_days_array">
         <item>in last 7 days</item>
@@ -140,4 +139,10 @@
     <string name="registration_person_occupation_hint">Enter Person Occupation</string>
     <string name="page_person_add">Add Person</string>
     <string name="text_view_family_phone">Family Phone</string>
+    <string name="bad_habits_others_hint">Other Bad Habits</string>
+    <string name="respiratory_issues_others_hint">Other Respiratory Issues</string>
+    <string name="family_phone_exists">Family Phone Number Exists</string>
+    <string name="unknown_error">Unknown Error!</string>
+    <string name="warning_person_add_mandatory_entry">Mobile, Name, Gender and Age are Mandatory Entry!</string>
+    <string name="family_phone_name_error">Family Mobile and Name Must Be Different!</string>
 </resources>

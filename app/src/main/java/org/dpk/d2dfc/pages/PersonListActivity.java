@@ -102,14 +102,19 @@ public class PersonListActivity extends AppCompatActivity implements OnRecyclerV
     public void listenItem(View view, final int position) {
         PersonBasicInfoTable personBasicInfoTable = persons.get(position);
         TextView phoneText, nameText;
-        ImageButton rightArrowButton;
+        ImageButton rightArrowButton1,rightArrowButton2,rightArrowButton3,rightArrowButton4,rightArrowButton5 ;
         phoneText = (TextView) view.findViewById(R.id.text_view_card_member_phone);
         nameText = (TextView) view.findViewById(R.id.text_view_card_member_name);
-        rightArrowButton = (ImageButton) view.findViewById(R.id.button_card_member_right_arrow);
+        rightArrowButton1 = view.findViewById(R.id.button_card_member_right_arrow_info);
+        rightArrowButton2 = view.findViewById(R.id.button_card_member_right_arrow_health);
+        rightArrowButton3 = view.findViewById(R.id.button_card_member_right_arrow_corona_recent);
+        rightArrowButton4 = view.findViewById(R.id.button_card_member_right_arrow_corona_daily);
+        rightArrowButton5 = view.findViewById(R.id.button_card_member_right_arrow_info);
+
         phoneText.setText(personBasicInfoTable.personBasicInfo.getMobile());
         nameText.setText(personBasicInfoTable.personBasicInfo.getAge()+"");
 
-        rightArrowButton.setOnClickListener(new View.OnClickListener() {
+        rightArrowButton1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 /*Intent intent = new Intent(HomeActivity.this, TransactionListActivity.class);

@@ -3,11 +3,11 @@ package org.dpk.d2dfc.pages;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -22,13 +22,18 @@ import org.dpk.d2dfc.D2DFC_HANDLER;
 import org.dpk.d2dfc.R;
 import org.dpk.d2dfc.data.constants.ApplicationConstants;
 import org.dpk.d2dfc.data_models.IRegistration;
-import org.dpk.d2dfc.data_models.dao.FamilyInfoTable;
+import org.dpk.d2dfc.data_models.dao.PersonBasicInfoTable;
 import org.dpk.d2dfc.utils.TimeHandler;
+
+import java.util.List;
 
 public class PersonAddActivity extends AppCompatActivity implements IRegistration {
     TextView familyPhoneText;
     TextInputEditText  personMobileText, personNameText, personFatherText, personMotherText, personAgeText, personOccupationText;
     Spinner personGenderSpinner;
+
+    String personMobile, personName, personGender, personFather, personMother, personAge, personOccupation;
+
 
     View progressView, errorMessageView;
     TextView errorMessageTextView;
@@ -52,7 +57,7 @@ public class PersonAddActivity extends AppCompatActivity implements IRegistratio
         personMotherText =findViewById(R.id.edit_text_person_mother_name);
         personAgeText =findViewById(R.id.edit_text_person_age);
         personOccupationText =findViewById(R.id.edit_text_person_occupation);
-         personGenderSpinner = (Spinner) findViewById(R.id.spinner_registration_select_sex_button);
+        personGenderSpinner = (Spinner) findViewById(R.id.spinner_registration_select_sex_button);
 // Create an ArrayAdapter using the string array and a default spinner layout
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
                 R.array.gender_array, android.R.layout.simple_spinner_item);
@@ -82,44 +87,34 @@ public class PersonAddActivity extends AppCompatActivity implements IRegistratio
             startActivity(intent);
         }
         else if (id == R.id.menu_insert_done) {
-/*
-            phone = phoneText.getText().toString();
-            members = Double.parseDouble(membersText.getText().toString());
-            if (phone.equals("") && membersText.equals("") ) {
-                */
-/*Toast.makeText(AccountOpenActivity.this, R.string.warning_account_open_phone_name_entry,
-                        Toast.LENGTH_LONG).show();*//*
-
+            personMobile=personMobileText.getText().toString();
+            personName=personNameText.getText().toString();
+            personGender=personGenderSpinner.getSelectedItem().toString();
+            personFather=personFatherText.getText().toString();
+            personMother=personMotherText.getText().toString();
+            personAge=personAgeText.getText().toString();
+            personOccupation=personOccupationText.getText().toString();
+            if (personMother.equals("") ||personName.equals("")||personGender.equals("")
+            || personAge.equals("")) {
                 Snackbar.
-                        make(coordinatorLayout,R.string.warning_family_add_phone_members_entry,Snackbar.LENGTH_LONG)
+                        make(coordinatorLayout,R.string.warning_person_add_mandatory_entry,Snackbar.LENGTH_LONG)
                         .show();
 //                    phoneText.setFocusable(true);
-            } else if (phone.equals("")) {
-                */
-/*Toast.makeText(AccountOpenActivity.this, R.string.warning_account_open_phone_entry,
-                        Toast.LENGTH_LONG).show();*//*
-
-                Snackbar.
-                        make(coordinatorLayout,R.string.warning_account_open_phone_entry,Snackbar.LENGTH_LONG)
-                        .show();
-            } else if (membersText.getText().toString().equals("")) {
-               */
-/* Toast.makeText(AccountOpenActivity.this, R.string.warning_account_open_name_entry,
-                        Toast.LENGTH_LONG).show();*//*
-
-                Snackbar.
-                        make(coordinatorLayout, R.string.warning_account_open_name_entry,Snackbar.LENGTH_LONG)
-                        .show();
             }  else {
-                // TODO create family
-                FamilyInfoTable familyInfoTable = new FamilyInfoTable();
-                familyInfoTable.setReporterPhone(ApplicationConstants.appReporter.getPhone());
-                familyInfoTable.setPhone(phone);
-                familyInfoTable.setMembers(members);
-                familyInfoTable.setReporterPhone(TimeHandler.now());
-                new FamilyAddBackgroundTask(familyInfoTable).execute();
+                // TODO create person
+            PersonBasicInfoTable personBasicInfoTable= new PersonBasicInfoTable();
+            personBasicInfoTable.personBasicInfo.setMobile(personMobile);
+            personBasicInfoTable.personBasicInfo.setName(personName);
+            personBasicInfoTable.personBasicInfo.setGender(personGender);
+            personBasicInfoTable.personBasicInfo.setFather(personFather);
+            personBasicInfoTable.personBasicInfo.setMother(personMother);
+            personBasicInfoTable.personBasicInfo.setAge(Double.parseDouble(personAge));
+            personBasicInfoTable.personBasicInfo.setOccupation(personOccupation);
+            personBasicInfoTable.setReporterPhone(ApplicationConstants.appReporter.getPhone());
+            personBasicInfoTable.setReportingDate(TimeHandler.now());
+            personBasicInfoTable.setFamilyPhone(ApplicationConstants.SELECTED_FAMILY_PHONE);
+            new PersonAddBackgroundTask(personBasicInfoTable).execute();
             }
-*/
         }
         return super.onOptionsItemSelected(item);
     }
@@ -133,12 +128,12 @@ public class PersonAddActivity extends AppCompatActivity implements IRegistratio
     }
 
 
-    private class FamilyAddBackgroundTask extends AsyncTask<String, String, String> {
-        FamilyInfoTable familyInfoTable;
+    private class PersonAddBackgroundTask extends AsyncTask<String, String, String> {
+        PersonBasicInfoTable personBasicInfoTable;
 
-        FamilyAddBackgroundTask(FamilyInfoTable familyInfoTable) {
+        PersonAddBackgroundTask(PersonBasicInfoTable personBasicInfoTable) {
             super();
-            this.familyInfoTable = familyInfoTable;
+            this.personBasicInfoTable = personBasicInfoTable;
         }
 
         @Override
@@ -149,27 +144,20 @@ public class PersonAddActivity extends AppCompatActivity implements IRegistratio
 
         @Override
         protected String doInBackground(String... strings) {
-        /*
-            List<AccountTable> accountTables = personalAccountant.getAllAccountsExcept(
-                    new AccountTable(ApplicationConstants.LOGGED_PHONE_NUMBER,""));
+            List<PersonBasicInfoTable> allMembers = d2DFC_handler.getAllMembers();
             boolean doesExist = false;
-            if (accountTable.getPhone().equals(ApplicationConstants.LOGGED_PHONE_NUMBER))
-                doesExist = true;
-            for (AccountTable accTable: accountTables){
-                Log.d("AC", accTable.toString());
-                if (accTable.getPhone().equals(accountTable.getPhone())){
+            for (PersonBasicInfoTable infoTable: allMembers){
+                Log.d("FI", infoTable.toString());
+                if ((personBasicInfoTable.getFamilyPhone()+personBasicInfoTable.personBasicInfo.getName()).equals((infoTable.getFamilyPhone()+infoTable.personBasicInfo.getName()))){
                     doesExist = true;
                     break;
                 }
             }
-            if (doesExist) return ApplicationConstants.ACCOUNT_EXIST_ERROR;
-            else if (personalAccountant.insertAccountIntoDB(accountTable)) {
-                Log.d("PA", ApplicationConstants.LOGGED_PHONE_NUMBER);
-                if (personalAccountant.insertTransactionIntoDB(transactionTable)) {
-                    return Boolean.TRUE.toString();
-                }
+            if (doesExist) return ApplicationConstants.FAMILY_MEMBER_PHONE_NAME_EXIST_ERROR;
+            else if (d2DFC_handler.insertTableIntoDB(personBasicInfoTable)) {
+                return Boolean.TRUE.toString();
             }
-*/
+
             return Boolean.FALSE.toString();
         }
 
@@ -177,18 +165,18 @@ public class PersonAddActivity extends AppCompatActivity implements IRegistratio
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
             progressView.setVisibility(View.GONE);
-           /* if(s.equals(ApplicationConstants.ACCOUNT_EXIST_ERROR)){
+            if(s.equals(ApplicationConstants.FAMILY_MEMBER_PHONE_NAME_EXIST_ERROR)){
                 errorMessageView.setVisibility(View.VISIBLE);
-                errorMessageTextView.setText(R.string.account_exist);
+                errorMessageTextView.setText(R.string.family_phone_name_error);
             }
             else if (s.equals(Boolean.TRUE.toString())) {
-                Intent intent = new Intent(AccountOpenActivity.this, TransactionHomeActivity.class);
+                Intent intent = new Intent(PersonAddActivity.this, MemberTravelAndHeathHistory.class);
                 startActivity(intent);
             }
             else {
                 errorMessageView.setVisibility(View.VISIBLE);
                 errorMessageTextView.setText(R.string.unknown_error);
             }
-*/        }
+        }
     }
 }
