@@ -229,7 +229,7 @@ public class RespiratoryIssuesInfoTable implements ITable{
 
     @Override
     public String toDropTableString() {
-        return "DROP TABLE "+" "+tableName();
+        return "DROP TABLE  if exists"+" "+tableName();
     }
 
     public String toString() {

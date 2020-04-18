@@ -6,12 +6,14 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 
+import androidx.annotation.FloatRange;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.core.view.GravityCompat;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 
 import android.view.MenuItem;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -38,12 +40,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class HomeActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener, OnRecyclerViewItemListener, IRegistration {
+        implements NavigationView.OnNavigationItemSelectedListener,  IRegistration {
 
     NavigationView navigationView;
-    RecyclerView accountRecyclerView;
-    RecyclerViewListAdapter familiesRecyclerViewListAdapter;
-    List<FamilyInfoTable> families = new ArrayList<FamilyInfoTable>();
     View cardAccountView;
     D2DFC_HANDLER d2DFC_handler;
     CoordinatorLayout coordinatorLayout;
@@ -65,26 +64,7 @@ public class HomeActivity extends AppCompatActivity
 
         checkRegistration(d2DFC_handler);
 
-        accountRecyclerView = (RecyclerView) findViewById(R.id.recycler_view_family_list);
-        accountRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-        accountRecyclerView.setHasFixedSize(true);
-        coordinatorLayout = (CoordinatorLayout) findViewById(R.id.coordinator_layout_transaction_home);
-        // Data
-        Reporter reporter = d2DFC_handler.loadReporter();
-
-        families = d2DFC_handler.getAllFamilies();
-
-        /*for (Account account: accounts){
-            account.setGivenTo(d2DFC_handler.getTotalAmountGivenTo(new AccountTable(account),exclusiveAccount));
-            account.setTakenFrom(d2DFC_handler.getTotalAmountTakenFrom(new AccountTable(account),exclusiveAccount));
-        }*/
-        // Data
-        //setAccountCardView(reporter);
-
-        familiesRecyclerViewListAdapter = new RecyclerViewListAdapter(
-                this, R.layout.card_family,families.size());
-        accountRecyclerView.setAdapter(familiesRecyclerViewListAdapter);
-
+        coordinatorLayout = (CoordinatorLayout) findViewById(R.id.coordinator_layout_d2dfc_home);
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -92,7 +72,7 @@ public class HomeActivity extends AppCompatActivity
         drawer.addDrawerListener(toggle);
         toggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
-        //setupNavigationHeader(d2DFC_handler.getLoggedAccount());
+        setupNavigationHeader(ApplicationConstants.appReporter);
 
     }
 
@@ -160,17 +140,13 @@ public class HomeActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
         if (id == R.id.nav_families) {
-            Intent intent = new Intent(this, HomeActivity.class);
+            Intent intent = new Intent(this, FamilyListActivity.class);
             startActivity(intent);
         }
         else if (id == R.id.nav_members) {
-//            Intent intent = new Intent(this, AccountOpenActivity.class);
-//            startActivity(intent);
+            Intent intent = new Intent(this, PersonListActivity.class);
+            startActivity(intent);
         }
-//        else if (id == R.id.nav_new_transaction) {
-//            Intent intent = new Intent(this, TransactionAddActivity.class);
-//            startActivity(intent);
-//        }
         else if (id == R.id.nav_info) {
 //            Intent intent = new Intent(this, AboutDevActivity.class);
 //            startActivity(intent);
@@ -208,27 +184,7 @@ public class HomeActivity extends AppCompatActivity
         detailedAccountsTransactions.setText(R.string.accounts_breakdown);
     }
 */
-    @Override
-    public void listenItem(View view, final int position) {
-        FamilyInfoTable familyInfoTable = families.get(position);
-        TextView phoneText, nameText, givenToText, takenFromText, amountNetText;
-        ImageButton rightArrowButton;
-        phoneText = (TextView) view.findViewById(R.id.text_view_card_account_phone);
-        nameText = (TextView) view.findViewById(R.id.text_view_card_account_name);
-        rightArrowButton = (ImageButton) view.findViewById(R.id.button_card_account_right_arrow);
-        phoneText.setText(familyInfoTable.getPhone());
-        nameText.setText(familyInfoTable.getMembers());
 
-        rightArrowButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                /*Intent intent = new Intent(HomeActivity.this, TransactionListActivity.class);
-                ApplicationConstants.TARGET_USER_PHONE = accounts.get(position).getPhone();
-                startActivity(intent);
-                 */
-            }
-        });
-    }
     @Override
     public void checkRegistration(D2DFC_HANDLER d2DFC_handler) {
         if (!d2DFC_handler.isRegistered()) {
@@ -237,10 +193,4 @@ public class HomeActivity extends AppCompatActivity
         }
     }
 
-    private void search(String query) {
-        Log.d("FIND",query);
-        familiesRecyclerViewListAdapter = new RecyclerViewListAdapter(
-                this, R.layout.card_family,families.size());
-        accountRecyclerView.setAdapter(familiesRecyclerViewListAdapter);
-    }
 }

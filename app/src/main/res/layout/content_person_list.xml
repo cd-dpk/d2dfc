@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorAccent"
+    android:id="@+id/coordinate_layout_person_list"
     app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -13,10 +14,10 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        tools:context="org.dpk.d2dfc.pages.HomeActivity">
+        tools:context="org.dpk.d2dfc.pages.PersonListActivity">
         <include
             layout="@layout/text_horizontal_line"
-            android:id="@+id/content_account_list_text_horizontal_line"
+            android:id="@+id/content_person_list_text_horizontal_line"
             android:layout_height="wrap_content"
             android:layout_width="match_parent"
             />
@@ -26,7 +27,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/scrollbar_wish">
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recycler_view_family_list"
+                android:id="@+id/recycler_view_person_list"
                 android:scrollbars="vertical"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -35,7 +36,7 @@
         </ScrollView>
     </LinearLayout>
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/family_list_ft_add_family"
+        android:id="@+id/person_list_ft_add_person"
         android:layout_width="@dimen/fab_width"
         android:layout_height="@dimen/fab_height"
         android:layout_gravity="bottom|end"

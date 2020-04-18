@@ -41,7 +41,7 @@ public class CommonHealthIssuesInfoTable implements ITable{
                 Variable.STRINGdiabetesRecorded+" text," +
                 Variable.STRINGdiabetesNow+" text," +
                 Variable.STRINGcardiovascularRecorded+" text," +
-                Variable.STRINGcardiovascularRecorded+" text," +
+                Variable.STRINGcardiovascularNow+" text," +
                 Variable.STRINGhypertensionRecorded+" text," +
                 Variable.STRINGhypertensionNow+" text," +
                 Variable.STRINGstrokeRecorded+" text," +
@@ -219,7 +219,7 @@ public class CommonHealthIssuesInfoTable implements ITable{
 
     @Override
     public String toDropTableString() {
-        return "DROP TABLE "+" "+tableName();
+        return "DROP TABLE if exists"+" "+tableName();
     }
     public String toString() {
         return reporterPhone+","+

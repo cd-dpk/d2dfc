@@ -12,14 +12,28 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class FamilyInfoTable implements ITable{
-    private String phone;
-    private int members;
+    private String reporterPhone, reportingDate;
 
-    FamilyInfoTable(){}
-    public FamilyInfoTable(String phone, int members) {
-        this.phone = phone;
-        this.members = members;
+    public String getReporterPhone() {
+        return reporterPhone;
     }
+
+    public void setReporterPhone(String reporterPhone) {
+        this.reporterPhone = reporterPhone;
+    }
+
+    public String getReportingDate() {
+        return reportingDate;
+    }
+
+    public void setReportingDate(String reportingDate) {
+        this.reportingDate = reportingDate;
+    }
+
+    private String phone;
+    private double members;
+
+    public FamilyInfoTable(){}
 
     public String getPhone() {
         return phone;
@@ -29,11 +43,11 @@ public class FamilyInfoTable implements ITable{
         this.phone = phone;
     }
 
-    public int getMembers() {
+    public double getMembers() {
         return members;
     }
 
-    public void setMembers(int members) {
+    public void setMembers(double members) {
         this.members = members;
     }
 
@@ -45,9 +59,11 @@ public class FamilyInfoTable implements ITable{
     @Override
     public String toCreateTableString() {
         return "create table if not exists "+tableName()+" ("+
+                Variable.STRING_REPORTER_PHONE+" text,"+
+                Variable.STRING_REPORTING_DATE+" text,"+
                 Variable.STRING_FAMILY_PHONE+" text," +
-                Variable.STRING_MEMBER_COUNT+" integer,"+
-                "primary key ("+ Variable.STRING_FAMILY_PHONE+")"+
+                Variable.STRING_MEMBER_COUNT+" double,"+
+                "primary key ("+ Variable.STRING_FAMILY_PHONE+","+ Variable.STRING_REPORTER_PHONE+")"+
                 ")";
     }
     private String whereClause="";
@@ -92,8 +108,16 @@ public class FamilyInfoTable implements ITable{
             familyInfoTable.setPhone(cursor.getString(cursor.getColumnIndex(Variable.STRING_FAMILY_PHONE)));
         }
         if (cursor.getColumnIndex(Variable.STRING_MEMBER_COUNT)!=-1){
-            familyInfoTable.setMembers(cursor.getInt(
+            familyInfoTable.setMembers(cursor.getDouble(
                     cursor.getColumnIndex(Variable.STRING_MEMBER_COUNT)));
+        }
+        if (cursor.getColumnIndex(Variable.STRING_REPORTER_PHONE)!=-1){
+            familyInfoTable.setReporterPhone(cursor.getString(
+                    cursor.getColumnIndex(Variable.STRING_REPORTER_PHONE)));
+        }
+        if (cursor.getColumnIndex(Variable.STRING_REPORTING_DATE)!=-1){
+            familyInfoTable.setReportingDate(cursor.getString(
+                    cursor.getColumnIndex(Variable.STRING_REPORTING_DATE)));
         }
         return familyInfoTable;
     }
@@ -113,6 +137,8 @@ public class FamilyInfoTable implements ITable{
     @Override
     public ITable toClone() {
         FamilyInfoTable familyInfoTable = new FamilyInfoTable();
+        familyInfoTable.reporterPhone = reporterPhone;
+        familyInfoTable.reportingDate = reportingDate;
         familyInfoTable.phone = phone;
         familyInfoTable.members  = members;
         return familyInfoTable;
@@ -121,6 +147,8 @@ public class FamilyInfoTable implements ITable{
     @Override
     public ContentValues getInsertContentValues() {
         ContentValues contentValues= new ContentValues();
+        contentValues.put(Variable.STRING_REPORTER_PHONE, reporterPhone);
+        contentValues.put(Variable.STRING_REPORTING_DATE, reportingDate);
         contentValues.put(Variable.STRING_FAMILY_PHONE, phone);
         contentValues.put(Variable.STRING_MEMBER_COUNT, members);
         return contentValues;
@@ -143,7 +171,7 @@ public class FamilyInfoTable implements ITable{
 
     @Override
     public String toDropTableString() {
-        return "DROP TABLE "+" "+tableName();
+        return "DROP TABLE  if exists"+" "+tableName();
 
     }
 
@@ -151,6 +179,8 @@ public class FamilyInfoTable implements ITable{
     @Override
     public String toString() {
         return "("+
+                reporterPhone+","+
+                reportingDate+","+
                 phone+","+
                 members+")";
     }
@@ -170,6 +200,8 @@ public class FamilyInfoTable implements ITable{
     public static class Variable {
 
         public final static String STRING_FAMILY_PHONE = "f_phone",
-                STRING_MEMBER_COUNT="m_count";
+                STRING_MEMBER_COUNT="m_count",
+                STRING_REPORTER_PHONE="r_phone",
+                STRING_REPORTING_DATE="r_date";
     }
 }

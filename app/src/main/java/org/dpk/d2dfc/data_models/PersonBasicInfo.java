@@ -2,17 +2,26 @@ package org.dpk.d2dfc.data_models;
 
 public class PersonBasicInfo {
 
-    private String mobile, name, gender, father, mother;
+    private String mobile;
+    private String name;
+    private String gender;
+    private String father;
+    private String mother;
+
+    public String getOccupation() {
+        return occupation;
+    }
+
+    public void setOccupation(String occupation) {
+        this.occupation = occupation;
+    }
+
+    private String occupation;
     private double age;
 
     private String personID;
 
     public PersonBasicInfo(){}
-    public PersonBasicInfo(String mobile, String name) {
-        this.mobile = mobile;
-        this.name = name;
-        personID = name+mobile;
-    }
 
     public void setPersonID(String personID) {
         this.personID = personID;

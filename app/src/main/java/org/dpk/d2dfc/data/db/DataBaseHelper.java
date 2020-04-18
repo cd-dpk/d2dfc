@@ -7,8 +7,16 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
 
+import org.dpk.d2dfc.data_models.dao.CommonHealthIssuesInfoTable;
+import org.dpk.d2dfc.data_models.dao.DailyFollowUpContactPersonsTable;
+import org.dpk.d2dfc.data_models.dao.DailyFollowUpCoronaSymptomsTable;
+import org.dpk.d2dfc.data_models.dao.DailyFollowUpTravelInfoTable;
+import org.dpk.d2dfc.data_models.dao.FamilyInfoTable;
 import org.dpk.d2dfc.data_models.dao.ITable;
 import org.dpk.d2dfc.data_models.dao.PersonBasicInfoTable;
+import org.dpk.d2dfc.data_models.dao.RecentCoronaRelatedIssuesTable;
+import org.dpk.d2dfc.data_models.dao.RespiratoryIssuesInfoTable;
+import org.dpk.d2dfc.data_models.dao.TravelHistoryInfoTable;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,10 +36,25 @@ public class DataBaseHelper extends SQLiteOpenHelper{
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        dropTable(new PersonBasicInfoTable());
-//        dropTable(new TransactionTable());
+ /*       dropTable(new CommonHealthIssuesInfoTable());
+        dropTable(new DailyFollowUpContactPersonsTable());
+        dropTable(new DailyFollowUpCoronaSymptomsTable());
+        dropTable(new DailyFollowUpTravelInfoTable());
+        dropTable(new FamilyInfoTable());
+        dropTable (new PersonBasicInfoTable());
+        dropTable(new RecentCoronaRelatedIssuesTable());
+        dropTable(new RespiratoryIssuesInfoTable());
+        dropTable(new TravelHistoryInfoTable());
+*/
+        db.execSQL(new CommonHealthIssuesInfoTable().toCreateTableString());
+        db.execSQL(new DailyFollowUpContactPersonsTable().toCreateTableString());
+        db.execSQL(new DailyFollowUpCoronaSymptomsTable().toCreateTableString());
+        db.execSQL(new DailyFollowUpTravelInfoTable().toCreateTableString());
+        db.execSQL(new FamilyInfoTable().toCreateTableString());
         db.execSQL(new PersonBasicInfoTable().toCreateTableString());
-//        db.execSQL(new TransactionTable().toCreateTableString());
+        db.execSQL(new RecentCoronaRelatedIssuesTable().toCreateTableString());
+        db.execSQL(new RespiratoryIssuesInfoTable().toCreateTableString());
+        db.execSQL(new TravelHistoryInfoTable().toCreateTableString());
     }
 
     @Override

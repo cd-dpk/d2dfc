@@ -4,6 +4,12 @@
     tools:showIn="navigation_view">
 
     <group android:checkableBehavior="single">
+
+        <item
+            android:id="@+id/nav_home"
+            android:icon="@drawable/home_64"
+            android:title="@string/menu_home" />
+
         <item
             android:id="@+id/nav_families"
             android:icon="@drawable/home_64"
@@ -13,6 +19,11 @@
             android:id="@+id/nav_members"
             android:icon="@drawable/add_user_64"
             android:title="@string/menu_members" />
+
+        <item
+            android:id="@+id/nav_email_data"
+            android:icon="@drawable/add_user_64"
+            android:title="@string/menu_email_data" />
         <!--<item-->
             <!--android:id="@+id/nav_new_transaction"-->
             <!--android:icon="@drawable/transaction_64"-->

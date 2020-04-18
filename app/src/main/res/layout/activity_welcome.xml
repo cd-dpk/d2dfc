@@ -5,6 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:theme="@style/AppTheme.GrayColorPrimary"
     tools:context="org.dpk.d2dfc.pages.WelcomeActivity"
     android:id="@+id/coordinate_layout_welcome">
 
@@ -43,14 +44,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:counterEnabled="true"
-                app:counterMaxLength="11"
+                app:counterMaxLength="20"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textColorHighlight="@color/colorPrimary"
-                    android:inputType="number"
-                    android:maxLength="11"
+                    android:inputType="textEmailAddress"
+                    android:maxLength="20"
                     android:id="@+id/edit_text_area_email"
                     android:hint="@string/area_email_address"/>
             </com.google.android.material.textfield.TextInputLayout>
@@ -74,10 +75,14 @@
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                app:counterEnabled="true"
+                app:counterMaxLength="25"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    app:counterEnabled="true"
+                    app:counterMaxLength="25"
                     android:id="@+id/edit_text_reporter_name"
                     android:hint="@string/reporter_name_own_hint"
                     />

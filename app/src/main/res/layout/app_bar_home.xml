@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@android:color/white"
-    android:id="@+id/coordinator_layout_transaction_home"
+    android:id="@+id/coordinator_layout_d2dfc_home"
     tools:context="org.dpk.d2dfc.pages.HomeActivity">
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
@@ -29,5 +29,13 @@
     </com.google.android.material.appbar.AppBarLayout>
 
     <include layout="@layout/content_home"/>
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/family_list_ft_add_family"
+        android:layout_width="@dimen/fab_width"
+        android:layout_height="@dimen/fab_height"
+        android:layout_gravity="bottom|end"
+        app:backgroundTint="@color/colorPrimary"
+        android:layout_margin="@dimen/fab_margin"
+        app:srcCompat="@drawable/baseline_add_white_18" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

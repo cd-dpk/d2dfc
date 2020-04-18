@@ -25,12 +25,14 @@
             android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:minHeight="60dp"
-            android:orientation="vertical"
+            android:orientation="horizontal"
+            android:layout_gravity="center"
+            android:gravity="center"
             android:layout_weight="1"
             android:weightSum="2">
 
             <TextView
-                android:id="@+id/text_view_card_account_phone"
+                android:id="@+id/text_view_card_family_phone"
                 android:layout_width="@dimen/card_account_phone"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -39,7 +41,7 @@
                 android:text="@string/family_attr_phone" />
 
             <TextView
-                android:id="@+id/text_view_card_account_name"
+                android:id="@+id/text_view_card_family_name"
                 android:layout_width="@dimen/card_account_name"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -48,7 +50,7 @@
                 android:text="@string/family_total_members" />
         </LinearLayout>
         <ImageButton
-            android:id="@+id/button_card_account_right_arrow"
+            android:id="@+id/button_card_family_right_arrow"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/right_arrow"

@@ -28,14 +28,5 @@
             android:layout_marginTop="2dp"
             android:layout_height="match_parent"
             />
-
-        <!--<include-->
-            <!--android:id="@+id/lay_bottom_bar"-->
-            <!--layout="@layout/footer"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="@dimen/text_length"-->
-            <!--android:layout_alignParentBottom="true"-->
-            <!--android:layout_alignParentRight="true"-->
-            <!--android:layout_alignParentEnd="true"  />-->
     </RelativeLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

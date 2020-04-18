@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/card_search"
+    android:layout_gravity="center"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    card_view:cardCornerRadius="@dimen/card_search_corner_radius">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_gravity="center"
+        android:weightSum="1">
+        <ImageButton
+            android:id="@+id/back_arrow_card_search"
+            android:layout_gravity="center"
+            android:src="@drawable/left_arrow_24"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:layout_weight="0.10"/>
+        <EditText
+            android:id="@+id/search_bar_card_search"
+            android:hint="@string/search_hint"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textCursorDrawable="@null"
+            android:singleLine="true"
+            android:layout_weight="0.90"/>
+    </LinearLayout>
+</androidx.cardview.widget.CardView>

@@ -1,5 +1,6 @@
 package org.dpk.d2dfc.data_models.dao;
 
+import android.app.Person;
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.util.Log;
@@ -16,22 +17,21 @@ import java.util.List;
 
 public class PersonBasicInfoTable implements ITable{
 
-    PersonBasicInfo personBasicInfo;
+    public PersonBasicInfo personBasicInfo;
 
     private String whereClause="";
 
     public String getWhereClause() {
         return whereClause;
-    } {
-        this.personBasicInfo = personBasicInfo;
     }
-
     public void setWhereClause(String whereClause) {
         this.whereClause = whereClause;
     }
 
 
-    public PersonBasicInfoTable(){}
+    public PersonBasicInfoTable(){
+        personBasicInfo = new PersonBasicInfo();
+    }
     public PersonBasicInfoTable(PersonBasicInfo personBasicInfo){
         this.personBasicInfo = personBasicInfo;
     }
@@ -70,6 +70,10 @@ public class PersonBasicInfoTable implements ITable{
             personBasicInfo.setMother(  cursor.getString(
                     cursor.getColumnIndex(Variable.STRING_MOTHER)));
         }
+        if (cursor.getColumnIndex(Variable.STRING_OCCUPATION )!=-1){
+            personBasicInfo.setOccupation(  cursor.getString(
+                    cursor.getColumnIndex(Variable.STRING_OCCUPATION)));
+        }
         if (cursor.getColumnIndex(Variable.STRING_AGE)!=-1){
             personBasicInfo.setAge(cursor.getDouble(
                     cursor.getColumnIndex(Variable.STRING_AGE)));
@@ -101,6 +105,7 @@ public class PersonBasicInfoTable implements ITable{
                 Variable.STRING_PERSON_NAME+" text," +
                 Variable.STRING_FATHER+" text,"+
                 Variable.STRING_MOTHER+" text,"+
+                Variable.STRING_OCCUPATION+" text,"+
                 Variable.STRING_AGE+" double,"+
                 "primary key ("+ Variable.STRING_PERSON_ID+")"+
                 ")";
@@ -134,6 +139,7 @@ public class PersonBasicInfoTable implements ITable{
         contentValues.put(Variable.STRING_FATHER,personBasicInfo.getFather());
         contentValues.put(Variable.STRING_MOTHER,personBasicInfo.getMother());
         contentValues.put(Variable.STRING_AGE,personBasicInfo.getAge());
+        contentValues.put(Variable.STRING_OCCUPATION,personBasicInfo.getOccupation());
         return contentValues;
     }
     @Override
@@ -159,6 +165,7 @@ public class PersonBasicInfoTable implements ITable{
                 personBasicInfo.getName()+","+
                 personBasicInfo.getFather()+","+
                 personBasicInfo.getMother()+","+
+                personBasicInfo.getOccupation()+","+
                 personBasicInfo.getAge()+")";
     }
 
@@ -183,10 +190,11 @@ public class PersonBasicInfoTable implements ITable{
                 STRING_PERSON_NAME="name",
                 STRING_AGE="age",
                 STRING_FATHER="father",
-                STRING_MOTHER="mother";
+                STRING_MOTHER="mother",
+                STRING_OCCUPATION="occupation";
     }
     @Override
     public String toDropTableString() {
-        return "DROP TABLE "+" "+tableName();
+        return "DROP TABLE  if exists"+" "+tableName();
     }
 }

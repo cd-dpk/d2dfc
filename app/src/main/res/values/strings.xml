@@ -26,7 +26,7 @@
     <string name="reporter_name_own_hint">Enter Your Name</string>
     <string name="reporter_info">Reporter Info</string>
     <string name="register">Register</string>
-    <string name="area_email_address">Enter Email Address</string>
+    <string name="area_email_address">Enter Area Email Address</string>
 
     <string name="warning_transaction_add_entry">Please enter Amount and Description Correctly!</string>
     <string name="warning_reporter_open_phone_name_entry">Please enter Phone and Name Correctly!</string>
@@ -123,4 +123,21 @@
     <string name="person_trace_out_for_work">Out for Work</string>
     <string name="person_trace_gone_to_shop">Gone to Shop</string>
     <string name="person_trace_gone_to_bazar">Gone to Bazar</string>
+    <string name="menu_email_data">Send Email Data</string>
+    <string name="search_hint">Search Here</string>
+    <string name="menu_home">Home</string>
+    <string name="family_list">Families</string>
+    <string name="person_list">Members</string>
+    <string name="family_attr_age">Age</string>
+    <string name="about_dev_info">Developer(s)</string>
+    <string name="family_add_phone_hint">Enter Family Phone</string>
+    <string name="family_add_members_hint">Enter Numbers of Members</string>
+    <string name="done">Done</string>
+    <string name="close">Close</string>
+    <string name="warning_family_add_phone_members_entry">Enter Phone and Number of Members Correctly!</string>
+    <string name="page_family_add">Add Family</string>
+    <string name="text_view_registration_occupation">Enter Occupation</string>
+    <string name="registration_person_occupation_hint">Enter Person Occupation</string>
+    <string name="page_person_add">Add Person</string>
+    <string name="text_view_family_phone">Family Phone</string>
 </resources>

@@ -10,8 +10,11 @@ import android.util.Log;
 import org.dpk.d2dfc.data.constants.ApplicationConstants;
 import org.dpk.d2dfc.data.constants.RegistrationConstants;
 import org.dpk.d2dfc.data.db.DataBaseHelper;
+import org.dpk.d2dfc.data_models.PersonBasicInfo;
 import org.dpk.d2dfc.data_models.dao.FamilyInfoTable;
 import org.dpk.d2dfc.data_models.Reporter;
+import org.dpk.d2dfc.data_models.dao.ITable;
+import org.dpk.d2dfc.data_models.dao.PersonBasicInfoTable;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,25 +38,27 @@ public class D2DFC_HANDLER {
                 Context.MODE_PRIVATE);
         RegistrationConstants.REPORTER_PHONE = sharedPreferences.getString(RegistrationConstants.REPORTER_PHONE_KEY,RegistrationConstants.COMPLEX_VALUE);
         RegistrationConstants.REPORTER_NAME = sharedPreferences.getString(RegistrationConstants.REPORTER_NAME_KEY,RegistrationConstants.COMPLEX_VALUE);
-        return new Reporter(RegistrationConstants.REPORTER_PHONE, RegistrationConstants.REPORTER_NAME);
+        RegistrationConstants.REPORTING_AREA_EMAIL = sharedPreferences.getString(RegistrationConstants.REPORTING_AREA_KEY,RegistrationConstants.COMPLEX_VALUE);
+        return new Reporter(RegistrationConstants.REPORTER_PHONE, RegistrationConstants.REPORTER_NAME, RegistrationConstants.REPORTING_AREA_EMAIL);
     }
-    public boolean savePersonalAccountPhone(Reporter toBeSavedReporter){
+    public boolean saveRepoterInfoIntoApp(Reporter toBeSavedReporter){
         sharedPreferences = context.getSharedPreferences(RegistrationConstants.APPLICATION_PREFERENCE,
                 Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString(RegistrationConstants.REGISTRATION_STATUS_KEY, RegistrationConstants.REGISTRATION_STATUS_VALUE_COMPLETED);
         editor.putString(RegistrationConstants.REPORTER_PHONE_KEY, toBeSavedReporter.getPhone());
         editor.putString(RegistrationConstants.REPORTER_NAME_KEY, toBeSavedReporter.getName());
+        editor.putString(RegistrationConstants.REPORTING_AREA_EMAIL, toBeSavedReporter.getAreaEmail());
         editor.commit();
         return true;
     }
     public List<FamilyInfoTable> getAllFamilies(){
         DataBaseHelper dataBaseHelper = new DataBaseHelper(context);
         List<FamilyInfoTable> families = new ArrayList<FamilyInfoTable>();
-        AccountTable accountTable = new AccountTable();
-        Log.d("CHECK", accountTable.toSelectString());
-        List<ITable> iTables = dataBaseHelper.selectRows(accountTable);
-        return new AccountTable().toAccountTables(iTables);
+        FamilyInfoTable familyInfoTable = new FamilyInfoTable();
+        Log.d("CHECK", familyInfoTable.toSelectString());
+        List<ITable> iTables = dataBaseHelper.selectRows(familyInfoTable);
+        families = familyInfoTable.toTablesFromITables(iTables);
         return families;
     }
 
@@ -207,7 +212,7 @@ public class D2DFC_HANDLER {
     public boolean isRegistered(){
         Reporter reporter = loadReporter();
         Log.d(RegistrationConstants.REPORTER_PHONE_KEY, reporter.getPhone());
-        if (!reporter.getPhone().equals(RegistrationConstants.REPORTER_PHONE_KEY)){
+        if (!reporter.getPhone().equals(RegistrationConstants.COMPLEX_VALUE)){
             return true;
         }
         return false;
@@ -239,6 +244,17 @@ public class D2DFC_HANDLER {
         android.content.res.Configuration conf = res.getConfiguration();
         conf.locale = new Locale(language_code.toLowerCase());
         res.updateConfiguration(conf, dm);
+    }
+
+    public List<PersonBasicInfoTable> getAllPersons() {
+        DataBaseHelper dataBaseHelper = new DataBaseHelper(context);
+        List<PersonBasicInfoTable> persons = new ArrayList<PersonBasicInfoTable>();
+        PersonBasicInfoTable personBasicInfoTable = new PersonBasicInfoTable();
+        Log.d("CHECK", personBasicInfoTable.toSelectString());
+        List<ITable> iTables = dataBaseHelper.selectRows(personBasicInfoTable);
+        persons = personBasicInfoTable.toTablesFromITables(iTables);
+        return persons;
+
     }
 
    /* public List<Account> searchedAccounts(String searchString, List<Account>toSearchAccounts){

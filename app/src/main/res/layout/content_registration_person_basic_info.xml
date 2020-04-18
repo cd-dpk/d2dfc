@@ -44,24 +44,6 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:layout_gravity="center"
-            android:text="@string/text_view_registration_birthdate"
-            android:id="@+id/text_view_registration_birthdate"/>
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/button_registration_select_button"
-            android:layout_weight="1"/>
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:weightSum="2">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
             android:text="@string/text_view_registration_gender"
             android:id="@+id/button_registration_select_gender"
             android:layout_weight="1"/>
@@ -115,6 +97,25 @@
             android:id="@+id/edit_text_person_age"
             android:hint="@string/registration_person_age_hint"/>
     </com.google.android.material.textfield.TextInputLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="2">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_gravity="center"
+            android:text="@string/text_view_registration_occupation"
+            android:id="@+id/text_view_registration_occupation"/>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/button_registration_select_button"
+            android:layout_weight="1"/>
+    </LinearLayout>
 
     <Button
         android:layout_gravity="center"

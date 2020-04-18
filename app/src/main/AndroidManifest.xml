@@ -9,22 +9,33 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".pages.HomeActivity"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity android:name=".pages.FamilyAddActivity"
+            android:label="@string/page_family_add"></activity>
+        <activity android:name=".pages.PersonAddActivity"
+            android:label="@string/page_person_add"></activity>
+        <activity android:name=".pages.AboutDevInfoActivity"
+            android:label="@string/about_dev_info"
+            android:parentActivityName=".pages.HomeActivity"></activity>
+        <activity android:name=".pages.SettingsActivity"></activity>
+        <activity android:name=".pages.FamilyListActivity"
+            android:parentActivityName=".pages.HomeActivity"
+            android:label="@string/family_list"></activity>
+        <activity android:name=".pages.PersonListActivity"
+            android:parentActivityName=".pages.FamilyListActivity"
+            android:label="@string/person_list"></activity>
         <activity android:name=".pages.DailyCoronaFollowup"></activity>
         <activity android:name=".pages.MemberTravelAndHeathHistory" />
         <activity android:name=".pages.WelcomeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
             android:name=".pages.RegistrationMemberBasicInfo"
             android:label="@string/title_activity_registration_person_basic_info"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
-            android:name=".MainActivity"
-            android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar" />
     </application>
 

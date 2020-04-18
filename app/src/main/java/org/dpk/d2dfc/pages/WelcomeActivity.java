@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 
 import com.google.android.material.snackbar.Snackbar;
@@ -18,12 +19,13 @@ import org.dpk.d2dfc.R;
 import org.dpk.d2dfc.data.constants.ApplicationConstants;
 import org.dpk.d2dfc.data.constants.RegistrationConstants;
 import org.dpk.d2dfc.data_models.IRegistration;
+import org.dpk.d2dfc.data_models.Reporter;
 
 public class WelcomeActivity extends AppCompatActivity implements IRegistration {
 
-    EditText phoneText, nameText,emailText;
+    EditText phoneText, nameText, emailText;
     Button okayButton;
-    String phone="", name="", email="";
+    Reporter reporter;
     View progressView ;
     D2DFC_HANDLER d2DFC_handler;
     CoordinatorLayout coordinatorLayout;
@@ -31,7 +33,7 @@ public class WelcomeActivity extends AppCompatActivity implements IRegistration 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_welcome);
-
+        reporter = new Reporter();
         d2DFC_handler = new D2DFC_HANDLER(this);
         d2DFC_handler.setLanguageInApp();
 
@@ -47,31 +49,31 @@ public class WelcomeActivity extends AppCompatActivity implements IRegistration 
         okayButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                email =emailText.getText().toString();
-                phone = phoneText.getText().toString();
-                name = nameText.getText().toString();
-                if (email.equals("")&&phone.equals("") && name.equals("")){
+                reporter.setAreaEmail(emailText.getText().toString());
+                reporter.setPhone(phoneText.getText().toString());
+                reporter.setName(nameText.getText().toString());
+                if (reporter.getAreaEmail().equals("")&&reporter.getPhone().equals("") && reporter.getName().equals("")){
                     /*Toast.makeText(WelcomeActivity.this, "Please enter Phone and Name Correctly!",
                             Toast.LENGTH_LONG).show();*/
                     Snackbar.
                             make(coordinatorLayout,R.string.warning_email_mobile_name,Snackbar.LENGTH_LONG)
                             .show();
                 }
-                else if (email.equals("")){
+                else if (reporter.getAreaEmail().equals("")){
                     /*Toast.makeText(WelcomeActivity.this, "Please enter Phone Correctly!",
                             Toast.LENGTH_LONG).show();*/
                     Snackbar.
                             make(coordinatorLayout,R.string.warning_account_open_email_entry,Snackbar.LENGTH_LONG)
                             .show();
                 }
-                else if (phone.equals("")){
+                else if (reporter.getPhone().equals("")){
                     /*Toast.makeText(WelcomeActivity.this, "Please enter Phone Correctly!",
                             Toast.LENGTH_LONG).show();*/
                     Snackbar.
                             make(coordinatorLayout,R.string.warning_account_open_phone_entry,Snackbar.LENGTH_LONG)
                             .show();
                 }
-                else if (name.equals("")){
+                else if (reporter.getName().equals("")){
                     /*Toast.makeText(WelcomeActivity.this, "Please enter Name Correctly!",
                             Toast.LENGTH_LONG).show();*/
                     Snackbar.
@@ -79,12 +81,11 @@ public class WelcomeActivity extends AppCompatActivity implements IRegistration 
                             .show();
                 }
                 else {
-                   /* Toast.makeText(WelcomeActivity.this, "Correct!",Toast.LENGTH_LONG).show();
-                    Snackbar.
+                   Toast.makeText(WelcomeActivity.this, "Correct!",Toast.LENGTH_LONG).show();
+                   /*Snackbar.
                             make(coordinatorLayout,R.string.warning_account_open_phone_entry,Snackbar.LENGTH_LONG)
                             .show();*/
-                    //AccountTable accountTable = new AccountTable(phone, name);
-                    //new SwitchingActivityAsyncTask(accountTable).execute();
+                    new SwitchingActivityAsyncTask(reporter).execute();
                 }
             }
         });
@@ -93,19 +94,19 @@ public class WelcomeActivity extends AppCompatActivity implements IRegistration 
     @Override
     public void checkRegistration(D2DFC_HANDLER d2DFC_handler) {
         if (d2DFC_handler.isRegistered()) {
+            ApplicationConstants.appReporter = d2DFC_handler.loadReporter();
             Log.d(RegistrationConstants.REPORTER_PHONE_KEY, RegistrationConstants.REPORTER_PHONE);
             Intent intent = new Intent(WelcomeActivity.this, HomeActivity.class);
             startActivity(intent);
         }
     }
 
-
     private class SwitchingActivityAsyncTask extends AsyncTask<String, String ,String>{
-        //AccountTable accountTable;
-       /* SwitchingActivityAsyncTask(AccountTable accountTable){
+        Reporter reporter;
+        SwitchingActivityAsyncTask(Reporter reporter){
             super();
-            this.accountTable = accountTable;
-        }*/
+            this.reporter = reporter;
+        }
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
@@ -114,15 +115,12 @@ public class WelcomeActivity extends AppCompatActivity implements IRegistration 
 
         @Override
         protected String doInBackground(String... strings) {
-           /* PersonalAccountant personalAccountant = new PersonalAccountant(WelcomeActivity.this);
-            if (personalAccountant.insertAccountIntoDB(accountTable)){
-                personalAccountant.savePersonalAccountPhone(accountTable.getPhone());
-                ApplicationConstants.LOGGED_PHONE_NUMBER = personalAccountant.loadPersonalAccountPhone();
-                Log.d("PA", ApplicationConstants.LOGGED_PHONE_NUMBER);
+            D2DFC_HANDLER d2DFC_handler = new D2DFC_HANDLER(WelcomeActivity.this);
+            if (d2DFC_handler.saveRepoterInfoIntoApp(reporter)){
+                Log.d("D2DFC", reporter.toString());
                 return Boolean.TRUE.toString();
             }
-            return Boolean.FALSE.toString();*/
-           return "";
+            return Boolean.FALSE.toString();
         }
 
         @Override
@@ -130,6 +128,8 @@ public class WelcomeActivity extends AppCompatActivity implements IRegistration 
             super.onPostExecute(s);
             progressView.setVisibility(View.GONE);
             if (s.equals(Boolean.TRUE.toString())){
+                Toast.makeText(WelcomeActivity.this, reporter.toString(), Toast.LENGTH_SHORT).show();
+                ApplicationConstants.appReporter = d2DFC_handler.loadReporter();
                 Intent intent = new Intent(WelcomeActivity.this, HomeActivity.class);
                 startActivity(intent);
             }
