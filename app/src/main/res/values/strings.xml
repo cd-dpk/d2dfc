@@ -152,4 +152,6 @@
     <string name="menu_reporting_list">Reporting</string>
     <string name="page_reportings">Reportings</string>
     <string name="member_attr_gender">Gender</string>
+    <string name="corona_symptoms_other">Other Symptoms</string>
+    <string name="person_trace_other">Other Area</string>
 </resources>

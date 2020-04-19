@@ -18,6 +18,126 @@ public class DailyFollowUpCoronaSymptomsTable implements ITable{
             diarrhea, other;
     private String whereClause="";
 
+    public String getReporterPhone() {
+        return reporterPhone;
+    }
+
+    public void setReporterPhone(String reporterPhone) {
+        this.reporterPhone = reporterPhone;
+    }
+
+    public String getPersonID() {
+        return personID;
+    }
+
+    public void setPersonID(String personID) {
+        this.personID = personID;
+    }
+
+    public String getReportingDate() {
+        return reportingDate;
+    }
+
+    public void setReportingDate(String reportingDate) {
+        this.reportingDate = reportingDate;
+    }
+
+    public String getFever() {
+        return fever;
+    }
+
+    public void setFever(String fever) {
+        this.fever = fever;
+    }
+
+    public String getDryCough() {
+        return dryCough;
+    }
+
+    public void setDryCough(String dryCough) {
+        this.dryCough = dryCough;
+    }
+
+    public String getFatigue() {
+        return fatigue;
+    }
+
+    public void setFatigue(String fatigue) {
+        this.fatigue = fatigue;
+    }
+
+    public String getCoughMucus() {
+        return coughMucus;
+    }
+
+    public void setCoughMucus(String coughMucus) {
+        this.coughMucus = coughMucus;
+    }
+
+    public String getShortnessOfBreath() {
+        return shortnessOfBreath;
+    }
+
+    public void setShortnessOfBreath(String shortnessOfBreath) {
+        this.shortnessOfBreath = shortnessOfBreath;
+    }
+
+    public String getAchesNPain() {
+        return achesNPain;
+    }
+
+    public void setAchesNPain(String achesNPain) {
+        this.achesNPain = achesNPain;
+    }
+
+    public String getSoreThroat() {
+        return soreThroat;
+    }
+
+    public void setSoreThroat(String soreThroat) {
+        this.soreThroat = soreThroat;
+    }
+
+    public String getChillis() {
+        return chillis;
+    }
+
+    public void setChillis(String chillis) {
+        this.chillis = chillis;
+    }
+
+    public String getNausea() {
+        return nausea;
+    }
+
+    public void setNausea(String nausea) {
+        this.nausea = nausea;
+    }
+
+    public String getNasalCongestion() {
+        return nasalCongestion;
+    }
+
+    public void setNasalCongestion(String nasalCongestion) {
+        this.nasalCongestion = nasalCongestion;
+    }
+
+    public String getDiarrhea() {
+        return diarrhea;
+    }
+
+    public void setDiarrhea(String diarrhea) {
+        this.diarrhea = diarrhea;
+    }
+
+    public String getOther() {
+        return other;
+    }
+
+    public void setOther(String other) {
+        this.other = other;
+    }
+
     public String getWhereClause() {
         return whereClause;
     }
@@ -26,6 +146,10 @@ public class DailyFollowUpCoronaSymptomsTable implements ITable{
         this.whereClause = whereClause;
     }
 
+    public DailyFollowUpCoronaSymptomsTable(){}
+    public DailyFollowUpCoronaSymptomsTable(String  familyPhone, String personName){
+        personID = familyPhone+"@"+personName;
+    }
     @Override
     public String tableName() {
         return "dailycoronasymptoms";

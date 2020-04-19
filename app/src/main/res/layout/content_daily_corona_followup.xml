@@ -5,7 +5,6 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     app:layout_behavior="@string/appbar_scrolling_view_behavior">
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -23,25 +22,35 @@
             android:layout_width="wrap_content"
             android:text="@string/person_trace_out_of_area"
             android:layout_weight="1"
+            android:buttonTint="@color/red"
             android:layout_height="wrap_content"/>
         <CheckBox
             android:id="@+id/checkbox_person_trace_gone_to_bazar"
             android:layout_width="wrap_content"
             android:text="@string/person_trace_gone_to_bazar"
             android:layout_weight="1"
+            android:buttonTint="@color/red"
             android:layout_height="wrap_content"/>
         <CheckBox
             android:id="@+id/checkbox_person_trace_gone_to_shop"
             android:text="@string/person_trace_gone_to_shop"
             android:layout_width="wrap_content"
             android:layout_weight="1"
+            android:buttonTint="@color/red"
             android:layout_height="wrap_content"/>
         <CheckBox
             android:id="@+id/checkbox_person_trace_out_for_work"
             android:layout_width="wrap_content"
             android:text="@string/person_trace_out_for_work"
             android:layout_weight="1"
+            android:buttonTint="@color/red"
             android:layout_height="wrap_content"/>
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/edit_text_person_trace_other"
+            android:hint="@string/person_trace_other"
+            />
     </LinearLayout>
 
     <LinearLayout
@@ -60,28 +69,33 @@
             android:layout_width="wrap_content"
             android:text="@string/corona_symptoms_fever"
             android:layout_weight="1"
+            android:buttonTint="@color/red"
             android:layout_height="wrap_content"/>
         <CheckBox
             android:id="@+id/checkbox_corona_symptoms_dry_cough"
             android:layout_width="wrap_content"
             android:text="@string/corona_symptoms_dry_cough"
             android:layout_weight="1"
+            android:buttonTint="@color/red"
             android:layout_height="wrap_content"/>
         <CheckBox
             android:id="@+id/checkbox_corona_symptoms_fatigue"
             android:text="@string/corona_symptoms_fatigue"
             android:layout_width="wrap_content"
+            android:buttonTint="@color/red"
             android:layout_weight="1"
             android:layout_height="wrap_content"/>
         <CheckBox
             android:id="@+id/checkbox__corona_symptoms_mucus_cough"
             android:layout_width="wrap_content"
             android:text="@string/corona_symptoms_mucus_cough"
+            android:buttonTint="@color/red"
             android:layout_weight="1"
             android:layout_height="wrap_content"/>
         <CheckBox
-            android:id="@+id/spinner_corona_symptoms_shortness_of_breath"
+            android:id="@+id/corona_symptoms_shortness_of_breath"
             android:layout_width="wrap_content"
+            android:buttonTint="@color/red"
             android:layout_weight="1"
             android:text="@string/corona_symptoms_shortness_of_breath"
             android:layout_height="wrap_content"/>
@@ -89,17 +103,20 @@
                 android:id="@+id/checkbox_corona_symptoms_aches_and_pain"
             android:layout_width="wrap_content"
             android:layout_weight="1"
+                android:buttonTint="@color/red"
             android:text="@string/corona_symptoms_aches_and_pain"
             android:layout_height="wrap_content"/>
         <CheckBox
             android:id="@+id/checkbox_corona_symptoms_sore_throat"
             android:layout_width="wrap_content"
             android:layout_weight="1"
+            android:buttonTint="@color/red"
             android:text="@string/corona_symptoms_sore_throat"
             android:layout_height="wrap_content"/>
         <CheckBox
             android:id="@+id/checkbox__corona_symptoms_fever_chillis"
             android:layout_width="wrap_content"
+            android:buttonTint="@color/red"
             android:text="@string/corona_symptoms_chillis"
             android:layout_weight="1"
             android:layout_height="wrap_content"/>
@@ -108,20 +125,29 @@
             android:layout_width="wrap_content"
             android:layout_weight="1"
             android:text="@string/corona_symptoms_nausea"
+            android:buttonTint="@color/red"
             android:layout_height="wrap_content"/>
 
         <CheckBox
             android:id="@+id/checkbox__corona_symptoms_nasal_congestion"
             android:layout_width="wrap_content"
             android:layout_weight="1"
+            android:buttonTint="@color/red"
             android:text="@string/corona_symptoms_nasal_congestion"
             android:layout_height="wrap_content"/>
         <CheckBox
             android:id="@+id/checkbox__corona_symptoms_diarrhea"
             android:layout_width="wrap_content"
             android:layout_weight="1"
+            android:buttonTint="@color/red"
             android:text="@string/corona_symptoms_diarrhea"
             android:layout_height="wrap_content"/>
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/edit_text_corona_symptoms_other"
+            android:hint="@string/corona_symptoms_other"
+            />
     </LinearLayout>
 
 </LinearLayout>

@@ -18,6 +18,10 @@ public class CommonHealthIssuesInfoTable implements ITable{
     String tubercolosisRecorded, tubercolosisNow;
     String others;
 
+    public CommonHealthIssuesInfoTable(String familyPhone, String personName){
+        personID=familyPhone+personName;
+    }
+    public CommonHealthIssuesInfoTable(){}
     private String whereClause="";
 
     public String getWhereClause() {

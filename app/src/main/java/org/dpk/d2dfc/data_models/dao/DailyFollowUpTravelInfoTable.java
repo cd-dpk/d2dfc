@@ -8,11 +8,79 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DailyFollowUpTravelInfoTable implements ITable{
-    private String reporterPhone,reportingDate, personTwoID,
-            out_of_area, gone_to_bazar, gone_to_shop, out_for_work;
+    private String reporterPhone,reportingDate,
+            out_of_area, gone_to_bazar, gone_to_shop, out_for_work, otherTravel;
+
+    public String getReporterPhone() {
+        return reporterPhone;
+    }
+
+    public void setReporterPhone(String reporterPhone) {
+        this.reporterPhone = reporterPhone;
+    }
+
+    public String getReportingDate() {
+        return reportingDate;
+    }
+
+    public void setReportingDate(String reportingDate) {
+        this.reportingDate = reportingDate;
+    }
+
+    public String getOut_of_area() {
+        return out_of_area;
+    }
+
+    public void setOut_of_area(String out_of_area) {
+        this.out_of_area = out_of_area;
+    }
+
+    public String getGone_to_bazar() {
+        return gone_to_bazar;
+    }
+
+    public void setGone_to_bazar(String gone_to_bazar) {
+        this.gone_to_bazar = gone_to_bazar;
+    }
+
+    public String getGone_to_shop() {
+        return gone_to_shop;
+    }
+
+    public void setGone_to_shop(String gone_to_shop) {
+        this.gone_to_shop = gone_to_shop;
+    }
+
+    public String getOut_for_work() {
+        return out_for_work;
+    }
+
+    public void setOut_for_work(String out_for_work) {
+        this.out_for_work = out_for_work;
+    }
+
+    public String getOtherTravel() {
+        return otherTravel;
+    }
+
+    public void setOtherTravel(String otherTravel) {
+        this.otherTravel = otherTravel;
+    }
+
+    public String getPersonID() {
+        return personID;
+    }
+
+    public void setPersonID(String personID) {
+        this.personID = personID;
+    }
+
     private String whereClause="";
     private String  personID;
-
+    public DailyFollowUpTravelInfoTable(){}
+    public DailyFollowUpTravelInfoTable(String familyPhone, String personName){
+        this.personID = familyPhone+"@"+personName;
+    }
     public String getWhereClause() {
         return whereClause;
     }
@@ -38,6 +106,7 @@ public class DailyFollowUpTravelInfoTable implements ITable{
                 Variable.STRINGgone_to_bazar+" text," +
                 Variable.STRINGgone_to_shop+" text," +
                 Variable.STRINGout_for_work+" text," +
+                Variable.STRING_other_travel+" text," +
                 "primary key ("+ Variable.STRINGreporterPhone+","+Variable.STRINGreportingDate
                 +","+Variable.STRINGpersonID+")"+")";
     }
@@ -79,7 +148,7 @@ public class DailyFollowUpTravelInfoTable implements ITable{
                     cursor.getColumnIndex(Variable.STRINGreportingDate));
         }
         if (cursor.getColumnIndex(Variable.STRINGpersonID)!=-1){
-            dailyFollowUpTravelInfoTable.personTwoID= cursor.getString(
+            dailyFollowUpTravelInfoTable.personID = cursor.getString(
                     cursor.getColumnIndex(Variable.STRINGpersonID));
         }
         if (cursor.getColumnIndex(Variable.STRINGgone_to_bazar)!=-1){
@@ -97,6 +166,10 @@ public class DailyFollowUpTravelInfoTable implements ITable{
         if (cursor.getColumnIndex(Variable.STRINGout_of_area)!=-1){
             dailyFollowUpTravelInfoTable.out_of_area= cursor.getString(
                     cursor.getColumnIndex(Variable.STRINGout_of_area));
+        }
+        if (cursor.getColumnIndex(Variable.STRING_other_travel)!=-1){
+            dailyFollowUpTravelInfoTable.otherTravel= cursor.getString(
+                    cursor.getColumnIndex(Variable.STRING_other_travel));
         }
         return dailyFollowUpTravelInfoTable;
     }
@@ -124,7 +197,7 @@ public class DailyFollowUpTravelInfoTable implements ITable{
                 dailyFollowUpTravelInfoTable.gone_to_bazar = gone_to_bazar;
                 dailyFollowUpTravelInfoTable.gone_to_shop = gone_to_shop;
                 dailyFollowUpTravelInfoTable.out_for_work = out_for_work;
-
+                dailyFollowUpTravelInfoTable.otherTravel = otherTravel;
 
         return dailyFollowUpTravelInfoTable;
     }
@@ -134,11 +207,12 @@ public class DailyFollowUpTravelInfoTable implements ITable{
         ContentValues contentValues= new ContentValues();
         contentValues.put(Variable.STRINGreporterPhone,reporterPhone);
         contentValues.put(Variable.STRINGreportingDate,reportingDate);
-        contentValues.put(Variable.STRINGpersonID,personTwoID);
+        contentValues.put(Variable.STRINGpersonID,personID);
         contentValues.put(Variable.STRINGout_of_area,out_of_area);
         contentValues.put(Variable.STRINGgone_to_bazar,gone_to_bazar);
         contentValues.put(Variable.STRINGgone_to_shop,gone_to_shop);
         contentValues.put(Variable.STRINGout_for_work,out_for_work);
+        contentValues.put(Variable.STRING_other_travel, otherTravel);
         return contentValues;
 
     }
@@ -164,8 +238,8 @@ public class DailyFollowUpTravelInfoTable implements ITable{
     }
 
     public String toString() {
-        return reporterPhone+","+ reportingDate+","+ personTwoID+","+
-                out_of_area+","+gone_to_bazar+","+gone_to_shop+","+ out_for_work;
+        return reporterPhone+","+ reportingDate+","+ personID+","+
+                out_of_area+","+gone_to_bazar+","+gone_to_shop+","+ out_for_work+","+otherTravel;
     }
 
     public List<DailyFollowUpTravelInfoTable> toTablesFromITables(List<ITable> iTables) {
@@ -186,7 +260,7 @@ public class DailyFollowUpTravelInfoTable implements ITable{
                 STRINGreportingDate="reportingDate",
                 STRINGpersonID="personID",
                 STRINGout_of_area="out_of_area", STRINGgone_to_bazar="gone_to_bazar",
-                STRINGgone_to_shop="gone_to_shop", STRINGout_for_work="out_for_work";
+                STRINGgone_to_shop="gone_to_shop", STRINGout_for_work="out_for_work",STRING_other_travel="other_travel";
 
     }
 

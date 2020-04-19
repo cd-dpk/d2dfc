@@ -104,7 +104,7 @@ public class PersonListActivity extends AppCompatActivity implements OnRecyclerV
 
     @Override
     public void listenItem(View view, final int position) {
-        PersonBasicInfoTable personBasicInfoTable = persons.get(position);
+        final PersonBasicInfoTable personBasicInfoTable = persons.get(position);
         TextView  nameText,ageText,genderText;
         ImageButton rightArrowButton1,rightArrowButton2,rightArrowButton3,rightArrowButton4,rightArrowButton5 ;
         nameText = (TextView) view.findViewById(R.id.text_view_card_member_name);
@@ -123,10 +123,11 @@ public class PersonListActivity extends AppCompatActivity implements OnRecyclerV
         rightArrowButton1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                /*Intent intent = new Intent(HomeActivity.this, TransactionListActivity.class);
-                ApplicationConstants.TARGET_USER_PHONE = accounts.get(position).getPhone();
+                ApplicationConstants.SELECTED_FAMILY_PHONE = personBasicInfoTable.getFamilyPhone();
+                ApplicationConstants.SELECTED_FAMILY_PERSON_NAME = personBasicInfoTable.getName();
+                Intent intent = new Intent(PersonListActivity.this, DailyCoronaFollowupHealthInfo.class);
                 startActivity(intent);
-                 */
+
             }
         });
 

@@ -175,7 +175,9 @@ public class PersonAddActivity extends AppCompatActivity implements IRegistratio
                 errorMessageTextView.setText(R.string.family_phone_name_error);
             }
             else if (s.equals(Boolean.TRUE.toString())) {
-                Intent intent = new Intent(PersonAddActivity.this,PersonListActivity.class);
+                ApplicationConstants.SELECTED_FAMILY_PHONE = personBasicInfoTable.getFamilyPhone();
+                ApplicationConstants.SELECTED_FAMILY_PERSON_NAME = personBasicInfoTable.getName();
+                Intent intent = new Intent(PersonAddActivity.this, PersonListActivity.class);
                 startActivity(intent);
             }
             else {
