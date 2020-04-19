@@ -147,9 +147,13 @@ public class HomeActivity extends AppCompatActivity
             Intent intent = new Intent(this, PersonListActivity.class);
             startActivity(intent);
         }
+        else if (id == R.id.nav_reporting_data) {
+            Intent intent = new Intent(this, ReportingListActivity.class);
+            startActivity(intent);
+        }
         else if (id == R.id.nav_info) {
-//            Intent intent = new Intent(this, AboutDevActivity.class);
-//            startActivity(intent);
+            Intent intent = new Intent(this, AboutDevInfoActivity.class);
+            startActivity(intent);
         }
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);

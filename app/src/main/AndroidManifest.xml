@@ -9,30 +9,39 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".pages.HomeActivity"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
-        <activity android:name=".pages.FamilyAddActivity"
-            android:label="@string/page_family_add"></activity>
-        <activity android:name=".pages.PersonAddActivity"
-            android:label="@string/page_person_add"></activity>
-        <activity android:name=".pages.AboutDevInfoActivity"
+        <activity android:name=".pages.DataSentActivity"></activity>
+        <activity
+            android:name=".pages.HomeActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".pages.FamilyAddActivity"
+            android:label="@string/page_family_add" />
+        <activity
+            android:name=".pages.ReportingListActivity"
+            android:label="@string/page_reportings" />
+        <activity
+            android:name=".pages.PersonAddActivity"
+            android:label="@string/page_person_add" />
+        <activity
+            android:name=".pages.AboutDevInfoActivity"
             android:label="@string/about_dev_info"
-            android:parentActivityName=".pages.HomeActivity"></activity>
-        <activity android:name=".pages.SettingsActivity"></activity>
-        <activity android:name=".pages.FamilyListActivity"
-            android:parentActivityName=".pages.HomeActivity"
-            android:label="@string/family_list"></activity>
-        <activity android:name=".pages.PersonListActivity"
-            android:parentActivityName=".pages.FamilyListActivity"
-            android:label="@string/person_list"></activity>
-        <activity android:name=".pages.DailyCoronaFollowupHealthInfo">
-        </activity>
-        <activity android:name=".pages.MemberTravelAndHeathHistory">
+            android:parentActivityName=".pages.HomeActivity" />
+        <activity android:name=".pages.SettingsActivity" />
+        <activity
+            android:name=".pages.FamilyListActivity"
+            android:label="@string/family_list"
+            android:parentActivityName=".pages.HomeActivity" />
 
-        </activity>
+        <activity
+            android:name=".pages.PersonListActivity"
+            android:label="@string/person_list"
+            android:parentActivityName=".pages.FamilyListActivity" />
+        <activity android:name=".pages.DailyCoronaFollowupHealthInfo"></activity>
+        <activity android:name=".pages.MemberTravelAndHeathHistory"></activity>
         <activity android:name=".pages.WelcomeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>

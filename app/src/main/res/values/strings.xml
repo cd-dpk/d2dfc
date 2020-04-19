@@ -145,4 +145,10 @@
     <string name="unknown_error">Unknown Error!</string>
     <string name="warning_person_add_mandatory_entry">Mobile, Name, Gender and Age are Mandatory Entry!</string>
     <string name="family_phone_name_error">Family Mobile and Name Must Be Different!</string>
+    <string name="from_label">From</string>
+    <string name="from_value">Value</string>
+    <string name="to_label">To</string>
+    <string name="to_value">Value</string>
+    <string name="menu_reporting_list">Reporting</string>
+    <string name="page_reportings">Reportings</string>
 </resources>

@@ -15,6 +15,7 @@ import org.dpk.d2dfc.data_models.dao.FamilyInfoTable;
 import org.dpk.d2dfc.data_models.Reporter;
 import org.dpk.d2dfc.data_models.dao.ITable;
 import org.dpk.d2dfc.data_models.dao.PersonBasicInfoTable;
+import org.dpk.d2dfc.data_models.dao.ReportingInfoTable;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -267,6 +268,16 @@ public class D2DFC_HANDLER {
         persons = personBasicInfoTable.toTablesFromITables(iTables);
         return persons;
 
+    }
+
+    public List<ReportingInfoTable> getAllReportings() {
+        DataBaseHelper dataBaseHelper = new DataBaseHelper(context);
+        List<ReportingInfoTable> reportings = new ArrayList<ReportingInfoTable>();
+        ReportingInfoTable reportingInfoTable = new ReportingInfoTable();
+        Log.d("CHECK", reportingInfoTable.toSelectString());
+        List<ITable> iTables = dataBaseHelper.selectRows(reportingInfoTable);
+        reportings = reportingInfoTable.toTablesFromITables(iTables);
+        return reportings;
     }
 
    /* public List<Account> searchedAccounts(String searchString, List<Account>toSearchAccounts){
