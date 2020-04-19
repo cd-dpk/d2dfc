@@ -8,14 +8,163 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class RespiratoryIssuesInfoTable implements ITable{
-    String reporterPhone, personID, reportingDate;
-    String asthmaRecorded, asthamaNow;
-    String chronicBronchitisRecorded, chronicBronchitisNow;
-    String lungCancerRecorded, lungCancerNow;
-    String PnemoniaRecorded, PnemoniaNow;
-    String tubercolosisRecorded, tubercolosisNow;
-    String others;
-    String smoking,betelLeaf,hooka,otherBadHabits;
+    private String reporterPhone, personID, reportingDate;
+    private String asthmaRecorded, asthamaNow;
+    private String chronicBronchitisRecorded, chronicBronchitisNow;
+    private String lungCancerRecorded, lungCancerNow;
+    private String PnemoniaRecorded, PnemoniaNow;
+    private String tubercolosisRecorded, tubercolosisNow;
+    private String others;
+    private String smoking,betelLeaf,hooka,otherBadHabits;
+
+    public RespiratoryIssuesInfoTable(){}
+    public RespiratoryIssuesInfoTable(String familyPhone, String personName){
+        personID=familyPhone+"@"+personName;
+    }
+
+    public String getReporterPhone() {
+        return reporterPhone;
+    }
+
+    public void setReporterPhone(String reporterPhone) {
+        this.reporterPhone = reporterPhone;
+    }
+
+    public String getPersonID() {
+        return personID;
+    }
+
+    public void setPersonID(String personID) {
+        this.personID = personID;
+    }
+
+    public String getReportingDate() {
+        return reportingDate;
+    }
+
+    public void setReportingDate(String reportingDate) {
+        this.reportingDate = reportingDate;
+    }
+
+    public String getAsthmaRecorded() {
+        return asthmaRecorded;
+    }
+
+    public void setAsthmaRecorded(String asthmaRecorded) {
+        this.asthmaRecorded = asthmaRecorded;
+    }
+
+    public String getAsthamaNow() {
+        return asthamaNow;
+    }
+
+    public void setAsthamaNow(String asthamaNow) {
+        this.asthamaNow = asthamaNow;
+    }
+
+    public String getChronicBronchitisRecorded() {
+        return chronicBronchitisRecorded;
+    }
+
+    public void setChronicBronchitisRecorded(String chronicBronchitisRecorded) {
+        this.chronicBronchitisRecorded = chronicBronchitisRecorded;
+    }
+
+    public String getChronicBronchitisNow() {
+        return chronicBronchitisNow;
+    }
+
+    public void setChronicBronchitisNow(String chronicBronchitisNow) {
+        this.chronicBronchitisNow = chronicBronchitisNow;
+    }
+
+    public String getLungCancerRecorded() {
+        return lungCancerRecorded;
+    }
+
+    public void setLungCancerRecorded(String lungCancerRecorded) {
+        this.lungCancerRecorded = lungCancerRecorded;
+    }
+
+    public String getLungCancerNow() {
+        return lungCancerNow;
+    }
+
+    public void setLungCancerNow(String lungCancerNow) {
+        this.lungCancerNow = lungCancerNow;
+    }
+
+    public String getPnemoniaRecorded() {
+        return PnemoniaRecorded;
+    }
+
+    public void setPnemoniaRecorded(String pnemoniaRecorded) {
+        PnemoniaRecorded = pnemoniaRecorded;
+    }
+
+    public String getPnemoniaNow() {
+        return PnemoniaNow;
+    }
+
+    public void setPnemoniaNow(String pnemoniaNow) {
+        PnemoniaNow = pnemoniaNow;
+    }
+
+    public String getTubercolosisRecorded() {
+        return tubercolosisRecorded;
+    }
+
+    public void setTubercolosisRecorded(String tubercolosisRecorded) {
+        this.tubercolosisRecorded = tubercolosisRecorded;
+    }
+
+    public String getTubercolosisNow() {
+        return tubercolosisNow;
+    }
+
+    public void setTubercolosisNow(String tubercolosisNow) {
+        this.tubercolosisNow = tubercolosisNow;
+    }
+
+    public String getOthers() {
+        return others;
+    }
+
+    public void setOthers(String others) {
+        this.others = others;
+    }
+
+    public String getSmoking() {
+        return smoking;
+    }
+
+    public void setSmoking(String smoking) {
+        this.smoking = smoking;
+    }
+
+    public String getBetelLeaf() {
+        return betelLeaf;
+    }
+
+    public void setBetelLeaf(String betelLeaf) {
+        this.betelLeaf = betelLeaf;
+    }
+
+    public String getHooka() {
+        return hooka;
+    }
+
+    public void setHooka(String hooka) {
+        this.hooka = hooka;
+    }
+
+    public String getOtherBadHabits() {
+        return otherBadHabits;
+    }
+
+    public void setOtherBadHabits(String otherBadHabits) {
+        this.otherBadHabits = otherBadHabits;
+    }
 
     private String whereClause="";
 

@@ -33,5 +33,6 @@
     <dimen name="card_member_height">60dp</dimen>
     <dimen name="card_member_corner_radius">5dp</dimen>
     <dimen name="card_search_corner_radius">5dp</dimen>
+    <dimen name="spinner_height">30dp</dimen>
 
 </resources>

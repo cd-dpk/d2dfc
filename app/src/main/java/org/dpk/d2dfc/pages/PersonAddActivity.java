@@ -177,7 +177,7 @@ public class PersonAddActivity extends AppCompatActivity implements IRegistratio
             else if (s.equals(Boolean.TRUE.toString())) {
                 ApplicationConstants.SELECTED_FAMILY_PHONE = personBasicInfoTable.getFamilyPhone();
                 ApplicationConstants.SELECTED_FAMILY_PERSON_NAME = personBasicInfoTable.getName();
-                Intent intent = new Intent(PersonAddActivity.this, PersonListActivity.class);
+                Intent intent = new Intent(PersonAddActivity.this, MemberTravelAndHeathHistory.class);
                 startActivity(intent);
             }
             else {

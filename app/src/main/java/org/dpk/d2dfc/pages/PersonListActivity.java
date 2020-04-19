@@ -130,12 +130,20 @@ public class PersonListActivity extends AppCompatActivity implements OnRecyclerV
 
             }
         });
+        rightArrowButton2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ApplicationConstants.SELECTED_FAMILY_PHONE = personBasicInfoTable.getFamilyPhone();
+                ApplicationConstants.SELECTED_FAMILY_PERSON_NAME = personBasicInfoTable.getName();
+                Intent intent = new Intent(PersonListActivity.this, MemberTravelAndHeathHistory.class);
+                startActivity(intent);
 
-
+            }
+        });
     }
     @Override
     public void checkRegistration(D2DFC_HANDLER d2DFC_handler) {
-        if (!d2DFC_handler.isRegistered()) {
+            if (!d2DFC_handler.isRegistered()) {
             Intent intent = new Intent(PersonListActivity.this, WelcomeActivity.class);
             startActivity(intent);
         }

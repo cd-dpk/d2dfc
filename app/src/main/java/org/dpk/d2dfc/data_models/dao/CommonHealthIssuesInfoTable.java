@@ -9,17 +9,145 @@ import java.util.List;
 
 public class CommonHealthIssuesInfoTable implements ITable{
 
-    String reporterPhone, personID, reportingDate;
-    String diabetesRecorded, diabetesNow;
-    String cardiovascularRecorded, cardiovascularNow;
-    String hypertensionRecorded, hypertensionNow;
-    String strokeRecorded, strokeNow;
-    String cancerRecorded, cancerNow;
-    String tubercolosisRecorded, tubercolosisNow;
-    String others;
+    private String reporterPhone, personID, reportingDate;
+    private String diabetesRecorded, diabetesNow;
+    private String cardiovascularRecorded, cardiovascularNow;
+    private String hypertensionRecorded, hypertensionNow;
+    private String strokeRecorded, strokeNow;
+    private String cancerRecorded, cancerNow;
+    private String tubercolosisRecorded, tubercolosisNow;
+    private String others;
+
+    public String getReporterPhone() {
+        return reporterPhone;
+    }
+
+    public void setReporterPhone(String reporterPhone) {
+        this.reporterPhone = reporterPhone;
+    }
+
+    public String getPersonID() {
+        return personID;
+    }
+
+    public void setPersonID(String personID) {
+        this.personID = personID;
+    }
+
+    public String getReportingDate() {
+        return reportingDate;
+    }
+
+    public void setReportingDate(String reportingDate) {
+        this.reportingDate = reportingDate;
+    }
+
+    public String getDiabetesRecorded() {
+        return diabetesRecorded;
+    }
+
+    public void setDiabetesRecorded(String diabetesRecorded) {
+        this.diabetesRecorded = diabetesRecorded;
+    }
+
+    public String getDiabetesNow() {
+        return diabetesNow;
+    }
+
+    public void setDiabetesNow(String diabetesNow) {
+        this.diabetesNow = diabetesNow;
+    }
+
+    public String getCardiovascularRecorded() {
+        return cardiovascularRecorded;
+    }
+
+    public void setCardiovascularRecorded(String cardiovascularRecorded) {
+        this.cardiovascularRecorded = cardiovascularRecorded;
+    }
+
+    public String getCardiovascularNow() {
+        return cardiovascularNow;
+    }
+
+    public void setCardiovascularNow(String cardiovascularNow) {
+        this.cardiovascularNow = cardiovascularNow;
+    }
+
+    public String getHypertensionRecorded() {
+        return hypertensionRecorded;
+    }
+
+    public void setHypertensionRecorded(String hypertensionRecorded) {
+        this.hypertensionRecorded = hypertensionRecorded;
+    }
+
+    public String getHypertensionNow() {
+        return hypertensionNow;
+    }
+
+    public void setHypertensionNow(String hypertensionNow) {
+        this.hypertensionNow = hypertensionNow;
+    }
+
+    public String getStrokeRecorded() {
+        return strokeRecorded;
+    }
+
+    public void setStrokeRecorded(String strokeRecorded) {
+        this.strokeRecorded = strokeRecorded;
+    }
+
+    public String getStrokeNow() {
+        return strokeNow;
+    }
+
+    public void setStrokeNow(String strokeNow) {
+        this.strokeNow = strokeNow;
+    }
+
+    public String getCancerRecorded() {
+        return cancerRecorded;
+    }
+
+    public void setCancerRecorded(String cancerRecorded) {
+        this.cancerRecorded = cancerRecorded;
+    }
+
+    public String getCancerNow() {
+        return cancerNow;
+    }
+
+    public void setCancerNow(String cancerNow) {
+        this.cancerNow = cancerNow;
+    }
+
+    public String getTubercolosisRecorded() {
+        return tubercolosisRecorded;
+    }
+
+    public void setTubercolosisRecorded(String tubercolosisRecorded) {
+        this.tubercolosisRecorded = tubercolosisRecorded;
+    }
+
+    public String getTubercolosisNow() {
+        return tubercolosisNow;
+    }
+
+    public void setTubercolosisNow(String tubercolosisNow) {
+        this.tubercolosisNow = tubercolosisNow;
+    }
+
+    public String getOthers() {
+        return others;
+    }
+
+    public void setOthers(String others) {
+        this.others = others;
+    }
 
     public CommonHealthIssuesInfoTable(String familyPhone, String personName){
-        personID=familyPhone+personName;
+        personID=familyPhone+"@"+personName;
     }
     public CommonHealthIssuesInfoTable(){}
     private String whereClause="";

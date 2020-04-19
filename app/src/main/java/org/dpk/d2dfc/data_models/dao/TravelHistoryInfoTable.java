@@ -11,7 +11,83 @@ import java.util.List;
 
 public class TravelHistoryInfoTable implements ITable{
 
-    String reporterPhone, personID, reportingDate, dhaka, naraynganj,
+    public TravelHistoryInfoTable(){}
+    public TravelHistoryInfoTable(String familyPhone, String personName){
+        personID=familyPhone+"@"+personName;
+    }
+    public String getReporterPhone() {
+        return reporterPhone;
+    }
+
+    public void setReporterPhone(String reporterPhone) {
+        this.reporterPhone = reporterPhone;
+    }
+
+    public String getPersonID() {
+        return personID;
+    }
+
+    public void setPersonID(String personID) {
+        this.personID = personID;
+    }
+
+    public String getReportingDate() {
+        return reportingDate;
+    }
+
+    public void setReportingDate(String reportingDate) {
+        this.reportingDate = reportingDate;
+    }
+
+    public String getDhaka() {
+        return dhaka;
+    }
+
+    public void setDhaka(String dhaka) {
+        this.dhaka = dhaka;
+    }
+
+    public String getNaraynganj() {
+        return naraynganj;
+    }
+
+    public void setNaraynganj(String naraynganj) {
+        this.naraynganj = naraynganj;
+    }
+
+    public String getSylhet() {
+        return sylhet;
+    }
+
+    public void setSylhet(String sylhet) {
+        this.sylhet = sylhet;
+    }
+
+    public String getOutOfSarail() {
+        return outOfSarail;
+    }
+
+    public void setOutOfSarail(String outOfSarail) {
+        this.outOfSarail = outOfSarail;
+    }
+
+    public String getOutOfBrahmanbaria() {
+        return outOfBrahmanbaria;
+    }
+
+    public void setOutOfBrahmanbaria(String outOfBrahmanbaria) {
+        this.outOfBrahmanbaria = outOfBrahmanbaria;
+    }
+
+    public String getOutOfBangladesh() {
+        return outOfBangladesh;
+    }
+
+    public void setOutOfBangladesh(String outOfBangladesh) {
+        this.outOfBangladesh = outOfBangladesh;
+    }
+
+    private String reporterPhone, personID, reportingDate, dhaka, naraynganj,
             sylhet, outOfSarail, outOfBrahmanbaria,outOfBangladesh;
 
     private String whereClause="";

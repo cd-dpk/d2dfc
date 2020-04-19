@@ -16,6 +16,7 @@
             android:layout_gravity="center"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textAppearance="@android:style/TextAppearance.Medium"
             android:text="@string/travel_history"/>
         <LinearLayout
             android:layout_width="match_parent"
@@ -25,14 +26,14 @@
             android:orientation="horizontal">
             <TextView
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="@dimen/spinner_height"
                 android:layout_weight="1"
                 android:text="@string/dhaka"/>
             <Spinner
                 android:id="@+id/travel_dhaka_spinner"
                 android:layout_weight="1"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+                android:layout_height="@dimen/spinner_height"/>
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
@@ -42,14 +43,14 @@
             android:orientation="horizontal">
             <TextView
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="@dimen/spinner_height"
                 android:layout_weight="1"
                 android:text="@string/narayanganj"/>
             <Spinner
                 android:id="@+id/travel_naranganj_spinner"
                 android:layout_width="wrap_content"
                 android:layout_weight="1"
-                android:layout_height="wrap_content"/>
+                android:layout_height="@dimen/spinner_height"/>
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
@@ -59,14 +60,14 @@
             android:orientation="horizontal">
             <TextView
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="@dimen/spinner_height"
                 android:layout_weight="1"
                 android:text="@string/sylhet"/>
             <Spinner
                 android:id="@+id/travel_sylhet_spinner"
                 android:layout_width="wrap_content"
                 android:layout_weight="1"
-                android:layout_height="wrap_content"/>
+                android:layout_height="@dimen/spinner_height"/>
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
@@ -76,14 +77,14 @@
             android:orientation="horizontal">
             <TextView
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="@dimen/spinner_height"
                 android:layout_weight="1"
                 android:text="@string/out_brahmanbaria"/>
             <Spinner
                 android:id="@+id/travel_out_brahmanbaria_spinner"
                 android:layout_width="wrap_content"
                 android:layout_weight="1"
-                android:layout_height="wrap_content"/>
+                android:layout_height="@dimen/spinner_height"/>
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
@@ -93,14 +94,14 @@
             android:orientation="horizontal">
             <TextView
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="@dimen/spinner_height"
                 android:layout_weight="1"
                 android:text="@string/out_sarail"/>
             <Spinner
                 android:id="@+id/travel_out_sarail_spinner"
                 android:layout_width="wrap_content"
                 android:layout_weight="1"
-                android:layout_height="wrap_content"/>
+                android:layout_height="@dimen/spinner_height"/>
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
@@ -111,13 +112,13 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_weight="1"
-                android:layout_height="wrap_content"
+                android:layout_height="@dimen/spinner_height"
                 android:text="@string/out_bangladesh"/>
             <Spinner
                 android:id="@+id/travel_out_bangladesh_spinner"
                 android:layout_width="wrap_content"
                 android:layout_weight="1"
-                android:layout_height="wrap_content"/>
+                android:layout_height="@dimen/spinner_height"/>
         </LinearLayout>
     </LinearLayout>
     <LinearLayout
@@ -130,6 +131,7 @@
             android:layout_gravity="center"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textAppearance="@android:style/TextAppearance.Medium"
             android:text="@string/common_health_issues"/>
         <LinearLayout
             android:layout_width="match_parent"
