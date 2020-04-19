@@ -7,15 +7,18 @@
     android:layout_gravity="center"
     android:gravity="center"
     android:orientation="vertical"
+    style="@style/AppTheme.GrayColorPrimary"
     tools:context=".pages.AboutDevInfoActivity">
 
-    <TextView
+    <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:id="@+id/email_dipok"
         android:text="chandradasdipok@gmail.com" />
-    <TextView
+    <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="tahrimkarim321@gmail.com" />
+        android:id="@+id/email_tahrim"
+        android:text="tahrimkarib321@gmail.com" />
 
 </LinearLayout>

@@ -6,6 +6,8 @@ public class ApplicationConstants {
 
     public static final String FAMILY_PHONE_EXIST_ERROR = "Family Number Already Exists";
     public static final String FAMILY_MEMBER_PHONE_NAME_EXIST_ERROR = "Family Mobile and Name Exists";
+    public static final String EMAIL_TYPE = "message/rfc822";
+    public static final String EMAIL_SUBJECT_DEV = "D2D Follow Corona- Feedback";
     public static Reporter appReporter=new Reporter(RegistrationConstants.COMPLEX_VALUE,RegistrationConstants.COMPLEX_VALUE,RegistrationConstants.COMPLEX_VALUE);
     public static String SELECTED_FAMILY_PHONE = appReporter.getPhone();
     public static String SELECTED_FAMILY_PERSON_NAME = appReporter.getName();

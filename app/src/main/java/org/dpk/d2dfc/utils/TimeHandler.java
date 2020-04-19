@@ -37,7 +37,7 @@ public class TimeHandler {
         return localCalendar.get(Calendar.MINUTE);
     }
 
-
-
-
+    public static String toDate(){
+        return year()+":"+month()+":"+day();
+    }
 }

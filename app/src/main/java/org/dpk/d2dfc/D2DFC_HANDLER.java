@@ -61,7 +61,7 @@ public class D2DFC_HANDLER {
         families = familyInfoTable.toTablesFromITables(iTables);
         return families;
     }
-    public List<PersonBasicInfoTable> getAllMembers(){
+    public List<PersonBasicInfoTable> getAllMembersOfFamily(){
         DataBaseHelper dataBaseHelper = new DataBaseHelper(context);
         List<PersonBasicInfoTable> members = new ArrayList<PersonBasicInfoTable>();
         PersonBasicInfoTable personBasicInfoTable = new PersonBasicInfoTable();

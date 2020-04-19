@@ -43,7 +43,7 @@
     <string name="menu_famililies">Families</string>
     <string name="menu_members">Members</string>
     <string name="menu_about_us">About Us</string>
-    <string name="family_attr_phone">Family Phone Number</string>
+    <string name="family_attr_phone">Family Phone</string>
     <string name="family_total_members">Total Members</string>
     <string name="search">Search</string>
     <string name="choose_your_language">Choose Language</string>
@@ -154,4 +154,7 @@
     <string name="member_attr_gender">Gender</string>
     <string name="corona_symptoms_other">Other Symptoms</string>
     <string name="person_trace_other">Other Area</string>
+    <string name="person_attr_phone">Person Phone</string>
+    <string name="person_attr_age">Age</string>
+    <string name="person_attr_name">Name</string>
 </resources>

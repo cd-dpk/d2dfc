@@ -148,7 +148,7 @@ public class PersonAddActivity extends AppCompatActivity implements IRegistratio
 
         @Override
         protected String doInBackground(String... strings) {
-            List<PersonBasicInfoTable> allMembers = d2DFC_handler.getAllMembers();
+            List<PersonBasicInfoTable> allMembers = d2DFC_handler.getAllMembersOfFamily();
             boolean doesExist = false;
             for (PersonBasicInfoTable infoTable: allMembers){
                 Log.d("FI", infoTable.toString());

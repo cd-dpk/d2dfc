@@ -15,7 +15,6 @@ public class CommonHealthIssuesInfoTable implements ITable{
     private String hypertensionRecorded, hypertensionNow;
     private String strokeRecorded, strokeNow;
     private String cancerRecorded, cancerNow;
-    private String tubercolosisRecorded, tubercolosisNow;
     private String others;
 
     public String getReporterPhone() {
@@ -121,23 +120,6 @@ public class CommonHealthIssuesInfoTable implements ITable{
     public void setCancerNow(String cancerNow) {
         this.cancerNow = cancerNow;
     }
-
-    public String getTubercolosisRecorded() {
-        return tubercolosisRecorded;
-    }
-
-    public void setTubercolosisRecorded(String tubercolosisRecorded) {
-        this.tubercolosisRecorded = tubercolosisRecorded;
-    }
-
-    public String getTubercolosisNow() {
-        return tubercolosisNow;
-    }
-
-    public void setTubercolosisNow(String tubercolosisNow) {
-        this.tubercolosisNow = tubercolosisNow;
-    }
-
     public String getOthers() {
         return others;
     }
@@ -214,6 +196,10 @@ public class CommonHealthIssuesInfoTable implements ITable{
     @Override
     public ITable toITableFromCursor(Cursor cursor) {
         CommonHealthIssuesInfoTable commonHealthIssuesInfoTable= new CommonHealthIssuesInfoTable();
+        if (cursor.getColumnIndex(Variable.STRINGpersonID)!=-1){
+            commonHealthIssuesInfoTable.personID= cursor.getString(
+                    cursor.getColumnIndex(Variable.STRINGpersonID));
+        }
         if (cursor.getColumnIndex(Variable.STRINGreporterPhone)!=-1){
             commonHealthIssuesInfoTable.reporterPhone= cursor.getString(
                     cursor.getColumnIndex(Variable.STRINGreporterPhone));
@@ -262,14 +248,6 @@ public class CommonHealthIssuesInfoTable implements ITable{
             commonHealthIssuesInfoTable.cancerNow= cursor.getString(
                     cursor.getColumnIndex(Variable.STRINGcancerNow));
         }
-        if (cursor.getColumnIndex(Variable.STRINGtubercolosisRecorded)!=-1){
-            commonHealthIssuesInfoTable.tubercolosisRecorded= cursor.getString(
-                    cursor.getColumnIndex(Variable.STRINGtubercolosisRecorded));
-        }
-        if (cursor.getColumnIndex(Variable.STRINGtubercolosisNow)!=-1){
-            commonHealthIssuesInfoTable.tubercolosisNow= cursor.getString(
-                    cursor.getColumnIndex(Variable.STRINGtubercolosisNow));
-        }
         if (cursor.getColumnIndex(Variable.STRINGothers)!=-1){
             commonHealthIssuesInfoTable.others= cursor.getString(
                     cursor.getColumnIndex(Variable.STRINGothers));
@@ -305,8 +283,6 @@ public class CommonHealthIssuesInfoTable implements ITable{
         commonHealthIssuesInfoTable.strokeNow=strokeNow;
         commonHealthIssuesInfoTable.cancerRecorded=cancerRecorded;
         commonHealthIssuesInfoTable.cancerNow=cancerNow;
-        commonHealthIssuesInfoTable.tubercolosisRecorded=tubercolosisRecorded;
-        commonHealthIssuesInfoTable.tubercolosisNow=tubercolosisNow;
         commonHealthIssuesInfoTable.others=others;
         return commonHealthIssuesInfoTable;
     }
@@ -327,8 +303,6 @@ public class CommonHealthIssuesInfoTable implements ITable{
         contentValues.put(Variable.STRINGstrokeNow,strokeNow);
         contentValues.put(Variable.STRINGcancerRecorded,cancerRecorded);
         contentValues.put(Variable.STRINGcancerNow,cancerNow);
-        contentValues.put(Variable.STRINGtubercolosisRecorded,tubercolosisRecorded);
-        contentValues.put(Variable.STRINGtubercolosisNow,tubercolosisNow);
         contentValues.put(Variable.STRINGothers,others);
 
         return contentValues;
@@ -367,8 +341,6 @@ public class CommonHealthIssuesInfoTable implements ITable{
                 strokeNow+","+
                 cancerRecorded+","+
                 cancerNow+","+
-                tubercolosisRecorded+","+
-                tubercolosisNow+","+
                 others;
     }
 

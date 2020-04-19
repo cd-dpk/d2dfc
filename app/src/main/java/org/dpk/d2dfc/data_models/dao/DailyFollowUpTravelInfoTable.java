@@ -8,8 +8,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DailyFollowUpTravelInfoTable implements ITable{
-    private String reporterPhone,reportingDate,
+    private String reporterPhone,reportingDate, entryTime,
             out_of_area, gone_to_bazar, gone_to_shop, out_for_work, otherTravel;
+
+    public String getEntryTime() {
+        return entryTime;
+    }
+
+    public void setEntryTime(String entryTime) {
+        this.entryTime = entryTime;
+    }
 
     public String getReporterPhone() {
         return reporterPhone;

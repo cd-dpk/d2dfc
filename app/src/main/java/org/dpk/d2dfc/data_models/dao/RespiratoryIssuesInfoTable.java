@@ -233,6 +233,10 @@ public class RespiratoryIssuesInfoTable implements ITable{
     @Override
     public ITable toITableFromCursor(Cursor cursor) {
         RespiratoryIssuesInfoTable respiratoryIssuesInfoTable= new RespiratoryIssuesInfoTable();
+        if (cursor.getColumnIndex(Variable.STRINGpersonID)!=-1){
+            respiratoryIssuesInfoTable.personID= cursor.getString(
+                    cursor.getColumnIndex(Variable.STRINGpersonID));
+        }
         if (cursor.getColumnIndex(Variable.STRINGreporterPhone)!=-1){
             respiratoryIssuesInfoTable.reporterPhone= cursor.getString(
                     cursor.getColumnIndex(Variable.STRINGreporterPhone));
@@ -296,6 +300,10 @@ public class RespiratoryIssuesInfoTable implements ITable{
         if (cursor.getColumnIndex(Variable.STRINGtubercolosisRecorded)!=-1){
             respiratoryIssuesInfoTable.tubercolosisRecorded= cursor.getString(
                     cursor.getColumnIndex(Variable.STRINGtubercolosisRecorded));
+        }
+        if (cursor.getColumnIndex(Variable.STRNGtubercolosisNow)!=-1){
+            respiratoryIssuesInfoTable.tubercolosisNow= cursor.getString(
+                    cursor.getColumnIndex(Variable.STRNGtubercolosisNow));
         }
         return respiratoryIssuesInfoTable;
 
@@ -394,7 +402,7 @@ public class RespiratoryIssuesInfoTable implements ITable{
                 PnemoniaRecorded+" ," +
                 PnemoniaNow+" ," +
                 tubercolosisRecorded+" ," +
-                Variable.STRNGtubercolosisNow+" ," +
+                tubercolosisNow+" ," +
                 others+" ," +
                 smoking+" ," +
                 betelLeaf+" ," +

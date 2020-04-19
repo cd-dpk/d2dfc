@@ -31,7 +31,7 @@
             android:name=".pages.FamilyListActivity"
             android:label="@string/family_list"
             android:parentActivityName=".pages.HomeActivity" />
-
+        <activity android:name=".pages.MemberSearchActivity"/>
         <activity
             android:name=".pages.PersonListActivity"
             android:label="@string/person_list"

@@ -69,7 +69,7 @@ public class PersonListActivity extends AppCompatActivity implements OnRecyclerV
         addPersonFAB = (FloatingActionButton) findViewById(R.id.person_list_ft_add_person);
         // Data
 
-        persons = d2DFC_handler.getAllMembers();
+        persons = d2DFC_handler.getAllMembersOfFamily();
         personsRecyclerViewListAdapter = new RecyclerViewListAdapter(
                 this, R.layout.card_member, persons.size());
         personRecyclerView.setAdapter(personsRecyclerViewListAdapter);
@@ -140,6 +140,17 @@ public class PersonListActivity extends AppCompatActivity implements OnRecyclerV
 
             }
         });
+        rightArrowButton3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ApplicationConstants.SELECTED_FAMILY_PHONE = personBasicInfoTable.getFamilyPhone();
+                ApplicationConstants.SELECTED_FAMILY_PERSON_NAME = personBasicInfoTable.getName();
+                Intent intent = new Intent(PersonListActivity.this, MemberSearchActivity.class);
+                startActivity(intent);
+
+            }
+        });
+
     }
     @Override
     public void checkRegistration(D2DFC_HANDLER d2DFC_handler) {
