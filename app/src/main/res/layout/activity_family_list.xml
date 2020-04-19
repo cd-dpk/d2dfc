@@ -32,7 +32,7 @@
         android:id="@+id/content_family_list"
         android:layout_width="match_parent"
         android:layout_marginTop="2dp"
-        android:layout_height="wrap_content"
+        android:layout_height="fill_parent"
         android:layout_below="@+id/search_bar"
         />
 </RelativeLayout>

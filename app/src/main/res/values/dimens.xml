@@ -34,5 +34,7 @@
     <dimen name="card_member_corner_radius">5dp</dimen>
     <dimen name="card_search_corner_radius">5dp</dimen>
     <dimen name="spinner_height">30dp</dimen>
+    <dimen name="dashboard_height">300dp</dimen>
+    <dimen name="chart_height">250dp</dimen>
 
 </resources>

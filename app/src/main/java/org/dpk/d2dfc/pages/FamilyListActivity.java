@@ -48,7 +48,6 @@ public class FamilyListActivity extends AppCompatActivity implements OnRecyclerV
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_family_list);
-        ;
 
         d2DFC_handler = new D2DFC_HANDLER(this);
         d2DFC_handler.setLanguageInApp();

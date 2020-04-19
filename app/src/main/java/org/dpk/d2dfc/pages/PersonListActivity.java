@@ -10,14 +10,21 @@ import android.view.View;
 
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
 
+import com.anychart.anychart.AnyChart;
+import com.anychart.anychart.AnyChartView;
+import com.anychart.anychart.DataEntry;
+import com.anychart.anychart.Pie;
+import com.anychart.anychart.ValueDataEntry;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import org.dpk.d2dfc.D2DFC_HANDLER;
@@ -34,6 +41,8 @@ import java.util.List;
 
 public class PersonListActivity extends AppCompatActivity implements OnRecyclerViewItemListener, IRegistration {
 
+    AnyChartView genderPieChartView;
+    Spinner chartOptionSpinner;
     TextView familyPhoneTextView;
     ImageButton arrowBackSearchButton;
     EditText searchText;
@@ -43,7 +52,7 @@ public class PersonListActivity extends AppCompatActivity implements OnRecyclerV
     List<PersonBasicInfoTable> persons = new ArrayList<PersonBasicInfoTable>();
     D2DFC_HANDLER d2DFC_handler;
     CoordinatorLayout coordinatorLayout;
-
+    View dashboardView;
     private static long BACK_PRESSED_AT, TIME_INTERVAL=2000;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,7 +69,16 @@ public class PersonListActivity extends AppCompatActivity implements OnRecyclerV
         searchText = (EditText) findViewById(R.id.edit_text_search);
         familyPhoneTextView = (TextView) findViewById(R.id.text_horizontal_line_text);
         personRecyclerView = (RecyclerView) findViewById(R.id.recycler_view_person_list);
-
+        dashboardView = (View) findViewById(R.id.person_list_dashboard);
+        genderPieChartView = dashboardView.findViewById(R.id.any_chart_view_dashboard);
+        chartOptionSpinner = dashboardView.findViewById(R.id.spinner_char_option_dashboard);
+        // Create an ArrayAdapter using the string array and a default spinner layout
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
+                R.array.chart_option_array, android.R.layout.simple_spinner_item);
+// Specify the layout to use when the list of choices appears
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+// Apply the adapter to the spinner
+        chartOptionSpinner.setAdapter(adapter);
 
         familyPhoneTextView.setText(ApplicationConstants.SELECTED_FAMILY_PHONE);
         personRecyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -99,9 +117,27 @@ public class PersonListActivity extends AppCompatActivity implements OnRecyclerV
             }
         });
 
+        int male=0, female=0, other=0;
+        for (PersonBasicInfoTable personBasicInfoTable: persons){
+            if (personBasicInfoTable.getGender().equals("Male")){
+                male++;
+            }
+            if (personBasicInfoTable.getGender().equals("Female")){
+                female++;
+            }
+            else {
+                other++;
+            }
+        }
+        Pie pie = AnyChart.pie();
+
+        List<DataEntry> data = new ArrayList<>();
+        data.add(new ValueDataEntry("Male", male));
+        data.add(new ValueDataEntry("Female", female));
+        data.add(new ValueDataEntry("Other", other));
+        pie.setData(data);
+        genderPieChartView.setChart(pie);
     }
-
-
     @Override
     public void listenItem(View view, final int position) {
         final PersonBasicInfoTable personBasicInfoTable = persons.get(position);

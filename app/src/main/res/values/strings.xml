@@ -62,6 +62,11 @@
         <item>Female</item>
         <item>Other</item>
     </string-array>
+    <string-array name="chart_option_array">
+        <item>Gender</item>
+        <item>Occupation</item>
+        <item>Age</item>
+    </string-array>
     <string-array name="travel_days_array">
         <item>7 days ago</item>
         <item>14 days ago</item>
