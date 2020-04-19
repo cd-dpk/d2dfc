@@ -4,8 +4,6 @@ import android.content.ContentValues;
 import android.database.Cursor;
 import android.util.Log;
 
-import org.dpk.d2dfc.data_models.PersonBasicInfo;
-
 import java.util.ArrayList;
 import java.util.List;
 

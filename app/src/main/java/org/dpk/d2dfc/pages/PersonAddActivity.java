@@ -49,7 +49,6 @@ public class PersonAddActivity extends AppCompatActivity implements IRegistratio
         checkRegistration(d2DFC_handler);
 
         coordinatorLayout = (CoordinatorLayout) findViewById(R.id.coordinate_layout_member_create);
-
         familyPhoneText=(TextView) findViewById(R.id.text_view_family_phone);
         personMobileText =findViewById(R.id.edit_text_person_mobile_number);
         personNameText =findViewById(R.id.edit_text_person_name);
@@ -58,7 +57,10 @@ public class PersonAddActivity extends AppCompatActivity implements IRegistratio
         personAgeText =findViewById(R.id.edit_text_person_age);
         personOccupationText =findViewById(R.id.edit_text_person_occupation);
         personGenderSpinner = (Spinner) findViewById(R.id.spinner_registration_select_sex_button);
-// Create an ArrayAdapter using the string array and a default spinner layout
+
+        familyPhoneText.setText(ApplicationConstants.SELECTED_FAMILY_PHONE);
+        personMobileText.setText(familyPhoneText.getText().toString());
+        // Create an ArrayAdapter using the string array and a default spinner layout
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
                 R.array.gender_array, android.R.layout.simple_spinner_item);
 // Specify the layout to use when the list of choices appears
@@ -94,7 +96,7 @@ public class PersonAddActivity extends AppCompatActivity implements IRegistratio
             personMother=personMotherText.getText().toString();
             personAge=personAgeText.getText().toString();
             personOccupation=personOccupationText.getText().toString();
-            if (personMother.equals("") ||personName.equals("")||personGender.equals("")
+            if (personMobile.equals("") ||personName.equals("")
             || personAge.equals("")) {
                 Snackbar.
                         make(coordinatorLayout,R.string.warning_person_add_mandatory_entry,Snackbar.LENGTH_LONG)
@@ -102,17 +104,19 @@ public class PersonAddActivity extends AppCompatActivity implements IRegistratio
 //                    phoneText.setFocusable(true);
             }  else {
                 // TODO create person
-            PersonBasicInfoTable personBasicInfoTable= new PersonBasicInfoTable();
-            personBasicInfoTable.personBasicInfo.setMobile(personMobile);
-            personBasicInfoTable.personBasicInfo.setName(personName);
-            personBasicInfoTable.personBasicInfo.setGender(personGender);
-            personBasicInfoTable.personBasicInfo.setFather(personFather);
-            personBasicInfoTable.personBasicInfo.setMother(personMother);
-            personBasicInfoTable.personBasicInfo.setAge(Double.parseDouble(personAge));
-            personBasicInfoTable.personBasicInfo.setOccupation(personOccupation);
-            personBasicInfoTable.setReporterPhone(ApplicationConstants.appReporter.getPhone());
+                PersonBasicInfoTable personBasicInfoTable = new PersonBasicInfoTable();
+                personBasicInfoTable.setMobile(personMobile);
+                personBasicInfoTable.setName(personName);
+                personBasicInfoTable.setGender(personGender);
+                personBasicInfoTable.setFather(personFather);
+                personBasicInfoTable.setMother(personMother);
+                personBasicInfoTable.setAge(Double.parseDouble(personAge));
+                personBasicInfoTable.setOccupation(personOccupation);
+
+            personBasicInfoTable.setReporterPhone(d2DFC_handler.loadReporter().getPhone());
             personBasicInfoTable.setReportingDate(TimeHandler.now());
             personBasicInfoTable.setFamilyPhone(ApplicationConstants.SELECTED_FAMILY_PHONE);
+            Log.d("ADD-"+personBasicInfoTable.tableName(),personBasicInfoTable.toString());
             new PersonAddBackgroundTask(personBasicInfoTable).execute();
             }
         }
@@ -148,13 +152,14 @@ public class PersonAddActivity extends AppCompatActivity implements IRegistratio
             boolean doesExist = false;
             for (PersonBasicInfoTable infoTable: allMembers){
                 Log.d("FI", infoTable.toString());
-                if ((personBasicInfoTable.getFamilyPhone()+personBasicInfoTable.personBasicInfo.getName()).equals((infoTable.getFamilyPhone()+infoTable.personBasicInfo.getName()))){
+                if ((personBasicInfoTable.getFamilyPhone()+personBasicInfoTable.getName()).equals((infoTable.getFamilyPhone()+infoTable.getName()))){
                     doesExist = true;
                     break;
                 }
             }
             if (doesExist) return ApplicationConstants.FAMILY_MEMBER_PHONE_NAME_EXIST_ERROR;
             else if (d2DFC_handler.insertTableIntoDB(personBasicInfoTable)) {
+                Log.d("FIA", personBasicInfoTable.toString());
                 return Boolean.TRUE.toString();
             }
 
@@ -170,7 +175,7 @@ public class PersonAddActivity extends AppCompatActivity implements IRegistratio
                 errorMessageTextView.setText(R.string.family_phone_name_error);
             }
             else if (s.equals(Boolean.TRUE.toString())) {
-                Intent intent = new Intent(PersonAddActivity.this, MemberTravelAndHeathHistory.class);
+                Intent intent = new Intent(PersonAddActivity.this,PersonListActivity.class);
                 startActivity(intent);
             }
             else {

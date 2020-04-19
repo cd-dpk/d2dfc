@@ -63,7 +63,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textColorHighlight="@color/colorPrimary"
-                android:inputType="number"
+                android:inputType="text"
                 android:maxLength="25"
                 android:id="@+id/edit_text_person_name"
                 android:hint="@string/registration_name_hint"/>
@@ -97,7 +97,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textColorHighlight="@color/colorPrimary"
-                android:inputType="number"
+                android:inputType="text"
                 android:maxLength="25"
                 android:id="@+id/edit_text_person_father_name"
                 android:hint="@string/registration_person_father_name_hint"/>
@@ -112,7 +112,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textColorHighlight="@color/colorPrimary"
-                android:inputType="number"
+                android:inputType="text"
                 android:maxLength="25"
                 android:id="@+id/edit_text_person_mother_name"
                 android:hint="@string/registration_person_mother_hint"/>
@@ -137,7 +137,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textColorHighlight="@color/colorPrimary"
-                android:inputType="number"
+                android:inputType="text"
                 android:id="@+id/edit_text_person_occupation"
                 android:hint="@string/registration_person_occupation_hint"/>
         </com.google.android.material.textfield.TextInputLayout>

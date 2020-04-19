@@ -34,6 +34,7 @@ import java.util.List;
 
 public class PersonListActivity extends AppCompatActivity implements OnRecyclerViewItemListener, IRegistration {
 
+    TextView familyPhoneTextView;
     ImageButton arrowBackSearchButton;
     EditText searchText;
     FloatingActionButton addPersonFAB;
@@ -57,15 +58,18 @@ public class PersonListActivity extends AppCompatActivity implements OnRecyclerV
         checkRegistration(d2DFC_handler);
         arrowBackSearchButton = (ImageButton) findViewById(R.id.image_search_back);
         searchText = (EditText) findViewById(R.id.edit_text_search);
+        familyPhoneTextView = (TextView) findViewById(R.id.text_horizontal_line_text);
         personRecyclerView = (RecyclerView) findViewById(R.id.recycler_view_person_list);
+
+
+        familyPhoneTextView.setText(ApplicationConstants.SELECTED_FAMILY_PHONE);
         personRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         personRecyclerView.setHasFixedSize(true);
         coordinatorLayout = (CoordinatorLayout) findViewById(R.id.coordinate_layout_person_list);
         addPersonFAB = (FloatingActionButton) findViewById(R.id.person_list_ft_add_person);
         // Data
 
-        persons = d2DFC_handler.getAllPersons();
-
+        persons = d2DFC_handler.getAllMembers();
         personsRecyclerViewListAdapter = new RecyclerViewListAdapter(
                 this, R.layout.card_member, persons.size());
         personRecyclerView.setAdapter(personsRecyclerViewListAdapter);
@@ -101,18 +105,20 @@ public class PersonListActivity extends AppCompatActivity implements OnRecyclerV
     @Override
     public void listenItem(View view, final int position) {
         PersonBasicInfoTable personBasicInfoTable = persons.get(position);
-        TextView phoneText, nameText;
+        TextView  nameText,ageText,genderText;
         ImageButton rightArrowButton1,rightArrowButton2,rightArrowButton3,rightArrowButton4,rightArrowButton5 ;
-        phoneText = (TextView) view.findViewById(R.id.text_view_card_member_phone);
         nameText = (TextView) view.findViewById(R.id.text_view_card_member_name);
+        ageText = (TextView) view.findViewById(R.id.text_view_card_member_age);
+        genderText = (TextView) view.findViewById(R.id.text_view_card_member_gender);
         rightArrowButton1 = view.findViewById(R.id.button_card_member_right_arrow_info);
         rightArrowButton2 = view.findViewById(R.id.button_card_member_right_arrow_health);
         rightArrowButton3 = view.findViewById(R.id.button_card_member_right_arrow_corona_recent);
         rightArrowButton4 = view.findViewById(R.id.button_card_member_right_arrow_corona_daily);
         rightArrowButton5 = view.findViewById(R.id.button_card_member_right_arrow_info);
 
-        phoneText.setText(personBasicInfoTable.personBasicInfo.getMobile());
-        nameText.setText(personBasicInfoTable.personBasicInfo.getAge()+"");
+        nameText.setText(personBasicInfoTable.getName()+"");
+        ageText.setText(personBasicInfoTable.getAge()+"");
+        genderText.setText(personBasicInfoTable.getGender()+"");
 
         rightArrowButton1.setOnClickListener(new View.OnClickListener() {
             @Override

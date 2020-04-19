@@ -1,12 +1,9 @@
 package org.dpk.d2dfc.data_models.dao;
 
-import android.app.Person;
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.util.Log;
 
-
-import org.dpk.d2dfc.data_models.PersonBasicInfo;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,9 +14,72 @@ import java.util.List;
 
 public class PersonBasicInfoTable implements ITable{
 
-    public PersonBasicInfo personBasicInfo;
     private String familyPhone;
     private String reporterPhone, reportingDate;
+    private String mobile;
+    private String name;
+    private String gender;
+    private String father;
+    private String mother;
+
+    public String getMobile() {
+        return mobile;
+    }
+
+    public void setMobile(String mobile) {
+        this.mobile = mobile;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
+
+    public String getFather() {
+        return father;
+    }
+
+    public void setFather(String father) {
+        this.father = father;
+    }
+
+    public String getMother() {
+        return mother;
+    }
+
+    public void setMother(String mother) {
+        this.mother = mother;
+    }
+
+    public double getAge() {
+        return age;
+    }
+
+    public void setAge(double age) {
+        this.age = age;
+    }
+
+    public String getOccupation() {
+        return occupation;
+    }
+
+    public void setOccupation(String occupation) {
+        this.occupation = occupation;
+    }
+
+    private String occupation;
+    private double age;
 
     public String getFamilyPhone() {
         return familyPhone;
@@ -55,13 +115,7 @@ public class PersonBasicInfoTable implements ITable{
     }
 
 
-    public PersonBasicInfoTable(){
-        personBasicInfo = new PersonBasicInfo();
-    }
-    public PersonBasicInfoTable(PersonBasicInfo personBasicInfo){
-        this.personBasicInfo = personBasicInfo;
-    }
-
+    public PersonBasicInfoTable(){};
 
 
 
@@ -77,6 +131,35 @@ public class PersonBasicInfoTable implements ITable{
     @Override
     public ITable toITableFromCursor(Cursor cursor) {
         PersonBasicInfoTable personBasicInfoTable = new PersonBasicInfoTable();
+        if (cursor.getColumnIndex(Variable.STRING_PERSON_PHONE)!=-1){
+            personBasicInfoTable.setMobile(cursor.getString(
+                    cursor.getColumnIndex(Variable.STRING_PERSON_PHONE)));
+        }
+        if (cursor.getColumnIndex(Variable.STRING_PERSON_NAME)!=-1){
+            personBasicInfoTable.setName(cursor.getString(
+                    cursor.getColumnIndex(Variable.STRING_PERSON_NAME)));
+        }
+        if (cursor.getColumnIndex(Variable.STRING_GENDER)!=-1){
+            personBasicInfoTable.setGender(cursor.getString(
+                    cursor.getColumnIndex(Variable.STRING_GENDER)));
+        }
+        if (cursor.getColumnIndex(Variable.STRING_FATHER)!=-1){
+            personBasicInfoTable.setFather(cursor.getString(
+                    cursor.getColumnIndex(Variable.STRING_FATHER)));
+        }
+        if (cursor.getColumnIndex(Variable.STRING_MOTHER)!=-1){
+            personBasicInfoTable.setMother(  cursor.getString(
+                    cursor.getColumnIndex(Variable.STRING_MOTHER)));
+        }
+        if (cursor.getColumnIndex(Variable.STRING_OCCUPATION )!=-1){
+            personBasicInfoTable.setOccupation(  cursor.getString(
+                    cursor.getColumnIndex(Variable.STRING_OCCUPATION)));
+        }
+        if (cursor.getColumnIndex(Variable.STRING_AGE)!=-1){
+            personBasicInfoTable.setAge(cursor.getDouble(
+                    cursor.getColumnIndex(Variable.STRING_AGE)));
+        }
+
         if (cursor.getColumnIndex(Variable.STRING_FAMILY_PHONE)!=-1){
             personBasicInfoTable.setFamilyPhone(cursor.getString(cursor.getColumnIndex(Variable.STRING_FAMILY_PHONE)));
         }
@@ -87,31 +170,6 @@ public class PersonBasicInfoTable implements ITable{
         if (cursor.getColumnIndex(Variable.STRING_REPORTING_DATE)!=-1){
             personBasicInfoTable.setReportingDate(cursor.getString(
                     cursor.getColumnIndex(Variable.STRING_REPORTING_DATE)));
-        }
-
-        if (cursor.getColumnIndex(Variable.STRING_PERSON_PHONE)!=-1){
-            personBasicInfoTable.personBasicInfo.setMobile(cursor.getString(
-                    cursor.getColumnIndex(Variable.STRING_PERSON_PHONE)));
-        }
-        if (cursor.getColumnIndex(Variable.STRING_PERSON_NAME)!=-1){
-            personBasicInfoTable.personBasicInfo.setName(cursor.getString(
-                    cursor.getColumnIndex(Variable.STRING_PERSON_NAME)));
-        }
-        if (cursor.getColumnIndex(Variable.STRING_FATHER)!=-1){
-            personBasicInfoTable.personBasicInfo.setFather(cursor.getString(
-                    cursor.getColumnIndex(Variable.STRING_FATHER)));
-        }
-        if (cursor.getColumnIndex(Variable.STRING_MOTHER)!=-1){
-            personBasicInfoTable.personBasicInfo.setMother(  cursor.getString(
-                    cursor.getColumnIndex(Variable.STRING_MOTHER)));
-        }
-        if (cursor.getColumnIndex(Variable.STRING_OCCUPATION )!=-1){
-            personBasicInfoTable.personBasicInfo.setOccupation(  cursor.getString(
-                    cursor.getColumnIndex(Variable.STRING_OCCUPATION)));
-        }
-        if (cursor.getColumnIndex(Variable.STRING_AGE)!=-1){
-            personBasicInfoTable.personBasicInfo.setAge(cursor.getDouble(
-                    cursor.getColumnIndex(Variable.STRING_AGE)));
         }
         return personBasicInfoTable;
     }
@@ -139,6 +197,7 @@ public class PersonBasicInfoTable implements ITable{
                 Variable.STRING_REPORTING_DATE+" text,"+
                 Variable.STRING_FAMILY_PHONE+" text," +
                 Variable.STRING_PERSON_PHONE+" text," +
+                Variable.STRING_GENDER+" text," +
                 Variable.STRING_PERSON_NAME+" text," +
                 Variable.STRING_FATHER+" text,"+
                 Variable.STRING_MOTHER+" text,"+
@@ -164,11 +223,18 @@ public class PersonBasicInfoTable implements ITable{
     }
     @Override
     public ITable toClone(){
-        PersonBasicInfoTable personBasicInfoTable =  new PersonBasicInfoTable(personBasicInfo);
-        personBasicInfoTable.setFamilyPhone(familyPhone);
-        personBasicInfoTable.setReporterPhone(reporterPhone);
-        personBasicInfoTable.setReportingDate(reportingDate);
-        return personBasicInfoTable;
+        PersonBasicInfoTable personBasicInfo = new PersonBasicInfoTable();
+        personBasicInfo.setMobile(getMobile());
+        personBasicInfo.setName(getName());
+        personBasicInfo.setGender(getGender());
+        personBasicInfo.setFather(getFather());
+        personBasicInfo.setMother(getMother());
+        personBasicInfo.setAge(getAge());
+        personBasicInfo.setOccupation(getOccupation());
+        personBasicInfo.setFamilyPhone(familyPhone);
+        personBasicInfo.setReporterPhone(reporterPhone);
+        personBasicInfo.setReportingDate(reportingDate);
+        return personBasicInfo;
     }
 
     @Override
@@ -177,12 +243,13 @@ public class PersonBasicInfoTable implements ITable{
         contentValues.put(Variable.STRING_REPORTER_PHONE, reporterPhone);
         contentValues.put(Variable.STRING_REPORTING_DATE, reportingDate);
         contentValues.put(Variable.STRING_FAMILY_PHONE, familyPhone);
-        contentValues.put(Variable.STRING_PERSON_PHONE,personBasicInfo.getMobile());
-        contentValues.put(Variable.STRING_PERSON_NAME,personBasicInfo.getName());
-        contentValues.put(Variable.STRING_FATHER,personBasicInfo.getFather());
-        contentValues.put(Variable.STRING_MOTHER,personBasicInfo.getMother());
-        contentValues.put(Variable.STRING_AGE,personBasicInfo.getAge());
-        contentValues.put(Variable.STRING_OCCUPATION,personBasicInfo.getOccupation());
+        contentValues.put(Variable.STRING_PERSON_PHONE,getMobile());
+        contentValues.put(Variable.STRING_GENDER,getGender());
+        contentValues.put(Variable.STRING_PERSON_NAME,getName());
+        contentValues.put(Variable.STRING_FATHER,getFather());
+        contentValues.put(Variable.STRING_MOTHER,getMother());
+        contentValues.put(Variable.STRING_AGE,getAge());
+        contentValues.put(Variable.STRING_OCCUPATION,getOccupation());
         return contentValues;
     }
     @Override
@@ -206,27 +273,24 @@ public class PersonBasicInfoTable implements ITable{
                 reporterPhone+","+
                 reportingDate+","+
                 familyPhone+","+
-                personBasicInfo.getMobile()+","+
-                personBasicInfo.getName()+","+
-                personBasicInfo.getFather()+","+
-                personBasicInfo.getMother()+","+
-                personBasicInfo.getOccupation()+","+
-                personBasicInfo.getAge()+")";
+                getMobile()+","+
+                getName()+","+
+                getGender()+","+
+                getFather()+","+
+                getMother()+","+
+                getOccupation()+","+
+                getAge()+")";
     }
 
     public List<PersonBasicInfoTable> toTablesFromITables(List<ITable> iTables) {
         List<PersonBasicInfoTable> personBasicInfoTables = new ArrayList<PersonBasicInfoTable>();
         for (ITable iTable: iTables) {
-
             PersonBasicInfoTable personBasicInfoTable = (PersonBasicInfoTable) iTable.toClone();
-            Log.d("TRANS-I", iTable.toString());
-            Log.d("TRANS", personBasicInfoTable.toString());
+            Log.d("TRANS_"+tableName(), personBasicInfoTable.toString());
             personBasicInfoTables.add(personBasicInfoTable);
         }
         return personBasicInfoTables;
     }
-
-
 
     public static class Variable {
 
@@ -234,6 +298,7 @@ public class PersonBasicInfoTable implements ITable{
                 STRING_PERSON_PHONE = "phone",
                 STRING_PERSON_NAME="name",
                 STRING_AGE="age",
+                STRING_GENDER="gender",
                 STRING_FATHER="father",
                 STRING_MOTHER="mother",
                 STRING_OCCUPATION="occupation",

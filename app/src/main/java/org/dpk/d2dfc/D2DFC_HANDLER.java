@@ -10,7 +10,6 @@ import android.util.Log;
 import org.dpk.d2dfc.data.constants.ApplicationConstants;
 import org.dpk.d2dfc.data.constants.RegistrationConstants;
 import org.dpk.d2dfc.data.db.DataBaseHelper;
-import org.dpk.d2dfc.data_models.PersonBasicInfo;
 import org.dpk.d2dfc.data_models.dao.FamilyInfoTable;
 import org.dpk.d2dfc.data_models.Reporter;
 import org.dpk.d2dfc.data_models.dao.ITable;
@@ -66,16 +65,17 @@ public class D2DFC_HANDLER {
         DataBaseHelper dataBaseHelper = new DataBaseHelper(context);
         List<PersonBasicInfoTable> members = new ArrayList<PersonBasicInfoTable>();
         PersonBasicInfoTable personBasicInfoTable = new PersonBasicInfoTable();
-        if (ApplicationConstants.SELECTED_FAMILY_PHONE.equals(RegistrationConstants.COMPLEX_VALUE)){
+        if (!ApplicationConstants.SELECTED_FAMILY_PHONE.equals(RegistrationConstants.COMPLEX_VALUE)){
             personBasicInfoTable.setWhereClause(PersonBasicInfoTable.Variable.STRING_FAMILY_PHONE+"='"+ApplicationConstants.SELECTED_FAMILY_PHONE+"'");
         }
-        Log.d("CHECK", personBasicInfoTable.toSelectString());
+        Log.d("SELECT-"+personBasicInfoTable.tableName(), personBasicInfoTable.toSelectString());
         List<ITable> iTables = dataBaseHelper.selectRows(personBasicInfoTable);
         members = personBasicInfoTable.toTablesFromITables(iTables);
         return members;
     }
 
     public boolean insertTableIntoDB(ITable iTable){
+        Log.d("INSERT-"+iTable.tableName(), iTable.toString());
         DataBaseHelper dataBaseHelper = new DataBaseHelper(context);
         return dataBaseHelper.insertRow(iTable);
     }

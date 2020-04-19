@@ -6,8 +6,6 @@ import android.util.Log;
 
 import androidx.annotation.NonNull;
 
-import org.dpk.d2dfc.data_models.PersonBasicInfo;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -188,10 +186,8 @@ public class FamilyInfoTable implements ITable{
     public List<FamilyInfoTable> toTablesFromITables(List<ITable> iTables) {
         List<FamilyInfoTable> familyInfoTables = new ArrayList<FamilyInfoTable>();
         for (ITable iTable: iTables) {
-
             FamilyInfoTable familyInfoTable = (FamilyInfoTable) iTable.toClone();
-            Log.d("TRANS-I", iTable.toString());
-            Log.d("TRANS", familyInfoTable.toString());
+            Log.d("TRANS-"+tableName(), familyInfoTable.toString());
             familyInfoTables.add(familyInfoTable);
         }
         return familyInfoTables;

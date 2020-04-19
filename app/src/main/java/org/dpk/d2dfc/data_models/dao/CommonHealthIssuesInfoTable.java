@@ -245,8 +245,7 @@ public class CommonHealthIssuesInfoTable implements ITable{
         for (ITable iTable: iTables) {
 
             CommonHealthIssuesInfoTable commonHealthIssuesInfoTable = (CommonHealthIssuesInfoTable) iTable.toClone();
-            Log.d("TRANS-I", iTable.toString());
-            Log.d("TRANS", commonHealthIssuesInfoTable.toString());
+            Log.d("TRANS-"+tableName(), commonHealthIssuesInfoTable.toString());
             commonHealthIssuesInfoTables.add(commonHealthIssuesInfoTable);
         }
         return commonHealthIssuesInfoTables;

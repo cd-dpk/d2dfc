@@ -151,4 +151,5 @@
     <string name="to_value">Value</string>
     <string name="menu_reporting_list">Reporting</string>
     <string name="page_reportings">Reportings</string>
+    <string name="member_attr_gender">Gender</string>
 </resources>

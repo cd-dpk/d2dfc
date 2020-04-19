@@ -15,6 +15,9 @@ public class MemberTravelAndHeathHistory extends AppCompatActivity {
     Spinner travelDhakaSpinner,travelNaranganjSpinner,travelSylhetSpinner,travelOutBrahmanbariaSpinner,travelOutSarailSpinner,travelOutBangladeshSpinner;
     CheckBox commonHealthIssuesDiabetesRecorded, commonHealthIssuesDiabetesNow,commonHealthIssuesCardiovascularDiseasesRecorded,commonHealthIssuesCardiovascularDiseasesNow,commonHealthIssuesHypertensionRecorded,commonHealthIssuesHypertensionNow,commonHealthIssuesStrokeRecorded,HealthIssuesStrokeNow,commonHealthIssuesCancerRecorded,commonHealthIssuesCancerNow,commonHealthIssuesTuberculosisRecorded,commonHealthIssuesTuberculosisNow,commonHealthIssuesTetanusRecorded,commonHealthIssuesTetanusNow,commonHealthIssuesAsthamaRecorded,commonHealthIssuesAsthamaNow,commonHealthIssuesChronicBronchitisRecorded,commonHealthIssuesChronicBronchitisNow,commonHealthIssuesLungCancerRecorded,commonHealthIssuesLungCancerNow,commonHealthIssuesPneumoniaRecorded,commonHealthIssuesPneumoniaNow,commonRespiratoryIssuesRelatedBadHabitsSmoking,commonRespiratoryIssuesRelatedBadHabitsBetelLeaf,commonRespiratoryIssuesRelatedBadHabitsHooka;
     EditText otherCommonHealthIssuesText, otherRespiratoryIssuesText, otherRespiratoryBadHabitsText;
+    CheckBox  personTraceOutOfAreaCheckBox, personTraceGoneToBazar,personTraceGoneToShop,personTraceOutForWork;
+    CheckBox coronaSymptomsFever,coronaSymptomsDryCough,coronaSymptomsFatigue,coronaSymptomsMucusCough,spinnerCoronaSymptomsShortnessOfBreath,coronaSymptomsAchesAndPain,coronaSymptomsSoreThroat,coronaSymptomsFeverChillis,coronaSymptomsFeverNausea,coronaSymptomsNasalCongestion,coronaSymptomsDiarrhea;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -63,6 +66,25 @@ public class MemberTravelAndHeathHistory extends AppCompatActivity {
          commonRespiratoryIssuesRelatedBadHabitsBetelLeaf = (CheckBox) findViewById(R.id.common_respiratory_issues_related_bad_habits_hooka);
          commonRespiratoryIssuesRelatedBadHabitsHooka =findViewById(R.id.common_respiratory_issues_related_bad_habits_hooka);
          otherRespiratoryBadHabitsText = (EditText) findViewById(R.id.common_respiratory_issues_related_bad_habits_others);
+
+        //personTrace
+        personTraceOutOfAreaCheckBox = (CheckBox) findViewById(R.id.checkbox_person_trace_out_of_area);
+        personTraceGoneToBazar = (CheckBox) findViewById(R.id.checkbox_person_trace_gone_to_bazar);
+        personTraceGoneToShop = (CheckBox) findViewById(R.id.checkbox_person_trace_gone_to_shop);
+        personTraceOutForWork = (CheckBox) findViewById(R.id.checkbox_person_trace_out_for_work);
+        //Corona Symptoms
+        coronaSymptomsFever = (CheckBox) findViewById(R.id.checkbox_corona_symptoms_fever);
+        coronaSymptomsDryCough = (CheckBox) findViewById(R.id.checkbox_corona_symptoms_dry_cough);
+        coronaSymptomsFatigue = (CheckBox) findViewById(R.id.checkbox_corona_symptoms_fatigue);
+        coronaSymptomsMucusCough = (CheckBox) findViewById(R.id.checkbox__corona_symptoms_mucus_cough);
+        // spinnerCoronaSymptomsShortnessOfBreath = (CheckBox) findViewById(R.id.Spinn);
+        coronaSymptomsAchesAndPain = (CheckBox) findViewById(R.id.checkbox_corona_symptoms_aches_and_pain);
+        coronaSymptomsSoreThroat = (CheckBox) findViewById(R.id.checkbox_corona_symptoms_sore_throat);
+        coronaSymptomsFeverChillis = (CheckBox) findViewById(R.id.checkbox__corona_symptoms_fever_chillis);
+        coronaSymptomsFeverNausea = (CheckBox) findViewById(R.id.checkbox__corona_symptoms_fever_nausea);
+        coronaSymptomsNasalCongestion = (CheckBox) findViewById(R.id.checkbox__corona_symptoms_nasal_congestion);
+        coronaSymptomsDiarrhea = (CheckBox) findViewById(R.id.checkbox__corona_symptoms_diarrhea);
+
     }
 
     private void setupTravelDaysSpinner(Spinner spinner){

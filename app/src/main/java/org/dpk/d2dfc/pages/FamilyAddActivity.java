@@ -87,10 +87,11 @@ public class FamilyAddActivity extends AppCompatActivity implements IRegistratio
             }  else {
                 // TODO create family
                 FamilyInfoTable familyInfoTable = new FamilyInfoTable();
-                familyInfoTable.setReporterPhone(ApplicationConstants.appReporter.getPhone());
+                Log.d("R-PHONE",d2DFC_handler.loadReporter().getPhone());
+                familyInfoTable.setReporterPhone(d2DFC_handler.loadReporter().getPhone());
                 familyInfoTable.setPhone(phone);
                 familyInfoTable.setMembers(members);
-                familyInfoTable.setReporterPhone(TimeHandler.now());
+                familyInfoTable.setReportingDate(TimeHandler.now());
                 new FamilyAddBackgroundTask(familyInfoTable).execute();
             }
         }
