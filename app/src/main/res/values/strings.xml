@@ -62,11 +62,21 @@
         <item>Female</item>
         <item>Other</item>
     </string-array>
-    <string-array name="chart_option_array">
+    <string-array name="chart_option1_array">
         <item>Gender</item>
         <item>Occupation</item>
         <item>Age</item>
     </string-array>
+    <string-array name="chart_option2_array">
+        <item>Corona Symptoms</item>
+        <item>Travel Info</item>
+    </string-array>
+    <string-array name="bio_spinner">
+        <item>@string/age</item>
+        <item>@string/gender</item>
+        <item>@string/occupation</item>
+    </string-array>
+
     <string-array name="travel_days_array">
         <item>7 days ago</item>
         <item>14 days ago</item>
@@ -162,4 +172,12 @@
     <string name="person_attr_phone">Person Phone</string>
     <string name="person_attr_age">Age</string>
     <string name="person_attr_name">Name</string>
+    <string name="change">Change</string>
+    <string name="cancel">Cancel</string>
+    <string name="age">Age</string>
+    <string name="occupation">Occupation</string>
+    <string name="gender">Gender</string>
+    <string name="family_dashboard">Family Dashboard</string>
+    <string name="follow_up_date">Follow Up Date</string>
+    <string name="person_selected">Person(s) Selected</string>
 </resources>

@@ -10,7 +10,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class FamilyInfoTable implements ITable{
-    private String reporterPhone, reportingDate;
+    private String reporterPhone;
+    private long
+            reportingDate;
 
     public String getReporterPhone() {
         return reporterPhone;
@@ -20,11 +22,12 @@ public class FamilyInfoTable implements ITable{
         this.reporterPhone = reporterPhone;
     }
 
-    public String getReportingDate() {
+    public long
+    getReportingDate() {
         return reportingDate;
     }
 
-    public void setReportingDate(String reportingDate) {
+    public void setReportingDate(long reportingDate) {
         this.reportingDate = reportingDate;
     }
 
@@ -58,7 +61,7 @@ public class FamilyInfoTable implements ITable{
     public String toCreateTableString() {
         return "create table if not exists "+tableName()+" ("+
                 Variable.STRING_REPORTER_PHONE+" text,"+
-                Variable.STRING_REPORTING_DATE+" text,"+
+                Variable.STRING_REPORTING_DATE+" integer,"+
                 Variable.STRING_FAMILY_PHONE+" text," +
                 Variable.STRING_MEMBER_COUNT+" double,"+
                 "primary key ("+ Variable.STRING_FAMILY_PHONE+","+ Variable.STRING_REPORTER_PHONE+")"+
@@ -114,7 +117,7 @@ public class FamilyInfoTable implements ITable{
                     cursor.getColumnIndex(Variable.STRING_REPORTER_PHONE)));
         }
         if (cursor.getColumnIndex(Variable.STRING_REPORTING_DATE)!=-1){
-            familyInfoTable.setReportingDate(cursor.getString(
+            familyInfoTable.setReportingDate(cursor.getLong(
                     cursor.getColumnIndex(Variable.STRING_REPORTING_DATE)));
         }
         return familyInfoTable;

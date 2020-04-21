@@ -1,5 +1,6 @@
 package org.dpk.d2dfc;
 
+import android.accounts.Account;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
@@ -10,13 +11,24 @@ import android.util.Log;
 import org.dpk.d2dfc.data.constants.ApplicationConstants;
 import org.dpk.d2dfc.data.constants.RegistrationConstants;
 import org.dpk.d2dfc.data.db.DataBaseHelper;
+import org.dpk.d2dfc.data_models.CoronaSymptomsSummary;
+import org.dpk.d2dfc.data_models.dao.DailyFollowUpContactPersonsTable;
+import org.dpk.d2dfc.data_models.dao.DailyFollowUpCoronaSymptomsTable;
+import org.dpk.d2dfc.data_models.dao.DailyFollowUpTravelInfoTable;
 import org.dpk.d2dfc.data_models.dao.FamilyInfoTable;
 import org.dpk.d2dfc.data_models.Reporter;
 import org.dpk.d2dfc.data_models.dao.ITable;
 import org.dpk.d2dfc.data_models.dao.PersonBasicInfoTable;
 import org.dpk.d2dfc.data_models.dao.ReportingInfoTable;
+import org.dpk.d2dfc.data_models.dao.Tuple;
+import org.dpk.d2dfc.pages.DailyCoronaFollowupPersonTrace;
+import org.dpk.d2dfc.pages.PersonAddActivity;
+import org.dpk.d2dfc.utils.TimeHandler;
 
+import java.sql.Time;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
@@ -78,6 +90,16 @@ public class D2DFC_HANDLER {
         Log.d("INSERT-"+iTable.tableName(), iTable.toString());
         DataBaseHelper dataBaseHelper = new DataBaseHelper(context);
         return dataBaseHelper.insertRow(iTable);
+    }
+    public boolean insertTablesIntoDB(List<ITable>iTables){
+        DataBaseHelper dataBaseHelper = new DataBaseHelper(context);
+        for (ITable iTable: iTables) {
+            Log.d("INSERT-"+iTable.tableName(), iTable.toString());
+            if (!dataBaseHelper.insertRow(iTable)){
+                return false;
+            }
+        }
+        return true;
     }
      /*
     public List<AccountTable> getAllAccountsExcept(AccountTable exclusiveAccountTable){
@@ -196,23 +218,57 @@ public class D2DFC_HANDLER {
         }
         return 0.0;
     }
-    public double getTotalAmountTakenFrom(AccountTable ownerAccount){
-        List<Tuple> tuples = new ArrayList<Tuple>();
-        Tuple tuple = new Tuple("select  sum("+ TransactionTable.Variable.STRING_AMOUNT+") as taken_from from "+new TransactionTable().tableName());
-        tuple.setWhereClause(TransactionTable.Variable.STRING_TAKER_PHONE+"='"+ownerAccount.getPhone()+"'");
-        DataBaseHelper dataBaseHelper = new DataBaseHelper(context);
-        List<ITable> iTables = dataBaseHelper.selectRows(tuple);
-        Tuple qTuple = new Tuple();
-        if (iTables.size()==1){
-            qTuple = (Tuple) iTables.get(0).toClone();
-            double amount = 0.0;
-            if (!qTuple.values.get("taken_from").equals("")){
-                amount = Double.parseDouble(qTuple.values.get("taken_from"));
-            }
-            return amount;
-        }
-        return 0.0;
+    */
+     public int countColumn(String column, String table, String whereCaluse){
+         List<Tuple> tuples = new ArrayList<Tuple>();
+
+         Tuple tuple = new Tuple("select  count(*) as "+ column
+                 +" from "+table);
+         whereCaluse = column+"='"+Boolean.toString(Boolean.TRUE)+"'";
+         tuple.setWhereClause(whereCaluse);
+         DataBaseHelper dataBaseHelper = new DataBaseHelper(context);
+         List<ITable> iTables = dataBaseHelper.selectRows(tuple);
+         Tuple qTuple = new Tuple();
+         if (iTables.size()==1){
+             qTuple = (Tuple) iTables.get(0).toClone();
+             int count = 0;
+             if (!qTuple.values.get(column).equals("")){
+                 count = Integer.parseInt(qTuple.values.get(column));
+             }
+             return count;
+         }
+         return 0;
+     }
+    public CoronaSymptomsSummary getCoronaSummarySymptoms(String familyPhone){
+        CoronaSymptomsSummary coronaSymptomsSummary = new CoronaSymptomsSummary();
+        coronaSymptomsSummary.fever = countColumn(DailyFollowUpCoronaSymptomsTable.Variable.STRINGfever,
+                new DailyFollowUpCoronaSymptomsTable().tableName(),"");
+        coronaSymptomsSummary.achesNPain = countColumn(DailyFollowUpCoronaSymptomsTable.Variable.STRINGachesNPain,
+                new DailyFollowUpCoronaSymptomsTable().tableName(),"");
+        coronaSymptomsSummary.chillis = countColumn(DailyFollowUpCoronaSymptomsTable.Variable.STRINGchillis,
+                new DailyFollowUpCoronaSymptomsTable().tableName(),"");
+        coronaSymptomsSummary.dryCough = countColumn(DailyFollowUpCoronaSymptomsTable.Variable.STRINGdryCough,
+                new DailyFollowUpCoronaSymptomsTable().tableName(),"");
+        coronaSymptomsSummary.fatigue = countColumn(DailyFollowUpCoronaSymptomsTable.Variable.STRINGfatigue,
+                new DailyFollowUpCoronaSymptomsTable().tableName(),"");
+        coronaSymptomsSummary.coughMucus = countColumn(DailyFollowUpCoronaSymptomsTable.Variable.STRINGcoughMucus,
+                new DailyFollowUpCoronaSymptomsTable().tableName(),"");
+        coronaSymptomsSummary.shortnessOfBreath = countColumn(DailyFollowUpCoronaSymptomsTable.Variable.STRINGshortnessOfBreath,
+                new DailyFollowUpCoronaSymptomsTable().tableName(),"");
+        coronaSymptomsSummary.soreThroat = countColumn(DailyFollowUpCoronaSymptomsTable.Variable.STRINGsoreThroat,
+                new DailyFollowUpCoronaSymptomsTable().tableName(),"");
+        coronaSymptomsSummary.nausea = countColumn(DailyFollowUpCoronaSymptomsTable.Variable.STRINGnausea,
+                new DailyFollowUpCoronaSymptomsTable().tableName(),"");
+        coronaSymptomsSummary.nasalCongestion = countColumn(DailyFollowUpCoronaSymptomsTable.Variable.STRINGnasalCongestion,
+                new DailyFollowUpCoronaSymptomsTable().tableName(),"");
+        coronaSymptomsSummary.diarrhea = countColumn(DailyFollowUpCoronaSymptomsTable.Variable.STRINGdiarrhea,
+                new DailyFollowUpCoronaSymptomsTable().tableName(),"");
+        coronaSymptomsSummary.other = countColumn(DailyFollowUpCoronaSymptomsTable.Variable.STRINGother,
+                new DailyFollowUpCoronaSymptomsTable().tableName(),"");
+
+        return coronaSymptomsSummary;
     }
+    /*
     public List<Account> fromTableToObject(List<AccountTable> accountTables){
         List<Account> accounts = new ArrayList<Account>();
         for (AccountTable accountTable: accountTables){
@@ -279,8 +335,126 @@ public class D2DFC_HANDLER {
         reportings = reportingInfoTable.toTablesFromITables(iTables);
         return reportings;
     }
+    public List<FamilyInfoTable> searchFamilies(String searchString, List<FamilyInfoTable>toSearchFamilies){
+        List<FamilyInfoTable> searcheFamilies = new ArrayList<FamilyInfoTable>();
+        if (searchString.equals("")) return toSearchFamilies;
+        String [] searchTokens = searchString.split("\\s+");
+        Log.d("TOK",searchString+","+ Arrays.toString(searchTokens));
+        for (FamilyInfoTable familyInfoTable: toSearchFamilies){
+            boolean isSearched = false;
+            for (String token :
+                    searchTokens) {
+                Log.d("TOKENS", token);
+                if (familyInfoTable.getPhone().matches(".*"+token.toLowerCase()+".*")){
+                    isSearched =true;
+                }
+            }
+            if (isSearched)
+                searcheFamilies.add(familyInfoTable);
+        }
+        return searcheFamilies;
+    }
+    public List<PersonBasicInfoTable> searchMembers(String searchString, List<PersonBasicInfoTable>toSearchMembers){
+        List<PersonBasicInfoTable> searchedMembers = new ArrayList<PersonBasicInfoTable>();
+        if (searchString.equals("")) return toSearchMembers;
+        String [] searchTokens = searchString.split("\\s+");
+        Log.d("TOK",searchString+","+ Arrays.toString(searchTokens));
+        for (PersonBasicInfoTable personBasicInfoTable: toSearchMembers){
+            boolean isSearched = false;
+            for (String token :
+                    searchTokens) {
+                Log.d("TOKENS", token);
+                token = token.toLowerCase();
+                if (personBasicInfoTable.getFamilyPhone().matches(".*"+token+".*") ||
+                        personBasicInfoTable.getName().toLowerCase().matches(".*"+token+".*")||
+                        Double.toString(personBasicInfoTable.getAge()).matches(".*"+token+".*")||
+                        personBasicInfoTable.getGender().toLowerCase().matches(".*"+token+".*")||
+                        personBasicInfoTable.getMobile().matches(".*"+token+".*")){
+                    isSearched =true;
+                }
+            }
+            if (isSearched)
+                searchedMembers.add(personBasicInfoTable);
+        }
+        return searchedMembers;
+    }
+    public List<DailyFollowUpCoronaSymptomsTable> getDailyFollowUpCoronaSymptomsTables(String whereCaluse){
+        DataBaseHelper dataBaseHelper = new DataBaseHelper(context);
+        List<DailyFollowUpCoronaSymptomsTable> dailyFollowUpCoronaSymptomsTables = new ArrayList<DailyFollowUpCoronaSymptomsTable>();
+        DailyFollowUpCoronaSymptomsTable dailyFollowUpCoronaSymptomsTable = new DailyFollowUpCoronaSymptomsTable();
+        dailyFollowUpCoronaSymptomsTable.setWhereClause(whereCaluse);
+        Log.d("S-Q"+dailyFollowUpCoronaSymptomsTable.tableName(), dailyFollowUpCoronaSymptomsTable.toSelectString());
+        List<ITable> iTables = dataBaseHelper.selectRows(dailyFollowUpCoronaSymptomsTable);
+        dailyFollowUpCoronaSymptomsTables = dailyFollowUpCoronaSymptomsTable.toTablesFromITables(iTables);
+        return dailyFollowUpCoronaSymptomsTables;
+    }
+    public List<DailyFollowUpContactPersonsTable> getDailyContactPersonsTables(String whereCaluse){
+        DataBaseHelper dataBaseHelper = new DataBaseHelper(context);
+        List<DailyFollowUpContactPersonsTable> dailyFollowUpContactPersonsTables = new ArrayList<DailyFollowUpContactPersonsTable>();
+        DailyFollowUpContactPersonsTable dailyFollowUpContactPersonsTable = new DailyFollowUpContactPersonsTable();
+        dailyFollowUpContactPersonsTable.setWhereClause(whereCaluse);
+        Log.d("S-Q"+dailyFollowUpContactPersonsTable.tableName(), dailyFollowUpContactPersonsTable.toSelectString());
+        List<ITable> iTables = dataBaseHelper.selectRows(dailyFollowUpContactPersonsTable);
+        dailyFollowUpContactPersonsTables = dailyFollowUpContactPersonsTable.toTablesFromITables(iTables);
+        return dailyFollowUpContactPersonsTables;
+    }
 
-   /* public List<Account> searchedAccounts(String searchString, List<Account>toSearchAccounts){
+    public boolean isInsertedDailyFollowUPHeath(String personID, long today) {
+        DataBaseHelper dataBaseHelper = new DataBaseHelper(context);
+        Boolean isInserted= false;
+        List<DailyFollowUpCoronaSymptomsTable> dailyFollowUpCoronaSymptomsTables = new ArrayList<DailyFollowUpCoronaSymptomsTable>();
+        List<DailyFollowUpTravelInfoTable> dailyFollowUpTravelInfoTables = new ArrayList<DailyFollowUpTravelInfoTable>();
+        long time =  TimeHandler.subtractDaysToUnixTime(today,1);
+
+        DailyFollowUpCoronaSymptomsTable dailyFollowUpCoronaSymptomsTable = new DailyFollowUpCoronaSymptomsTable();
+        dailyFollowUpCoronaSymptomsTable.setWhereClause(DailyFollowUpCoronaSymptomsTable.Variable.STRINGpersonID+"='"+personID+"'"+" and "+
+                DailyFollowUpCoronaSymptomsTable.Variable.STRINGreportingDate+" > "+time);
+        Log.d("S-Q"+dailyFollowUpCoronaSymptomsTable.tableName(), dailyFollowUpCoronaSymptomsTable.toSelectString());
+        List<ITable> iTables = dataBaseHelper.selectRows(dailyFollowUpCoronaSymptomsTable);
+        dailyFollowUpCoronaSymptomsTables = dailyFollowUpCoronaSymptomsTable.toTablesFromITables(iTables);
+        Log.d("DPK",dailyFollowUpCoronaSymptomsTables.toString());
+
+        DailyFollowUpTravelInfoTable dailyFollowUpTravelInfoTable = new DailyFollowUpTravelInfoTable();
+        dailyFollowUpTravelInfoTable.setWhereClause(DailyFollowUpTravelInfoTable.Variable.STRINGpersonID+"='"+personID+"'"+" and "+
+                DailyFollowUpTravelInfoTable.Variable.STRINGreportingDate+" > "+time);
+        Log.d("S-Q"+dailyFollowUpTravelInfoTable.tableName(), dailyFollowUpTravelInfoTable.toSelectString());
+        List<ITable> iTables1 = dataBaseHelper.selectRows(dailyFollowUpTravelInfoTable);
+        dailyFollowUpTravelInfoTables= dailyFollowUpTravelInfoTable.toTablesFromITables(iTables1);
+        Log.d("DPK",dailyFollowUpTravelInfoTables.toString());
+        for (DailyFollowUpCoronaSymptomsTable dfCST :
+                dailyFollowUpCoronaSymptomsTables) {
+            if (TimeHandler.isSameDate(today, dfCST.getFollowUpDate())){
+                return true;
+            }
+        }
+        for (DailyFollowUpTravelInfoTable dfTIT :
+                dailyFollowUpTravelInfoTables) {
+            if (TimeHandler.isSameDate(today, dfTIT.getFollowUpDate())){
+                return true;
+            }
+        }
+        return isInserted;
+    }
+    public boolean isInsertedDailyContactTrace(String personID, long today) {
+        DataBaseHelper dataBaseHelper = new DataBaseHelper(context);
+        Boolean isInserted= false;
+        long time =  TimeHandler.subtractDaysToUnixTime(today,1);
+        List<DailyFollowUpContactPersonsTable> dailyFollowUpContactPersonsTables = new ArrayList<DailyFollowUpContactPersonsTable>();
+        DailyFollowUpContactPersonsTable dailyFollowUpContactPersonsTable = new DailyFollowUpContactPersonsTable();
+        dailyFollowUpContactPersonsTable.setWhereClause(DailyFollowUpContactPersonsTable.Variable.STRINGpersonOnePhone+
+                "='"+personID+"'"+" and "+
+                DailyFollowUpContactPersonsTable.Variable.STRINGreportingDate+" > "+time);
+        dailyFollowUpContactPersonsTables = getDailyContactPersonsTables(dailyFollowUpContactPersonsTable.getWhereClause());
+        for (DailyFollowUpContactPersonsTable dfCST :
+                dailyFollowUpContactPersonsTables) {
+            if (TimeHandler.isSameDate(today, dfCST.getFollowUpDate())){
+                return true;
+            }
+        }
+        return isInserted;
+    }
+
+    /* public List<Account> searchedAccounts(String searchString, List<Account>toSearchAccounts){
         List<Account> searchedAccounts = new ArrayList<Account>();
         if (searchString.equals("")) return toSearchAccounts;
         String [] searchTokens = searchString.split("\\s+");

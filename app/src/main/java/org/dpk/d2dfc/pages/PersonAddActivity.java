@@ -114,7 +114,7 @@ public class PersonAddActivity extends AppCompatActivity implements IRegistratio
                 personBasicInfoTable.setOccupation(personOccupation);
 
             personBasicInfoTable.setReporterPhone(d2DFC_handler.loadReporter().getPhone());
-            personBasicInfoTable.setReportingDate(TimeHandler.now());
+            personBasicInfoTable.setReportingDate(TimeHandler.unixTimeNow());
             personBasicInfoTable.setFamilyPhone(ApplicationConstants.SELECTED_FAMILY_PHONE);
             Log.d("ADD-"+personBasicInfoTable.tableName(),personBasicInfoTable.toString());
             new PersonAddBackgroundTask(personBasicInfoTable).execute();

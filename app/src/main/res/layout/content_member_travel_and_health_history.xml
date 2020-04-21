@@ -148,12 +148,14 @@
                 android:id="@+id/checkbox_common_health_issues_diabetes_recorded"
                 android:layout_weight="1"
                 android:layout_width="wrap_content"
+                android:buttonTint="@color/red"
                 android:layout_height="wrap_content"
                 android:text="@string/recorded"/>
             <CheckBox
                 android:id="@+id/checkbox_common_health_issues_diabetes_now"
                 android:layout_weight="1"
                 android:layout_width="wrap_content"
+                android:buttonTint="@color/red"
                 android:layout_height="wrap_content"
                 android:text="@string/now"/>
         </LinearLayout>
@@ -172,12 +174,14 @@
                 android:id="@+id/checkbox_common_health_issues_cardiovascular_diseases_recorded"
                 android:layout_weight="1"
                 android:layout_width="wrap_content"
+                android:buttonTint="@color/red"
                 android:layout_height="wrap_content"
                 android:text="@string/recorded"/>
             <CheckBox
                 android:id="@+id/checkbox_common_health_issues_cardiovascular_diseases_now"
                 android:layout_weight="1"
                 android:layout_width="wrap_content"
+                android:buttonTint="@color/red"
                 android:layout_height="wrap_content"
                 android:text="@string/now"/>
         </LinearLayout>
@@ -196,12 +200,14 @@
                 android:id="@+id/checkbox_common_health_issues_hypertension_recorded"
                 android:layout_weight="1"
                 android:layout_width="wrap_content"
+                android:buttonTint="@color/red"
                 android:layout_height="wrap_content"
                 android:text="@string/recorded"/>
             <CheckBox
                 android:id="@+id/checkbox_common_health_issues_hypertension_now"
                 android:layout_weight="1"
                 android:layout_width="wrap_content"
+                android:buttonTint="@color/red"
                 android:layout_height="wrap_content"
                 android:text="@string/now"/>
         </LinearLayout>
@@ -219,12 +225,14 @@
             <CheckBox
                 android:id="@+id/checkbox_common_health_issues_stroke_recorded"
                 android:layout_weight="1"
+                android:buttonTint="@color/red"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/recorded"/>
             <CheckBox
                 android:id="@+id/checkbox_common_health_issues_stroke_now"
                 android:layout_weight="1"
+                android:buttonTint="@color/red"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/now"/>
@@ -243,12 +251,14 @@
             <CheckBox
                 android:id="@+id/checkbox_common_health_issues_cancer_recorded"
                 android:layout_weight="1"
+                android:buttonTint="@color/red"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/recorded"/>
             <CheckBox
                 android:id="@+id/checkbox_common_health_issues_cancer_now"
                 android:layout_weight="1"
+                android:buttonTint="@color/red"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/now"/>
@@ -267,12 +277,14 @@
             <CheckBox
                 android:id="@+id/checkbox_common_health_issues_tetanus_recorded"
                 android:layout_weight="1"
+                android:buttonTint="@color/red"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/recorded"/>
             <CheckBox
                 android:id="@+id/checkbox_common_health_issues_tetanus_now"
                 android:layout_weight="1"
+                android:buttonTint="@color/red"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/now"/>
@@ -311,12 +323,14 @@
             <CheckBox
                 android:id="@+id/checkbox_common_health_issues_asthama_recorded"
                 android:layout_weight="1"
+                android:buttonTint="@color/red"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/recorded"/>
             <CheckBox
                 android:id="@+id/checkbox_common_health_issues_asthama_now"
                 android:layout_weight="1"
+                android:buttonTint="@color/red"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/now"/>
@@ -335,12 +349,14 @@
             <CheckBox
                 android:id="@+id/checkbox_common_health_issues_chronic_bronchitis_recorded"
                 android:layout_weight="1"
+                android:buttonTint="@color/red"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/recorded"/>
             <CheckBox
                 android:id="@+id/checkbox_common_health_issues_chronic_bronchitis_now"
                 android:layout_weight="1"
+                android:buttonTint="@color/red"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/now"/>
@@ -359,12 +375,14 @@
             <CheckBox
                 android:id="@+id/checkbox_common_health_issues_lung_cancer_recorded"
                 android:layout_weight="1"
+                android:buttonTint="@color/red"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/recorded"/>
             <CheckBox
                 android:id="@+id/checkbox_common_health_issues_lung_cancer_now"
                 android:layout_weight="1"
+                android:buttonTint="@color/red"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/now"/>
@@ -383,12 +401,14 @@
             <CheckBox
                 android:id="@+id/checkbox_common_health_issues_pneumonia_recorded"
                 android:layout_weight="1"
+                android:buttonTint="@color/red"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/recorded"/>
             <CheckBox
                 android:id="@+id/checkbox_common_health_issues_pneumonia_now"
                 android:layout_weight="1"
+                android:buttonTint="@color/red"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/now"/>
@@ -407,12 +427,14 @@
             <CheckBox
                 android:id="@+id/checkbox_common_health_issues_tuberculosis_recorded"
                 android:layout_weight="1"
+                android:buttonTint="@color/red"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/recorded"/>
             <CheckBox
                 android:id="@+id/checkbox_common_health_issues_tuberculosis_now"
                 android:layout_weight="1"
+                android:buttonTint="@color/red"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/now"/>
@@ -440,18 +462,21 @@
             <CheckBox
                 android:id="@+id/common_respiratory_issues_related_bad_habits_smoking"
                 android:layout_weight="1"
+                android:buttonTint="@color/red"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/smoking"/>
             <CheckBox
                 android:id="@+id/common_respiratory_issues_related_bad_habits_betel_leaf"
                 android:layout_weight="1"
+                android:buttonTint="@color/red"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/betel_leaf"/>
             <CheckBox
                 android:id="@+id/common_respiratory_issues_related_bad_habits_hooka"
                 android:layout_weight="1"
+                android:buttonTint="@color/red"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/hooka"/>

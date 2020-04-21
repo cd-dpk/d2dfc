@@ -159,7 +159,7 @@ public class MemberTravelAndHeathHistory extends AppCompatActivity implements IR
             TravelHistoryInfoTable travelHistoryInfoTable = new TravelHistoryInfoTable(ApplicationConstants.SELECTED_FAMILY_PHONE,
                     ApplicationConstants.SELECTED_FAMILY_PERSON_NAME);
             travelHistoryInfoTable.setReporterPhone(d2DFC_handler.loadReporter().getPhone());
-            travelHistoryInfoTable.setReportingDate(TimeHandler.now());
+            travelHistoryInfoTable.setReportingDate(TimeHandler.unixTimeNow());
             travelHistoryInfoTable.setDhaka(travelDhakaSpinner.getSelectedItem().toString());
             travelHistoryInfoTable.setNaraynganj(travelNaranganjSpinner.getSelectedItem().toString());
             travelHistoryInfoTable.setSylhet(travelSylhetSpinner.getSelectedItem().toString());
@@ -170,7 +170,7 @@ public class MemberTravelAndHeathHistory extends AppCompatActivity implements IR
             CommonHealthIssuesInfoTable commonHealthIssuesInfoTable = new CommonHealthIssuesInfoTable(ApplicationConstants
             .SELECTED_FAMILY_PHONE, ApplicationConstants.SELECTED_FAMILY_PHONE);
             commonHealthIssuesInfoTable.setReporterPhone(d2DFC_handler.loadReporter().getPhone());
-            commonHealthIssuesInfoTable.setReportingDate(TimeHandler.now());
+            commonHealthIssuesInfoTable.setReportingDate(TimeHandler.unixTimeNow());
             commonHealthIssuesInfoTable.setDiabetesRecorded(Boolean.toString(commonHealthIssuesDiabetesRecorded.isChecked()));
             commonHealthIssuesInfoTable.setDiabetesNow(Boolean.toString(commonHealthIssuesCardiovascularDiseasesNow.isChecked()));
             commonHealthIssuesInfoTable.setCardiovascularRecorded(Boolean.toString(commonHealthIssuesCardiovascularDiseasesRecorded.isChecked()));
@@ -186,7 +186,7 @@ public class MemberTravelAndHeathHistory extends AppCompatActivity implements IR
             RespiratoryIssuesInfoTable respiratoryIssuesInfoTable = new RespiratoryIssuesInfoTable(ApplicationConstants
             .SELECTED_FAMILY_PHONE, ApplicationConstants.SELECTED_FAMILY_PERSON_NAME);
             respiratoryIssuesInfoTable.setReporterPhone(d2DFC_handler.loadReporter().getPhone());
-            respiratoryIssuesInfoTable.setReportingDate(TimeHandler.now());
+            respiratoryIssuesInfoTable.setReportingDate(TimeHandler.unixTimeNow());
             respiratoryIssuesInfoTable.setAsthmaRecorded(Boolean.toString(commonHealthIssuesAsthamaRecorded.isChecked()));
             respiratoryIssuesInfoTable.setAsthamaNow(Boolean.toString(commonHealthIssuesAsthamaNow.isChecked()));
             respiratoryIssuesInfoTable.setChronicBronchitisRecorded(Boolean.toString(commonHealthIssuesChronicBronchitisRecorded.isChecked()));
@@ -206,7 +206,7 @@ public class MemberTravelAndHeathHistory extends AppCompatActivity implements IR
             RecentCoronaRelatedIssuesTable recentCoronaRelatedIssuesTable = new RecentCoronaRelatedIssuesTable(ApplicationConstants.SELECTED_FAMILY_PHONE,
                     ApplicationConstants.SELECTED_FAMILY_PERSON_NAME);
             recentCoronaRelatedIssuesTable.setReporterPhone(d2DFC_handler.loadReporter().getPhone());
-            recentCoronaRelatedIssuesTable.setReportingDate(TimeHandler.now());
+            recentCoronaRelatedIssuesTable.setReportingDate(TimeHandler.unixTimeNow());
             recentCoronaRelatedIssuesTable.setAchesNPain(Boolean.toString(coronaSymptomsAchesAndPain.isChecked()));
             recentCoronaRelatedIssuesTable.setChillis(Boolean.toString(coronaSymptomChillis.isChecked()));
             recentCoronaRelatedIssuesTable.setCoughMucus(Boolean.toString(coronaSymptomsMucusCough.isChecked()));

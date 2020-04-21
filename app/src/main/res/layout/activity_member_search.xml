@@ -1,44 +1,79 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     android:theme="@style/AppTheme.GrayColorPrimary"
     tools:context=".pages.MemberSearchActivity">
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/search_bar_height"
         android:orientation="horizontal"
-        android:weightSum="3"
-        android:background="@android:color/white"
-        android:id="@+id/search_bar">
+        android:layout_margin="10dp"
+        android:weightSum="1"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_width="wrap_content"
+            android:id="@+id/followup_date"
+            android:gravity="center"
+            android:layout_gravity="center"
+            android:layout_weight="0.7"
+            android:text="@string/follow_up_date"
+            android:layout_height="wrap_content"/>
         <ImageButton
-            android:layout_weight="0.25"
-            android:paddingLeft="@dimen/activity_horizontal_margin"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:background="@color/trans"
-            android:src="@drawable/baseline_search_black_24"
-            android:id="@+id/image_search_back"
-            />
+            android:layout_weight="0.3"
+            android:id="@+id/button_follow_up_date_change"
+            android:src="@drawable/baseline_add_white_18"/>
+    </LinearLayout>
+    <include
+        android:id="@+id/contact_open_progress_view"
+        layout="@layout/view_progress_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:visibility="gone"
+        android:layout_weight="1">
+    </include>
+    <include
+        android:id="@+id/contact_error_message_view"
+        layout="@layout/view_error_message"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:visibility="gone"
+        android:layout_weight="1">
+    </include>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:text="@string/person_selected"
+        android:id="@+id/text_person_selected"
+        android:layout_height="30dp"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/search_bar_height"
+        android:orientation="horizontal"
+        android:weightSum="1"
+        android:background="@android:color/white"
+        android:id="@+id/search_bar">
         <EditText
             android:layout_marginLeft="@dimen/activity_horizontal_margin"
-            android:layout_weight="2.50"
+            android:layout_weight=" 0.90"
             android:layout_width="wrap_content"
             android:layout_height="@dimen/search_bar_height"
             android:hint="Search"
             android:textColor="@color/grey"
             android:id="@+id/edit_text_search"/>
         <ImageButton
-            android:layout_weight="0.25"
+            android:layout_weight="0.10"
             android:paddingLeft="@dimen/activity_horizontal_margin"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:background="@color/trans"
-            android:src="@drawable/baseline_search_black_24"
-            android:id="@+id/image_search_back1"
+            android:src="@drawable/baseline_close_white_18"
+            android:id="@+id/image_search_close"
             />
     </LinearLayout>
     <include layout="@layout/content_member_search"
@@ -46,6 +81,5 @@
         android:layout_width="match_parent"
         android:layout_marginTop="2dp"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/search_bar"
         />
-</RelativeLayout>
+</LinearLayout>

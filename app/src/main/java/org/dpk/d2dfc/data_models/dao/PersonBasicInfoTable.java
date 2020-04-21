@@ -15,7 +15,8 @@ import java.util.List;
 public class PersonBasicInfoTable implements ITable{
 
     private String familyPhone;
-    private String reporterPhone, reportingDate;
+    private String reporterPhone;
+    private long reportingDate;
     private String mobile;
     private String name;
     private String gender;
@@ -97,11 +98,11 @@ public class PersonBasicInfoTable implements ITable{
         this.reporterPhone = reporterPhone;
     }
 
-    public String getReportingDate() {
+    public long getReportingDate() {
         return reportingDate;
     }
 
-    public void setReportingDate(String reportingDate) {
+    public void setReportingDate(long reportingDate) {
         this.reportingDate = reportingDate;
     }
 
@@ -168,7 +169,7 @@ public class PersonBasicInfoTable implements ITable{
                     cursor.getColumnIndex(Variable.STRING_REPORTER_PHONE)));
         }
         if (cursor.getColumnIndex(Variable.STRING_REPORTING_DATE)!=-1){
-            personBasicInfoTable.setReportingDate(cursor.getString(
+            personBasicInfoTable.setReportingDate(cursor.getLong(
                     cursor.getColumnIndex(Variable.STRING_REPORTING_DATE)));
         }
         return personBasicInfoTable;
@@ -194,7 +195,7 @@ public class PersonBasicInfoTable implements ITable{
     public String toCreateTableString() {
         return "create table if not exists "+tableName()+" ("+
                 Variable.STRING_REPORTER_PHONE+" text,"+
-                Variable.STRING_REPORTING_DATE+" text,"+
+                Variable.STRING_REPORTING_DATE+" integer,"+
                 Variable.STRING_FAMILY_PHONE+" text," +
                 Variable.STRING_PERSON_PHONE+" text," +
                 Variable.STRING_GENDER+" text," +
@@ -310,5 +311,23 @@ public class PersonBasicInfoTable implements ITable{
     @Override
     public String toDropTableString() {
         return "DROP TABLE  if exists"+" "+tableName();
+    }
+
+    public String getPersonID(String familyPhone, String personName){
+        return  familyPhone+"@"+personName;
+    }
+    public String familyPhoneFromPersonID(String personID){
+        if (personID.matches(".*@.*")){
+            return personID.split("@")[0];
+        }else {
+            return  personID;
+        }
+    }
+    public String nameFromPersonID(String personID){
+        if (personID.matches(".*@.*")){
+            return personID.split("@")[1];
+        }else {
+            return  personID;
+        }
     }
 }

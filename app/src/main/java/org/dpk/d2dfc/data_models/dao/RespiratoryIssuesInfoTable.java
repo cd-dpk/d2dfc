@@ -8,7 +8,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class RespiratoryIssuesInfoTable implements ITable{
-    private String reporterPhone, personID, reportingDate;
+    private String reporterPhone, personID;
+    private long reportingDate;
     private String asthmaRecorded, asthamaNow;
     private String chronicBronchitisRecorded, chronicBronchitisNow;
     private String lungCancerRecorded, lungCancerNow;
@@ -38,11 +39,11 @@ public class RespiratoryIssuesInfoTable implements ITable{
         this.personID = personID;
     }
 
-    public String getReportingDate() {
+    public long getReportingDate() {
         return reportingDate;
     }
 
-    public void setReportingDate(String reportingDate) {
+    public void setReportingDate(long reportingDate) {
         this.reportingDate = reportingDate;
     }
 
@@ -184,7 +185,7 @@ public class RespiratoryIssuesInfoTable implements ITable{
     public String toCreateTableString() {
         return "create table if not exists "+tableName()+" ("+
                 Variable.STRINGreporterPhone+" text," +
-                Variable.STRINGreportingDate+" text," +
+                Variable.STRINGreportingDate+" integer," +
                 Variable.STRINGpersonID+" text," +
                 Variable.STRINGasthmaRecorded+" text," +
                 Variable.STRINGasthamaNow+" text," +
@@ -242,7 +243,7 @@ public class RespiratoryIssuesInfoTable implements ITable{
                     cursor.getColumnIndex(Variable.STRINGreporterPhone));
         }
         if (cursor.getColumnIndex(Variable.STRINGreportingDate)!=-1){
-            respiratoryIssuesInfoTable.reportingDate= cursor.getString(
+            respiratoryIssuesInfoTable.reportingDate= cursor.getLong(
                     cursor.getColumnIndex(Variable.STRINGreportingDate));
         }
         if (cursor.getColumnIndex(Variable.STRINGasthmaRecorded)!=-1){

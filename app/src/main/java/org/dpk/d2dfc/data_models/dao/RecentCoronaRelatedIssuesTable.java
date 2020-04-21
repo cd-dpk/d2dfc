@@ -8,7 +8,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class RecentCoronaRelatedIssuesTable implements ITable{
-    private String reporterPhone, personID, reportingDate;
+    private String reporterPhone, personID;
+    private long reportingDate;
 
     public RecentCoronaRelatedIssuesTable(){}
     public RecentCoronaRelatedIssuesTable(String familyPhone, String personName){
@@ -30,11 +31,11 @@ public class RecentCoronaRelatedIssuesTable implements ITable{
         this.personID = personID;
     }
 
-    public String getReportingDate() {
+    public long getReportingDate() {
         return reportingDate;
     }
 
-    public void setReportingDate(String reportingDate) {
+    public void setReportingDate(long reportingDate) {
         this.reportingDate = reportingDate;
     }
 
@@ -160,7 +161,7 @@ public class RecentCoronaRelatedIssuesTable implements ITable{
     public String toCreateTableString() {
         return "create table if not exists "+tableName()+" ("+
                 Variable.STRINGreporterPhone+" text," +
-                Variable.STRINGreportingDate+" text," +
+                Variable.STRINGreportingDate+" integer," +
                 Variable.STRINGpersonID+" text," +
                 Variable.STRINGfever+" text," +
                 Variable.STRINGdryCough+" text," +
@@ -211,7 +212,7 @@ public class RecentCoronaRelatedIssuesTable implements ITable{
                     cursor.getColumnIndex(Variable.STRINGreporterPhone));
         }
         if (cursor.getColumnIndex(Variable.STRINGreportingDate)!=-1){
-            recentCoronaRelatedIssuesTable.reportingDate= cursor.getString(
+            recentCoronaRelatedIssuesTable.reportingDate= cursor.getLong(
                     cursor.getColumnIndex(Variable.STRINGreportingDate));
         }
         if (cursor.getColumnIndex(Variable.STRINGpersonID)!=-1){

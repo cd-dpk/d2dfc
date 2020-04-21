@@ -22,6 +22,7 @@ import org.dpk.d2dfc.data_models.dao.DailyFollowUpCoronaSymptomsTable;
 import org.dpk.d2dfc.data_models.dao.DailyFollowUpTravelInfoTable;
 import org.dpk.d2dfc.utils.TimeHandler;
 
+import java.sql.Time;
 import java.util.List;
 
 public class DailyCoronaFollowupHealthInfo extends AppCompatActivity implements IRegistration {
@@ -91,7 +92,8 @@ public class DailyCoronaFollowupHealthInfo extends AppCompatActivity implements 
             DailyFollowUpTravelInfoTable dailyFollowUpTravelInfoTable = new DailyFollowUpTravelInfoTable(ApplicationConstants.SELECTED_FAMILY_PHONE,
                     ApplicationConstants.SELECTED_FAMILY_PERSON_NAME);
             dailyFollowUpTravelInfoTable.setReporterPhone(d2DFC_handler.loadReporter().getPhone());
-            dailyFollowUpTravelInfoTable.setReportingDate(TimeHandler.now());
+            dailyFollowUpTravelInfoTable.setReportingDate(TimeHandler.unixTimeNow());
+            dailyFollowUpTravelInfoTable.setFollowUpDate(TimeHandler.unixTimeNow());
             dailyFollowUpTravelInfoTable.setOut_of_area(Boolean.toString(personTraceOutOfAreaCheckBox.isChecked()));
             dailyFollowUpTravelInfoTable.setOut_for_work(Boolean.toString(personTraceOutForWork.isChecked()));
             dailyFollowUpTravelInfoTable.setGone_to_bazar(Boolean.toString(personTraceGoneToBazar.isChecked()));
@@ -101,7 +103,8 @@ public class DailyCoronaFollowupHealthInfo extends AppCompatActivity implements 
             DailyFollowUpCoronaSymptomsTable dailyFollowUpCoronaSymptomsTable = new DailyFollowUpCoronaSymptomsTable(ApplicationConstants.SELECTED_FAMILY_PHONE,
                     ApplicationConstants.SELECTED_FAMILY_PERSON_NAME);
             dailyFollowUpCoronaSymptomsTable.setReporterPhone(d2DFC_handler.loadReporter().getPhone());
-            dailyFollowUpCoronaSymptomsTable.setReportingDate(TimeHandler.now());
+            dailyFollowUpCoronaSymptomsTable.setReportingDate(TimeHandler.unixTimeNow());
+            dailyFollowUpCoronaSymptomsTable.setFollowUpDate(TimeHandler.unixTimeNow());
             dailyFollowUpCoronaSymptomsTable.setAchesNPain(Boolean.toString(coronaSymptomsAchesAndPain.isChecked()));
             dailyFollowUpCoronaSymptomsTable.setChillis(Boolean.toString(coronaSymptomChillis.isChecked()));
             dailyFollowUpCoronaSymptomsTable.setCoughMucus(Boolean.toString(coronaSymptomsMucusCough.isChecked()));
@@ -115,8 +118,9 @@ public class DailyCoronaFollowupHealthInfo extends AppCompatActivity implements 
             dailyFollowUpCoronaSymptomsTable.setSoreThroat(Boolean.toString(coronaSymptomsSoreThroat.isChecked()));
             dailyFollowUpCoronaSymptomsTable.setOther(coronaSysmptomsOtherText.getText().toString());
 
-            new DailyCoronaFollowupHealthInfoAddBackgroundTask(dailyFollowUpTravelInfoTable
-            ,dailyFollowUpCoronaSymptomsTable).execute();
+            Log.d("ADD-"+dailyFollowUpCoronaSymptomsTable.tableName(), dailyFollowUpCoronaSymptomsTable.toString());
+            Log.d("ADD-"+dailyFollowUpTravelInfoTable.tableName(),dailyFollowUpTravelInfoTable.toString());
+            new DailyCoronaFollowupHealthInfoAddBackgroundTask(dailyFollowUpTravelInfoTable,dailyFollowUpCoronaSymptomsTable).execute();
         }
         return super.onOptionsItemSelected(item);
     }

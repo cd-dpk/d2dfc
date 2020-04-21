@@ -30,9 +30,6 @@
                 android:gravity="center"
                 android:layout_weight="1"
                 android:weightSum="3">
-
-
-
                 <TextView
                     android:id="@+id/text_view_card_member_name"
                     android:layout_width="@dimen/card_account_name"

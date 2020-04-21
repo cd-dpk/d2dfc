@@ -4,10 +4,22 @@
     android:layout_width="match_parent"
     android:orientation="vertical"
     android:layout_height="wrap_content">
-    <Spinner
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/spinner_height"
-        android:id="@+id/spinner_char_option_dashboard"/>
+        android:layout_height="wrap_content"
+        android:weightSum="2"
+        android:orientation="horizontal">
+        <Spinner
+            android:layout_width="wrap_content"
+            android:layout_weight="1"
+            android:layout_height="@dimen/spinner_height"
+            android:id="@+id/spinner_char_option1_dashboard"/>
+        <Spinner
+            android:layout_width="wrap_content"
+            android:layout_weight="1"
+            android:layout_height="@dimen/spinner_height"
+            android:id="@+id/spinner_char_option2_dashboard"/>
+    </LinearLayout>
     <com.anychart.anychart.AnyChartView
         android:id="@+id/any_chart_view_dashboard"
         android:layout_width="match_parent"

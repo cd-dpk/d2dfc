@@ -9,7 +9,48 @@ import java.util.List;
 
 public class DailyFollowUpContactPersonsTable implements ITable {
 
-    private String reporterPhone, reportingDate, personOnePhone, personTwoPhone;
+    private String reporterPhone,  personOnePhone, personTwoPhone;
+    private long followUpDate,reportingDate;
+
+    public String getReporterPhone() {
+        return reporterPhone;
+    }
+
+    public void setReporterPhone(String reporterPhone) {
+        this.reporterPhone = reporterPhone;
+    }
+
+    public long getReportingDate() {
+        return reportingDate;
+    }
+
+    public void setReportingDate(long reportingDate) {
+        this.reportingDate = reportingDate;
+    }
+
+    public String getPersonOnePhone() {
+        return personOnePhone;
+    }
+
+    public void setPersonOnePhone(String personOnePhone) {
+        this.personOnePhone = personOnePhone;
+    }
+
+    public String getPersonTwoPhone() {
+        return personTwoPhone;
+    }
+
+    public void setPersonTwoPhone(String personTwoPhone) {
+        this.personTwoPhone = personTwoPhone;
+    }
+
+    public long getFollowUpDate() {
+        return followUpDate;
+    }
+
+    public void setFollowUpDate(long followUpDate) {
+        this.followUpDate = followUpDate;
+    }
 
     private String whereClause="";
 
@@ -31,10 +72,11 @@ public class DailyFollowUpContactPersonsTable implements ITable {
     public String toCreateTableString() {
         return "create table if not exists "+tableName()+" ("+
                 Variable.STRINGreporterPhone+" text," +
-                Variable.STRINGreportingDate+" text," +
+                Variable.STRING_FOLLOW_UP_DATE+" integer,"+
+                Variable.STRINGreportingDate+" integer," +
                 Variable.STRINGpersonOnePhone+" text," +
                 Variable.STRINGpersonTwoPhone+" text,"+
-                "primary key ("+ Variable.STRINGreporterPhone+","+Variable.STRINGreportingDate
+                "primary key ("+ Variable.STRINGreporterPhone+","+Variable.STRING_FOLLOW_UP_DATE
                 +","+Variable.STRINGpersonOnePhone+","+Variable.STRINGpersonTwoPhone+")"+")";
 
     }
@@ -73,8 +115,12 @@ public class DailyFollowUpContactPersonsTable implements ITable {
                     cursor.getColumnIndex(Variable.STRINGreporterPhone));
         }
         if (cursor.getColumnIndex(Variable.STRINGreportingDate)!=-1){
-            dialyContactPersonsTable.reportingDate= cursor.getString(
+            dialyContactPersonsTable.reportingDate= cursor.getLong(
                     cursor.getColumnIndex(Variable.STRINGreportingDate));
+        }
+        if (cursor.getColumnIndex(Variable.STRING_FOLLOW_UP_DATE)!=-1){
+            dialyContactPersonsTable.followUpDate= cursor.getLong(
+                    cursor.getColumnIndex(Variable.STRING_FOLLOW_UP_DATE));
         }
         if (cursor.getColumnIndex(Variable.STRINGpersonOnePhone)!=-1){
             dialyContactPersonsTable.personOnePhone= cursor.getString(
@@ -105,6 +151,7 @@ public class DailyFollowUpContactPersonsTable implements ITable {
         dailyFollowUpContactPersonsTable.reportingDate=reportingDate;
         dailyFollowUpContactPersonsTable.personOnePhone=personOnePhone;
         dailyFollowUpContactPersonsTable.personTwoPhone=personTwoPhone;
+        dailyFollowUpContactPersonsTable.followUpDate =followUpDate;
         return dailyFollowUpContactPersonsTable;
     }
 
@@ -115,6 +162,8 @@ public class DailyFollowUpContactPersonsTable implements ITable {
         contentValues.put(Variable.STRINGreportingDate, reportingDate);
         contentValues.put(Variable.STRINGpersonOnePhone,personOnePhone);
         contentValues.put(Variable.STRINGpersonTwoPhone,personTwoPhone);
+        contentValues.put(Variable.STRING_FOLLOW_UP_DATE,followUpDate );
+
         return contentValues;
 
     }
@@ -142,6 +191,7 @@ public class DailyFollowUpContactPersonsTable implements ITable {
     public String toString() {
         return reporterPhone+","+
                 reportingDate+","+
+                followUpDate+","+
                 personOnePhone+","+
                 personTwoPhone;
     }
@@ -162,7 +212,9 @@ public class DailyFollowUpContactPersonsTable implements ITable {
 
         public final static String STRINGreporterPhone="reporterPhone",
                 STRINGreportingDate="reportingDate",
-                STRINGpersonOnePhone="personOnePhone", STRINGpersonTwoPhone="personTwoPhone";
+                STRING_FOLLOW_UP_DATE="f_date",
+                STRINGpersonOnePhone="personOnePhone",
+                STRINGpersonTwoPhone="personTwoPhone";
 
     }
 

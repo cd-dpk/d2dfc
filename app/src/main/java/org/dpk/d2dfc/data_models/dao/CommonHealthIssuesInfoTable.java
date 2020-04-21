@@ -9,7 +9,8 @@ import java.util.List;
 
 public class CommonHealthIssuesInfoTable implements ITable{
 
-    private String reporterPhone, personID, reportingDate;
+    private String reporterPhone, personID;
+    private long reportingDate;
     private String diabetesRecorded, diabetesNow;
     private String cardiovascularRecorded, cardiovascularNow;
     private String hypertensionRecorded, hypertensionNow;
@@ -33,11 +34,11 @@ public class CommonHealthIssuesInfoTable implements ITable{
         this.personID = personID;
     }
 
-    public String getReportingDate() {
+    public long getReportingDate() {
         return reportingDate;
     }
 
-    public void setReportingDate(String reportingDate) {
+    public void setReportingDate(long reportingDate) {
         this.reportingDate = reportingDate;
     }
 
@@ -150,7 +151,7 @@ public class CommonHealthIssuesInfoTable implements ITable{
     public String toCreateTableString() {
         return "create table if not exists "+tableName()+" ("+
                 Variable.STRINGreporterPhone+" text," +
-                Variable.STRINGreportingDate+" text," +
+                Variable.STRINGreportingDate+" integer," +
                 Variable.STRINGpersonID+" text," +
                 Variable.STRINGdiabetesRecorded+" text," +
                 Variable.STRINGdiabetesNow+" text," +
@@ -205,7 +206,7 @@ public class CommonHealthIssuesInfoTable implements ITable{
                     cursor.getColumnIndex(Variable.STRINGreporterPhone));
         }
         if (cursor.getColumnIndex(Variable.STRINGreportingDate)!=-1){
-            commonHealthIssuesInfoTable.reportingDate= cursor.getString(
+            commonHealthIssuesInfoTable.reportingDate= cursor.getLong(
                     cursor.getColumnIndex(Variable.STRINGreportingDate));
         }
         if (cursor.getColumnIndex(Variable.STRINGdiabetesRecorded)!=-1){

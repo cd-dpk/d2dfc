@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorAccent"
+    android:theme="@style/AppTheme.GrayColorPrimary"
+    tools:context=".pages.FamilyDashboardActivity"
+    android:id="@+id/coordinate_layout_family_dashboard"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:layout_height="wrap_content">
+        <include
+            layout="@layout/text_horizontal_line"
+            android:id="@+id/content_account_list_text_horizontal_line"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            />
+
+        <include
+            layout="@layout/card_date_interval_picker"
+            android:id="@+id/card_date_interval_picker_person_list"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            />
+
+       <!-- <include
+            layout="@layout/chart_dashboard"
+            android:id="@+id/family_dashboard"
+            android:layout_width="match_parent"
+            android:layout_marginTop="2dp"
+            android:layout_below="@id/card_date_interval_picker_person_list"
+            android:layout_height="wrap_content"
+            />-->
+        <com.anychart.anychart.AnyChartView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dashboard_height"
+        />
+    </LinearLayout>
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/family_dashboard_fab_members"
+        android:layout_width="@dimen/fab_width"
+        android:layout_height="@dimen/fab_height"
+        android:layout_gravity="bottom|end"
+        app:backgroundTint="@color/colorPrimary"
+        android:layout_margin="@dimen/fab_margin"
+        app:srcCompat="@drawable/baseline_add_white_18" />
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

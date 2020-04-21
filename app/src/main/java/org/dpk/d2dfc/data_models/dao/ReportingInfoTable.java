@@ -13,8 +13,16 @@ import java.util.List;
 
 public class ReportingInfoTable implements ITable{
 
-    private String reporterPhone, reportingFromDate,reportingToDate;
+    private String reporterPhone;
+    private long reportingDate, reportingFromDate,reportingToDate;
 
+    public long getReportingDate() {
+        return reportingDate;
+    }
+
+    public void setReportingDate(long reportingDate) {
+        this.reportingDate = reportingDate;
+    }
 
     public String getReporterPhone() {
         return reporterPhone;
@@ -24,19 +32,19 @@ public class ReportingInfoTable implements ITable{
         this.reporterPhone = reporterPhone;
     }
 
-    public String getReportingFromDate() {
+    public long getReportingFromDate() {
         return reportingFromDate;
     }
 
-    public void setReportingFromDate(String reportingFromDate) {
+    public void setReportingFromDate(long reportingFromDate) {
         this.reportingFromDate = reportingFromDate;
     }
 
-    public String getReportingToDate() {
+    public long getReportingToDate() {
         return reportingToDate;
     }
 
-    public void setReportingToDate(String reportingToDate) {
+    public void setReportingToDate(long reportingToDate) {
         this.reportingToDate = reportingToDate;
     }
 
@@ -72,12 +80,16 @@ public class ReportingInfoTable implements ITable{
             reportingInfoTable.setReporterPhone(cursor.getString(
                     cursor.getColumnIndex(Variable.STRING_REPORTER_PHONE)));
         }
+        if (cursor.getColumnIndex(Variable.STRING_REPORTING_DATE)!=-1){
+            reportingInfoTable.setReportingDate(cursor.getLong(
+                    cursor.getColumnIndex(Variable.STRING_REPORTING_DATE)));
+        }
         if (cursor.getColumnIndex(Variable.STRING_REPORTING_FROM_DATE)!=-1){
-            reportingInfoTable.setReportingFromDate(cursor.getString(
+            reportingInfoTable.setReportingFromDate(cursor.getLong(
                     cursor.getColumnIndex(Variable.STRING_REPORTING_FROM_DATE)));
         }
         if (cursor.getColumnIndex(Variable.STRING_REPORTING_TO_DATE)!=-1){
-            reportingInfoTable.setReportingToDate(cursor.getString(
+            reportingInfoTable.setReportingToDate(cursor.getLong(
                     cursor.getColumnIndex(Variable.STRING_REPORTING_TO_DATE)));
         }
         return reportingInfoTable;
@@ -103,9 +115,11 @@ public class ReportingInfoTable implements ITable{
     public String toCreateTableString() {
         return "create table if not exists "+tableName()+" ("+
                 Variable.STRING_REPORTER_PHONE+" text,"+
-                Variable.STRING_REPORTING_FROM_DATE+" text,"+
-                Variable.STRING_REPORTING_TO_DATE+" text,"+
-                "primary key ("+ Variable.STRING_REPORTER_PHONE+","+ Variable.STRING_REPORTING_FROM_DATE
+                Variable.STRING_REPORTING_DATE+" integer,"+
+                Variable.STRING_REPORTING_FROM_DATE+" integer,"+
+                Variable.STRING_REPORTING_TO_DATE+" integer,"+
+                "primary key ("+ Variable.STRING_REPORTER_PHONE+","+Variable.STRING_REPORTING_DATE+
+                ","+ Variable.STRING_REPORTING_FROM_DATE
                 +","+ Variable.STRING_REPORTING_TO_DATE+")"+
                 ")";
     }
@@ -130,6 +144,7 @@ public class ReportingInfoTable implements ITable{
         personBasicInfoTable.setReporterPhone(reporterPhone);
         personBasicInfoTable.setReportingFromDate(reportingFromDate);
         personBasicInfoTable.setReportingToDate(reportingToDate);
+        personBasicInfoTable.setReportingDate(reportingDate);
         return personBasicInfoTable;
     }
 
@@ -137,6 +152,7 @@ public class ReportingInfoTable implements ITable{
     public ContentValues getInsertContentValues() {
         ContentValues contentValues= new ContentValues();
         contentValues.put(Variable.STRING_REPORTER_PHONE, reporterPhone);
+        contentValues.put(Variable.STRING_REPORTING_DATE, reportingDate);
         contentValues.put(Variable.STRING_REPORTING_FROM_DATE, reportingFromDate);
         contentValues.put(Variable.STRING_REPORTING_TO_DATE, reportingToDate);
         return contentValues;
@@ -160,6 +176,7 @@ public class ReportingInfoTable implements ITable{
     public String toString() {
         return "("+
                 reporterPhone+","+
+                reportingDate+","+
                 reportingFromDate+","+
                 reportingToDate+")";
     }
@@ -183,8 +200,9 @@ public class ReportingInfoTable implements ITable{
         public final static String
                 STRING_REPORTER_PHONE="r_phone",
                 STRING_REPORTING_FROM_DATE="r_f_date",
-                STRING_REPORTING_TO_DATE="r_t_date";
-        ;
+                STRING_REPORTING_TO_DATE="r_t_date",
+                STRING_REPORTING_DATE="r_date"
+        ;;
     }
     @Override
     public String toDropTableString() {

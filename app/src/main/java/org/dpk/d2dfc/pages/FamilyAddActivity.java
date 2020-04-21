@@ -91,7 +91,7 @@ public class FamilyAddActivity extends AppCompatActivity implements IRegistratio
                 familyInfoTable.setReporterPhone(d2DFC_handler.loadReporter().getPhone());
                 familyInfoTable.setPhone(phone);
                 familyInfoTable.setMembers(members);
-                familyInfoTable.setReportingDate(TimeHandler.now());
+                familyInfoTable.setReportingDate(TimeHandler.unixTimeNow());
                 new FamilyAddBackgroundTask(familyInfoTable).execute();
             }
         }

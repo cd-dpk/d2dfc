@@ -31,11 +31,11 @@ public class TravelHistoryInfoTable implements ITable{
         this.personID = personID;
     }
 
-    public String getReportingDate() {
+    public long getReportingDate() {
         return reportingDate;
     }
 
-    public void setReportingDate(String reportingDate) {
+    public void setReportingDate(long reportingDate) {
         this.reportingDate = reportingDate;
     }
 
@@ -87,8 +87,9 @@ public class TravelHistoryInfoTable implements ITable{
         this.outOfBangladesh = outOfBangladesh;
     }
 
-    private String reporterPhone, personID, reportingDate, dhaka, naraynganj,
+    private String reporterPhone, personID,  dhaka, naraynganj,
             sylhet, outOfSarail, outOfBrahmanbaria,outOfBangladesh;
+    private long reportingDate;
 
     private String whereClause="";
 
@@ -156,7 +157,7 @@ public class TravelHistoryInfoTable implements ITable{
                     cursor.getColumnIndex(Variable.STRNIGreporterPhone));
         }
         if (cursor.getColumnIndex(Variable.STRNGreportingDate)!=-1){
-            travelHistoryInfoTable.reportingDate= cursor.getString(
+            travelHistoryInfoTable.reportingDate= cursor.getLong(
                     cursor.getColumnIndex(Variable.STRNGreportingDate));
         }
         if (cursor.getColumnIndex(Variable.STRNGpersonID)!=-1){

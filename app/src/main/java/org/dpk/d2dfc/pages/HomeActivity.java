@@ -6,38 +6,30 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 
-import androidx.annotation.FloatRange;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.core.view.GravityCompat;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 
 import android.view.MenuItem;
 
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.anychart.anychart.AnyChartView;
 import com.google.android.material.navigation.NavigationView;
 
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.Menu;
-import android.widget.ImageButton;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import org.dpk.d2dfc.D2DFC_HANDLER;
 import org.dpk.d2dfc.R;
-import org.dpk.d2dfc.adapter.RecyclerViewListAdapter;
 import org.dpk.d2dfc.data.constants.ApplicationConstants;
-import org.dpk.d2dfc.data_models.dao.FamilyInfoTable;
 import org.dpk.d2dfc.data_models.IRegistration;
-import org.dpk.d2dfc.data_models.OnRecyclerViewItemListener;
 import org.dpk.d2dfc.data_models.Reporter;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class HomeActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener,  IRegistration {
@@ -50,6 +42,10 @@ public class HomeActivity extends AppCompatActivity
     TextView loggedPersonNameText;
 
     private static long BACK_PRESSED_AT, TIME_INTERVAL=2000;
+    private View dashboardView;
+    private AnyChartView bioChartView;
+    private Spinner bioChartOptionSpinner;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -73,6 +69,20 @@ public class HomeActivity extends AppCompatActivity
         toggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
         setupNavigationHeader(ApplicationConstants.appReporter);
+
+/*
+        dashboardView = (View) findViewById(R.id.home_bio_chart_dashboard);
+        bioChartView = dashboardView.findViewById(R.id.any_chart_view_dashboard);
+        bioChartOptionSpinner = dashboardView.findViewById(R.id.spinner_chart_option_dashboard);
+        // Create an ArrayAdapter using the string array and a default spinner layout
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
+                R.array.bio_spinner, android.R.layout.simple_spinner_item);
+// Specify the layout to use when the list of choices appears
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+// Apply the adapter to the spinner
+        bioChartOptionSpinner.setAdapter(adapter);
+        // Create an ArrayAdapter using the string array and a default spinner layout
+*/
 
     }
 

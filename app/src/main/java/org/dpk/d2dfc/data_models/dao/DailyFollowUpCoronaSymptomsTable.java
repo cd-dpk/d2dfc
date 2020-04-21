@@ -8,7 +8,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DailyFollowUpCoronaSymptomsTable implements ITable{
-    String reporterPhone, personID, reportingDate;
+    String reporterPhone, personID;
+    private long
+             reportingDate, followUpDate;
     private String fever, dryCough, fatigue, coughMucus,shortnessOfBreath,
             achesNPain,
             soreThroat,
@@ -17,6 +19,15 @@ public class DailyFollowUpCoronaSymptomsTable implements ITable{
             nasalCongestion,
             diarrhea, other;
     private String whereClause="";
+
+    public long
+    getFollowUpDate() {
+        return followUpDate;
+    }
+
+    public void setFollowUpDate(long followUpDate) {
+        this.followUpDate = followUpDate;
+    }
 
     public String getReporterPhone() {
         return reporterPhone;
@@ -34,11 +45,11 @@ public class DailyFollowUpCoronaSymptomsTable implements ITable{
         this.personID = personID;
     }
 
-    public String getReportingDate() {
+    public long getReportingDate() {
         return reportingDate;
     }
 
-    public void setReportingDate(String reportingDate) {
+    public void setReportingDate(long reportingDate) {
         this.reportingDate = reportingDate;
     }
 
@@ -159,7 +170,8 @@ public class DailyFollowUpCoronaSymptomsTable implements ITable{
     public String toCreateTableString() {
         return "create table if not exists "+tableName()+" ("+
                 Variable.STRINGreporterPhone+" text," +
-                Variable.STRINGreportingDate+" text," +
+                Variable.STRINGreportingDate+" integer," +
+                Variable.STRING_FOLLOW_UP_DATE+" integer,"+
                 Variable.STRINGpersonID+" text," +
                 Variable.STRINGfever+" text," +
                 Variable.STRINGdryCough+" text," +
@@ -173,7 +185,7 @@ public class DailyFollowUpCoronaSymptomsTable implements ITable{
                 Variable.STRINGnasalCongestion+" text," +
                 Variable.STRINGdiarrhea+" text," +
                 Variable.STRINGother+" text," +
-                "primary key ("+ Variable.STRINGreporterPhone+","+Variable.STRINGreportingDate
+                "primary key ("+ Variable.STRINGreporterPhone+","+Variable.STRING_FOLLOW_UP_DATE
                 +","+Variable.STRINGpersonID+")"+")";
     }
 
@@ -209,8 +221,12 @@ public class DailyFollowUpCoronaSymptomsTable implements ITable{
             dailyFollowUpCoronaSymptomsTable.reporterPhone= cursor.getString(
                     cursor.getColumnIndex(Variable.STRINGreporterPhone));
         }
+        if (cursor.getColumnIndex(Variable.STRING_FOLLOW_UP_DATE)!=-1){
+            dailyFollowUpCoronaSymptomsTable.followUpDate= cursor.getLong(
+                    cursor.getColumnIndex(Variable.STRING_FOLLOW_UP_DATE));
+        }
         if (cursor.getColumnIndex(Variable.STRINGreportingDate)!=-1){
-            dailyFollowUpCoronaSymptomsTable.reportingDate= cursor.getString(
+            dailyFollowUpCoronaSymptomsTable.reportingDate= cursor.getLong(
                     cursor.getColumnIndex(Variable.STRINGreportingDate));
         }
         if (cursor.getColumnIndex(Variable.STRINGpersonID)!=-1){
@@ -278,6 +294,7 @@ public class DailyFollowUpCoronaSymptomsTable implements ITable{
 
         dailyFollowUpCoronaSymptomsTable.reporterPhone = reporterPhone;
                 dailyFollowUpCoronaSymptomsTable.reportingDate = reportingDate;
+                dailyFollowUpCoronaSymptomsTable.followUpDate = followUpDate;
                 dailyFollowUpCoronaSymptomsTable.personID = personID;
                 dailyFollowUpCoronaSymptomsTable.fever = fever;
                 dailyFollowUpCoronaSymptomsTable.dryCough = dryCough;
@@ -301,6 +318,7 @@ public class DailyFollowUpCoronaSymptomsTable implements ITable{
         ContentValues contentValues= new ContentValues();
         contentValues.put(Variable.STRINGreporterPhone,reporterPhone);
         contentValues.put(Variable.STRINGreportingDate,reportingDate);
+        contentValues.put(Variable.STRING_FOLLOW_UP_DATE,followUpDate);
         contentValues.put(Variable.STRINGpersonID,personID);
         contentValues.put(Variable.STRINGfever,fever);
         contentValues.put(Variable.STRINGdryCough,dryCough);
@@ -331,14 +349,14 @@ public class DailyFollowUpCoronaSymptomsTable implements ITable{
     public String getWhereClauseString() {
         return null;
     }
-
     @Override
     public String toDropTableString() {
         return "DROP TABLE  if exists"+" "+tableName();
     }
     public String toString() {
         return reporterPhone+","+
-                reportingDate+","+ personID+","+fever+","+dryCough+","+fatigue+","+
+                reportingDate+","+followUpDate+","
+                + personID+","+fever+","+dryCough+","+fatigue+","+
                 coughMucus+","+shortnessOfBreath+","+achesNPain+","+soreThroat+","+
                 chillis+","+nausea+","+nasalCongestion+","+diarrhea+","+other;
     }
@@ -367,6 +385,6 @@ public class DailyFollowUpCoronaSymptomsTable implements ITable{
                 STRINGnausea="nausea",
                 STRINGnasalCongestion="nasalCongestion",
                 STRINGdiarrhea="diarrhea", STRINGother="other";
+        public static final String STRING_FOLLOW_UP_DATE = "f_date";
     }
-
 }

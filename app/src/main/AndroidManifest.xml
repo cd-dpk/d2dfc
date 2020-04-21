@@ -9,6 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".pages.FamilyDashboardActivity"
+            android:label="@string/family_dashboard"/>
         <activity android:name=".pages.DataSentActivity"></activity>
         <activity
             android:name=".pages.HomeActivity"

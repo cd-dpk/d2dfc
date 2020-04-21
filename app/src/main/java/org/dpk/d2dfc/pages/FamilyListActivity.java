@@ -39,7 +39,7 @@ public class FamilyListActivity extends AppCompatActivity implements OnRecyclerV
     FloatingActionButton addFamilyFAB;
     RecyclerView familyRecyclerView;
     RecyclerViewListAdapter familiesRecyclerViewListAdapter;
-    List<FamilyInfoTable> families = new ArrayList<FamilyInfoTable>();
+    List<FamilyInfoTable> families = new ArrayList<FamilyInfoTable>(), searchedFamilies;
     D2DFC_HANDLER d2DFC_handler;
     CoordinatorLayout coordinatorLayout;
 
@@ -70,7 +70,7 @@ public class FamilyListActivity extends AppCompatActivity implements OnRecyclerV
                 this, R.layout.card_family,families.size());
         familyRecyclerView.setAdapter(familiesRecyclerViewListAdapter);
 
-
+        searchedFamilies = d2DFC_handler.getAllFamilies();
         searchText.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
@@ -80,11 +80,10 @@ public class FamilyListActivity extends AppCompatActivity implements OnRecyclerV
             public void afterTextChanged(Editable string) {
                 String searchText = string.toString();
                 Log.d("SEARCH", searchText);
-                /*searchedAccounts = personalAccountant.searchedAccounts(searchText, accounts);
-                accountRecyclerViewListAdapter = new RecyclerViewListAdapter(SearchPersonActivity.this,
-                        R.layout.card_account, searchedAccounts.size());
-                accountRecyclerView.setAdapter(accountRecyclerViewListAdapter);*/
-
+                searchedFamilies = d2DFC_handler.searchFamilies(searchText, families);
+                familiesRecyclerViewListAdapter = new RecyclerViewListAdapter(FamilyListActivity.this,
+                        R.layout.card_family, searchedFamilies.size());
+                familyRecyclerView.setAdapter(familiesRecyclerViewListAdapter);
             }
         });
 
@@ -102,7 +101,7 @@ public class FamilyListActivity extends AppCompatActivity implements OnRecyclerV
 
     @Override
     public void listenItem(View view, final int position) {
-        final FamilyInfoTable familyInfoTable = families.get(position);
+        final FamilyInfoTable familyInfoTable = searchedFamilies.get(position);
         TextView phoneText, nameText;
         ImageButton rightArrowButton;
         phoneText = (TextView) view.findViewById(R.id.text_view_card_family_phone);

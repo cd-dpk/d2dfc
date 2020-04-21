@@ -1,5 +1,7 @@
 package org.dpk.d2dfc.pages;
 
+import android.app.DatePickerDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -18,48 +20,53 @@ import com.anychart.anychart.ValueDataEntry;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.DialogFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.dpk.d2dfc.D2DFC_HANDLER;
 import org.dpk.d2dfc.R;
 import org.dpk.d2dfc.adapter.RecyclerViewListAdapter;
 import org.dpk.d2dfc.data.constants.ApplicationConstants;
-import org.dpk.d2dfc.data_models.dao.FamilyInfoTable;
+import org.dpk.d2dfc.data_models.CoronaSymptomsSummary;
 import org.dpk.d2dfc.data_models.IRegistration;
 import org.dpk.d2dfc.data_models.OnRecyclerViewItemListener;
+import org.dpk.d2dfc.data_models.dao.DailyFollowUpCoronaSymptomsTable;
 import org.dpk.d2dfc.data_models.dao.PersonBasicInfoTable;
+import org.dpk.d2dfc.utils.TimeHandler;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
-public class PersonListActivity extends AppCompatActivity implements OnRecyclerViewItemListener, IRegistration {
+public class PersonListActivity extends AppCompatActivity implements OnRecyclerViewItemListener,
+        IRegistration,
+        DatePickerDialog.OnDateSetListener {
 
-    AnyChartView genderPieChartView;
-    Spinner chartOptionSpinner;
     TextView familyPhoneTextView;
     ImageButton arrowBackSearchButton;
     EditText searchText;
     FloatingActionButton addPersonFAB;
     RecyclerView personRecyclerView;
     RecyclerViewListAdapter personsRecyclerViewListAdapter;
-    List<PersonBasicInfoTable> persons = new ArrayList<PersonBasicInfoTable>();
+    List<PersonBasicInfoTable> persons = new ArrayList<PersonBasicInfoTable>(), searchedPersons= new ArrayList<PersonBasicInfoTable>();
     D2DFC_HANDLER d2DFC_handler;
     CoordinatorLayout coordinatorLayout;
-    View dashboardView;
+
     private static long BACK_PRESSED_AT, TIME_INTERVAL=2000;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_person_list);
-        ;
-
         d2DFC_handler = new D2DFC_HANDLER(this);
         d2DFC_handler.setLanguageInApp();
         Log.d("LANG", ApplicationConstants.LANGUAGE_CODE);
@@ -69,16 +76,6 @@ public class PersonListActivity extends AppCompatActivity implements OnRecyclerV
         searchText = (EditText) findViewById(R.id.edit_text_search);
         familyPhoneTextView = (TextView) findViewById(R.id.text_horizontal_line_text);
         personRecyclerView = (RecyclerView) findViewById(R.id.recycler_view_person_list);
-        dashboardView = (View) findViewById(R.id.person_list_dashboard);
-        genderPieChartView = dashboardView.findViewById(R.id.any_chart_view_dashboard);
-        chartOptionSpinner = dashboardView.findViewById(R.id.spinner_char_option_dashboard);
-        // Create an ArrayAdapter using the string array and a default spinner layout
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
-                R.array.chart_option_array, android.R.layout.simple_spinner_item);
-// Specify the layout to use when the list of choices appears
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-// Apply the adapter to the spinner
-        chartOptionSpinner.setAdapter(adapter);
 
         familyPhoneTextView.setText(ApplicationConstants.SELECTED_FAMILY_PHONE);
         personRecyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -91,7 +88,7 @@ public class PersonListActivity extends AppCompatActivity implements OnRecyclerV
         personsRecyclerViewListAdapter = new RecyclerViewListAdapter(
                 this, R.layout.card_member, persons.size());
         personRecyclerView.setAdapter(personsRecyclerViewListAdapter);
-
+        searchedPersons = d2DFC_handler.getAllMembersOfFamily();
         searchText.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
@@ -101,11 +98,10 @@ public class PersonListActivity extends AppCompatActivity implements OnRecyclerV
             public void afterTextChanged(Editable string) {
                 String searchText = string.toString();
                 Log.d("SEARCH", searchText);
-                /*searchedAccounts = personalAccountant.searchedAccounts(searchText, accounts);
-                accountRecyclerViewListAdapter = new RecyclerViewListAdapter(SearchPersonActivity.this,
-                        R.layout.card_account, searchedAccounts.size());
-                accountRecyclerView.setAdapter(accountRecyclerViewListAdapter);*/
-
+                searchedPersons = d2DFC_handler.searchMembers(searchText, persons);
+                personsRecyclerViewListAdapter = new RecyclerViewListAdapter(PersonListActivity.this,
+                        R.layout.card_member, searchedPersons.size());
+                personRecyclerView.setAdapter(personsRecyclerViewListAdapter);
             }
         });
 
@@ -116,31 +112,11 @@ public class PersonListActivity extends AppCompatActivity implements OnRecyclerV
                 startActivity(intent);
             }
         });
-
-        int male=0, female=0, other=0;
-        for (PersonBasicInfoTable personBasicInfoTable: persons){
-            if (personBasicInfoTable.getGender().equals("Male")){
-                male++;
-            }
-            if (personBasicInfoTable.getGender().equals("Female")){
-                female++;
-            }
-            else {
-                other++;
-            }
-        }
-        Pie pie = AnyChart.pie();
-
-        List<DataEntry> data = new ArrayList<>();
-        data.add(new ValueDataEntry("Male", male));
-        data.add(new ValueDataEntry("Female", female));
-        data.add(new ValueDataEntry("Other", other));
-        pie.setData(data);
-        genderPieChartView.setChart(pie);
     }
     @Override
     public void listenItem(View view, final int position) {
-        final PersonBasicInfoTable personBasicInfoTable = persons.get(position);
+        final PersonBasicInfoTable personBasicInfoTable = searchedPersons.get(position);
+        final String personID = personBasicInfoTable.getPersonID(personBasicInfoTable.getFamilyPhone(),personBasicInfoTable.getName());
         TextView  nameText,ageText,genderText;
         ImageButton rightArrowButton1,rightArrowButton2,rightArrowButton3,rightArrowButton4,rightArrowButton5 ;
         nameText = (TextView) view.findViewById(R.id.text_view_card_member_name);
@@ -159,34 +135,45 @@ public class PersonListActivity extends AppCompatActivity implements OnRecyclerV
         rightArrowButton1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ApplicationConstants.SELECTED_FAMILY_PHONE = personBasicInfoTable.getFamilyPhone();
-                ApplicationConstants.SELECTED_FAMILY_PERSON_NAME = personBasicInfoTable.getName();
-                Intent intent = new Intent(PersonListActivity.this, DailyCoronaFollowupHealthInfo.class);
-                startActivity(intent);
-
+                Log.d("DPK", personID);
+                if (d2DFC_handler.isInsertedDailyFollowUPHeath(personID, TimeHandler.unixTimeNow())){
+                    Toast.makeText(PersonListActivity.this, "Inserted Today", Toast.LENGTH_LONG).show();
+                }
+                else {
+                    ApplicationConstants.SELECTED_FAMILY_PHONE = personBasicInfoTable.getFamilyPhone();
+                    ApplicationConstants.SELECTED_FAMILY_PERSON_NAME = personBasicInfoTable.getName();
+                    Intent intent = new Intent(PersonListActivity.this, DailyCoronaFollowupHealthInfo.class);
+                    startActivity(intent);
+                }
             }
         });
         rightArrowButton2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ApplicationConstants.SELECTED_FAMILY_PHONE = personBasicInfoTable.getFamilyPhone();
-                ApplicationConstants.SELECTED_FAMILY_PERSON_NAME = personBasicInfoTable.getName();
-                Intent intent = new Intent(PersonListActivity.this, MemberTravelAndHeathHistory.class);
-                startActivity(intent);
+
+                    ApplicationConstants.SELECTED_FAMILY_PHONE = personBasicInfoTable.getFamilyPhone();
+                    ApplicationConstants.SELECTED_FAMILY_PERSON_NAME = personBasicInfoTable.getName();
+                    Intent intent = new Intent(PersonListActivity.this, MemberTravelAndHeathHistory.class);
+                    startActivity(intent);
+
 
             }
         });
         rightArrowButton3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ApplicationConstants.SELECTED_FAMILY_PHONE = personBasicInfoTable.getFamilyPhone();
-                ApplicationConstants.SELECTED_FAMILY_PERSON_NAME = personBasicInfoTable.getName();
-                Intent intent = new Intent(PersonListActivity.this, MemberSearchActivity.class);
-                startActivity(intent);
-
+                Log.d("DPK", personID);
+                if (d2DFC_handler.isInsertedDailyContactTrace(personID, TimeHandler.unixTimeNow())){
+                    Toast.makeText(PersonListActivity.this, "Inserted Today", Toast.LENGTH_LONG).show();
+                }
+                else {
+                    ApplicationConstants.SELECTED_FAMILY_PHONE = personBasicInfoTable.getFamilyPhone();
+                    ApplicationConstants.SELECTED_FAMILY_PERSON_NAME = personBasicInfoTable.getName();
+                    Intent intent = new Intent(PersonListActivity.this, MemberSearchActivity.class);
+                    startActivity(intent);
+                }
             }
         });
-
     }
     @Override
     public void checkRegistration(D2DFC_HANDLER d2DFC_handler) {
@@ -201,5 +188,12 @@ public class PersonListActivity extends AppCompatActivity implements OnRecyclerV
         personsRecyclerViewListAdapter = new RecyclerViewListAdapter(
                 this, R.layout.card_member, persons.size());
         personRecyclerView.setAdapter(personsRecyclerViewListAdapter);
+    }
+
+    @Override
+    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+       /* transactionTimeTextView.setText(Integer.toString(year)+"-"+
+                Integer.toString((month+1)%12)+"-"+
+                Integer.toString(day));*/
     }
 }
