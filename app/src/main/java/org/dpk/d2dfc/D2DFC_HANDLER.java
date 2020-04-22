@@ -12,6 +12,7 @@ import org.dpk.d2dfc.data.constants.ApplicationConstants;
 import org.dpk.d2dfc.data.constants.RegistrationConstants;
 import org.dpk.d2dfc.data.db.DataBaseHelper;
 import org.dpk.d2dfc.data_models.CoronaSymptomsSummary;
+import org.dpk.d2dfc.data_models.dao.CommonHealthIssuesInfoTable;
 import org.dpk.d2dfc.data_models.dao.DailyFollowUpContactPersonsTable;
 import org.dpk.d2dfc.data_models.dao.DailyFollowUpCoronaSymptomsTable;
 import org.dpk.d2dfc.data_models.dao.DailyFollowUpTravelInfoTable;
@@ -19,7 +20,10 @@ import org.dpk.d2dfc.data_models.dao.FamilyInfoTable;
 import org.dpk.d2dfc.data_models.Reporter;
 import org.dpk.d2dfc.data_models.dao.ITable;
 import org.dpk.d2dfc.data_models.dao.PersonBasicInfoTable;
+import org.dpk.d2dfc.data_models.dao.RecentCoronaRelatedIssuesTable;
 import org.dpk.d2dfc.data_models.dao.ReportingInfoTable;
+import org.dpk.d2dfc.data_models.dao.RespiratoryIssuesInfoTable;
+import org.dpk.d2dfc.data_models.dao.TravelHistoryInfoTable;
 import org.dpk.d2dfc.data_models.dao.Tuple;
 import org.dpk.d2dfc.pages.DailyCoronaFollowupPersonTrace;
 import org.dpk.d2dfc.pages.PersonAddActivity;
@@ -63,6 +67,11 @@ public class D2DFC_HANDLER {
         editor.putString(RegistrationConstants.REPORTING_AREA_EMAIL, toBeSavedReporter.getAreaEmail());
         editor.commit();
         return true;
+    }
+    public List<ITable> selectRows(ITable iTable){
+        DataBaseHelper dataBaseHelper = new DataBaseHelper(context);
+        List<ITable> iTables = dataBaseHelper.selectRows(iTable);
+        return iTables;
     }
     public List<FamilyInfoTable> getAllFamilies(){
         DataBaseHelper dataBaseHelper = new DataBaseHelper(context);
@@ -330,6 +339,7 @@ public class D2DFC_HANDLER {
         DataBaseHelper dataBaseHelper = new DataBaseHelper(context);
         List<ReportingInfoTable> reportings = new ArrayList<ReportingInfoTable>();
         ReportingInfoTable reportingInfoTable = new ReportingInfoTable();
+        reportingInfoTable.setWhereClause(" 1=1 order by "+ReportingInfoTable.Variable.STRING_REPORTING_DATE+" desc");
         Log.d("CHECK", reportingInfoTable.toSelectString());
         List<ITable> iTables = dataBaseHelper.selectRows(reportingInfoTable);
         reportings = reportingInfoTable.toTablesFromITables(iTables);
@@ -378,15 +388,16 @@ public class D2DFC_HANDLER {
         }
         return searchedMembers;
     }
-    public List<DailyFollowUpCoronaSymptomsTable> getDailyFollowUpCoronaSymptomsTables(String whereCaluse){
+
+    public List<CommonHealthIssuesInfoTable> getCommonHealthIssuesInfoTables(String whereCaluse){
         DataBaseHelper dataBaseHelper = new DataBaseHelper(context);
-        List<DailyFollowUpCoronaSymptomsTable> dailyFollowUpCoronaSymptomsTables = new ArrayList<DailyFollowUpCoronaSymptomsTable>();
-        DailyFollowUpCoronaSymptomsTable dailyFollowUpCoronaSymptomsTable = new DailyFollowUpCoronaSymptomsTable();
-        dailyFollowUpCoronaSymptomsTable.setWhereClause(whereCaluse);
-        Log.d("S-Q"+dailyFollowUpCoronaSymptomsTable.tableName(), dailyFollowUpCoronaSymptomsTable.toSelectString());
-        List<ITable> iTables = dataBaseHelper.selectRows(dailyFollowUpCoronaSymptomsTable);
-        dailyFollowUpCoronaSymptomsTables = dailyFollowUpCoronaSymptomsTable.toTablesFromITables(iTables);
-        return dailyFollowUpCoronaSymptomsTables;
+        List<CommonHealthIssuesInfoTable> commonHealthIssuesInfoTables = new ArrayList<CommonHealthIssuesInfoTable>();
+        CommonHealthIssuesInfoTable commonHealthIssuesInfoTable = new CommonHealthIssuesInfoTable();
+        commonHealthIssuesInfoTable.setWhereClause(whereCaluse);
+        Log.d("S-Q"+commonHealthIssuesInfoTable.tableName(), commonHealthIssuesInfoTable.toSelectString());
+        List<ITable> iTables = dataBaseHelper.selectRows(commonHealthIssuesInfoTable);
+        commonHealthIssuesInfoTables = commonHealthIssuesInfoTable.toTablesFromITables(iTables);
+        return commonHealthIssuesInfoTables;
     }
     public List<DailyFollowUpContactPersonsTable> getDailyContactPersonsTables(String whereCaluse){
         DataBaseHelper dataBaseHelper = new DataBaseHelper(context);
@@ -397,6 +408,86 @@ public class D2DFC_HANDLER {
         List<ITable> iTables = dataBaseHelper.selectRows(dailyFollowUpContactPersonsTable);
         dailyFollowUpContactPersonsTables = dailyFollowUpContactPersonsTable.toTablesFromITables(iTables);
         return dailyFollowUpContactPersonsTables;
+    }
+    public List<DailyFollowUpCoronaSymptomsTable> getDailyFollowUpCoronaSymptomsTables(String whereCaluse){
+        DataBaseHelper dataBaseHelper = new DataBaseHelper(context);
+        List<DailyFollowUpCoronaSymptomsTable> dailyFollowUpCoronaSymptomsTables = new ArrayList<DailyFollowUpCoronaSymptomsTable>();
+        DailyFollowUpCoronaSymptomsTable dailyFollowUpCoronaSymptomsTable = new DailyFollowUpCoronaSymptomsTable();
+        dailyFollowUpCoronaSymptomsTable.setWhereClause(whereCaluse);
+        Log.d("S-Q"+dailyFollowUpCoronaSymptomsTable.tableName(), dailyFollowUpCoronaSymptomsTable.toSelectString());
+        List<ITable> iTables = dataBaseHelper.selectRows(dailyFollowUpCoronaSymptomsTable);
+        dailyFollowUpCoronaSymptomsTables = dailyFollowUpCoronaSymptomsTable.toTablesFromITables(iTables);
+        return dailyFollowUpCoronaSymptomsTables;
+    }
+    public List<DailyFollowUpTravelInfoTable> getDailyFollowUpTravelInfoTables(String whereCaluse){
+        DataBaseHelper dataBaseHelper = new DataBaseHelper(context);
+        List<DailyFollowUpTravelInfoTable> dailyFollowUpTravelInfoTables = new ArrayList<DailyFollowUpTravelInfoTable>();
+        DailyFollowUpTravelInfoTable dailyFollowUpTravelInfoTable = new DailyFollowUpTravelInfoTable();
+        dailyFollowUpTravelInfoTable.setWhereClause(whereCaluse);
+        Log.d("S-Q"+dailyFollowUpTravelInfoTable.tableName(), dailyFollowUpTravelInfoTable.toSelectString());
+        List<ITable> iTables = dataBaseHelper.selectRows(dailyFollowUpTravelInfoTable);
+        dailyFollowUpTravelInfoTables = dailyFollowUpTravelInfoTable.toTablesFromITables(iTables);
+        return dailyFollowUpTravelInfoTables;
+    }
+    public List<FamilyInfoTable> getFamilyInfoTables(String whereCaluse){
+        DataBaseHelper dataBaseHelper = new DataBaseHelper(context);
+        List<FamilyInfoTable> familyInfoTables = new ArrayList<FamilyInfoTable>();
+        FamilyInfoTable familyInfoTable = new FamilyInfoTable();
+        familyInfoTable.setWhereClause(whereCaluse);
+        Log.d("S-Q"+familyInfoTable.tableName(), familyInfoTable.toSelectString());
+        List<ITable> iTables = dataBaseHelper.selectRows(familyInfoTable);
+        familyInfoTables = familyInfoTable.toTablesFromITables(iTables);
+        return familyInfoTables;
+    }
+    public List<PersonBasicInfoTable> getPersonBasicInfoTables(String whereCaluse){
+        DataBaseHelper dataBaseHelper = new DataBaseHelper(context);
+        List<PersonBasicInfoTable> personBasicInfoTables = new ArrayList<PersonBasicInfoTable>();
+        PersonBasicInfoTable personBasicInfoTable = new PersonBasicInfoTable();
+        personBasicInfoTable.setWhereClause(whereCaluse);
+        Log.d("S-Q"+personBasicInfoTable.tableName(), personBasicInfoTable.toSelectString());
+        List<ITable> iTables = dataBaseHelper.selectRows(personBasicInfoTable);
+        personBasicInfoTables = personBasicInfoTable.toTablesFromITables(iTables);
+        return personBasicInfoTables;
+    }
+    public List<RecentCoronaRelatedIssuesTable> getRecentCoronaRelatedIssuesTables(String whereCaluse){
+        DataBaseHelper dataBaseHelper = new DataBaseHelper(context);
+        List<RecentCoronaRelatedIssuesTable> recentCoronaRelatedIssuesTables = new ArrayList<RecentCoronaRelatedIssuesTable>();
+        RecentCoronaRelatedIssuesTable recentCoronaRelatedIssuesTable = new RecentCoronaRelatedIssuesTable();
+        recentCoronaRelatedIssuesTable.setWhereClause(whereCaluse);
+        Log.d("S-Q"+recentCoronaRelatedIssuesTable.tableName(), recentCoronaRelatedIssuesTable.toSelectString());
+        List<ITable> iTables = dataBaseHelper.selectRows(recentCoronaRelatedIssuesTable);
+        recentCoronaRelatedIssuesTables = recentCoronaRelatedIssuesTable.toTablesFromITables(iTables);
+        return recentCoronaRelatedIssuesTables;
+    }
+    public List<ReportingInfoTable> getReportingInfoTables(String whereCaluse){
+        DataBaseHelper dataBaseHelper = new DataBaseHelper(context);
+        List<ReportingInfoTable> reportingInfoTables = new ArrayList<ReportingInfoTable>();
+        ReportingInfoTable reportingInfoTable = new ReportingInfoTable();
+        reportingInfoTable.setWhereClause(whereCaluse);
+        Log.d("S-Q"+reportingInfoTable.tableName(), reportingInfoTable.toSelectString());
+        List<ITable> iTables = dataBaseHelper.selectRows(reportingInfoTable);
+        reportingInfoTables = reportingInfoTable.toTablesFromITables(iTables);
+        return reportingInfoTables;
+    }
+    public List<RespiratoryIssuesInfoTable> getRespiratoryIssuesInfoTables(String whereCaluse){
+        DataBaseHelper dataBaseHelper = new DataBaseHelper(context);
+        List<RespiratoryIssuesInfoTable> respiratoryIssuesInfoTables = new ArrayList<RespiratoryIssuesInfoTable>();
+        RespiratoryIssuesInfoTable respiratoryIssuesInfoTable = new RespiratoryIssuesInfoTable();
+        respiratoryIssuesInfoTable.setWhereClause(whereCaluse);
+        Log.d("S-Q"+respiratoryIssuesInfoTable.tableName(), respiratoryIssuesInfoTable.toSelectString());
+        List<ITable> iTables = dataBaseHelper.selectRows(respiratoryIssuesInfoTable);
+        respiratoryIssuesInfoTables = respiratoryIssuesInfoTable.toTablesFromITables(iTables);
+        return respiratoryIssuesInfoTables;
+    }
+    public List<TravelHistoryInfoTable> getTravelHistoryInfoTables(String whereCaluse){
+        DataBaseHelper dataBaseHelper = new DataBaseHelper(context);
+        List<TravelHistoryInfoTable> travelHistoryInfoTables = new ArrayList<TravelHistoryInfoTable>();
+        TravelHistoryInfoTable travelHistoryInfoTable = new TravelHistoryInfoTable();
+        travelHistoryInfoTable.setWhereClause(whereCaluse);
+        Log.d("S-Q"+travelHistoryInfoTable.tableName(), travelHistoryInfoTable.toSelectString());
+        List<ITable> iTables = dataBaseHelper.selectRows(travelHistoryInfoTable);
+        travelHistoryInfoTables = travelHistoryInfoTable.toTablesFromITables(iTables);
+        return travelHistoryInfoTables;
     }
 
     public boolean isInsertedDailyFollowUPHeath(String personID, long today) {

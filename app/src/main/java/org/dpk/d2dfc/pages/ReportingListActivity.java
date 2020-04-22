@@ -1,17 +1,20 @@
 package org.dpk.d2dfc.pages;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -23,14 +26,15 @@ import org.dpk.d2dfc.adapter.RecyclerViewListAdapter;
 import org.dpk.d2dfc.data.constants.ApplicationConstants;
 import org.dpk.d2dfc.data_models.IRegistration;
 import org.dpk.d2dfc.data_models.OnRecyclerViewItemListener;
-import org.dpk.d2dfc.data_models.dao.FamilyInfoTable;
 import org.dpk.d2dfc.data_models.dao.ReportingInfoTable;
+import org.dpk.d2dfc.utils.TimeHandler;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class ReportingListActivity extends AppCompatActivity implements OnRecyclerViewItemListener, IRegistration {
 
+    private static final int MY_PERMISSIONS_REQUEST_READ_EXT = 22;
     TextView reportingFromTextView, reportingToTextView;
     String reportingFrom, reportingTo;
     EditText searchText;
@@ -65,7 +69,30 @@ public class ReportingListActivity extends AppCompatActivity implements OnRecycl
         reportsRecyclerViewListAdapter = new RecyclerViewListAdapter(
                 this, R.layout.card_report, reports.size());
         reportingRecyclerView.setAdapter(reportsRecyclerViewListAdapter);
+// Here, thisActivity is the current activity
+        if (ContextCompat.checkSelfPermission(ReportingListActivity.this,
+                Manifest.permission.READ_EXTERNAL_STORAGE)
+                != PackageManager.PERMISSION_GRANTED) {
+            // Permission is not granted
+            // Should we show an explanation?
+            if (ActivityCompat.shouldShowRequestPermissionRationale(ReportingListActivity.this,
+                    Manifest.permission.READ_EXTERNAL_STORAGE)) {
+                // Show an explanation to the user *asynchronously* -- don't block
+                // this thread waiting for the user's response! After the user
+                // sees the explanation, try again to request the permission.
+            } else {
+                // No explanation needed; request the permission
+                ActivityCompat.requestPermissions(ReportingListActivity.this,
+                        new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
+                        MY_PERMISSIONS_REQUEST_READ_EXT);
 
+                // MY_PERMISSIONS_REQUEST_READ_CONTACTS is an
+                // app-defined int constant. The callback method gets the
+                // result of the request.
+            }
+        } else {
+            // Permission has already been granted
+        }
 
         searchText.addTextChangedListener(new TextWatcher() {
             @Override
@@ -88,13 +115,12 @@ public class ReportingListActivity extends AppCompatActivity implements OnRecycl
         addReportingFAB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(ReportingListActivity.this, DataSentActivity.class);
+                Intent intent = new Intent(ReportingListActivity.this, ReportGenerationActivity.class);
                 startActivity(intent);
-            }
-        });
+              }
+            });
 
     }
-
 
     @Override
     public void listenItem(View view, final int position) {
@@ -102,6 +128,9 @@ public class ReportingListActivity extends AppCompatActivity implements OnRecycl
         TextView reportingFromText, reportingToText;
         reportingFromText = view.findViewById(R.id.text_from);
         reportingToText = view.findViewById(R.id.text_to);
+        reportingFromText.setText(TimeHandler.dateFromUnixTime(reportingInfoTable.getReportingFromDate()) +"");
+        reportingToText.setText(TimeHandler.dateFromUnixTime(reportingInfoTable.getReportingDate())+"");
+
     }
     @Override
     public void checkRegistration(D2DFC_HANDLER d2DFC_handler) {

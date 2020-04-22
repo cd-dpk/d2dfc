@@ -30,18 +30,20 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1.25"
+                    android:layout_weight="1.3"
                     android:text="@string/from_label"/>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1.25"
+                    android:layout_weight="1.3"
                     android:text="@string/from_value"
+                    android:textAppearance="@android:style/TextAppearance.Medium"
                     android:id="@+id/card_date_interval_picker_from_value"/>
                 <Button
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="0.5"
+
+                    android:layout_weight="0.4"
                     android:id="@+id/card_date_interval_picker_from_button"
                     android:text="@string/change"/>
             </LinearLayout>
@@ -54,18 +56,19 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1.25"
+                    android:layout_weight="1.3"
                     android:text="@string/to_label"/>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1.25"
+                    android:layout_weight="1.3"
+                    android:textAppearance="@android:style/TextAppearance.Medium"
                     android:text="@string/from_value"
                     android:id="@+id/card_date_interval_picker_to_value"/>
                 <Button
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="0.5"
+                    android:layout_weight="0.4"
                     android:id="@+id/card_date_interval_picker_to_button"
                     android:text="@string/change"/>
             </LinearLayout>

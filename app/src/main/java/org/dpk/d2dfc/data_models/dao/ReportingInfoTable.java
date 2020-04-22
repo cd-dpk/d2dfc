@@ -174,11 +174,11 @@ public class ReportingInfoTable implements ITable{
 
     @Override
     public String toString() {
-        return "("+
+        return ""+
                 reporterPhone+","+
                 reportingDate+","+
                 reportingFromDate+","+
-                reportingToDate+")";
+                reportingToDate+"";
     }
 
     public List<ReportingInfoTable> toTablesFromITables(List<ITable> iTables) {

@@ -21,6 +21,16 @@ public class TimeHandler {
     public static long subtractDaysToUnixTime(long unixTime, int days){
         return unixTime-days*secondsEqualDay;
     }
+    public static long unixTimeFrom(String timeString){
+        long time = 0;
+        try {
+            Date date = new SimpleDateFormat("dd/MM/yyyy").parse(timeString);
+            return unixTimeFromDate(date);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return time;
+    }
     public static Date dateFromUnixTime(long unixTime){
         Date date = new Date(unixTime*factorMillisecond);
         return date;

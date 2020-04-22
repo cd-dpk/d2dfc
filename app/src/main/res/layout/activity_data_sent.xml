@@ -3,13 +3,46 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_margin="10dp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:theme="@style/AppTheme.GrayColorPrimary"
     android:id="@+id/coordinate_layout_data_sent">
-    <include
-        layout="@layout/card_date_interval_picker"
+    <LinearLayout
+        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/card_date_interval_picker_data_sent"
-        />
+        android:layout_height="wrap_content">
+        <include
+            layout="@layout/card_date_interval_picker"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/card_date_interval_picker_data_sent"
+            />
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:id="@+id/data_sent_generate_report"
+            android:text="@string/generate"/>
+        <include
+            android:id="@+id/reporting_add_progress_view"
+            layout="@layout/view_progress_bar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:visibility="gone"
+            android:layout_weight="1">
+        </include>
+        <include
+            android:id="@+id/reporting_add_error_message_view"
+            layout="@layout/view_error_message"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:visibility="gone"
+            android:layout_weight="1">
+        </include>
+
+    </LinearLayout>
+
+
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

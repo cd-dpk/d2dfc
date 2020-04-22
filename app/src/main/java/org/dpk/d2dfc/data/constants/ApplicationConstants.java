@@ -1,13 +1,17 @@
 package org.dpk.d2dfc.data.constants;
 
+import android.os.Environment;
+
 import org.dpk.d2dfc.data_models.Reporter;
 
 public class ApplicationConstants {
-
+    public static final String externalStorageFolder = Environment.getExternalStorageDirectory().toString();
+    public static final String appFolder="d2dfc";
     public static final String FAMILY_PHONE_EXIST_ERROR = "Family Number Already Exists";
     public static final String FAMILY_MEMBER_PHONE_NAME_EXIST_ERROR = "Family Mobile and Name Exists";
-    public static final String EMAIL_TYPE = "message/rfc822";
+    public static final String EMAIL_TYPE = "text/plain*";
     public static final String EMAIL_SUBJECT_DEV = "D2D Follow Corona- Feedback";
+    public static final String EMAIL_SUBJECT_REPORT = "Reporting d2dfc Data";
     public static Reporter appReporter=new Reporter(RegistrationConstants.COMPLEX_VALUE,RegistrationConstants.COMPLEX_VALUE,RegistrationConstants.COMPLEX_VALUE);
     public static String SELECTED_FAMILY_PHONE = appReporter.getPhone();
     public static String SELECTED_FAMILY_PERSON_NAME = appReporter.getName();
@@ -19,4 +23,5 @@ public class ApplicationConstants {
     public static final String ACCOUNT_EXIST_ERROR="account_exist";
 
 
+    public static String filePath="";
 }

@@ -48,10 +48,11 @@ public class FamilyDashboardActivity extends AppCompatActivity implements  IRegi
     Spinner chartOptionSpinner1, chartOptionSpinner2;
     TextView familyPhoneTextView;
     D2DFC_HANDLER d2DFC_handler;
+    Boolean dateFromChangeClicked = false;
     CoordinatorLayout coordinatorLayout;
     View dashboardView, dateIntervalPickerView;
     Button dateFromChangeButtom, dateToChangeButton;
-    Boolean dateFromChangeClicked = false;
+
     private static long BACK_PRESSED_AT, TIME_INTERVAL=2000;
     @Override
     protected void onCreate(Bundle savedInstanceState) {

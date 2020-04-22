@@ -180,4 +180,9 @@
     <string name="family_dashboard">Family Dashboard</string>
     <string name="follow_up_date">Follow Up Date</string>
     <string name="person_selected">Person(s) Selected</string>
+    <string name="generate">Generate</string>
+    <string name="same_time">Same Time</string>
+    <string name="time_interval_constraint">From Time should be greater than To Time</string>
+    <string name="files_creation_successful">Files Created Successfully!</string>
+    <string name="files_creation_error">Files are not created successfully!</string>
 </resources>
