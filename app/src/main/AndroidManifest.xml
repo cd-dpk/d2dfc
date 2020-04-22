@@ -21,9 +21,6 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".pages.HomeActivity"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
             android:name=".pages.FamilyAddActivity"
             android:label="@string/page_family_add" />
         <activity
@@ -35,12 +32,16 @@
         <activity
             android:name=".pages.AboutDevInfoActivity"
             android:label="@string/about_dev_info"
-            android:parentActivityName=".pages.HomeActivity" />
+            android:parentActivityName=".pages.FamilyListActivity" />
         <activity android:name=".pages.SettingsActivity" />
+        <activity android:name=".pages.MemberInfoDetailsActivity"
+            android:label="@string/member_info"
+            android:parentActivityName=".pages.PersonListActivity"/>
         <activity
             android:name=".pages.FamilyListActivity"
-            android:label="@string/family_list"
-            android:parentActivityName=".pages.HomeActivity" />
+            android:label="@string/app_name"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:parentActivityName=".pages.FamilyListActivity" />
         <activity android:name=".pages.MemberSearchActivity"/>
         <activity
             android:name=".pages.PersonListActivity"

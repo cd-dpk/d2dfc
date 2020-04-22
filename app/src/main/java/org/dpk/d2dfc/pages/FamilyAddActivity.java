@@ -4,7 +4,6 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
 
-import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -23,17 +22,13 @@ import org.dpk.d2dfc.R;
 import org.dpk.d2dfc.data.constants.ApplicationConstants;
 import org.dpk.d2dfc.data_models.IRegistration;
 import org.dpk.d2dfc.data_models.dao.FamilyInfoTable;
-import org.dpk.d2dfc.data_models.dao.PersonBasicInfoTable;
-import org.dpk.d2dfc.pages.HomeActivity;
-import org.dpk.d2dfc.pages.WelcomeActivity;
 import org.dpk.d2dfc.utils.TimeHandler;
 
 import java.util.List;
 
 public class FamilyAddActivity extends AppCompatActivity implements IRegistration {
-    TextInputEditText phoneText, membersText;
-    String phone = "";
-    double members;
+    TextInputEditText phoneText, membersText, nameText;
+    FamilyInfoTable tobeAddedFamilyInfoTable= new FamilyInfoTable();
     View progressView, errorMessageView;
     TextView errorMessageTextView;
     CoordinatorLayout coordinatorLayout;
@@ -50,6 +45,8 @@ public class FamilyAddActivity extends AppCompatActivity implements IRegistratio
         coordinatorLayout = (CoordinatorLayout) findViewById(R.id.coordinate_layout_family_add);
         phoneText = (TextInputEditText) findViewById(R.id.edit_text_family_add_number);
         membersText = (TextInputEditText) findViewById(R.id.edit_text_family_add_members);
+        nameText = (TextInputEditText) findViewById(R.id.edit_text_family_add_guardian);
+
         progressView = (View) findViewById(R.id.family_add_progress_view);
         errorMessageView = (View) findViewById(R.id.family_add_error_message_view);
         errorMessageTextView = (TextView) errorMessageView.findViewById(R.id.text_view_error_message);
@@ -67,32 +64,26 @@ public class FamilyAddActivity extends AppCompatActivity implements IRegistratio
         int id = item.getItemId();
         //noinspection SimplifiableIfStatement
         if(id == R.id.menu_insert_close){
-            Intent intent = new Intent(FamilyAddActivity.this, HomeActivity.class);
+            Intent intent = new Intent(FamilyAddActivity.this, FamilyListActivity.class);
             startActivity(intent);
         }
         else if (id == R.id.menu_insert_done) {
-            phone = phoneText.getText().toString();
-            members = membersText.getText().toString().equals("")?0:Double.parseDouble(membersText.getText().toString());
-            if (phone.equals("") && membersText.equals("") ) {
+            tobeAddedFamilyInfoTable.setPhone(phoneText.getText().toString());
+            tobeAddedFamilyInfoTable.setName(nameText.getText().toString());
+            tobeAddedFamilyInfoTable.setMembers(membersText.getText().toString().equals("")?0:Integer.parseInt(membersText.getText().toString()));
+
+            if (tobeAddedFamilyInfoTable.getPhone().equals("") || tobeAddedFamilyInfoTable.getName().equals("")
+                    || tobeAddedFamilyInfoTable.getMembers()==0 ) {
                 Snackbar.
-                        make(coordinatorLayout,R.string.warning_family_add_phone_members_entry,Snackbar.LENGTH_LONG)
+                        make(coordinatorLayout,R.string.warning_family_add_constraint,Snackbar.LENGTH_LONG)
                         .show();
             }
-            else if (membersText.getText().toString().equals("")) {
-               /* Toast.makeText(AccountOpenActivity.this, R.string.warning_account_open_name_entry,
-                        Toast.LENGTH_LONG).show();*/
-                Snackbar.
-                        make(coordinatorLayout, R.string.warning_account_open_name_entry,Snackbar.LENGTH_LONG)
-                        .show();
-            }  else {
+            else {
                 // TODO create family
-                FamilyInfoTable familyInfoTable = new FamilyInfoTable();
                 Log.d("R-PHONE",d2DFC_handler.loadReporter().getPhone());
-                familyInfoTable.setReporterPhone(d2DFC_handler.loadReporter().getPhone());
-                familyInfoTable.setPhone(phone);
-                familyInfoTable.setMembers(members);
-                familyInfoTable.setReportingDate(TimeHandler.unixTimeNow());
-                new FamilyAddBackgroundTask(familyInfoTable).execute();
+                tobeAddedFamilyInfoTable.setReporterPhone(d2DFC_handler.loadReporter().getPhone());
+                tobeAddedFamilyInfoTable.setReportingDate(TimeHandler.unixTimeNow());
+                new FamilyAddBackgroundTask(tobeAddedFamilyInfoTable).execute();
             }
         }
         return super.onOptionsItemSelected(item);

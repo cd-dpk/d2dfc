@@ -227,7 +227,7 @@ public class ReportGenerationActivity extends AppCompatActivity implements IRegi
         int id = item.getItemId();
         //noinspection SimplifiableIfStatement
         if(id == R.id.menu_insert_close){
-            Intent intent = new Intent(ReportGenerationActivity.this, HomeActivity.class);
+            Intent intent = new Intent(ReportGenerationActivity.this, FamilyListActivity.class);
             startActivity(intent);
         }
         else if (id == R.id.menu_insert_done) {

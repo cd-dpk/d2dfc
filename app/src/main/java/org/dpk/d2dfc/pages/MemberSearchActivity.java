@@ -75,13 +75,11 @@ public class MemberSearchActivity extends AppCompatActivity implements OnRecycle
         personRecyclerView.setHasFixedSize(true);
         coordinatorLayout = (CoordinatorLayout) findViewById(R.id.coordinate_layout_person_list);
         // Data
-
-        persons = d2DFC_handler.getAllPersons();
-    /*    for (PersonBasicInfoTable personBasicInfoTable:persons){
-            isSelectedPersons.put(personBasicInfoTable.getFamilyPhone()+"@"+personBasicInfoTable.getName(), Boolean.FALSE);
-        }
-    */    searchedPersons = d2DFC_handler.getAllPersons();
-
+        PersonBasicInfoTable personBasicInfoTable = new PersonBasicInfoTable();
+        personBasicInfoTable.setWhereClause(PersonBasicInfoTable.Variable.STRING_FAMILY_PHONE+
+                " != '"+ApplicationConstants.SELECTED_FAMILY_PHONE+"'");
+        persons = d2DFC_handler.getPersonBasicInfoTables(personBasicInfoTable.getWhereClause());
+        searchedPersons = d2DFC_handler.getPersonBasicInfoTables(personBasicInfoTable.getWhereClause());
         personsRecyclerViewListAdapter = new RecyclerViewListAdapter(
                 this, R.layout.card_search_member, persons.size());
         personRecyclerView.setAdapter(personsRecyclerViewListAdapter);
@@ -162,7 +160,7 @@ public class MemberSearchActivity extends AppCompatActivity implements OnRecycle
         int id = item.getItemId();
         //noinspection SimplifiableIfStatement
         if(id == R.id.menu_insert_close){
-            Intent intent = new Intent(MemberSearchActivity.this, HomeActivity.class);
+            Intent intent = new Intent(MemberSearchActivity.this, FamilyListActivity.class);
             startActivity(intent);
         }
         else if (id == R.id.menu_insert_done) {

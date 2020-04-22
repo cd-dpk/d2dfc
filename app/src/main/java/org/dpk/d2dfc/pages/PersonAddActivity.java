@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -21,6 +22,7 @@ import com.google.android.material.textfield.TextInputEditText;
 import org.dpk.d2dfc.D2DFC_HANDLER;
 import org.dpk.d2dfc.R;
 import org.dpk.d2dfc.data.constants.ApplicationConstants;
+import org.dpk.d2dfc.data.constants.RegistrationConstants;
 import org.dpk.d2dfc.data_models.IRegistration;
 import org.dpk.d2dfc.data_models.dao.PersonBasicInfoTable;
 import org.dpk.d2dfc.utils.TimeHandler;
@@ -71,7 +73,14 @@ public class PersonAddActivity extends AppCompatActivity implements IRegistratio
         progressView = (View) findViewById(R.id.member_open_progress_view);
         errorMessageView = (View) findViewById(R.id.member_open_error_message_view);
         errorMessageTextView = (TextView) errorMessageView.findViewById(R.id.text_view_error_message);
-
+        if (ApplicationConstants.SELECTED_FAMILY_PHONE.equals(RegistrationConstants.COMPLEX_VALUE)
+                || ApplicationConstants.SELECTED_FAMILY_NAME.equals(RegistrationConstants.COMPLEX_VALUE)){
+            Toast.makeText(PersonAddActivity.this,
+                    R.string.member_creation_family_constraint,
+                    Toast.LENGTH_LONG).show();
+            Intent intent = new Intent(PersonAddActivity.this, FamilyListActivity.class);
+            startActivity(intent);
+        }
     }
 
     @Override
@@ -85,7 +94,7 @@ public class PersonAddActivity extends AppCompatActivity implements IRegistratio
         int id = item.getItemId();
         //noinspection SimplifiableIfStatement
         if(id == R.id.menu_insert_close){
-            Intent intent = new Intent(PersonAddActivity.this, HomeActivity.class);
+            Intent intent = new Intent(PersonAddActivity.this, PersonListActivity.class);
             startActivity(intent);
         }
         else if (id == R.id.menu_insert_done) {
@@ -112,12 +121,11 @@ public class PersonAddActivity extends AppCompatActivity implements IRegistratio
                 personBasicInfoTable.setMother(personMother);
                 personBasicInfoTable.setAge(Double.parseDouble(personAge));
                 personBasicInfoTable.setOccupation(personOccupation);
-
-            personBasicInfoTable.setReporterPhone(d2DFC_handler.loadReporter().getPhone());
-            personBasicInfoTable.setReportingDate(TimeHandler.unixTimeNow());
-            personBasicInfoTable.setFamilyPhone(ApplicationConstants.SELECTED_FAMILY_PHONE);
-            Log.d("ADD-"+personBasicInfoTable.tableName(),personBasicInfoTable.toString());
-            new PersonAddBackgroundTask(personBasicInfoTable).execute();
+                personBasicInfoTable.setReporterPhone(d2DFC_handler.loadReporter().getPhone());
+                personBasicInfoTable.setReportingDate(TimeHandler.unixTimeNow());
+                personBasicInfoTable.setFamilyPhone(ApplicationConstants.SELECTED_FAMILY_PHONE);
+                Log.d("ADD-" + personBasicInfoTable.tableName(), personBasicInfoTable.toString());
+                new PersonAddBackgroundTask(personBasicInfoTable).execute();
             }
         }
         return super.onOptionsItemSelected(item);

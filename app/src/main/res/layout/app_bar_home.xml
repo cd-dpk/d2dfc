@@ -6,8 +6,12 @@
     android:layout_height="match_parent"
     android:background="@android:color/white"
     android:id="@+id/coordinator_layout_d2dfc_home"
-    tools:context="org.dpk.d2dfc.pages.HomeActivity">
+    tools:context="org.dpk.d2dfc.pages.FamilyListActivity">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
     <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/app_bar_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:theme="@style/AppTheme.AppBarOverlay">
@@ -27,8 +31,14 @@
                 />
         </androidx.appcompat.widget.Toolbar>
     </com.google.android.material.appbar.AppBarLayout>
-
-    <include layout="@layout/content_home"/>
+    <include layout="@layout/content_family_list"
+        android:layout_below="@+id/app_bar_layout"
+        android:id="@+id/content_family_list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="2dp"
+        />
+    </RelativeLayout>
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/family_list_ft_add_family"
         android:layout_width="@dimen/fab_width"
@@ -37,5 +47,4 @@
         app:backgroundTint="@color/colorPrimary"
         android:layout_margin="@dimen/fab_margin"
         app:srcCompat="@drawable/baseline_add_white_18" />
-
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

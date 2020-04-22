@@ -12,9 +12,13 @@ public class ApplicationConstants {
     public static final String EMAIL_TYPE = "text/plain*";
     public static final String EMAIL_SUBJECT_DEV = "D2D Follow Corona- Feedback";
     public static final String EMAIL_SUBJECT_REPORT = "Reporting d2dfc Data";
-    public static Reporter appReporter=new Reporter(RegistrationConstants.COMPLEX_VALUE,RegistrationConstants.COMPLEX_VALUE,RegistrationConstants.COMPLEX_VALUE);
-    public static String SELECTED_FAMILY_PHONE = appReporter.getPhone();
-    public static String SELECTED_FAMILY_PERSON_NAME = appReporter.getName();
+    public static Reporter appReporter=new Reporter(
+            RegistrationConstants.COMPLEX_VALUE,
+            RegistrationConstants.COMPLEX_VALUE,
+            RegistrationConstants.COMPLEX_VALUE);
+    public static String SELECTED_FAMILY_PHONE = RegistrationConstants.COMPLEX_VALUE;
+    public static String SELECTED_FAMILY_NAME = RegistrationConstants.COMPLEX_VALUE;
+    public static String SELECTED_FAMILY_PERSON_NAME = RegistrationConstants.COMPLEX_VALUE;
     public static final String LANGUAGE_CODE_LABEL ="ln_code",
             LANGUAGE_CODE_BANGLA="bn",
             LANGUAGE_CODE_ENGLISH="en";

@@ -78,11 +78,12 @@
     </string-array>
 
     <string-array name="travel_days_array">
-        <item>৭ দিন পূর্বে </item>
-        <item>১৪ দিন পূর্বে</item>
-        <item>২১ দিন পূর্বে</item>
-        <item>২৮ দিন পূর্বে</item>
+        <item>Not Recent</item>
         <item>৩৫ দিন পূর্বে</item>
+        <item>২৮ দিন পূর্বে</item>
+        <item>২১ দিন পূর্বে</item>
+        <item>১৪ দিন পূর্বে</item>
+        <item>৭ দিন পূর্বে </item>
     </string-array>
     <string-array name="corona_symptoms_days_array">
         <item>বিগত ৭ দিনে</item>
@@ -185,4 +186,21 @@
     <string name="time_interval_constraint">প্রেরনের সময় প্রাপকের সময় থেকে বড় হবে</string>
     <string name="files_creation_successful">ফাইলস ক্রিয়েটেড সাক্সেসফুলি!</string>
     <string name="files_creation_error">ফাইলস আর নট ক্রিয়েটেড সাক্সেসফুলি!</string>
+    <string name="daily_corona_followup">Daily Corona Followup</string>
+    <string name="daily_person_contact">Contacts Trace</string>
+    <string name="history">History</string>
+    <string name="info">Info</string>
+    <string name="menu_export_data">Export Data</string>
+    <string name="area_name_hint">Enter name of the area</string>
+    <string name="area_name">Area Name</string>
+    <string name="member_creation_family_constraint">Select Family First!</string>
+    <string name="family_add_members_guardian_hint">Enter Family Guardian Name</string>
+    <string name="warning_family_add_constraint">Name, Phone and Members Number are mandatory</string>
+    <string name="card_member_details">Member Details</string>
+    <string name="card_member_bio">Bio</string>
+    <string name="card_member_corona_related_history">Corona Related History</string>
+    <string name="card_member_health">Health History</string>
+    <string name="card_member_travel">Travel History</string>
+    <string name="card_member_repitory">Respiratory Issues</string>
+    <string name="member_info">Member Info</string>
 </resources>

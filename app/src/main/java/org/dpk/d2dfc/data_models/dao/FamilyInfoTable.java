@@ -32,7 +32,16 @@ public class FamilyInfoTable implements ITable{
     }
 
     private String phone;
-    private double members;
+    private int members;
+    private String name;
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
 
     public FamilyInfoTable(){}
 
@@ -44,11 +53,11 @@ public class FamilyInfoTable implements ITable{
         this.phone = phone;
     }
 
-    public double getMembers() {
+    public int getMembers() {
         return members;
     }
 
-    public void setMembers(double members) {
+    public void setMembers(int members) {
         this.members = members;
     }
 
@@ -63,7 +72,8 @@ public class FamilyInfoTable implements ITable{
                 Variable.STRING_REPORTER_PHONE+" text,"+
                 Variable.STRING_REPORTING_DATE+" integer,"+
                 Variable.STRING_FAMILY_PHONE+" text," +
-                Variable.STRING_MEMBER_COUNT+" double,"+
+                Variable.STRING_MEMBER_COUNT+" integer,"+
+                Variable.STRING_FAMILY_NAME+" text," +
                 "primary key ("+ Variable.STRING_FAMILY_PHONE+","+ Variable.STRING_REPORTER_PHONE+")"+
                 ")";
     }
@@ -108,8 +118,11 @@ public class FamilyInfoTable implements ITable{
         if (cursor.getColumnIndex(Variable.STRING_FAMILY_PHONE)!=-1){
             familyInfoTable.setPhone(cursor.getString(cursor.getColumnIndex(Variable.STRING_FAMILY_PHONE)));
         }
+        if (cursor.getColumnIndex(Variable.STRING_FAMILY_NAME)!=-1){
+            familyInfoTable.setName(cursor.getString(cursor.getColumnIndex(Variable.STRING_FAMILY_NAME)));
+        }
         if (cursor.getColumnIndex(Variable.STRING_MEMBER_COUNT)!=-1){
-            familyInfoTable.setMembers(cursor.getDouble(
+            familyInfoTable.setMembers(cursor.getInt(
                     cursor.getColumnIndex(Variable.STRING_MEMBER_COUNT)));
         }
         if (cursor.getColumnIndex(Variable.STRING_REPORTER_PHONE)!=-1){
@@ -142,6 +155,7 @@ public class FamilyInfoTable implements ITable{
         familyInfoTable.reportingDate = reportingDate;
         familyInfoTable.phone = phone;
         familyInfoTable.members  = members;
+        familyInfoTable.name = name;
         return familyInfoTable;
     }
 
@@ -152,6 +166,7 @@ public class FamilyInfoTable implements ITable{
         contentValues.put(Variable.STRING_REPORTING_DATE, reportingDate);
         contentValues.put(Variable.STRING_FAMILY_PHONE, phone);
         contentValues.put(Variable.STRING_MEMBER_COUNT, members);
+        contentValues.put(Variable.STRING_FAMILY_NAME, name);
         return contentValues;
     }
 
@@ -183,6 +198,7 @@ public class FamilyInfoTable implements ITable{
                 reporterPhone+","+
                 reportingDate+","+
                 phone+","+
+                name+","+
                 members+")";
     }
 
@@ -201,6 +217,7 @@ public class FamilyInfoTable implements ITable{
         public final static String STRING_FAMILY_PHONE = "f_phone",
                 STRING_MEMBER_COUNT="m_count",
                 STRING_REPORTER_PHONE="r_phone",
+                STRING_FAMILY_NAME="f_name",
                 STRING_REPORTING_DATE="r_date";
     }
 }

@@ -11,11 +11,11 @@ public class RegistrationConstants {
             REGISTRATION_STATUS_VALUE_NOT_COMPLETED = "no",
             REPORTER_PHONE_KEY="phone",
             REPORTER_NAME_KEY="name",
-            REPORTING_AREA_KEY="area_email",
+            REPORTING_AREA_KEY="area",
             COMPLEX_VALUE="-i";
     public static String
             REGISTRATION_STATUS_VALUE=COMPLEX_VALUE,
             REPORTER_PHONE=COMPLEX_VALUE,
             REPORTER_NAME=COMPLEX_VALUE,
-            REPORTING_AREA_EMAIL=COMPLEX_VALUE;
+            REPORTING_AREA_NAME =COMPLEX_VALUE;
 }

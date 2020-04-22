@@ -1,7 +1,6 @@
 package org.dpk.d2dfc.pages;
 
 import android.app.DatePickerDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -12,24 +11,16 @@ import android.view.View;
 
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
 
-import com.anychart.anychart.AnyChart;
-import com.anychart.anychart.AnyChartView;
-import com.anychart.anychart.DataEntry;
-import com.anychart.anychart.Pie;
-import com.anychart.anychart.ValueDataEntry;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.DialogFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -37,21 +28,21 @@ import org.dpk.d2dfc.D2DFC_HANDLER;
 import org.dpk.d2dfc.R;
 import org.dpk.d2dfc.adapter.RecyclerViewListAdapter;
 import org.dpk.d2dfc.data.constants.ApplicationConstants;
-import org.dpk.d2dfc.data_models.CoronaSymptomsSummary;
+import org.dpk.d2dfc.data.constants.RegistrationConstants;
 import org.dpk.d2dfc.data_models.IRegistration;
 import org.dpk.d2dfc.data_models.OnRecyclerViewItemListener;
-import org.dpk.d2dfc.data_models.dao.DailyFollowUpCoronaSymptomsTable;
+import org.dpk.d2dfc.data_models.dao.FamilyInfoTable;
 import org.dpk.d2dfc.data_models.dao.PersonBasicInfoTable;
 import org.dpk.d2dfc.utils.TimeHandler;
 
+import java.sql.Time;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 public class PersonListActivity extends AppCompatActivity implements OnRecyclerViewItemListener,
         IRegistration,
         DatePickerDialog.OnDateSetListener {
-
+    FamilyInfoTable selectedFamilyInfoTable = new FamilyInfoTable();
     TextView familyPhoneTextView;
     ImageButton arrowBackSearchButton;
     EditText searchText;
@@ -77,18 +68,26 @@ public class PersonListActivity extends AppCompatActivity implements OnRecyclerV
         familyPhoneTextView = (TextView) findViewById(R.id.text_horizontal_line_text);
         personRecyclerView = (RecyclerView) findViewById(R.id.recycler_view_person_list);
 
-        familyPhoneTextView.setText(ApplicationConstants.SELECTED_FAMILY_PHONE);
         personRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         personRecyclerView.setHasFixedSize(true);
         coordinatorLayout = (CoordinatorLayout) findViewById(R.id.coordinate_layout_person_list);
         addPersonFAB = (FloatingActionButton) findViewById(R.id.person_list_ft_add_person);
         // Data
-
-        persons = d2DFC_handler.getAllMembersOfFamily();
+        if (!ApplicationConstants.SELECTED_FAMILY_PHONE.equals(RegistrationConstants.COMPLEX_VALUE) &&
+                !ApplicationConstants.SELECTED_FAMILY_NAME.equals(RegistrationConstants.COMPLEX_VALUE)){
+            familyPhoneTextView.setText(ApplicationConstants.SELECTED_FAMILY_PHONE+":"+
+                    ApplicationConstants.SELECTED_FAMILY_NAME);
+            persons = d2DFC_handler.getAllMembersOfFamily();
+            searchedPersons = d2DFC_handler.getAllMembersOfFamily();
+        }else {
+            familyPhoneTextView.setText(R.string.menu_members);
+            persons = d2DFC_handler.getAllPersons();
+            searchedPersons = d2DFC_handler.getAllPersons();
+        }
         personsRecyclerViewListAdapter = new RecyclerViewListAdapter(
                 this, R.layout.card_member, persons.size());
         personRecyclerView.setAdapter(personsRecyclerViewListAdapter);
-        searchedPersons = d2DFC_handler.getAllMembersOfFamily();
+
         searchText.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
@@ -108,31 +107,44 @@ public class PersonListActivity extends AppCompatActivity implements OnRecyclerV
         addPersonFAB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(PersonListActivity.this, PersonAddActivity.class);
-                startActivity(intent);
+                if (ApplicationConstants.SELECTED_FAMILY_PHONE.equals(RegistrationConstants.COMPLEX_VALUE)
+                        || ApplicationConstants.SELECTED_FAMILY_NAME.equals(RegistrationConstants.COMPLEX_VALUE)){
+                    Toast.makeText(PersonListActivity.this,
+                            R.string.member_creation_family_constraint,
+                            Toast.LENGTH_LONG).show();
+                }
+                else {
+                    Intent intent = new Intent(PersonListActivity.this, PersonAddActivity.class);
+                    startActivity(intent);
+                }
             }
         });
+
     }
     @Override
     public void listenItem(View view, final int position) {
         final PersonBasicInfoTable personBasicInfoTable = searchedPersons.get(position);
         final String personID = personBasicInfoTable.getPersonID(personBasicInfoTable.getFamilyPhone(),personBasicInfoTable.getName());
         TextView  nameText,ageText,genderText;
-        ImageButton rightArrowButton1,rightArrowButton2,rightArrowButton3,rightArrowButton4,rightArrowButton5 ;
+
+        Button dailyCoronaFollowupButton,dailyPersonContactTraceButton,memberHealthTravelInfoButton;
+
+
         nameText = (TextView) view.findViewById(R.id.text_view_card_member_name);
         ageText = (TextView) view.findViewById(R.id.text_view_card_member_age);
         genderText = (TextView) view.findViewById(R.id.text_view_card_member_gender);
-        rightArrowButton1 = view.findViewById(R.id.button_card_member_right_arrow_info);
-        rightArrowButton2 = view.findViewById(R.id.button_card_member_right_arrow_health);
-        rightArrowButton3 = view.findViewById(R.id.button_card_member_right_arrow_corona_recent);
-        rightArrowButton4 = view.findViewById(R.id.button_card_member_right_arrow_corona_daily);
-        rightArrowButton5 = view.findViewById(R.id.button_card_member_right_arrow_info);
+
+        dailyCoronaFollowupButton = view.findViewById(R.id.button_card_member_daily_corona_followup);
+        dailyPersonContactTraceButton = view.findViewById(R.id.button_card_member_daily_person_contacts);
+        memberHealthTravelInfoButton = view.findViewById(R.id.button_card_member_history);
+
+        ImageButton memberInfoButton = view.findViewById(R.id.button_card_member_info);
 
         nameText.setText(personBasicInfoTable.getName()+"");
         ageText.setText(personBasicInfoTable.getAge()+"");
         genderText.setText(personBasicInfoTable.getGender()+"");
 
-        rightArrowButton1.setOnClickListener(new View.OnClickListener() {
+        dailyCoronaFollowupButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Log.d("DPK", personID);
@@ -147,19 +159,7 @@ public class PersonListActivity extends AppCompatActivity implements OnRecyclerV
                 }
             }
         });
-        rightArrowButton2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                    ApplicationConstants.SELECTED_FAMILY_PHONE = personBasicInfoTable.getFamilyPhone();
-                    ApplicationConstants.SELECTED_FAMILY_PERSON_NAME = personBasicInfoTable.getName();
-                    Intent intent = new Intent(PersonListActivity.this, MemberTravelAndHeathHistory.class);
-                    startActivity(intent);
-
-
-            }
-        });
-        rightArrowButton3.setOnClickListener(new View.OnClickListener() {
+        dailyPersonContactTraceButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Log.d("DPK", personID);
@@ -172,6 +172,24 @@ public class PersonListActivity extends AppCompatActivity implements OnRecyclerV
                     Intent intent = new Intent(PersonListActivity.this, MemberSearchActivity.class);
                     startActivity(intent);
                 }
+            }
+        });
+        memberHealthTravelInfoButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ApplicationConstants.SELECTED_FAMILY_PHONE = personBasicInfoTable.getFamilyPhone();
+                ApplicationConstants.SELECTED_FAMILY_PERSON_NAME = personBasicInfoTable.getName();
+                Intent intent = new Intent(PersonListActivity.this, MemberTravelAndHeathHistory.class);
+                startActivity(intent);
+            }
+        });
+        memberInfoButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ApplicationConstants.SELECTED_FAMILY_PHONE = personBasicInfoTable.getFamilyPhone();
+                ApplicationConstants.SELECTED_FAMILY_PERSON_NAME = personBasicInfoTable.getName();
+                Intent intent = new Intent(PersonListActivity.this, MemberInfoDetailsActivity.class);
+                startActivity(intent);
             }
         });
     }

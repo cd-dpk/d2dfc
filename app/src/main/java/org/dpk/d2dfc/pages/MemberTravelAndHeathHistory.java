@@ -121,8 +121,6 @@ public class MemberTravelAndHeathHistory extends AppCompatActivity implements IR
         progressView = (View) findViewById(R.id.member_travel_health_progress_view);
         errorMessageView = (View) findViewById(R.id.member_travel_health_error_message_view);
         errorMessageTextView = (TextView) errorMessageView.findViewById(R.id.text_view_error_message);
-
-
     }
     @Override
     public void checkRegistration(D2DFC_HANDLER d2DFC_handler) {

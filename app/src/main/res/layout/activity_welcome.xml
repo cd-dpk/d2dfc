@@ -9,6 +9,9 @@
     tools:context="org.dpk.d2dfc.pages.WelcomeActivity"
     android:id="@+id/coordinate_layout_welcome">
 
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -50,10 +53,10 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textColorHighlight="@color/colorPrimary"
-                    android:inputType="textEmailAddress"
+                    android:inputType="textPersonName"
                     android:maxLength="50"
-                    android:id="@+id/edit_text_area_email"
-                    android:hint="@string/area_email_address"/>
+                    android:id="@+id/edit_text_area"
+                    android:hint="@string/area_name_hint"/>
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
@@ -82,22 +85,14 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     app:counterEnabled="true"
+                    android:inputType="textPersonName"
                     app:counterMaxLength="25"
                     android:id="@+id/edit_text_reporter_name"
                     android:hint="@string/reporter_name_own_hint"
                     />
             </com.google.android.material.textfield.TextInputLayout>
-            <Button
-                android:layout_marginTop="5dp"
-                android:layout_gravity="center"
-                android:layout_width="@dimen/button_width"
-                android:layout_height="@dimen/button_height"
-                android:backgroundTint="@color/lime"
-                android:textColor="@android:color/white"
-                android:id="@+id/button_okay"
-                android:layout_weight="1"
-                android:drawableLeft="@drawable/baseline_done_white_24"
-                android:text="@string/register"/>
         </LinearLayout>
     </LinearLayout>
+    </ScrollView>
+
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

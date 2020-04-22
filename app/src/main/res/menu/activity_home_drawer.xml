@@ -2,35 +2,29 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     tools:showIn="navigation_view">
-
     <group android:checkableBehavior="single">
 
         <item
-            android:id="@+id/nav_home"
-            android:icon="@drawable/home_64"
-            android:title="@string/menu_home" />
-
-        <item
             android:id="@+id/nav_families"
-            android:icon="@drawable/home_64"
+            android:icon="@drawable/baseline_home_black_48"
             android:title="@string/menu_famililies" />
 
         <item
             android:id="@+id/nav_members"
-            android:icon="@drawable/add_user_64"
+            android:icon="@drawable/baseline_group_black_48"
             android:title="@string/menu_members" />
 
         <item
             android:id="@+id/nav_reporting_data"
-            android:icon="@drawable/add_user_64"
-            android:title="@string/menu_reporting_list" />
+            android:icon="@drawable/baseline_import_export_black_48"
+            android:title="@string/menu_export_data" />
         <!--<item-->
             <!--android:id="@+id/nav_new_transaction"-->
             <!--android:icon="@drawable/transaction_64"-->
             <!--android:title="@string/menu_new_transaction" />-->
         <item
             android:id="@+id/nav_info"
-            android:icon="@drawable/information_64"
+            android:icon="@drawable/baseline_info_black_48"
             android:title="@string/menu_about_us" />
     </group>
 

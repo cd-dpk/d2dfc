@@ -1,6 +1,5 @@
 package org.dpk.d2dfc;
 
-import android.accounts.Account;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
@@ -25,14 +24,10 @@ import org.dpk.d2dfc.data_models.dao.ReportingInfoTable;
 import org.dpk.d2dfc.data_models.dao.RespiratoryIssuesInfoTable;
 import org.dpk.d2dfc.data_models.dao.TravelHistoryInfoTable;
 import org.dpk.d2dfc.data_models.dao.Tuple;
-import org.dpk.d2dfc.pages.DailyCoronaFollowupPersonTrace;
-import org.dpk.d2dfc.pages.PersonAddActivity;
 import org.dpk.d2dfc.utils.TimeHandler;
 
-import java.sql.Time;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
@@ -54,8 +49,8 @@ public class D2DFC_HANDLER {
                 Context.MODE_PRIVATE);
         RegistrationConstants.REPORTER_PHONE = sharedPreferences.getString(RegistrationConstants.REPORTER_PHONE_KEY,RegistrationConstants.COMPLEX_VALUE);
         RegistrationConstants.REPORTER_NAME = sharedPreferences.getString(RegistrationConstants.REPORTER_NAME_KEY,RegistrationConstants.COMPLEX_VALUE);
-        RegistrationConstants.REPORTING_AREA_EMAIL = sharedPreferences.getString(RegistrationConstants.REPORTING_AREA_KEY,RegistrationConstants.COMPLEX_VALUE);
-        return new Reporter(RegistrationConstants.REPORTER_PHONE, RegistrationConstants.REPORTER_NAME, RegistrationConstants.REPORTING_AREA_EMAIL);
+        RegistrationConstants.REPORTING_AREA_NAME = sharedPreferences.getString(RegistrationConstants.REPORTING_AREA_KEY,RegistrationConstants.COMPLEX_VALUE);
+        return new Reporter(RegistrationConstants.REPORTER_PHONE, RegistrationConstants.REPORTER_NAME, RegistrationConstants.REPORTING_AREA_NAME);
     }
     public boolean saveRepoterInfoIntoApp(Reporter toBeSavedReporter){
         sharedPreferences = context.getSharedPreferences(RegistrationConstants.APPLICATION_PREFERENCE,
@@ -64,7 +59,7 @@ public class D2DFC_HANDLER {
         editor.putString(RegistrationConstants.REGISTRATION_STATUS_KEY, RegistrationConstants.REGISTRATION_STATUS_VALUE_COMPLETED);
         editor.putString(RegistrationConstants.REPORTER_PHONE_KEY, toBeSavedReporter.getPhone());
         editor.putString(RegistrationConstants.REPORTER_NAME_KEY, toBeSavedReporter.getName());
-        editor.putString(RegistrationConstants.REPORTING_AREA_EMAIL, toBeSavedReporter.getAreaEmail());
+        editor.putString(RegistrationConstants.REPORTING_AREA_KEY, toBeSavedReporter.getAreaEmail());
         editor.commit();
         return true;
     }
@@ -355,7 +350,8 @@ public class D2DFC_HANDLER {
             for (String token :
                     searchTokens) {
                 Log.d("TOKENS", token);
-                if (familyInfoTable.getPhone().matches(".*"+token.toLowerCase()+".*")){
+                if (familyInfoTable.getPhone().matches(".*"+token.toLowerCase()+".*")||
+                familyInfoTable.getName().toLowerCase().matches(".*"+token.toLowerCase()+".*")){
                     isSearched =true;
                 }
             }
@@ -503,6 +499,7 @@ public class D2DFC_HANDLER {
         Log.d("S-Q"+dailyFollowUpCoronaSymptomsTable.tableName(), dailyFollowUpCoronaSymptomsTable.toSelectString());
         List<ITable> iTables = dataBaseHelper.selectRows(dailyFollowUpCoronaSymptomsTable);
         dailyFollowUpCoronaSymptomsTables = dailyFollowUpCoronaSymptomsTable.toTablesFromITables(iTables);
+        if (dailyFollowUpCoronaSymptomsTables.size()==0) return false;
         Log.d("DPK",dailyFollowUpCoronaSymptomsTables.toString());
 
         DailyFollowUpTravelInfoTable dailyFollowUpTravelInfoTable = new DailyFollowUpTravelInfoTable();
@@ -511,17 +508,62 @@ public class D2DFC_HANDLER {
         Log.d("S-Q"+dailyFollowUpTravelInfoTable.tableName(), dailyFollowUpTravelInfoTable.toSelectString());
         List<ITable> iTables1 = dataBaseHelper.selectRows(dailyFollowUpTravelInfoTable);
         dailyFollowUpTravelInfoTables= dailyFollowUpTravelInfoTable.toTablesFromITables(iTables1);
+        if (dailyFollowUpTravelInfoTables.size()==0) return false;
         Log.d("DPK",dailyFollowUpTravelInfoTables.toString());
         for (DailyFollowUpCoronaSymptomsTable dfCST :
                 dailyFollowUpCoronaSymptomsTables) {
             if (TimeHandler.isSameDate(today, dfCST.getFollowUpDate())){
-                return true;
+                isInserted=true;
+                break;
             }
         }
         for (DailyFollowUpTravelInfoTable dfTIT :
                 dailyFollowUpTravelInfoTables) {
+            if (isInserted) break;
             if (TimeHandler.isSameDate(today, dfTIT.getFollowUpDate())){
-                return true;
+                isInserted = true;
+                break;
+            }
+        }
+        return isInserted;
+    }
+    public boolean isInsertedHistory(String personID, long today) {
+        DataBaseHelper dataBaseHelper = new DataBaseHelper(context);
+        Boolean isInserted= false;
+        List<DailyFollowUpCoronaSymptomsTable> dailyFollowUpCoronaSymptomsTables = new ArrayList<DailyFollowUpCoronaSymptomsTable>();
+        List<DailyFollowUpTravelInfoTable> dailyFollowUpTravelInfoTables = new ArrayList<DailyFollowUpTravelInfoTable>();
+        long time =  TimeHandler.subtractDaysToUnixTime(today,1);
+
+        DailyFollowUpCoronaSymptomsTable dailyFollowUpCoronaSymptomsTable = new DailyFollowUpCoronaSymptomsTable();
+        dailyFollowUpCoronaSymptomsTable.setWhereClause(DailyFollowUpCoronaSymptomsTable.Variable.STRINGpersonID+"='"+personID+"'"+" and "+
+                DailyFollowUpCoronaSymptomsTable.Variable.STRINGreportingDate+" > "+time);
+        Log.d("S-Q"+dailyFollowUpCoronaSymptomsTable.tableName(), dailyFollowUpCoronaSymptomsTable.toSelectString());
+        List<ITable> iTables = dataBaseHelper.selectRows(dailyFollowUpCoronaSymptomsTable);
+        dailyFollowUpCoronaSymptomsTables = dailyFollowUpCoronaSymptomsTable.toTablesFromITables(iTables);
+        if (dailyFollowUpCoronaSymptomsTables.size()==0) return false;
+        Log.d("DPK",dailyFollowUpCoronaSymptomsTables.toString());
+
+        DailyFollowUpTravelInfoTable dailyFollowUpTravelInfoTable = new DailyFollowUpTravelInfoTable();
+        dailyFollowUpTravelInfoTable.setWhereClause(DailyFollowUpTravelInfoTable.Variable.STRINGpersonID+"='"+personID+"'"+" and "+
+                DailyFollowUpTravelInfoTable.Variable.STRINGreportingDate+" > "+time);
+        Log.d("S-Q"+dailyFollowUpTravelInfoTable.tableName(), dailyFollowUpTravelInfoTable.toSelectString());
+        List<ITable> iTables1 = dataBaseHelper.selectRows(dailyFollowUpTravelInfoTable);
+        dailyFollowUpTravelInfoTables= dailyFollowUpTravelInfoTable.toTablesFromITables(iTables1);
+        if (dailyFollowUpTravelInfoTables.size()==0) return false;
+        Log.d("DPK",dailyFollowUpTravelInfoTables.toString());
+        for (DailyFollowUpCoronaSymptomsTable dfCST :
+                dailyFollowUpCoronaSymptomsTables) {
+            if (TimeHandler.isSameDate(today, dfCST.getFollowUpDate())){
+                isInserted=true;
+                break;
+            }
+        }
+        for (DailyFollowUpTravelInfoTable dfTIT :
+                dailyFollowUpTravelInfoTables) {
+            if (isInserted) break;
+            if (TimeHandler.isSameDate(today, dfTIT.getFollowUpDate())){
+                isInserted = true;
+                break;
             }
         }
         return isInserted;
@@ -536,10 +578,12 @@ public class D2DFC_HANDLER {
                 "='"+personID+"'"+" and "+
                 DailyFollowUpContactPersonsTable.Variable.STRINGreportingDate+" > "+time);
         dailyFollowUpContactPersonsTables = getDailyContactPersonsTables(dailyFollowUpContactPersonsTable.getWhereClause());
+        if (dailyFollowUpContactPersonsTables.size()==0) return false;
         for (DailyFollowUpContactPersonsTable dfCST :
                 dailyFollowUpContactPersonsTables) {
             if (TimeHandler.isSameDate(today, dfCST.getFollowUpDate())){
-                return true;
+                isInserted = true;
+                break;
             }
         }
         return isInserted;
