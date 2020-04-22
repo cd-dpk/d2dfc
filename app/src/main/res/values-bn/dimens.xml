@@ -1,0 +1,40 @@
+<resources>
+    <dimen name="fab_margin">16dp</dimen>
+    <dimen name="page_margin">10dp</dimen>
+    <dimen name="button_width">150dp</dimen>
+    <dimen name="button_height">40dp</dimen>
+
+    <!-- AccountTable Card -->
+    <dimen name="card_account_margin">10dp</dimen>
+    <dimen name="card_account_padding">5dp</dimen>
+    <!--<dimen name="card_account_width">350dp</dimen>-->
+    <dimen name="card_family_height">60dp</dimen>
+    <dimen name="card_account_phone">100dp</dimen>
+    <dimen name="card_account_name">100dp</dimen>
+    <dimen name="card_account_deposit_label">100dp</dimen>
+    <dimen name="card_account_deposit">100dp</dimen>
+    <dimen name="card_account_due_label">100dp</dimen>
+    <dimen name="card_account_due">100dp</dimen>
+    <dimen name="card_account_elevation">5dp</dimen>
+    <dimen name="card_family_corner_radius">5dp</dimen>
+    <dimen name="layout_padding_8dp">8dp</dimen>
+
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+    <dimen name="nav_header_vertical_spacing">8dp</dimen>
+    <dimen name="nav_header_height">176dp</dimen>
+    <!-- AccountTable Card -->
+
+    <dimen name="text_length">30dp</dimen>
+    <dimen name="search_bar_height">50dp</dimen>
+    <dimen name="fab_width">56dp</dimen>
+    <dimen name="fab_height">56dp</dimen>
+    <dimen name="card_member_height">60dp</dimen>
+    <dimen name="card_member_corner_radius">5dp</dimen>
+    <dimen name="card_search_corner_radius">5dp</dimen>
+    <dimen name="spinner_height">30dp</dimen>
+    <dimen name="dashboard_height">250dp</dimen>
+    <dimen name="chart_height">200dp</dimen>
+
+</resources>

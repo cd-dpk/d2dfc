@@ -1,0 +1,188 @@
+<resources>
+    <string name="app_name">D2D Follow Corona</string>
+    <string name="action_settings">সেটিংস</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label"> প্রথম ভাগ</string>
+    <string name="second_fragment_label">দ্বিতীয় ভাগ</string>
+    <string name="next">পরবর্তী</string>
+    <string name="previous">পূর্ববর্তী</string>
+
+    <string name="hello_first_fragment">হ্যালো প্রথম খণ্ড</string>Arg: %
+    <string name="hello_second_fragment">হ্যালো দ্বিতীয় খণ্ড. 1$s</string>
+    <string name="title_activity_registration_person_basic_info">RegistrationPersonBasicInfo
+    </string>
+    <string name="registration_mobile_hint">ফোন নম্ব্রে প্রবেশ করুন</string>
+    <string name="registration_name_hint">নাম লিখুন</string>
+    <string name="registration_person_father_name_hint">বাবার নাম</string>
+    <string name="registration_person_mother_hint">মায়ের নাম</string>
+    <string name="registration_person_age_hint">বয়স</string>
+    <string name="text_view_registration_birthdate">জন্মদিন</string>
+    <string name="button_registration_select_button">জন্মতারিখ নির্বাচন করুন </string>
+    <string name="button_registration_select_sex_button">লিঙ্গ নির্বাচন করুন</string>
+    <string name="text_view_registration_gender">লিঙ্গ নির্বাচন করুন</string>
+    <string name="spinner_registration_select_sex_button"> লিঙ্গ নির্বাচন করুন</string>
+    <string name="button_registration_complete">সম্পন্ন</string>
+    <string name="reporter_phone_own_hint">আপনার ফোন নম্বরে প্রবেশ করুন</string>
+    <string name="reporter_name_own_hint">নাম লিখুন</string>
+    <string name="reporter_info"> প্রতিবেদকের তথ্য </string>
+    <string name="register">নিবন্ধন</string>
+    <string name="area_email_address"> এরিয়া ইমেইল অ্যাড্রেসে প্রবেশ করুন</string>
+
+    <string name="warning_transaction_add_entry"> অনুগ্রহ করে পরিমাণ এবং বর্ণনা সঠিকভাবে দিন!</string>
+    <string name="warning_reporter_open_phone_name_entry"> অনুগ্রহ করে সঠিক ফোন নম্বর এবং নামে প্রবেশ করুন !</string>
+    <string name="warning_account_open_phone_entry"> অনুগ্রহ করে সঠিক ফোন নম্বর দিন!</string>
+    <string name="warning_account_open_name_entry">\" অনুগ্রহ করে সঠিক নাম লিখুন!</string>
+    <string name="warning_account_open_amount_entry">\" অনুগ্রহ করে সঠিক পরিমাণটি লিখুন!</string>
+    <string name="warning_email_mobile_name">সঠিক ই-মেইল, ফোন ও নাম লিখুন!</string>
+    <string name="warning_account_open_email_entry">এরিয়া ই-মেইল অ্যাড্রেসে সঠিকভাবে প্রবেশ করুন!</string>
+    <string name="d2dfc_home">ডিটুডি ফলো করোনা</string>
+
+    <string name="navigation_drawer_open">ওপেন নেভিগেশন ড্রওয়ার</string>
+    <string name="navigation_drawer_close">ক্লোজ নেভিগেশন ড্রওয়ার</string>
+
+    <string name="menu_famililies">পরিবারবর্গ</string>
+    <string name="menu_members">সদস্যগণ</string>
+    <string name="menu_about_us">আমাদের সম্পর্কে</string>
+    <string name="family_attr_phone">পরিবারের ফোন নম্বর</string>
+    <string name="family_total_members"> মোট সদস্যসংখ্যা</string>
+    <string name="search">খুঁজুন</string>
+    <string name="choose_your_language">ভাষা নির্বাচন করুন</string>
+    <string name="bangla">বাংলা</string>
+    <string name="english">ইংলিশ</string>
+    <string name="member_attr_name">সদস্যের নাম</string>
+    <string name="member_attr_phone">সদস্যের ফোন নম্বর</string>
+    <string name="member_attr_age">সদস্যের বয়স</string>
+
+    <string name="nav_header_title">ফোন</string>
+    <string name="nav_header_subtitle">নাম</string>
+
+    <string name="error_msg">ভুল বার্তা</string>
+    <string-array name="gender_array">
+        <item>ছেলে</item>
+        <item>মেয়ে</item>
+        <item>অন্যান্য</item>
+    </string-array>
+    <string-array name="chart_option1_array">
+        <item>লিঙ্গ</item>
+        <item>পেশা</item>
+        <item>বয়স</item>
+    </string-array>
+    <string-array name="chart_option2_array">
+        <item>করোনা উপসর্গসমূহ</item>
+        <item>ভ্রমণ সংক্রান্ত</item>
+    </string-array>
+    <string-array name="bio_spinner">
+        <item>@string/age</item>
+        <item>@string/gender</item>
+        <item>@string/occupation</item>
+    </string-array>
+
+    <string-array name="travel_days_array">
+        <item>৭ দিন পূর্বে </item>
+        <item>১৪ দিন পূর্বে</item>
+        <item>২১ দিন পূর্বে</item>
+        <item>২৮ দিন পূর্বে</item>
+        <item>৩৫ দিন পূর্বে</item>
+    </string-array>
+    <string-array name="corona_symptoms_days_array">
+        <item>বিগত ৭ দিনে</item>
+        <item>বিগত ১৪ দিনে</item>
+        <item>বিগত ২১ দিনে</item>
+        <item>আজকে</item>
+    </string-array>
+    <string name="title_activity_member_travel_and_heath_history">MemberTravelAndHeathHistory
+    </string>
+    <string name="travel_history">ভ্রমণের ইতিহাস</string>
+    <string name="dhaka">ঢাকা</string>
+    <string name="narayanganj">নারায়ণগঞ্জ</string>
+    <string name="out_bangladesh">বাংলাদেশের বাইরে</string>
+    <string name="out_sarail">সরাইলের বাইরে</string>
+    <string name="out_brahmanbaria"> ব্রাহ্মণবাড়িয়ার বাইরে</string>
+    <string name="sylhet">সিলেট </string>
+    <string name="common_health_issues">সাধারণ স্বাস্থ্য সমস্যাসমূহ</string>
+    <string name="recorded">নথিভুক্ত</string>
+    <string name="diabetes">ডায়াবেটিস</string>
+    <string name="now">এখন</string>
+    <string name="cardiovascular_diseases">কার্ডইওভাস্কুলার ডি</string>
+    <string name="hypertension">হাইপারতেনশন</string>
+    <string name="stroke">স্ট্রোক</string>
+    <string name="cancer">ক্যান্সার</string>
+    <string name="tuberculosis">টিউবারকুলোসিস</string>
+    <string name="tetanus">টিটেনাস</string>
+    <string name="other_disease_desc_hint">অন্যান্য রোগের বর্ণনা</string>
+    <string name="common_respiratory_issues">সাধারণ শ্বাসক্রিয়াঘটিত রোগ</string>
+    <string name="common_respiratory_issues_related_bad_habits">সাধারণ শ্বাসক্রিয়া সংক্রান্ত বদঅভ্যাসসমূহ</string>
+    <string name="asthama">এজমা</string>
+    <string name="chronic_bronchitis">ক্রনিক ব্রঙ্কাইটিস</string>
+    <string name="lung_cancer">লাঙ ক্যান্সার</string>
+    <string name="pneumonia">নিউমোনিয়া</string>
+    <string name="smoking">ধূমপান</string>
+    <string name="betel_leaf">পান পাতা</string>
+    <string name="hooka">হুকা</string>
+    <string name="corona_symptoms">করোনা উপসর্গসমূহ</string>
+    <string name="corona_symptoms_fever">জ্বর</string>
+    <string name="corona_symptoms_dry_cough">শুষ্ক কাশি</string>
+    <string name="corona_symptoms_fatigue">অবসাদ</string>
+    <string name="corona_symptoms_mucus_cough">শ্লেষ্মা কাশি</string>
+    <string name="corona_symptoms_shortness_of_breath">শ্বাসকষ্ট</string>
+    <string name="corona_symptoms_aches_and_pain">এইক্স অ্যান্ড পেইন</string>
+    <string name="corona_symptoms_sore_throat">গলা ব্যাথা</string>
+    <string name="corona_symptoms_nausea">বমি বমি ভাব</string>
+    <string name="corona_symptoms_chillis">চিলিস</string>
+    <string name="corona_symptoms_nasal_congestion"> অনুনাসিক ভিড় </string>
+    <string name="corona_symptoms_diarrhea">ডায়েরিয়া</string>
+    <string name="yes">হ্যাঁ</string>
+    <string name="person_trace">ব্যাক্তি ট্রেস</string>
+    <string name="person_trace_out_of_area">এরিয়ার বাইরে</string>
+    <string name="person_trace_out_for_work"> কাজের জন্য বাইরে</string>
+    <string name="person_trace_gone_to_shop">দোকানে যায়</string>
+    <string name="person_trace_gone_to_bazar">বাজারে যায়</string>
+    <string name="menu_email_data">ইমেইলে ডাটা প্রেরণ</string>
+    <string name="search_hint">এখানে অনুসন্ধান করুন</string>
+    <string name="menu_home">হোম </string>
+    <string name="family_list">পরিবারবর্গ </string>
+    <string name="person_list">পরিবারবর্গ</string>
+    <string name="family_attr_age">বয়স</string>
+    <string name="about_dev_info"> ডেভেলপার(স)</string>
+    <string name="family_add_phone_hint"> পরিবারের ফোন নম্বরে প্রবেশ করুন</string>
+    <string name="family_add_members_hint"> সদস্যের ফোন নম্বরে প্রবেশ করুন</string>
+    <string name="done">সম্পন্ন</string>
+    <string name="close">বন্ধ করুন</string>
+    <string name="warning_family_add_phone_members_entry">পরিবারের সদস্যদের ফোন ও নম্বরে সঠিকভাবে প্রবেশ করুন!</string>
+    <string name="page_family_add">পরিবার যোগ করুন</string>
+    <string name="text_view_registration_occupation">পেশা</string>
+    <string name="registration_person_occupation_hint">ব্যাক্তির পেশা</string>
+    <string name="page_person_add">ব্যাক্তি যোগ করুন</string>
+    <string name="text_view_family_phone">পরিবারের ফোন</string>
+    <string name="bad_habits_others_hint">অন্যান্য বদঅভ্যাসসমূহ</string>
+    <string name="respiratory_issues_others_hint">অন্যান্য শ্বাসক্রিয়া ঘটিত সমস্যা</string>
+    <string name="family_phone_exists">পরিবারের ফোন নম্বর বর্তমান</string>
+    <string name="unknown_error">অজ্ঞাত ভুল!</string>
+    <string name="warning_person_add_mandatory_entry"> মোবাইল, নাম, লিঙ্গ এবং বয়স আবশ্যক!</string>
+    <string name="family_phone_name_error">পরিবারের ফোন এবং নাম অবশ্যই ভিন্ন হবে!</string>
+    <string name="from_label">প্রেরক</string>
+    <string name="from_value">ভ্যালু</string>
+    <string name="to_label">প্রাপক</string>
+    <string name="to_value">ভ্যালু</string>
+    <string name="menu_reporting_list">প্রতিবেদন</string>
+    <string name="page_reportings">প্রতিবেদনসমূহ</string>
+    <string name="member_attr_gender">লিঙ্গ</string>
+    <string name="corona_symptoms_other">অন্যান্য লক্ষণসমূহ</string>
+    <string name="person_trace_other">অন্যান্য ক্ষেত্র</string>
+    <string name="person_attr_phone">ব্যাক্তি ফোন</string>
+    <string name="person_attr_age">বয়স</string>
+    <string name="person_attr_name">নাম</string>
+    <string name="change">পরিবর্তন </string>
+    <string name="cancel">বাতিল করুন</string>
+    <string name="age">বয়স</string>
+    <string name="occupation">পেশা</string>
+    <string name="gender">লিঙ্গ</string>
+    <string name="family_dashboard">ফ্যামিলি ড্যাশবোর্ড</string>
+    <string name="follow_up_date">ফলো আপ ডেইট</string>
+    <string name="person_selected"> নির্বাচিত ব্যাক্তি(রা)</string>
+    <string name="generate">উৎপন্ন</string>
+    <string name="same_time">একই সময়</string>
+    <string name="time_interval_constraint">প্রেরনের সময় প্রাপকের সময় থেকে বড় হবে</string>
+    <string name="files_creation_successful">ফাইলস ক্রিয়েটেড সাক্সেসফুলি!</string>
+    <string name="files_creation_error">ফাইলস আর নট ক্রিয়েটেড সাক্সেসফুলি!</string>
+</resources>
