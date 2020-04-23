@@ -159,15 +159,14 @@ public class PersonListActivity extends AppCompatActivity implements OnRecyclerV
         genderText.setText(personBasicInfoTable.getGender()+"");
 
         if (d2DFC_handler.isInsertedDailyFollowUPHeath(personID, TimeHandler.unixTimeNow())){
-            dailyCoronaFollowupButton.setVisibility(View.INVISIBLE);
+            dailyCoronaFollowupButton.setBackgroundColor(getResources().getColor(R.color.grey));
         }
         if (d2DFC_handler.isInsertedDailyContactTrace(personID, TimeHandler.unixTimeNow())){
-            dailyPersonContactTraceButton.setVisibility(View.INVISIBLE);
+            dailyPersonContactTraceButton.setBackgroundColor(getResources().getColor(R.color.grey));
         }
         if (d2DFC_handler.isInsertedHistory(personID)){
-            memberHealthTravelInfoButton.setVisibility(View.INVISIBLE);
+            memberHealthTravelInfoButton.setBackgroundColor(getResources().getColor(R.color.grey));
         }
-
         dailyCoronaFollowupButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

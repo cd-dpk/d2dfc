@@ -18,6 +18,10 @@
             android:name=".pages.FamilyAddActivity"
             android:label="@string/page_family_add" />
         <activity
+            android:name=".pages.DailyFollowUpCoronaDetailsActivity"
+            android:parentActivityName=".pages.PersonListActivity"
+            android:label="@string/page_daily_corona_details" />
+        <activity
             android:name=".pages.ExportingListActivity"
             android:parentActivityName=".pages.ExportingListActivity"
             android:label="@string/page_exportings" />

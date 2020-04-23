@@ -210,4 +210,6 @@
     <string name="export_data">Export Data</string>
     <string name="export">Export</string>
     <string name="external_storage_not_ready">External Storage Is Not Ready!</string>
+    <string name="card_member_corona_followup">Daily Corona Followup</string>
+    <string name="page_daily_corona_details">"Daily Corona FollowUp "</string>
 </resources>

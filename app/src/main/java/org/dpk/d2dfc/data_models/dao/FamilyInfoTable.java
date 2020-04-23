@@ -6,6 +6,8 @@ import android.util.Log;
 
 import androidx.annotation.NonNull;
 
+import org.dpk.d2dfc.utils.TimeHandler;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -145,7 +147,13 @@ public class FamilyInfoTable implements ITable{
 
     @Override
     public String toJsonString() {
-        return null;
+        return"{"+
+                "CollectorPhone:" + reporterPhone+","+
+                "Entry:"+ TimeHandler.dateShortFromUnixTime(reportingDate) +","+
+                        "Phone:" +phone+","+
+                        "Name:"+name+","+
+                        "Members:"+members+"}";
+
     }
 
     @Override
@@ -194,12 +202,12 @@ public class FamilyInfoTable implements ITable{
     @NonNull
     @Override
     public String toString() {
-        return "("+
+        return ""+
                 reporterPhone+","+
                 reportingDate+","+
                 phone+","+
                 name+","+
-                members+")";
+                members+"";
     }
     @Override
     public String getCSVHeader(){

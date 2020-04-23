@@ -4,6 +4,8 @@ import android.content.ContentValues;
 import android.database.Cursor;
 import android.util.Log;
 
+import org.dpk.d2dfc.utils.TimeHandler;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -285,7 +287,18 @@ public class DailyFollowUpCoronaSymptomsTable implements ITable{
 
     @Override
     public String toJsonString() {
-        return null;
+
+        return "{CollectorPhone:"+reporterPhone+","+
+                "Family:"+new PersonBasicInfoTable().familyPhoneFromPersonID(personID)+","+
+                "Name:"+new PersonBasicInfoTable().nameFromPersonID(personID)+","+
+                "Entry:"+ TimeHandler.dateShortFromUnixTime(reportingDate) +"," +
+                "FollowUpDate:"+TimeHandler.dateShortFromUnixTime(followUpDate)+","+
+                "Fever:"+fever+","+"DryCough:"+dryCough+","+"Fatigue:"+fatigue+","+
+                "CoughMucus:"+coughMucus+","+"ShortnessOfBreath:"+shortnessOfBreath+","
+                +"AchesNPain:"+achesNPain+","+"SoreThroat:"+soreThroat+","+
+                "Chillis:"+chillis+","+"nausea:"+nausea+","+"nasalCongestion:"+nasalCongestion+","
+                +"diarrhea:"+diarrhea+","+"other:"+other+"}";
+
     }
 
     @Override

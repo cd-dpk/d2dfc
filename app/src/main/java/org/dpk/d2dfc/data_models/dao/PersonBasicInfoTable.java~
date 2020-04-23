@@ -5,8 +5,6 @@ import android.database.Cursor;
 import android.util.Log;
 
 
-import org.dpk.d2dfc.utils.TimeHandler;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -186,7 +184,7 @@ public class PersonBasicInfoTable implements ITable{
     @Override
     public String toJsonString() {
         return "{CollectorPhone:"+reporterPhone+","+
-                "Entry:"+ TimeHandler.dateShortFromUnixTime(reportingDate) +","+
+                "ReportingDate:"+reportingDate+","+
                 "FamilyPhone:"+familyPhone+","+
                 "Mobile:"+mobile+","+
                 "Name:"+name+","+

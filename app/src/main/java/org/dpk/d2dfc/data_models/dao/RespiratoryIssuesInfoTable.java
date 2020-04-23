@@ -4,6 +4,8 @@ import android.content.ContentValues;
 import android.database.Cursor;
 import android.util.Log;
 
+import org.dpk.d2dfc.utils.TimeHandler;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -318,7 +320,36 @@ public class RespiratoryIssuesInfoTable implements ITable{
 
     @Override
     public String toJsonString() {
-        return null;
+        return "{CollectorPhone:"+reporterPhone+","+
+                "Family:"+new PersonBasicInfoTable().familyPhoneFromPersonID(personID)+","+
+                "Name:"+new PersonBasicInfoTable().nameFromPersonID(personID)+","+
+                "Entry:"+ TimeHandler.dateShortFromUnixTime(reportingDate) +","+
+                "Asthma:"+
+                "{Recorded:"+asthmaRecorded+" ," +
+                "Now:"+asthamaNow+
+                "},"+
+                "" +
+                "ChronicBronchitis:"+" ," +
+                "{Recorded:"+chronicBronchitisRecorded+" ," +
+                "Now:"+chronicBronchitisNow+
+                "},"+
+                "LungCancer:"+" ," +
+                "{Recorded:"+asthmaRecorded+" ," +
+                "Now:"+asthamaNow+
+                "},"+
+                "Pnemonia:"+" ," +
+                "{Recorded:"+asthmaRecorded+" ," +
+                "Now:"+asthamaNow+
+                "},"+
+                "Tubercolosis:"+" ," +
+                "{Recorded:"+asthmaRecorded+" ," +
+                "Now:"+asthamaNow+
+                "},"+
+                "others:"+others +" ," +
+                "smoking:"+smoking+" ," +
+                "betelLeaf:"+betelLeaf+" ," +
+                "hooka:"+hooka+" ," +
+                "otherBadHabits:"+otherBadHabits+"}" ;
     }
 
     @Override

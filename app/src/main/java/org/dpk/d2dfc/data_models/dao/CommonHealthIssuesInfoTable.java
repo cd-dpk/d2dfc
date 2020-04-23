@@ -4,6 +4,8 @@ import android.content.ContentValues;
 import android.database.Cursor;
 import android.util.Log;
 
+import org.dpk.d2dfc.utils.TimeHandler;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -263,8 +265,32 @@ public class CommonHealthIssuesInfoTable implements ITable{
     }
 
     @Override
-    public String toJsonString() {
-        return null;
+    public String toJsonString()
+    {
+        return "{CollectorPhone:"+reporterPhone+","+
+                "Family:"+new PersonBasicInfoTable().familyPhoneFromPersonID(personID)+","+
+                "Name:"+new PersonBasicInfoTable().nameFromPersonID(personID)+","+
+                "Entry:"+ TimeHandler.dateShortFromUnixTime(reportingDate) +","+
+                "Diabetes"+","+
+                "{Recorded:"+diabetesRecorded+" ," +
+                "Now:"+diabetesNow+
+                "},"+
+                "Cardiovascular:"+","+
+                "{Recorded:"+cardiovascularRecorded+" ," +
+                "Now:"+cardiovascularNow+
+                "},"+
+                "Hypertension"+","+
+                "{Recorded:"+hypertensionRecorded+" ," +
+                "Now:"+hypertensionNow+
+                "},"+
+                "Stroke"+","+
+                "{Recorded:"+strokeRecorded+" ," +
+                "Now:"+strokeNow+
+                "},"+
+                "Cancer:"+","+
+                "{Recorded:"+cancerRecorded+" ," +
+                "Now:"+cancerNow+
+                "},"+ "others:"+others+"}";
     }
 
     @Override

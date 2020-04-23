@@ -4,6 +4,8 @@ import android.content.ContentValues;
 import android.database.Cursor;
 import android.util.Log;
 
+import org.dpk.d2dfc.utils.TimeHandler;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -259,6 +261,14 @@ public class RecentCoronaRelatedIssuesTable implements ITable{
             recentCoronaRelatedIssuesTable.other= cursor.getString(
                     cursor.getColumnIndex(Variable.STRINGother));
         }
+        if (cursor.getColumnIndex(Variable.STRINGshortnessOfBreath)!=-1){
+            recentCoronaRelatedIssuesTable.shortnessOfBreath= cursor.getString(
+                    cursor.getColumnIndex(Variable.STRINGshortnessOfBreath));
+        }
+        if (cursor.getColumnIndex(Variable.STRINGsoreThroat)!=-1){
+            recentCoronaRelatedIssuesTable.soreThroat= cursor.getString(
+                    cursor.getColumnIndex(Variable.STRINGsoreThroat));
+        }
         return recentCoronaRelatedIssuesTable;
 
     }
@@ -271,7 +281,17 @@ public class RecentCoronaRelatedIssuesTable implements ITable{
 
     @Override
     public String toJsonString() {
-        return null;
+
+        return "{CollectorPhone:"+reporterPhone+","+
+                "Family:"+new PersonBasicInfoTable().familyPhoneFromPersonID(personID)+","+
+                "Name:"+new PersonBasicInfoTable().nameFromPersonID(personID)+","+
+                "Entry:"+ TimeHandler.dateShortFromUnixTime(reportingDate) +","
+                +"Fever:"+fever+","+"DryCough:"+dryCough+","+"Fatigue:"+fatigue+","+
+                "CoughMucus:"+coughMucus+","+"ShortnessOfBreath:"+shortnessOfBreath+","
+                +"AchesNPain:"+achesNPain+","+"SoreThroat:"+soreThroat+","+
+                "Chillis:"+chillis+","+"nausea:"+nausea+","+"nasalCongestion:"+nasalCongestion+","
+                +"diarrhea:"+diarrhea+","+"other:"+other+"}";
+
     }
 
     @Override

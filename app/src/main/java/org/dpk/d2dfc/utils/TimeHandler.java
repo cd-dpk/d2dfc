@@ -31,6 +31,11 @@ public class TimeHandler {
         }
         return time;
     }
+
+    public static String dateShortFromUnixTime(long unixTim){
+        Date date = dateFromUnixTime(unixTim);
+        return date.toString();
+    }
     public static Date dateFromUnixTime(long unixTime){
         Date date = new Date(unixTime*factorMillisecond);
         return date;

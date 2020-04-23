@@ -92,26 +92,26 @@ public class MemberInfoDetailsActivity extends AppCompatActivity implements IReg
         TravelHistoryInfoTable travelHistoryInfoTable = new TravelHistoryInfoTable();
         travelHistoryInfoTable.setWhereClause(TravelHistoryInfoTable.Variable.STRNGpersonID +" = '"+personID+"'");
 
-        memberBioTextView.setText(personBasicInfoTable.getCSVHeader());
+//        memberBioTextView.setText(personBasicInfoTable.getCSVHeader());
         for (PersonBasicInfoTable infoTable: d2DFC_handler.getPersonBasicInfoTables(personBasicInfoTable.getWhereClause())){
-            memberBioTextView.setText(memberBioTextView.getText().toString()+"\n"+infoTable.toString());
+            memberBioTextView.setText(memberBioTextView.getText().toString()+"\n"+infoTable.toJsonString());
         }
-        memberTravelTextView.setText(travelHistoryInfoTable.getCSVHeader());
+//        memberTravelTextView.setText(travelHistoryInfoTable.getCSVHeader());
         for (TravelHistoryInfoTable infoTable: d2DFC_handler.getTravelHistoryInfoTables(travelHistoryInfoTable.getWhereClause())){
-            memberTravelTextView.setText(memberTravelTextView.getText().toString()+"\n"+infoTable.toString());
+            memberTravelTextView.setText(memberTravelTextView.getText().toString()+"\n"+infoTable.toJsonString());
         }
-        memberHealthTextView.setText(commonHealthIssuesInfoTable.getCSVHeader());
+//        memberHealthTextView.setText(commonHealthIssuesInfoTable.getCSVHeader());
         for (CommonHealthIssuesInfoTable infoTable: d2DFC_handler.getCommonHealthIssuesInfoTables(
                 commonHealthIssuesInfoTable.getWhereClause())){
-            memberHealthTextView.setText(memberHealthTextView.getText().toString()+"\n"+infoTable.toString());
+            memberHealthTextView.setText(memberHealthTextView.getText().toString()+"\n"+infoTable.toJsonString());
         }
-        memberRespiratorTextView.setText(respiratoryIssuesInfoTable.getCSVHeader());
+//        memberRespiratorTextView.setText(respiratoryIssuesInfoTable.getCSVHeader());
         for (RespiratoryIssuesInfoTable infoTable: d2DFC_handler.getRespiratoryIssuesInfoTables(respiratoryIssuesInfoTable.getWhereClause())){
-            memberRespiratorTextView.setText(memberRespiratorTextView.getText().toString()+"\n"+infoTable.toString());
+            memberRespiratorTextView.setText(memberRespiratorTextView.getText().toString()+"\n"+infoTable.toJsonString());
         }
-        memberCoronaRecentTextView.setText(recentCoronaRelatedIssuesTable.getCSVHeader());
+//        memberCoronaRecentTextView.setText(recentCoronaRelatedIssuesTable.getCSVHeader());
         for (RecentCoronaRelatedIssuesTable infoTable: d2DFC_handler.getRecentCoronaRelatedIssuesTables(recentCoronaRelatedIssuesTable.getWhereClause())){
-            memberCoronaRecentTextView.setText(memberCoronaRecentTextView.getText().toString()+"\n"+infoTable.toString());
+            memberCoronaRecentTextView.setText(memberCoronaRecentTextView.getText().toString()+"\n"+infoTable.toJsonString());
         }
     }
     @Override

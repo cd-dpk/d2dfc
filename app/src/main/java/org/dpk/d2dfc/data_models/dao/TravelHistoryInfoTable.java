@@ -6,6 +6,8 @@ import android.util.Log;
 
 import androidx.annotation.NonNull;
 
+import org.dpk.d2dfc.utils.TimeHandler;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -201,7 +203,17 @@ public class TravelHistoryInfoTable implements ITable{
 
     @Override
     public String toJsonString() {
-        return null;
+        return "{CollectorPhone:"+reporterPhone+","+
+                "Family:"+new PersonBasicInfoTable().familyPhoneFromPersonID(personID)+","+
+                "Name:"+new PersonBasicInfoTable().nameFromPersonID(personID)+","+
+                "Entry:"+ TimeHandler.dateShortFromUnixTime(reportingDate) +","+
+                "Dhaka:"+dhaka+","+
+                "Narayanganj:"+naraynganj+","+
+                "Sylhet:"+sylhet+","+
+                "OutOfSarail:"+outOfSarail+","+
+                "OutOfBrahmanbaria:"+outOfBrahmanbaria+","+
+                "OutOfBangladesh:"+outOfBangladesh+"}";
+
     }
 
     @Override
