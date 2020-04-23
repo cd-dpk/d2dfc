@@ -54,7 +54,6 @@ public class MemberSearchActivity extends AppCompatActivity implements OnRecycle
     private List<PersonBasicInfoTable> searchedPersons= new ArrayList<PersonBasicInfoTable>();
     View progressView, errorMessageView;
     TextView errorMessageTextView;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -192,9 +191,7 @@ public class MemberSearchActivity extends AppCompatActivity implements OnRecycle
                 dailyFollowUpContactPersonsTable.setReportingDate(TimeHandler.unixTimeNow());
                 Toast.makeText(MemberSearchActivity .this, R.string.no_persons_selected, Toast.LENGTH_LONG).show();
                 dailyFollowUpContactPersonsTables.add(dailyFollowUpContactPersonsTable);
-
                 new ContactPersonsAddBackgroundTask(dailyFollowUpContactPersonsTables).execute();
-
             }
             }
         return super.onOptionsItemSelected(item);

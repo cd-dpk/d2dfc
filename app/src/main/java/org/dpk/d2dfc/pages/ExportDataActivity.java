@@ -11,7 +11,6 @@ import android.app.DatePickerDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
@@ -41,10 +40,7 @@ import org.dpk.d2dfc.data_models.dao.TravelHistoryInfoTable;
 import org.dpk.d2dfc.utils.FileHandler;
 import org.dpk.d2dfc.utils.TimeHandler;
 
-import java.io.File;
-import java.util.List;
-
-public class ReportGenerationActivity extends AppCompatActivity implements IRegistration, DatePickerDialog.OnDateSetListener{
+public class ExportDataActivity extends AppCompatActivity implements IRegistration, DatePickerDialog.OnDateSetListener{
 
     private static final int MY_PERMISSIONS_REQUEST_WRITE_EXT = 54;
     private static final int MY_PERMISSIONS_REQUEST_READ_EXT = 55;
@@ -86,12 +82,12 @@ public class ReportGenerationActivity extends AppCompatActivity implements IRegi
                 long fromTime = TimeHandler.unixTimeFrom(dateFromTextView.getText().toString());
                 long toTime = TimeHandler.unixTimeFrom(dateToTextView.getText().toString());
                 if (fromTime >= toTime){
-                    Toast.makeText(ReportGenerationActivity.this, R.string.time_interval_constraint, Toast.LENGTH_LONG).show();
+                    Toast.makeText(ExportDataActivity.this, getResources().getString(R.string.time_interval_constraint), Toast.LENGTH_LONG).show();
                 }
                 else{
                     if (isExternalStorageAvailable() && checkExtWrtPermission()){
                         Log.d("TIME", fromTime+","+toTime);
-                        Toast.makeText(ReportGenerationActivity.this, fromTime+"-"+toTime, Toast.LENGTH_LONG).show();
+//                        Toast.makeText(ExportDataActivity.this, fromTime+"-"+toTime, Toast.LENGTH_LONG).show();
                         ReportingInfoTable reportingInfoTable = new ReportingInfoTable();
                         reportingInfoTable.setReporterPhone(d2DFC_handler.loadReporter().getPhone());
                         reportingInfoTable.setReportingDate(TimeHandler.unixTimeNow());
@@ -101,7 +97,7 @@ public class ReportGenerationActivity extends AppCompatActivity implements IRegi
                         new ReportGenerationBackgroundTask(reportingInfoTable).execute();
                     }
                     else {
-                        Toast.makeText(ReportGenerationActivity.this, "External Storage Is Not Ready", Toast.LENGTH_LONG).show();
+                        Toast.makeText(ExportDataActivity.this, getResources().getString(R.string.external_storage_not_ready), Toast.LENGTH_LONG).show();
                     }
                 }
             }
@@ -114,9 +110,9 @@ public class ReportGenerationActivity extends AppCompatActivity implements IRegi
             @Override
             public void onClick(View v) {
                 dateFromChangeClicked = true;
-                DatePickerDialog datePickerDialog = new DatePickerDialog(ReportGenerationActivity.this,
+                DatePickerDialog datePickerDialog = new DatePickerDialog(ExportDataActivity.this,
                         R.style.MyDialogTheme ,
-                        ReportGenerationActivity.this,
+                        ExportDataActivity.this,
                         TimeHandler.year(),
                         TimeHandler.month(),
                         TimeHandler.day());
@@ -133,9 +129,9 @@ public class ReportGenerationActivity extends AppCompatActivity implements IRegi
             @Override
             public void onClick(View v) {
                 dateFromChangeClicked = false;
-                DatePickerDialog datePickerDialog = new DatePickerDialog(ReportGenerationActivity.this,
+                DatePickerDialog datePickerDialog = new DatePickerDialog(ExportDataActivity.this,
                         R.style.MyDialogTheme ,
-                        ReportGenerationActivity.this,
+                        ExportDataActivity.this,
                         TimeHandler.year(),
                         TimeHandler.month(),
                         TimeHandler.day());
@@ -151,19 +147,19 @@ public class ReportGenerationActivity extends AppCompatActivity implements IRegi
             }
         });
         // Here, thisActivity is the current activity
-        if (ContextCompat.checkSelfPermission(ReportGenerationActivity.this,
+        if (ContextCompat.checkSelfPermission(ExportDataActivity.this,
                 Manifest.permission.WRITE_EXTERNAL_STORAGE)
                 != PackageManager.PERMISSION_GRANTED) {
             // Permission is not granted
             // Should we show an explanation?
-            if (ActivityCompat.shouldShowRequestPermissionRationale(ReportGenerationActivity.this,
+            if (ActivityCompat.shouldShowRequestPermissionRationale(ExportDataActivity.this,
                     Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
                 // Show an explanation to the user *asynchronously* -- don't block
                 // this thread waiting for the user's response! After the user
                 // sees the explanation, try again to request the permission.
             } else {
                 // No explanation needed; request the permission
-                ActivityCompat.requestPermissions(ReportGenerationActivity.this,
+                ActivityCompat.requestPermissions(ExportDataActivity.this,
                         new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
                         MY_PERMISSIONS_REQUEST_WRITE_EXT);
 
@@ -175,19 +171,19 @@ public class ReportGenerationActivity extends AppCompatActivity implements IRegi
             // Permission has already been granted
         }
         // Here, thisActivity is the current activity
-        if (ContextCompat.checkSelfPermission(ReportGenerationActivity.this,
+        if (ContextCompat.checkSelfPermission(ExportDataActivity.this,
                 Manifest.permission.READ_EXTERNAL_STORAGE)
                 != PackageManager.PERMISSION_GRANTED) {
             // Permission is not granted
             // Should we show an explanation?
-            if (ActivityCompat.shouldShowRequestPermissionRationale(ReportGenerationActivity.this,
+            if (ActivityCompat.shouldShowRequestPermissionRationale(ExportDataActivity.this,
                     Manifest.permission.READ_EXTERNAL_STORAGE)) {
                 // Show an explanation to the user *asynchronously* -- don't block
                 // this thread waiting for the user's response! After the user
                 // sees the explanation, try again to request the permission.
             } else {
                 // No explanation needed; request the permission
-                ActivityCompat.requestPermissions(ReportGenerationActivity.this,
+                ActivityCompat.requestPermissions(ExportDataActivity.this,
                         new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
                         MY_PERMISSIONS_REQUEST_READ_EXT);
 
@@ -208,12 +204,12 @@ public class ReportGenerationActivity extends AppCompatActivity implements IRegi
     }
     private boolean checkExtWrtPermission(){
         return
-                ContextCompat.checkSelfPermission(ReportGenerationActivity.this,
+                ContextCompat.checkSelfPermission(ExportDataActivity.this,
                         Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED;
     }
     private boolean checkExtRdPermission(){
         return
-                ContextCompat.checkSelfPermission(ReportGenerationActivity.this,
+                ContextCompat.checkSelfPermission(ExportDataActivity.this,
                         Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED;
     }
     @Override
@@ -223,15 +219,22 @@ public class ReportGenerationActivity extends AppCompatActivity implements IRegi
     }
 
     @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Intent intent = new Intent(ExportDataActivity.this, ExportingListActivity.class);
+        startActivity(intent);
+    }
+
+    @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
         //noinspection SimplifiableIfStatement
         if(id == R.id.menu_insert_close){
-            Intent intent = new Intent(ReportGenerationActivity.this, FamilyListActivity.class);
+            Intent intent = new Intent(ExportDataActivity.this, ExportingListActivity.class);
             startActivity(intent);
         }
         else if (id == R.id.menu_insert_done) {
-            Intent intent = new Intent(ReportGenerationActivity.this, ReportingListActivity.class);
+            Intent intent = new Intent(ExportDataActivity.this, ExportingListActivity.class);
             startActivity(intent);
 /*
             if (checkExtRdPermission() && isExternalStorageAvailable()){
@@ -277,7 +280,7 @@ public class ReportGenerationActivity extends AppCompatActivity implements IRegi
     @Override
     public void checkRegistration(D2DFC_HANDLER d2DFC_handler) {
         if (!d2DFC_handler.isRegistered()) {
-            Intent intent = new Intent(ReportGenerationActivity.this, WelcomeActivity.class);
+            Intent intent = new Intent(ExportDataActivity.this, WelcomeActivity.class);
             startActivity(intent);
         }
     }

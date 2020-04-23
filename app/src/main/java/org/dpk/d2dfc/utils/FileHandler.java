@@ -3,6 +3,7 @@ package org.dpk.d2dfc.utils;
 import android.Manifest;
 import android.app.Activity;
 import android.content.Context;
+import android.database.Cursor;
 import android.net.Uri;
 import android.os.Environment;
 import android.util.Log;
@@ -19,6 +20,7 @@ import org.dpk.d2dfc.data_models.dao.ITable;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -42,6 +44,30 @@ public class FileHandler {
             reportURIs.add(Uri.fromFile(file));
         }
         return reportURIs;
+    }
+    public static String getPath(Context context, Uri uri) throws URISyntaxException {
+        if ("content".equalsIgnoreCase(uri.getScheme())) {
+            String[] projection = { "_data" };
+            Cursor cursor = null;
+
+            try {
+                cursor = context.getContentResolver().query(uri, projection, null, null, null);
+                int column_index = cursor.getColumnIndexOrThrow("_data");
+                if (cursor.moveToFirst()) {
+                    return cursor.getString(column_index);
+                }
+            } catch (Exception e) {
+                // Eat it
+            }
+        }
+        else if ("file".equalsIgnoreCase(uri.getScheme())) {
+            return uri.getPath();
+        }
+
+        return null;
+    }
+    public static void readFile(){
+
     }
     public  boolean createCSVFileFromTableData(ITable iTable){
         List<ITable> iTables = d2DFC_handler.selectRows(iTable);

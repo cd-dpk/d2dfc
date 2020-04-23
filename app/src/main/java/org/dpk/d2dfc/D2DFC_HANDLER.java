@@ -10,7 +10,6 @@ import android.util.Log;
 import org.dpk.d2dfc.data.constants.ApplicationConstants;
 import org.dpk.d2dfc.data.constants.RegistrationConstants;
 import org.dpk.d2dfc.data.db.DataBaseHelper;
-import org.dpk.d2dfc.data_models.CoronaSymptomsSummary;
 import org.dpk.d2dfc.data_models.dao.CommonHealthIssuesInfoTable;
 import org.dpk.d2dfc.data_models.dao.DailyFollowUpContactPersonsTable;
 import org.dpk.d2dfc.data_models.dao.DailyFollowUpCoronaSymptomsTable;
@@ -229,7 +228,7 @@ public class D2DFC_HANDLER {
        return 0.0;
    }
    */
-    public int countColumn(String column, String table, String whereCaluse) {
+ /*   public int countColumn(String column, String table, String whereCaluse) {
         List<Tuple> tuples = new ArrayList<Tuple>();
 
         Tuple tuple = new Tuple("select  count(*) as " + column
@@ -249,7 +248,8 @@ public class D2DFC_HANDLER {
         }
         return 0;
     }
-
+*/
+/*
     public CoronaSymptomsSummary getCoronaSummarySymptoms(String familyPhone) {
         CoronaSymptomsSummary coronaSymptomsSummary = new CoronaSymptomsSummary();
         coronaSymptomsSummary.fever = countColumn(DailyFollowUpCoronaSymptomsTable.Variable.STRINGfever,
@@ -279,6 +279,7 @@ public class D2DFC_HANDLER {
 
         return coronaSymptomsSummary;
     }
+*/
     /*
     public List<Account> fromTableToObject(List<AccountTable> accountTables){
         List<Account> accounts = new ArrayList<Account>();

@@ -22,7 +22,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:id="@+id/data_sent_generate_report"
-            android:text="@string/generate"/>
+            android:text="@string/export"/>
         <include
             android:id="@+id/reporting_add_progress_view"
             layout="@layout/view_progress_bar"

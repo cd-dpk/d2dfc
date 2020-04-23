@@ -12,13 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        tools:context="org.dpk.d2dfc.pages.ReportingListActivity">
-        <include
-            layout="@layout/text_horizontal_line"
-            android:id="@+id/content_account_list_text_horizontal_line"
-            android:layout_height="wrap_content"
-            android:layout_width="match_parent"
-            />
+        tools:context="org.dpk.d2dfc.pages.ExportingListActivity">
         <ScrollView
             xmlns:android="http://schemas.android.com/apk/res/android"
             android:layout_width="match_parent"

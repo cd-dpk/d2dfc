@@ -1,15 +1,18 @@
 package org.dpk.d2dfc.pages;
 
 import android.Manifest;
+import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.database.Cursor;
+import android.net.Uri;
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
+import android.provider.DocumentsContract;
+import android.provider.OpenableColumns;
 import android.util.Log;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
@@ -29,15 +32,16 @@ import org.dpk.d2dfc.data_models.OnRecyclerViewItemListener;
 import org.dpk.d2dfc.data_models.dao.ReportingInfoTable;
 import org.dpk.d2dfc.utils.TimeHandler;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ReportingListActivity extends AppCompatActivity implements OnRecyclerViewItemListener, IRegistration {
+public class ExportingListActivity extends AppCompatActivity implements OnRecyclerViewItemListener, IRegistration {
 
     private static final int MY_PERMISSIONS_REQUEST_READ_EXT = 22;
+    private static final int FILE_CHO0SER = 55;
     TextView reportingFromTextView, reportingToTextView;
     String reportingFrom, reportingTo;
-    EditText searchText;
     FloatingActionButton addReportingFAB;
     RecyclerView reportingRecyclerView;
     RecyclerViewListAdapter reportsRecyclerViewListAdapter;
@@ -50,39 +54,38 @@ public class ReportingListActivity extends AppCompatActivity implements OnRecycl
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reporting_list);
-        ;
 
         d2DFC_handler = new D2DFC_HANDLER(this);
         d2DFC_handler.setLanguageInApp();
         Log.d("LANG", ApplicationConstants.LANGUAGE_CODE);
 
         checkRegistration(d2DFC_handler);
-        searchText = (EditText) findViewById(R.id.edit_text_search);
         reportingRecyclerView = (RecyclerView) findViewById(R.id.recycler_view_reporting_list);
         reportingRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         reportingRecyclerView.setHasFixedSize(true);
 //        coordinatorLayout = (CoordinatorLayout) findViewById(R.id.coordinator_layout_d2dfc_home);
         addReportingFAB = (FloatingActionButton) findViewById(R.id.reporting_list_ft_send_report);
         // Data
-        reports = d2DFC_handler.getAllReportings();
 
+        reports = d2DFC_handler.getReportingInfoTables(
+                " 1=1 order by "+ReportingInfoTable.Variable.STRING_REPORTING_DATE+" desc");
         reportsRecyclerViewListAdapter = new RecyclerViewListAdapter(
                 this, R.layout.card_report, reports.size());
         reportingRecyclerView.setAdapter(reportsRecyclerViewListAdapter);
 // Here, thisActivity is the current activity
-        if (ContextCompat.checkSelfPermission(ReportingListActivity.this,
+        if (ContextCompat.checkSelfPermission(ExportingListActivity.this,
                 Manifest.permission.READ_EXTERNAL_STORAGE)
                 != PackageManager.PERMISSION_GRANTED) {
             // Permission is not granted
             // Should we show an explanation?
-            if (ActivityCompat.shouldShowRequestPermissionRationale(ReportingListActivity.this,
+            if (ActivityCompat.shouldShowRequestPermissionRationale(ExportingListActivity.this,
                     Manifest.permission.READ_EXTERNAL_STORAGE)) {
                 // Show an explanation to the user *asynchronously* -- don't block
                 // this thread waiting for the user's response! After the user
                 // sees the explanation, try again to request the permission.
             } else {
                 // No explanation needed; request the permission
-                ActivityCompat.requestPermissions(ReportingListActivity.this,
+                ActivityCompat.requestPermissions(ExportingListActivity.this,
                         new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
                         MY_PERMISSIONS_REQUEST_READ_EXT);
 
@@ -94,29 +97,14 @@ public class ReportingListActivity extends AppCompatActivity implements OnRecycl
             // Permission has already been granted
         }
 
-        searchText.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) { }
-            @Override
-            public void afterTextChanged(Editable string) {
-                String searchText = string.toString();
-                Log.d("SEARCH", searchText);
-                /*searchedAccounts = personalAccountant.searchedAccounts(searchText, accounts);
-                accountRecyclerViewListAdapter = new RecyclerViewListAdapter(SearchPersonActivity.this,
-                        R.layout.card_account, searchedAccounts.size());
-                accountRecyclerView.setAdapter(accountRecyclerViewListAdapter);*/
-
-            }
-        });
 
 
         addReportingFAB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(ReportingListActivity.this, ReportGenerationActivity.class);
+                Intent intent = new Intent(ExportingListActivity.this, ExportDataActivity.class);
                 startActivity(intent);
+//                openDirectory(Uri.fromFile(new File(ApplicationConstants.externalStorageFolder)));
               }
             });
 
@@ -125,17 +113,21 @@ public class ReportingListActivity extends AppCompatActivity implements OnRecycl
     @Override
     public void listenItem(View view, final int position) {
         final ReportingInfoTable reportingInfoTable = reports.get(position);
-        TextView reportingFromText, reportingToText;
+        TextView reportingFromText, reportingToText, exportingTimText;
+        exportingTimText = view.findViewById(R.id.text_data_export_time);
         reportingFromText = view.findViewById(R.id.text_from);
         reportingToText = view.findViewById(R.id.text_to);
+        exportingTimText.setText(TimeHandler.dateFromUnixTime(reportingInfoTable.getReportingDate())+"");
         reportingFromText.setText(TimeHandler.dateFromUnixTime(reportingInfoTable.getReportingFromDate()) +"");
         reportingToText.setText(TimeHandler.dateFromUnixTime(reportingInfoTable.getReportingDate())+"");
+
+        Log.d("TIME", exportingTimText.getText().toString());
 
     }
     @Override
     public void checkRegistration(D2DFC_HANDLER d2DFC_handler) {
         if (!d2DFC_handler.isRegistered()) {
-            Intent intent = new Intent(ReportingListActivity.this, WelcomeActivity.class);
+            Intent intent = new Intent(ExportingListActivity.this, WelcomeActivity.class);
             startActivity(intent);
         }
     }
@@ -145,5 +137,44 @@ public class ReportingListActivity extends AppCompatActivity implements OnRecycl
         reportsRecyclerViewListAdapter = new RecyclerViewListAdapter(
                 this, R.layout.card_report, reports.size());
         reportingRecyclerView.setAdapter(reportsRecyclerViewListAdapter);
+    }
+    @Override
+    public void onActivityResult(int requestCode, int resultCode,
+                                 Intent resultData) {
+        if (requestCode == FILE_CHO0SER
+                && resultCode == Activity.RESULT_OK) {
+            // The result data contains a URI for the document or directory that
+            // the user selected.
+            Uri uri = null;
+            if (resultData != null) {
+                uri = resultData.getData();
+                File myFile = null;
+                Cursor returnCursor =
+                        getContentResolver().query(uri, null, null, null, null);
+                int nameIndex = returnCursor.getColumnIndex(OpenableColumns.DISPLAY_NAME);
+                int sizeIndex = returnCursor.getColumnIndex(OpenableColumns.SIZE);
+                returnCursor.moveToFirst();
+                Toast.makeText(ExportingListActivity.this,
+                        returnCursor.getString(nameIndex),
+                        Toast.LENGTH_LONG).show();
+
+
+                // Perform operations on the document using its URI.
+            }
+        }
+    }
+    public void openDirectory(Uri uriToLoad) {
+        // Choose a directory using the system's file picker.
+        Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT_TREE);
+
+        // Provide read access to files and sub-directories in the user-selected
+        // directory.
+        intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+
+        // Optionally, specify a URI for the directory that should be opened in
+        // the system file picker when it loads.
+        intent.putExtra(DocumentsContract.EXTRA_INITIAL_URI, uriToLoad);
+
+        startActivityForResult(intent, FILE_CHO0SER);
     }
 }

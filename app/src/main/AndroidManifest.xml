@@ -11,21 +11,16 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".pages.FamilyDashboardActivity"
-            android:label="@string/family_dashboard"/>
-        <activity android:name=".pages.ReportGenerationActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.SENDTO" />
-                <data android:scheme="mailto" />
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
+        <activity android:name=".pages.ExportDataActivity"
+            android:label="@string/export_data">
         </activity>
         <activity
             android:name=".pages.FamilyAddActivity"
             android:label="@string/page_family_add" />
         <activity
-            android:name=".pages.ReportingListActivity"
-            android:label="@string/page_reportings" />
+            android:name=".pages.ExportingListActivity"
+            android:parentActivityName=".pages.ExportingListActivity"
+            android:label="@string/page_exportings" />
         <activity
             android:name=".pages.PersonAddActivity"
             android:label="@string/page_person_add" />

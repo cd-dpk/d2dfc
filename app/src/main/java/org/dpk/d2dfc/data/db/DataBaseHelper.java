@@ -18,7 +18,6 @@ import org.dpk.d2dfc.data_models.dao.RecentCoronaRelatedIssuesTable;
 import org.dpk.d2dfc.data_models.dao.ReportingInfoTable;
 import org.dpk.d2dfc.data_models.dao.RespiratoryIssuesInfoTable;
 import org.dpk.d2dfc.data_models.dao.TravelHistoryInfoTable;
-import org.dpk.d2dfc.pages.ReportingListActivity;
 
 import java.util.ArrayList;
 import java.util.List;

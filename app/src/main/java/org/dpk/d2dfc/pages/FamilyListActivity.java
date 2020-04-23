@@ -75,7 +75,7 @@ public class FamilyListActivity extends AppCompatActivity implements
 
         checkRegistration(d2DFC_handler);
         horizontalLineText = (TextView) findViewById(R.id.text_horizontal_line_text);
-        horizontalLineText.setText(d2DFC_handler.loadReporter().getAreaEmail() + "-> Families");
+        horizontalLineText.setText(d2DFC_handler.loadReporter().getAreaEmail() + " : "+ getResources().getString(R.string.menu_famililies));
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -84,7 +84,6 @@ public class FamilyListActivity extends AppCompatActivity implements
         toggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
         setupNavigationHeader(ApplicationConstants.appReporter);
-
 
         searchText = (EditText) findViewById(R.id.edit_text_search);
         closeSearchButton = (ImageButton) findViewById(R.id.image_search_close);
@@ -158,7 +157,7 @@ public class FamilyListActivity extends AppCompatActivity implements
             Intent intent = new Intent(this, PersonListActivity.class);
             startActivity(intent);
         } else if (id == R.id.nav_reporting_data) {
-            Intent intent = new Intent(this, ReportingListActivity.class);
+            Intent intent = new Intent(this, ExportingListActivity.class);
             startActivity(intent);
         } else if (id == R.id.nav_info) {
             Intent intent = new Intent(this, AboutDevInfoActivity.class);
@@ -188,9 +187,6 @@ public class FamilyListActivity extends AppCompatActivity implements
         if (id == R.id.action_settings) {
             Intent intent = new Intent(FamilyListActivity.this, SettingsActivity.class);
             startActivity(intent);
-        } else if (id == R.id.action_search) {
-//            Intent intent = new Intent(HomeActivity.this, SearchPersonActivity.class);
-//            startActivity(intent);
         }
 
         return super.onOptionsItemSelected(item);
