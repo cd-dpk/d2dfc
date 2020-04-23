@@ -259,6 +259,11 @@ public class DailyFollowUpTravelInfoTable implements ITable{
         return reporterPhone+","+ reportingDate+","+ followUpDate+","+personID+","+
                 out_of_area+","+gone_to_bazar+","+gone_to_shop+","+ out_for_work+","+otherTravel;
     }
+    @Override
+    public String getCSVHeader(){
+        return "reporterPhone"+","+ "reportingDate"+","+ "followUpDate"+","+"personID"+","+
+                "out_of_area"+","+"gone_to_bazar"+","+"gone_to_shop"+","+ "out_for_work"+","+"otherTravel";
+    }
     public List<DailyFollowUpTravelInfoTable> toTablesFromITables(List<ITable> iTables) {
         List<DailyFollowUpTravelInfoTable> dailyFollowUpTravelInfoTables = new ArrayList<DailyFollowUpTravelInfoTable>();
         for (ITable iTable: iTables) {

@@ -47,6 +47,7 @@ public class FamilyListActivity extends AppCompatActivity implements
     NavigationView navigationView;
     TextView loggedPersonPhoneText;
     TextView loggedPersonNameText;
+    ImageButton closeSearchButton;
 
     private static long BACK_PRESSED_AT, TIME_INTERVAL = 2000;
 
@@ -84,8 +85,9 @@ public class FamilyListActivity extends AppCompatActivity implements
         navigationView.setNavigationItemSelectedListener(this);
         setupNavigationHeader(ApplicationConstants.appReporter);
 
-        arrowBackSearchButton = (ImageButton) findViewById(R.id.image_search_back);
+
         searchText = (EditText) findViewById(R.id.edit_text_search);
+        closeSearchButton = (ImageButton) findViewById(R.id.image_search_close);
         familyRecyclerView = (RecyclerView) findViewById(R.id.recycler_view_family_list);
         familyRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         familyRecyclerView.setHasFixedSize(true);
@@ -117,6 +119,12 @@ public class FamilyListActivity extends AppCompatActivity implements
             }
         });
 
+        closeSearchButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                searchText.setText("");
+            }
+        });
 
         addFamilyFAB.setOnClickListener(new View.OnClickListener() {
             @Override

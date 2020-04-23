@@ -118,7 +118,7 @@ public class TravelHistoryInfoTable implements ITable{
                 Variable.STRINGoutOfSarail+" text,"+
                 Variable.STRINGoutOfBrahmanbaria+" text,"+
                 Variable.STRINGoutOfBangladesh+" text,"+
-                "primary key ("+ Variable.STRNIGreporterPhone+","+Variable.STRNGreportingDate
+                "primary key ("+ Variable.STRNIGreporterPhone
                 +","+Variable.STRNGpersonID+")"+")";
 
     }
@@ -267,6 +267,19 @@ public class TravelHistoryInfoTable implements ITable{
                 outOfBrahmanbaria+","+
                 outOfBangladesh;
 
+    }
+
+    @Override
+    public String getCSVHeader(){
+        return "reporterPhone"+","+
+                "personID"+","+
+                "reportingDate"+","+
+                "dhaka"+","+
+                "naraynganj"+","+
+                "sylhet"+","+
+                "outOfSarail"+","+
+                "outOfBrahmanbaria"+","+
+                "outOfBangladesh";
     }
 
     public List<TravelHistoryInfoTable> toTablesFromITables(List<ITable> iTables) {

@@ -78,7 +78,6 @@ public class DailyFollowUpContactPersonsTable implements ITable {
                 Variable.STRINGpersonTwoPhone+" text,"+
                 "primary key ("+ Variable.STRINGreporterPhone+","+Variable.STRING_FOLLOW_UP_DATE
                 +","+Variable.STRINGpersonOnePhone+","+Variable.STRINGpersonTwoPhone+")"+")";
-
     }
 
     @Override
@@ -194,6 +193,14 @@ public class DailyFollowUpContactPersonsTable implements ITable {
                 followUpDate+","+
                 personOnePhone+","+
                 personTwoPhone;
+    }
+    @Override
+    public String getCSVHeader(){
+        return "reporterPhone"+","+
+                "reportingDate"+","+
+                "followUpDate"+","+
+                "personOnePhone"+","+
+                "personTwoPhone";
     }
 
     public List<DailyFollowUpContactPersonsTable> toTablesFromITables(List<ITable> iTables) {

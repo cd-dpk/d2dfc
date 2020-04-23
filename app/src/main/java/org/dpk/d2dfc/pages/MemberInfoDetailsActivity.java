@@ -67,36 +67,49 @@ public class MemberInfoDetailsActivity extends AppCompatActivity implements IReg
                 ApplicationConstants.SELECTED_FAMILY_PERSON_NAME);
         CommonHealthIssuesInfoTable commonHealthIssuesInfoTable = new CommonHealthIssuesInfoTable();
         commonHealthIssuesInfoTable.setWhereClause(CommonHealthIssuesInfoTable.Variable.STRINGpersonID +" = '"+personID+"'");
+
         DailyFollowUpContactPersonsTable dailyFollowUpContactPersonsTable = new DailyFollowUpContactPersonsTable();
         dailyFollowUpContactPersonsTable.setWhereClause(DailyFollowUpContactPersonsTable.Variable.STRINGpersonOnePhone
                 +" = '"+personID+"'"+" or "+
                 DailyFollowUpContactPersonsTable.Variable.STRINGpersonTwoPhone +" = '"+personID+"'");
+
         DailyFollowUpCoronaSymptomsTable dailyFollowUpCoronaSymptomsTable = new DailyFollowUpCoronaSymptomsTable();
         dailyFollowUpCoronaSymptomsTable.setWhereClause(DailyFollowUpCoronaSymptomsTable.Variable.STRINGpersonID +" = '"+personID+"'");
+
         DailyFollowUpTravelInfoTable dailyFollowUpTravelInfoTable = new DailyFollowUpTravelInfoTable();
         dailyFollowUpTravelInfoTable.setWhereClause(DailyFollowUpTravelInfoTable.Variable.STRINGpersonID+" = '"+personID+"'");
+
         PersonBasicInfoTable personBasicInfoTable = new PersonBasicInfoTable();
         personBasicInfoTable.setWhereClause(PersonBasicInfoTable.Variable.STRING_FAMILY_PHONE +" = '"+ApplicationConstants.SELECTED_FAMILY_PHONE+"'"
         +" and "+ PersonBasicInfoTable.Variable.STRING_PERSON_NAME+" = '"+ApplicationConstants.SELECTED_FAMILY_PERSON_NAME+"'");
+
         RecentCoronaRelatedIssuesTable recentCoronaRelatedIssuesTable = new RecentCoronaRelatedIssuesTable();
         recentCoronaRelatedIssuesTable.setWhereClause(RecentCoronaRelatedIssuesTable.Variable.STRINGpersonID +" = '"+personID+"'");
+
         RespiratoryIssuesInfoTable respiratoryIssuesInfoTable = new RespiratoryIssuesInfoTable();
         respiratoryIssuesInfoTable.setWhereClause(RespiratoryIssuesInfoTable.Variable.STRINGpersonID +" = '"+personID+"'");
+
         TravelHistoryInfoTable travelHistoryInfoTable = new TravelHistoryInfoTable();
         travelHistoryInfoTable.setWhereClause(TravelHistoryInfoTable.Variable.STRNGpersonID +" = '"+personID+"'");
 
+        memberBioTextView.setText(personBasicInfoTable.getCSVHeader());
         for (PersonBasicInfoTable infoTable: d2DFC_handler.getPersonBasicInfoTables(personBasicInfoTable.getWhereClause())){
             memberBioTextView.setText(memberBioTextView.getText().toString()+"\n"+infoTable.toString());
         }
+        memberTravelTextView.setText(travelHistoryInfoTable.getCSVHeader());
         for (TravelHistoryInfoTable infoTable: d2DFC_handler.getTravelHistoryInfoTables(travelHistoryInfoTable.getWhereClause())){
             memberTravelTextView.setText(memberTravelTextView.getText().toString()+"\n"+infoTable.toString());
         }
-        for (CommonHealthIssuesInfoTable infoTable: d2DFC_handler.getCommonHealthIssuesInfoTables(commonHealthIssuesInfoTable.getWhereClause())){
+        memberHealthTextView.setText(commonHealthIssuesInfoTable.getCSVHeader());
+        for (CommonHealthIssuesInfoTable infoTable: d2DFC_handler.getCommonHealthIssuesInfoTables(
+                commonHealthIssuesInfoTable.getWhereClause())){
             memberHealthTextView.setText(memberHealthTextView.getText().toString()+"\n"+infoTable.toString());
         }
+        memberRespiratorTextView.setText(respiratoryIssuesInfoTable.getCSVHeader());
         for (RespiratoryIssuesInfoTable infoTable: d2DFC_handler.getRespiratoryIssuesInfoTables(respiratoryIssuesInfoTable.getWhereClause())){
             memberRespiratorTextView.setText(memberRespiratorTextView.getText().toString()+"\n"+infoTable.toString());
         }
+        memberCoronaRecentTextView.setText(recentCoronaRelatedIssuesTable.getCSVHeader());
         for (RecentCoronaRelatedIssuesTable infoTable: d2DFC_handler.getRecentCoronaRelatedIssuesTables(recentCoronaRelatedIssuesTable.getWhereClause())){
             memberCoronaRecentTextView.setText(memberCoronaRecentTextView.getText().toString()+"\n"+infoTable.toString());
         }

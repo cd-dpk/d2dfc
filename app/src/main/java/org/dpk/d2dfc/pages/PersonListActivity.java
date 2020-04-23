@@ -35,7 +35,6 @@ import org.dpk.d2dfc.data_models.dao.FamilyInfoTable;
 import org.dpk.d2dfc.data_models.dao.PersonBasicInfoTable;
 import org.dpk.d2dfc.utils.TimeHandler;
 
-import java.sql.Time;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -52,8 +51,17 @@ public class PersonListActivity extends AppCompatActivity implements OnRecyclerV
     List<PersonBasicInfoTable> persons = new ArrayList<PersonBasicInfoTable>(), searchedPersons= new ArrayList<PersonBasicInfoTable>();
     D2DFC_HANDLER d2DFC_handler;
     CoordinatorLayout coordinatorLayout;
+    ImageButton closeSearchButton;
 
     private static long BACK_PRESSED_AT, TIME_INTERVAL=2000;
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Intent intent = new Intent(PersonListActivity.this, FamilyListActivity.class);
+        startActivity(intent);
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -63,7 +71,7 @@ public class PersonListActivity extends AppCompatActivity implements OnRecyclerV
         Log.d("LANG", ApplicationConstants.LANGUAGE_CODE);
 
         checkRegistration(d2DFC_handler);
-        arrowBackSearchButton = (ImageButton) findViewById(R.id.image_search_back);
+        closeSearchButton = (ImageButton) findViewById(R.id.image_search_close);
         searchText = (EditText) findViewById(R.id.edit_text_search);
         familyPhoneTextView = (TextView) findViewById(R.id.text_horizontal_line_text);
         personRecyclerView = (RecyclerView) findViewById(R.id.recycler_view_person_list);
@@ -87,6 +95,12 @@ public class PersonListActivity extends AppCompatActivity implements OnRecyclerV
         personsRecyclerViewListAdapter = new RecyclerViewListAdapter(
                 this, R.layout.card_member, persons.size());
         personRecyclerView.setAdapter(personsRecyclerViewListAdapter);
+        closeSearchButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                searchText.setText("");
+            }
+        });
 
         searchText.addTextChangedListener(new TextWatcher() {
             @Override
@@ -144,6 +158,16 @@ public class PersonListActivity extends AppCompatActivity implements OnRecyclerV
         ageText.setText(personBasicInfoTable.getAge()+"");
         genderText.setText(personBasicInfoTable.getGender()+"");
 
+        if (d2DFC_handler.isInsertedDailyFollowUPHeath(personID, TimeHandler.unixTimeNow())){
+            dailyCoronaFollowupButton.setVisibility(View.INVISIBLE);
+        }
+        if (d2DFC_handler.isInsertedDailyContactTrace(personID, TimeHandler.unixTimeNow())){
+            dailyPersonContactTraceButton.setVisibility(View.INVISIBLE);
+        }
+        if (d2DFC_handler.isInsertedHistory(personID)){
+            memberHealthTravelInfoButton.setVisibility(View.INVISIBLE);
+        }
+
         dailyCoronaFollowupButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -177,10 +201,16 @@ public class PersonListActivity extends AppCompatActivity implements OnRecyclerV
         memberHealthTravelInfoButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ApplicationConstants.SELECTED_FAMILY_PHONE = personBasicInfoTable.getFamilyPhone();
-                ApplicationConstants.SELECTED_FAMILY_PERSON_NAME = personBasicInfoTable.getName();
-                Intent intent = new Intent(PersonListActivity.this, MemberTravelAndHeathHistory.class);
-                startActivity(intent);
+                Log.d("DPK", personID);
+                if (d2DFC_handler.isInsertedHistory(personID)){
+                    Toast.makeText(PersonListActivity.this, "Inserted Member History!", Toast.LENGTH_LONG).show();
+                }
+                else {
+                    ApplicationConstants.SELECTED_FAMILY_PHONE = personBasicInfoTable.getFamilyPhone();
+                    ApplicationConstants.SELECTED_FAMILY_PERSON_NAME = personBasicInfoTable.getName();
+                    Intent intent = new Intent(PersonListActivity.this, MemberTravelAndHeathHistory.class);
+                    startActivity(intent);
+                }
             }
         });
         memberInfoButton.setOnClickListener(new View.OnClickListener() {

@@ -8,7 +8,15 @@
     android:gravity="center"
     android:orientation="vertical"
     style="@style/AppTheme.GrayColorPrimary"
-    tools:context=".pages.AboutDevInfoActivity">
+    tools:context=".pages.MemberInfoDetailsActivity">
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/scroll_bar_member_info">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:layout_height="wrap_content">
     <include
         android:id="@+id/member_info_bio"
         layout="@layout/card_member_bio"
@@ -44,9 +52,6 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_weight="1"/>
-
-
-
-
-
+        </LinearLayout>
+    </ScrollView>
 </LinearLayout>

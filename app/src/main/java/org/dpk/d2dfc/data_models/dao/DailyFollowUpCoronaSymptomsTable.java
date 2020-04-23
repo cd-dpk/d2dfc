@@ -360,6 +360,14 @@ public class DailyFollowUpCoronaSymptomsTable implements ITable{
                 coughMucus+","+shortnessOfBreath+","+achesNPain+","+soreThroat+","+
                 chillis+","+nausea+","+nasalCongestion+","+diarrhea+","+other;
     }
+    @Override
+    public String getCSVHeader(){
+        return "reporterPhone"+","+
+                "reportingDate"+","+"followUpDate"+","
+                + "personID"+","+"fever"+","+"dryCough"+","+"fatigue"+","+
+                "coughMucus"+","+"shortnessOfBreath"+","+"achesNPain"+","+"soreThroat"+","+
+                "chillis"+","+"nausea"+","+"nasalCongestion"+","+"diarrhea"+","+"other";
+    }
 
     public List<DailyFollowUpCoronaSymptomsTable> toTablesFromITables(List<ITable> iTables) {
         List<DailyFollowUpCoronaSymptomsTable> dailyFollowUpCoronaSymptomsTables = new ArrayList<DailyFollowUpCoronaSymptomsTable>();

@@ -34,6 +34,7 @@ import org.dpk.d2dfc.data_models.dao.DailyFollowUpContactPersonsTable;
 import org.dpk.d2dfc.data_models.dao.PersonBasicInfoTable;
 import org.dpk.d2dfc.utils.TimeHandler;
 
+import java.sql.Time;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -165,19 +166,37 @@ public class MemberSearchActivity extends AppCompatActivity implements OnRecycle
         }
         else if (id == R.id.menu_insert_done) {
             List<DailyFollowUpContactPersonsTable> dailyFollowUpContactPersonsTables  = new ArrayList<DailyFollowUpContactPersonsTable>();
-            for (String key: isSelectedPersons.keySet()){
+            if (isSelectedPersons.keySet().size()!=0){
+                for (String key: isSelectedPersons.keySet()){
+                    DailyFollowUpContactPersonsTable dailyFollowUpContactPersonsTable = new DailyFollowUpContactPersonsTable();
+                    dailyFollowUpContactPersonsTable.setPersonOnePhone(
+                            new PersonBasicInfoTable().getPersonID(ApplicationConstants.SELECTED_FAMILY_PHONE,
+                            ApplicationConstants.SELECTED_FAMILY_PERSON_NAME));
+                    dailyFollowUpContactPersonsTable.setPersonTwoPhone(key);
+                    dailyFollowUpContactPersonsTable.setReporterPhone(d2DFC_handler.loadReporter().getPhone());
+                    dailyFollowUpContactPersonsTable.setFollowUpDate(TimeHandler.unixTimeNow());
+                    dailyFollowUpContactPersonsTable.setReportingDate(TimeHandler.unixTimeNow());
+                    dailyFollowUpContactPersonsTables.add(dailyFollowUpContactPersonsTable);
+                }
+                Toast.makeText(MemberSearchActivity .this, dailyFollowUpContactPersonsTables.toString(), Toast.LENGTH_LONG).show();
+                new ContactPersonsAddBackgroundTask(dailyFollowUpContactPersonsTables).execute();
+            }
+            else {
                 DailyFollowUpContactPersonsTable dailyFollowUpContactPersonsTable = new DailyFollowUpContactPersonsTable();
+                dailyFollowUpContactPersonsTable.setReporterPhone(d2DFC_handler.loadReporter().getPhone());
                 dailyFollowUpContactPersonsTable.setPersonOnePhone(new PersonBasicInfoTable().getPersonID(ApplicationConstants.SELECTED_FAMILY_PHONE,
                         ApplicationConstants.SELECTED_FAMILY_PERSON_NAME));
-                dailyFollowUpContactPersonsTable.setPersonTwoPhone(key);
-                dailyFollowUpContactPersonsTable.setReporterPhone(d2DFC_handler.loadReporter().getPhone());
+                dailyFollowUpContactPersonsTable.setPersonTwoPhone(new PersonBasicInfoTable().getPersonID(ApplicationConstants.SELECTED_FAMILY_PHONE,
+                        ApplicationConstants.SELECTED_FAMILY_PERSON_NAME));
                 dailyFollowUpContactPersonsTable.setFollowUpDate(TimeHandler.unixTimeNow());
                 dailyFollowUpContactPersonsTable.setReportingDate(TimeHandler.unixTimeNow());
+                Toast.makeText(MemberSearchActivity .this, R.string.no_persons_selected, Toast.LENGTH_LONG).show();
                 dailyFollowUpContactPersonsTables.add(dailyFollowUpContactPersonsTable);
+
+                new ContactPersonsAddBackgroundTask(dailyFollowUpContactPersonsTables).execute();
+
             }
-            Toast.makeText(MemberSearchActivity .this, dailyFollowUpContactPersonsTables.toString(), Toast.LENGTH_LONG).show();
-            new ContactPersonsAddBackgroundTask(dailyFollowUpContactPersonsTables).execute();
-        }
+            }
         return super.onOptionsItemSelected(item);
     }
     private void setPersonSelection() {

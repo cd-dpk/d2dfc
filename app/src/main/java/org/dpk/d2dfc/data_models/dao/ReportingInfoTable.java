@@ -180,6 +180,14 @@ public class ReportingInfoTable implements ITable{
                 reportingFromDate+","+
                 reportingToDate+"";
     }
+    @Override
+    public String getCSVHeader(){
+        return "reporterPhone"+","+
+                "reportingDate"+","+
+               "reportingFromDate" +","+
+                "reportingToDate";
+    }
+
 
     public List<ReportingInfoTable> toTablesFromITables(List<ITable> iTables) {
         List<ReportingInfoTable> personBasicInfoTables = new ArrayList<ReportingInfoTable>();

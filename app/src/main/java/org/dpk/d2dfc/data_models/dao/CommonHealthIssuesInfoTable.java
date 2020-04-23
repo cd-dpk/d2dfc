@@ -166,8 +166,7 @@ public class CommonHealthIssuesInfoTable implements ITable{
                 Variable.STRINGtubercolosisRecorded+" text," +
                 Variable.STRINGtubercolosisNow+" text," +
                 Variable.STRINGothers+" text," +
-                "primary key ("+ Variable.STRINGreporterPhone+","+Variable.STRINGreportingDate
-                +","+Variable.STRINGpersonID+")"+")";
+                "primary key ("+ Variable.STRINGreporterPhone+","+Variable.STRINGpersonID+")"+")";
     }
 
     @Override
@@ -343,6 +342,23 @@ public class CommonHealthIssuesInfoTable implements ITable{
                 cancerRecorded+","+
                 cancerNow+","+
                 others;
+    }
+    @Override
+    public String getCSVHeader(){
+        return "reporterPhone"+","+
+                "reportingDate"+","+
+                "personID"+","+
+                "diabetesRecorded"+","+
+                "diabetesNow"+","+
+                "cardiovascularRecorded"+","+
+                "cardiovascularNow"+","+
+                "hypertensionRecorded"+","+
+                "hypertensionNow"+","+
+                "strokeRecorded"+","+
+                "strokeNow"+","+
+                "cancerRecorded"+","+
+                "cancerNow"+","+
+                "others";
     }
 
     public List<CommonHealthIssuesInfoTable> toTablesFromITables(List<ITable> iTables) {

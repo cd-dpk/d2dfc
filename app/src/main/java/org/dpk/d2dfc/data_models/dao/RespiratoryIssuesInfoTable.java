@@ -178,7 +178,7 @@ public class RespiratoryIssuesInfoTable implements ITable{
     }
     @Override
     public String tableName() {
-        return "respiratoryissuesinfo";
+        return "respiratory_issues_info";
     }
 
     @Override
@@ -202,9 +202,8 @@ public class RespiratoryIssuesInfoTable implements ITable{
                 Variable.STRINGbetelLeaf+" text," +
                 Variable.STRINGhooka+" text," +
                 Variable.STRINGotherBadHabits+" text," +
-                "primary key ("+ Variable.STRINGreporterPhone+","+Variable.STRINGreportingDate
+                "primary key ("+ Variable.STRINGreporterPhone
                 +","+Variable.STRINGpersonID+")"+")";
-
     }
 
     @Override
@@ -410,7 +409,27 @@ public class RespiratoryIssuesInfoTable implements ITable{
                 hooka+" ," +
                 otherBadHabits ;
     }
-
+    @Override
+    public String getCSVHeader(){
+        return "reporterPhone"+" " +
+                "reportingDate"+" ," +
+                "personID"+" ," +
+                "asthmaRecorded"+" ," +
+                "asthamaNow"+" ," +
+                "chronicBronchitisRecorded"+" ," +
+                "chronicBronchitisNow"+" ," +
+                "lungCancerRecorded"+" ," +
+                "lungCancerNow"+" ," +
+                "PnemoniaRecorded"+" ," +
+                "PnemoniaNow"+" ," +
+                "tubercolosisRecorded"+" ," +
+                "tubercolosisNow"+" ," +
+                "others" +" ," +
+                "smoking"+" ," +
+                "betelLeaf"+" ," +
+                "hooka"+" ," +
+                "otherBadHabits" ;
+    }
     public List<RespiratoryIssuesInfoTable> toTablesFromITables(List<ITable> iTables) {
         List<RespiratoryIssuesInfoTable> respiratoryIssuesInfoTables = new ArrayList<RespiratoryIssuesInfoTable>();
         for (ITable iTable: iTables) {

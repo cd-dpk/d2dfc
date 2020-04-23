@@ -204,7 +204,8 @@ public class PersonBasicInfoTable implements ITable{
                 Variable.STRING_MOTHER+" text,"+
                 Variable.STRING_OCCUPATION+" text,"+
                 Variable.STRING_AGE+" double,"+
-                "primary key ("+ Variable.STRING_REPORTER_PHONE+","+Variable.STRING_FAMILY_PHONE+","+Variable.STRING_PERSON_NAME+")"+
+                "primary key ("+ Variable.STRING_REPORTER_PHONE+","+
+                Variable.STRING_FAMILY_PHONE+","+Variable.STRING_PERSON_NAME+")"+
                 ")";
     }
 
@@ -282,6 +283,20 @@ public class PersonBasicInfoTable implements ITable{
                 getOccupation()+","+
                 getAge()+")";
     }
+    @Override
+    public String getCSVHeader(){
+        return "reporterPhone"+","+
+                "reportingDate"+","+
+                "familyPhone"+","+
+                "getMobile"+","+
+                "getName"+","+
+                "Gender"+","+
+                "Father"+","+
+                "getMother"+","+
+                "getOccupation"+","+
+                "getAge"+"";
+    }
+
 
     public List<PersonBasicInfoTable> toTablesFromITables(List<ITable> iTables) {
         List<PersonBasicInfoTable> personBasicInfoTables = new ArrayList<PersonBasicInfoTable>();

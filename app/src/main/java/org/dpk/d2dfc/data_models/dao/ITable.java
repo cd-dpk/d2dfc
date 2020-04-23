@@ -8,6 +8,7 @@ import android.database.Cursor;
  */
 
 public interface ITable {
+    public String getCSVHeader();
     public String tableName();
     public String toCreateTableString();
     public String toSelectString();

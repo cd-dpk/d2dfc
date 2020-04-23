@@ -175,7 +175,7 @@ public class RecentCoronaRelatedIssuesTable implements ITable{
                 Variable.STRINGnasalCongestion+" text," +
                 Variable.STRINGdiarrhea+" text," +
                 Variable.STRINGother+" text," +
-                "primary key ("+ Variable.STRINGreporterPhone+","+Variable.STRINGreportingDate
+                "primary key ("+ Variable.STRINGreporterPhone
                 +","+Variable.STRINGpersonID+")"+")";
 
     }
@@ -343,6 +343,13 @@ public class RecentCoronaRelatedIssuesTable implements ITable{
                 reportingDate+","+ personID+","+fever+","+dryCough+","+fatigue+","+
                 coughMucus+","+shortnessOfBreath+","+achesNPain+","+soreThroat+","+
                 chillis+","+nausea+","+nasalCongestion+","+diarrhea+","+other;
+    }
+    @Override
+    public String getCSVHeader(){
+        return "reporterPhone"+","+
+                "reportingDate"+","+ "personID"+","+"fever"+","+"dryCough"+","+"fatigue"+","+
+                "coughMucus"+","+"shortnessOfBreath"+","+"achesNPain"+","+"soreThroat"+","+
+                "chillis"+","+"nausea"+","+"nasalCongestion"+","+"diarrhea"+","+"other";
     }
 
     public List<RecentCoronaRelatedIssuesTable> toTablesFromITables(List<ITable> iTables) {

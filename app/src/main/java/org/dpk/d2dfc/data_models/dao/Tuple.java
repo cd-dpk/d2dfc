@@ -26,6 +26,11 @@ public class Tuple implements ITable{
 
 
     @Override
+    public String getCSVHeader() {
+        return "null";
+    }
+
+    @Override
     public String tableName() {
         return null;
     }

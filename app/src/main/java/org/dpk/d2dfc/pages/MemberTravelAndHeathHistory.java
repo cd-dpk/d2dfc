@@ -29,16 +29,17 @@ import org.dpk.d2dfc.utils.TimeHandler;
 public class MemberTravelAndHeathHistory extends AppCompatActivity implements IRegistration {
     D2DFC_HANDLER d2DFC_handler;
 
-    Spinner travelDhakaSpinner,travelNaranganjSpinner,travelSylhetSpinner,travelOutBrahmanbariaSpinner,travelOutSarailSpinner,travelOutBangladeshSpinner;
-    CheckBox commonHealthIssuesDiabetesRecorded, commonHealthIssuesDiabetesNow,commonHealthIssuesCardiovascularDiseasesRecorded,commonHealthIssuesCardiovascularDiseasesNow,commonHealthIssuesHypertensionRecorded,
-            commonHealthIssuesHypertensionNow,commonHealthIssuesStrokeRecorded, commonHealthIssuesStrokeNow,commonHealthIssuesCancerRecorded,commonHealthIssuesCancerNow,commonHealthIssuesTuberculosisRecorded,commonHealthIssuesTuberculosisNow,commonHealthIssuesTetanusRecorded,commonHealthIssuesTetanusNow,commonHealthIssuesAsthamaRecorded,commonHealthIssuesAsthamaNow,commonHealthIssuesChronicBronchitisRecorded,commonHealthIssuesChronicBronchitisNow,commonHealthIssuesLungCancerRecorded,commonHealthIssuesLungCancerNow,commonHealthIssuesPneumoniaRecorded,commonHealthIssuesPneumoniaNow,commonRespiratoryIssuesRelatedBadHabitsSmoking,commonRespiratoryIssuesRelatedBadHabitsBetelLeaf,commonRespiratoryIssuesRelatedBadHabitsHooka;
+    Spinner travelDhakaSpinner, travelNaranganjSpinner, travelSylhetSpinner, travelOutBrahmanbariaSpinner, travelOutSarailSpinner, travelOutBangladeshSpinner;
+    CheckBox commonHealthIssuesDiabetesRecorded, commonHealthIssuesDiabetesNow, commonHealthIssuesCardiovascularDiseasesRecorded, commonHealthIssuesCardiovascularDiseasesNow, commonHealthIssuesHypertensionRecorded,
+            commonHealthIssuesHypertensionNow, commonHealthIssuesStrokeRecorded, commonHealthIssuesStrokeNow, commonHealthIssuesCancerRecorded, commonHealthIssuesCancerNow,
+            commonHealthIssuesTuberculosisRecorded, commonHealthIssuesTuberculosisNow, commonHealthIssuesTetanusRecorded, commonHealthIssuesTetanusNow, commonHealthIssuesAsthamaRecorded, commonHealthIssuesAsthamaNow, commonHealthIssuesChronicBronchitisRecorded, commonHealthIssuesChronicBronchitisNow, commonHealthIssuesLungCancerRecorded, commonHealthIssuesLungCancerNow, commonHealthIssuesPneumoniaRecorded, commonHealthIssuesPneumoniaNow, commonRespiratoryIssuesRelatedBadHabitsSmoking, commonRespiratoryIssuesRelatedBadHabitsBetelLeaf, commonRespiratoryIssuesRelatedBadHabitsHooka;
     EditText otherCommonHealthIssuesText, otherRespiratoryIssuesText, otherRespiratoryBadHabitsText;
 
-    CheckBox  personTraceOutOfAreaCheckBox, personTraceGoneToBazar,personTraceGoneToShop,personTraceOutForWork;
+    CheckBox personTraceOutOfAreaCheckBox, personTraceGoneToBazar, personTraceGoneToShop, personTraceOutForWork;
     EditText personTraceOtherText;
-    CheckBox coronaSymptomsFever,coronaSymptomsDryCough,coronaSymptomsFatigue,coronaSymptomsMucusCough,
-            coronaSymptomsShortnessOfBreath,coronaSymptomsAchesAndPain,coronaSymptomsSoreThroat,
-            coronaSymptomChillis, coronaSymptomsNausea,coronaSymptomsNasalCongestion,coronaSymptomsDiarrhea;
+    CheckBox coronaSymptomsFever, coronaSymptomsDryCough, coronaSymptomsFatigue, coronaSymptomsMucusCough,
+            coronaSymptomsShortnessOfBreath, coronaSymptomsAchesAndPain, coronaSymptomsSoreThroat,
+            coronaSymptomChillis, coronaSymptomsNausea, coronaSymptomsNasalCongestion, coronaSymptomsDiarrhea;
     EditText coronaSysmptomsOtherText;
     View progressView, errorMessageView;
     TextView errorMessageTextView;
@@ -68,35 +69,33 @@ public class MemberTravelAndHeathHistory extends AppCompatActivity implements IR
         setupTravelDaysSpinner(travelOutBangladeshSpinner);
 
         //checkbox
-         commonHealthIssuesDiabetesRecorded = (CheckBox) findViewById(R.id.checkbox_common_health_issues_diabetes_recorded);
-         commonHealthIssuesDiabetesNow = (CheckBox) findViewById(R.id.checkbox_common_health_issues_diabetes_now);
-         commonHealthIssuesCardiovascularDiseasesRecorded = (CheckBox) findViewById(R.id.checkbox_common_health_issues_cardiovascular_diseases_recorded);
-         commonHealthIssuesCardiovascularDiseasesNow =  (CheckBox) findViewById(R.id.checkbox_common_health_issues_cardiovascular_diseases_now);
-         commonHealthIssuesHypertensionRecorded =  (CheckBox) findViewById(R.id.checkbox_common_health_issues_hypertension_recorded);
-         commonHealthIssuesHypertensionNow =  (CheckBox) findViewById(R.id.checkbox_common_health_issues_hypertension_now);
-         commonHealthIssuesStrokeRecorded =  (CheckBox) findViewById(R.id.checkbox_common_health_issues_stroke_recorded);
-         commonHealthIssuesStrokeNow =  (CheckBox) findViewById(R.id.checkbox_common_health_issues_stroke_now);
-         commonHealthIssuesCancerRecorded =   (CheckBox) findViewById(R.id.checkbox_common_health_issues_cancer_recorded) ;
-         commonHealthIssuesCancerNow =  (CheckBox) findViewById(R.id.checkbox_common_health_issues_cancer_now);
-         commonHealthIssuesTuberculosisRecorded =  (CheckBox) findViewById(R.id.checkbox_common_health_issues_tuberculosis_recorded);
-         commonHealthIssuesTuberculosisNow = (CheckBox) findViewById(R.id.checkbox_common_health_issues_tuberculosis_now);
-         commonHealthIssuesTetanusRecorded = (CheckBox) findViewById(R.id.checkbox_common_health_issues_tetanus_recorded);
-         commonHealthIssuesTetanusNow = (CheckBox) findViewById(R.id.checkbox_common_health_issues_tuberculosis_now);
-         otherCommonHealthIssuesText=(EditText) findViewById(R.id.edit_text_other_disease_desc);
+        commonHealthIssuesDiabetesRecorded = (CheckBox) findViewById(R.id.checkbox_common_health_issues_diabetes_recorded);
+        commonHealthIssuesDiabetesNow = (CheckBox) findViewById(R.id.checkbox_common_health_issues_diabetes_now);
+        commonHealthIssuesCardiovascularDiseasesRecorded = (CheckBox) findViewById(R.id.checkbox_common_health_issues_cardiovascular_diseases_recorded);
+        commonHealthIssuesCardiovascularDiseasesNow = (CheckBox) findViewById(R.id.checkbox_common_health_issues_cardiovascular_diseases_now);
+        commonHealthIssuesHypertensionRecorded = (CheckBox) findViewById(R.id.checkbox_common_health_issues_hypertension_recorded);
+        commonHealthIssuesHypertensionNow = (CheckBox) findViewById(R.id.checkbox_common_health_issues_hypertension_now);
+        commonHealthIssuesStrokeRecorded = (CheckBox) findViewById(R.id.checkbox_common_health_issues_stroke_recorded);
+        commonHealthIssuesStrokeNow = (CheckBox) findViewById(R.id.checkbox_common_health_issues_stroke_now);
+        commonHealthIssuesCancerRecorded = (CheckBox) findViewById(R.id.checkbox_common_health_issues_cancer_recorded);
+        commonHealthIssuesCancerNow = (CheckBox) findViewById(R.id.checkbox_common_health_issues_cancer_now);
+        otherCommonHealthIssuesText = (EditText) findViewById(R.id.edit_text_other_disease_desc);
 
-         commonHealthIssuesAsthamaRecorded = (CheckBox) findViewById(R.id.checkbox_common_health_issues_asthama_recorded);
-         commonHealthIssuesAsthamaNow = (CheckBox) findViewById(R.id.checkbox_common_health_issues_asthama_now);
-         commonHealthIssuesChronicBronchitisRecorded = (CheckBox) findViewById(R.id.checkbox_common_health_issues_chronic_bronchitis_recorded);
-         commonHealthIssuesChronicBronchitisNow = (CheckBox) findViewById(R.id.checkbox_common_health_issues_chronic_bronchitis_now);
-         commonHealthIssuesLungCancerRecorded = (CheckBox) findViewById(R.id.checkbox_common_health_issues_lung_cancer_recorded);
-         commonHealthIssuesLungCancerNow = (CheckBox) findViewById(R.id.checkbox_common_health_issues_lung_cancer_now);
-         commonHealthIssuesPneumoniaRecorded = (CheckBox) findViewById(R.id.checkbox_common_health_issues_pneumonia_recorded);
-         commonHealthIssuesPneumoniaNow = (CheckBox) findViewById(R.id.checkbox_common_health_issues_pneumonia_now);
-         otherRespiratoryIssuesText= (EditText) findViewById(R.id.respiratory_issues_others);
-         commonRespiratoryIssuesRelatedBadHabitsSmoking = (CheckBox) findViewById(R.id.common_respiratory_issues_related_bad_habits_smoking);
-         commonRespiratoryIssuesRelatedBadHabitsBetelLeaf = (CheckBox) findViewById(R.id.common_respiratory_issues_related_bad_habits_betel_leaf);
-         commonRespiratoryIssuesRelatedBadHabitsHooka =findViewById(R.id.common_respiratory_issues_related_bad_habits_hooka);
-         otherRespiratoryBadHabitsText = (EditText) findViewById(R.id.common_respiratory_issues_related_bad_habits_others);
+        commonHealthIssuesAsthamaRecorded = (CheckBox) findViewById(R.id.checkbox_common_health_issues_asthama_recorded);
+        commonHealthIssuesAsthamaNow = (CheckBox) findViewById(R.id.checkbox_common_health_issues_asthama_now);
+        commonHealthIssuesChronicBronchitisRecorded = (CheckBox) findViewById(R.id.checkbox_common_health_issues_chronic_bronchitis_recorded);
+        commonHealthIssuesChronicBronchitisNow = (CheckBox) findViewById(R.id.checkbox_common_health_issues_chronic_bronchitis_now);
+        commonHealthIssuesLungCancerRecorded = (CheckBox) findViewById(R.id.checkbox_common_health_issues_lung_cancer_recorded);
+        commonHealthIssuesLungCancerNow = (CheckBox) findViewById(R.id.checkbox_common_health_issues_lung_cancer_now);
+        commonHealthIssuesTuberculosisRecorded = (CheckBox) findViewById(R.id.checkbox_common_health_issues_tuberculosis_recorded);
+        commonHealthIssuesTuberculosisNow = (CheckBox) findViewById(R.id.checkbox_common_health_issues_tuberculosis_now);
+        commonHealthIssuesPneumoniaRecorded = (CheckBox) findViewById(R.id.checkbox_common_health_issues_pneumonia_recorded);
+        commonHealthIssuesPneumoniaNow = (CheckBox) findViewById(R.id.checkbox_common_health_issues_pneumonia_now);
+        otherRespiratoryIssuesText = (EditText) findViewById(R.id.respiratory_issues_others);
+        commonRespiratoryIssuesRelatedBadHabitsSmoking = (CheckBox) findViewById(R.id.common_respiratory_issues_related_bad_habits_smoking);
+        commonRespiratoryIssuesRelatedBadHabitsBetelLeaf = (CheckBox) findViewById(R.id.common_respiratory_issues_related_bad_habits_betel_leaf);
+        commonRespiratoryIssuesRelatedBadHabitsHooka = findViewById(R.id.common_respiratory_issues_related_bad_habits_hooka);
+        otherRespiratoryBadHabitsText = (EditText) findViewById(R.id.common_respiratory_issues_related_bad_habits_others);
 
         //personTrace
         personTraceOutOfAreaCheckBox = (CheckBox) findViewById(R.id.checkbox_person_trace_out_of_area);
@@ -122,6 +121,7 @@ public class MemberTravelAndHeathHistory extends AppCompatActivity implements IR
         errorMessageView = (View) findViewById(R.id.member_travel_health_error_message_view);
         errorMessageTextView = (TextView) errorMessageView.findViewById(R.id.text_view_error_message);
     }
+
     @Override
     public void checkRegistration(D2DFC_HANDLER d2DFC_handler) {
         if (!d2DFC_handler.isRegistered()) {
@@ -129,7 +129,8 @@ public class MemberTravelAndHeathHistory extends AppCompatActivity implements IR
             startActivity(intent);
         }
     }
-    private void setupTravelDaysSpinner(Spinner spinner){
+
+    private void setupTravelDaysSpinner(Spinner spinner) {
         // Create an ArrayAdapter using the string array and a default spinner layout
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
                 R.array.travel_days_array, android.R.layout.simple_spinner_item);
@@ -139,6 +140,7 @@ public class MemberTravelAndHeathHistory extends AppCompatActivity implements IR
         spinner.setAdapter(adapter);
 
     }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_inser_into_table, menu);
@@ -149,11 +151,10 @@ public class MemberTravelAndHeathHistory extends AppCompatActivity implements IR
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
         //noinspection SimplifiableIfStatement
-        if(id == R.id.menu_insert_close){
-            Intent intent = new Intent( MemberTravelAndHeathHistory.this, FamilyListActivity.class);
+        if (id == R.id.menu_insert_close) {
+            Intent intent = new Intent(MemberTravelAndHeathHistory.this, FamilyListActivity.class);
             startActivity(intent);
-        }
-        else if (id == R.id.menu_insert_done) {
+        } else if (id == R.id.menu_insert_done) {
             TravelHistoryInfoTable travelHistoryInfoTable = new TravelHistoryInfoTable(ApplicationConstants.SELECTED_FAMILY_PHONE,
                     ApplicationConstants.SELECTED_FAMILY_PERSON_NAME);
             travelHistoryInfoTable.setReporterPhone(d2DFC_handler.loadReporter().getPhone());
@@ -166,7 +167,7 @@ public class MemberTravelAndHeathHistory extends AppCompatActivity implements IR
             travelHistoryInfoTable.setOutOfBangladesh(travelOutBangladeshSpinner.getSelectedItem().toString());
 
             CommonHealthIssuesInfoTable commonHealthIssuesInfoTable = new CommonHealthIssuesInfoTable(ApplicationConstants
-            .SELECTED_FAMILY_PHONE, ApplicationConstants.SELECTED_FAMILY_PHONE);
+                    .SELECTED_FAMILY_PHONE, ApplicationConstants.SELECTED_FAMILY_PERSON_NAME);
             commonHealthIssuesInfoTable.setReporterPhone(d2DFC_handler.loadReporter().getPhone());
             commonHealthIssuesInfoTable.setReportingDate(TimeHandler.unixTimeNow());
             commonHealthIssuesInfoTable.setDiabetesRecorded(Boolean.toString(commonHealthIssuesDiabetesRecorded.isChecked()));
@@ -182,7 +183,7 @@ public class MemberTravelAndHeathHistory extends AppCompatActivity implements IR
             commonHealthIssuesInfoTable.setOthers(otherCommonHealthIssuesText.getText().toString());
 
             RespiratoryIssuesInfoTable respiratoryIssuesInfoTable = new RespiratoryIssuesInfoTable(ApplicationConstants
-            .SELECTED_FAMILY_PHONE, ApplicationConstants.SELECTED_FAMILY_PERSON_NAME);
+                    .SELECTED_FAMILY_PHONE, ApplicationConstants.SELECTED_FAMILY_PERSON_NAME);
             respiratoryIssuesInfoTable.setReporterPhone(d2DFC_handler.loadReporter().getPhone());
             respiratoryIssuesInfoTable.setReportingDate(TimeHandler.unixTimeNow());
             respiratoryIssuesInfoTable.setAsthmaRecorded(Boolean.toString(commonHealthIssuesAsthamaRecorded.isChecked()));
@@ -193,7 +194,7 @@ public class MemberTravelAndHeathHistory extends AppCompatActivity implements IR
             respiratoryIssuesInfoTable.setLungCancerNow(Boolean.toString(commonHealthIssuesLungCancerNow.isChecked()));
             respiratoryIssuesInfoTable.setPnemoniaRecorded(Boolean.toString(commonHealthIssuesPneumoniaRecorded.isChecked()));
             respiratoryIssuesInfoTable.setPnemoniaNow(Boolean.toString(commonHealthIssuesPneumoniaNow.isChecked()));
-            respiratoryIssuesInfoTable.setTubercolosisRecorded(Boolean.toString(commonHealthIssuesTetanusRecorded.isChecked()));
+            respiratoryIssuesInfoTable.setTubercolosisRecorded(Boolean.toString(commonHealthIssuesTuberculosisRecorded.isChecked()));
             respiratoryIssuesInfoTable.setTubercolosisNow(Boolean.toString(commonHealthIssuesTuberculosisNow.isChecked()));
             respiratoryIssuesInfoTable.setOthers(otherRespiratoryIssuesText.getText().toString());
             respiratoryIssuesInfoTable.setSmoking(Boolean.toString(commonRespiratoryIssuesRelatedBadHabitsSmoking.isChecked()));
@@ -219,12 +220,12 @@ public class MemberTravelAndHeathHistory extends AppCompatActivity implements IR
             recentCoronaRelatedIssuesTable.setOther(coronaSysmptomsOtherText.getText().toString());
 
 
-            Log.d("ADD-"+travelHistoryInfoTable.tableName(),travelHistoryInfoTable.toString());
-            Log.d("ADD-"+commonHealthIssuesInfoTable.tableName(),commonHealthIssuesInfoTable.toString());
-            Log.d("ADD-"+respiratoryIssuesInfoTable.tableName(),respiratoryIssuesInfoTable.toString());
-            Log.d("ADD-"+recentCoronaRelatedIssuesTable.tableName(),recentCoronaRelatedIssuesTable.toString());
+            Log.d("ADD-" + travelHistoryInfoTable.tableName(), travelHistoryInfoTable.toString());
+            Log.d("ADD-" + commonHealthIssuesInfoTable.tableName(), commonHealthIssuesInfoTable.toString());
+            Log.d("ADD-" + respiratoryIssuesInfoTable.tableName(), respiratoryIssuesInfoTable.toString());
+            Log.d("ADD-" + recentCoronaRelatedIssuesTable.tableName(), recentCoronaRelatedIssuesTable.toString());
             new MemberTravelAndHeathHistoryInfoAddBackgroundTask(travelHistoryInfoTable,
-                    respiratoryIssuesInfoTable,recentCoronaRelatedIssuesTable, commonHealthIssuesInfoTable).execute();
+                    respiratoryIssuesInfoTable, recentCoronaRelatedIssuesTable, commonHealthIssuesInfoTable).execute();
         }
         return super.onOptionsItemSelected(item);
     }
@@ -235,6 +236,7 @@ public class MemberTravelAndHeathHistory extends AppCompatActivity implements IR
         RecentCoronaRelatedIssuesTable recentCoronaRelatedIssuesTable;
         CommonHealthIssuesInfoTable commonHealthIssuesInfoTable;
         RespiratoryIssuesInfoTable respiratoryIssuesInfoTable;
+
         MemberTravelAndHeathHistoryInfoAddBackgroundTask(
                 TravelHistoryInfoTable travelHistoryInfoTable, RespiratoryIssuesInfoTable respiratoryIssuesInfoTable,
                 RecentCoronaRelatedIssuesTable recentCoronaRelatedIssuesTable,
@@ -254,14 +256,13 @@ public class MemberTravelAndHeathHistory extends AppCompatActivity implements IR
 
         @Override
         protected String doInBackground(String... strings) {
-            Log.d("WHY",travelHistoryInfoTable.toString());
+            Log.d("WHY", travelHistoryInfoTable.toString());
             if (d2DFC_handler.insertTableIntoDB(travelHistoryInfoTable) &&
                     d2DFC_handler.insertTableIntoDB(recentCoronaRelatedIssuesTable) &&
                     d2DFC_handler.insertTableIntoDB(commonHealthIssuesInfoTable) &&
                     d2DFC_handler.insertTableIntoDB(respiratoryIssuesInfoTable)) {
                 return Boolean.TRUE.toString();
-            }
-            else {
+            } else {
                 return Boolean.FALSE.toString();
             }
         }
@@ -273,8 +274,7 @@ public class MemberTravelAndHeathHistory extends AppCompatActivity implements IR
             if (s.equals(Boolean.TRUE.toString())) {
                 Intent intent = new Intent(MemberTravelAndHeathHistory.this, PersonListActivity.class);
                 startActivity(intent);
-            }
-            else {
+            } else {
                 errorMessageView.setVisibility(View.VISIBLE);
                 errorMessageTextView.setText(R.string.unknown_error);
             }

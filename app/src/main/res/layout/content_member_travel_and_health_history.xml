@@ -263,32 +263,6 @@
                 android:layout_height="wrap_content"
                 android:text="@string/now"/>
         </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/health_tetanus_group"
-            android:weightSum="3"
-            android:orientation="horizontal">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/tetanus"/>
-            <CheckBox
-                android:id="@+id/checkbox_common_health_issues_tetanus_recorded"
-                android:layout_weight="1"
-                android:buttonTint="@color/red"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/recorded"/>
-            <CheckBox
-                android:id="@+id/checkbox_common_health_issues_tetanus_now"
-                android:layout_weight="1"
-                android:buttonTint="@color/red"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/now"/>
-        </LinearLayout>
 
         <EditText
             android:layout_width="wrap_content"

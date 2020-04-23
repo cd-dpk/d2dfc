@@ -61,9 +61,9 @@
                     android:id="@+id/button_card_member_info"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:background="@color/trans"
                     android:src="@drawable/baseline_info_black_24"
                     android:layout_weight="1"
-                    android:layout_gravity="center"
                     />
 
             </LinearLayout>
@@ -80,7 +80,6 @@
                 android:layout_height="wrap_content"
                 android:textColor="@color/black"
                 android:textAppearance="@android:style/TextAppearance.Small"
-                android:drawableLeft="@drawable/baseline_check_box_outline_blank_black_24"
                 android:layout_gravity="center"
                 android:layout_weight="1"
                 android:text="@string/daily_corona_followup"
@@ -92,7 +91,6 @@
                 android:textColor="@color/black"
                 android:text="@string/daily_person_contact"
                 android:textAppearance="@android:style/TextAppearance.Small"
-                android:drawableLeft="@drawable/baseline_check_box_outline_blank_black_24"
                 android:layout_weight="1"
                 android:layout_gravity="center"
                 />
@@ -101,7 +99,6 @@
                 android:layout_width="wrap_content"
                 android:textColor="@color/black"
                 android:layout_height="wrap_content"
-                android:drawableLeft="@drawable/baseline_check_box_outline_blank_black_24"
                 android:textAppearance="@android:style/TextAppearance.Small"
                 android:text="@string/history"
                 android:layout_weight="1"

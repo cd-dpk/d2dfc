@@ -5,6 +5,7 @@
     android:id="@+id/card_member_view"
     android:layout_gravity="center"
     android:padding="5dp"
+    android:layout_margin="5dp"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:minHeight="@dimen/card_member_height"

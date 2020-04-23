@@ -201,7 +201,15 @@ public class FamilyInfoTable implements ITable{
                 name+","+
                 members+")";
     }
-
+    @Override
+    public String getCSVHeader(){
+         return
+               "reporterPhone" +","+
+                "reportingDate"+","+
+               "phone" +","+
+                "name"+","+
+                "members";
+    }
     public List<FamilyInfoTable> toTablesFromITables(List<ITable> iTables) {
         List<FamilyInfoTable> familyInfoTables = new ArrayList<FamilyInfoTable>();
         for (ITable iTable: iTables) {
