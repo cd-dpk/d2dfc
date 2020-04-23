@@ -60,6 +60,7 @@ public class FamilyListActivity extends AppCompatActivity implements
     D2DFC_HANDLER d2DFC_handler;
     CoordinatorLayout coordinatorLayout;
     private TextView horizontalLineText;
+    private TextView loggedPersonAreaText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -140,9 +141,10 @@ public class FamilyListActivity extends AppCompatActivity implements
         View header = navigationView.getHeaderView(0);
         loggedPersonPhoneText = (TextView) header.findViewById(R.id.text_view_nav_header_phone);
         loggedPersonNameText = (TextView) header.findViewById(R.id.text_view_nav_header_name);
-
+        loggedPersonAreaText = (TextView) header.findViewById(R.id.text_view_nav_header_area);
         loggedPersonPhoneText.setText(reporter.getPhone());
         loggedPersonNameText.setText(reporter.getName());
+        loggedPersonAreaText.setText(reporter.getAreaEmail());
     }
 
     @SuppressWarnings("StatementWithEmptyBody")
