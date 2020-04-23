@@ -224,7 +224,6 @@ public class ExportDataActivity extends AppCompatActivity implements IRegistrati
         Intent intent = new Intent(ExportDataActivity.this, ExportingListActivity.class);
         startActivity(intent);
     }
-
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
@@ -236,43 +235,6 @@ public class ExportDataActivity extends AppCompatActivity implements IRegistrati
         else if (id == R.id.menu_insert_done) {
             Intent intent = new Intent(ExportDataActivity.this, ExportingListActivity.class);
             startActivity(intent);
-/*
-            if (checkExtRdPermission() && isExternalStorageAvailable()){
-                ArrayList<Uri> reportURIs = new ArrayList<Uri>();
-                File appFolder = new File(ApplicationConstants.externalStorageFolder, ApplicationConstants.appFolder);
-                File [] reportFiles = appFolder.listFiles();
-                for (File file: reportFiles){
-                    reportURIs.add(Uri.fromFile(file));
-                }
-                Intent emailIntent = new Intent(Intent.ACTION_SEND_MULTIPLE);
-                emailIntent.setType(ApplicationConstants.EMAIL_TYPE);
-                emailIntent.putExtra(Intent.EXTRA_EMAIL, "dipok.iit.nstu@gmail.com");
-                emailIntent.putParcelableArrayListExtra(Intent.EXTRA_STREAM, reportURIs);
-                Log.d("URIs", reportURIs.toString());
-                emailIntent.putExtra(Intent.EXTRA_SUBJECT, ApplicationConstants.EMAIL_SUBJECT_REPORT);
-                try {
-                    if (emailIntent.resolveActivity(getPackageManager()) != null) {
-                        startActivity(Intent.createChooser(emailIntent, "Send mail..."));
-                        Log.d("Indicator", "Finished sending email...");
-
-                    }
-                }
-                catch (android.content.ActivityNotFoundException ex) {
-                    Toast.makeText(DataSentActivity.this,
-                            "There is no email client installed.",
-                            Toast.LENGTH_SHORT).
-                            show();
-                }
-                Log.d("Flag", "OKAY");
-
-            }
-            else {
-                Toast.makeText(DataSentActivity.this,
-                        "Read Permission Required!",
-                        Toast.LENGTH_SHORT).
-                        show();
-            }
-*/
         }
         return super.onOptionsItemSelected(item);
     }

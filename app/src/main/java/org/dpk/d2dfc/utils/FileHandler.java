@@ -83,6 +83,7 @@ public class FileHandler {
         ApplicationConstants.filePath= file.getAbsolutePath();
         try {
             FileWriter fileWriter = new FileWriter(file);
+            fileWriter.write(iTable.getCSVHeader()+"\n");
             for (ITable itable:iTables){
                 Log.d("CSV-DATA",iTable.tableName()+":"+itable.toString()+":"+file.getName());
                 fileWriter.write(itable.toString()+"\n");
