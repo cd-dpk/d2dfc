@@ -212,4 +212,10 @@
     <string name="external_storage_not_ready">External Storage Is Not Ready!</string>
     <string name="card_member_corona_followup">Daily Corona Followup</string>
     <string name="page_daily_corona_details">"Daily Corona FollowUp "</string>
+    <string name="add">Add</string>
+    <string name="follow_up_date_constraint">Already Data Inserted On That Day!</string>
+    <string name="card_member_follow_up_date">Follow Up Date</string>
+    <string name="card_member_contact">Contact Person</string>
+    <string name="page_daily_contact_trace">Daily Contacts</string>
+    <string name="concept">Concept</string>
 </resources>

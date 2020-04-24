@@ -7,6 +7,7 @@ import org.dpk.d2dfc.data_models.Reporter;
 public class ApplicationConstants {
     public static final long APP_INIT_TIME= 1586455200;
     public static long APP_TIME= APP_INIT_TIME;
+    public static long SELECTED_FOLLOW_UP_DATE = APP_INIT_TIME;
     public static final String externalStorageFolder = Environment.getExternalStorageDirectory().toString();
     public static final String appFolder="d2dfc";
     public static final String FAMILY_PHONE_EXIST_ERROR = "Family Number Already Exists";

@@ -12,4 +12,5 @@
         android:title="@string/close"
         android:icon="@drawable/baseline_close_white_48"
         app:showAsAction="always" />
+
 </menu>

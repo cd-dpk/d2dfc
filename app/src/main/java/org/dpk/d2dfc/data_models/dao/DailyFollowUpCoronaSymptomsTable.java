@@ -287,7 +287,6 @@ public class DailyFollowUpCoronaSymptomsTable implements ITable{
 
     @Override
     public String toJsonString() {
-
         return "{CollectorPhone:"+reporterPhone+","+
                 "Family:"+new PersonBasicInfoTable().familyPhoneFromPersonID(personID)+","+
                 "Name:"+new PersonBasicInfoTable().nameFromPersonID(personID)+","+
@@ -298,7 +297,6 @@ public class DailyFollowUpCoronaSymptomsTable implements ITable{
                 +"AchesNPain:"+achesNPain+","+"SoreThroat:"+soreThroat+","+
                 "Chillis:"+chillis+","+"nausea:"+nausea+","+"nasalCongestion:"+nasalCongestion+","
                 +"diarrhea:"+diarrhea+","+"other:"+other+"}";
-
     }
 
     @Override

@@ -144,7 +144,7 @@
     <string name="family_list">Families</string>
     <string name="person_list">Members</string>
     <string name="family_attr_age">Age</string>
-    <string name="about_dev_info">About Us</string>
+    <string name="about_dev_info">Developer(s)</string>
     <string name="family_add_phone_hint">Enter Family Phone</string>
     <string name="family_add_members_hint">Enter Total Members</string>
     <string name="done">Done</string>

@@ -31,10 +31,12 @@ import org.dpk.d2dfc.D2DFC_HANDLER;
 import org.dpk.d2dfc.R;
 import org.dpk.d2dfc.adapter.RecyclerViewListAdapter;
 import org.dpk.d2dfc.data.constants.ApplicationConstants;
+import org.dpk.d2dfc.data.constants.RegistrationConstants;
 import org.dpk.d2dfc.data_models.Reporter;
 import org.dpk.d2dfc.data_models.dao.FamilyInfoTable;
 import org.dpk.d2dfc.data_models.IRegistration;
 import org.dpk.d2dfc.data_models.OnRecyclerViewItemListener;
+import org.dpk.d2dfc.utils.TimeHandler;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -66,6 +68,11 @@ public class FamilyListActivity extends AppCompatActivity implements
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_family_list);
+
+        ApplicationConstants.SELECTED_FOLLOW_UP_DATE = TimeHandler.unixTimeNow();
+        ApplicationConstants.SELECTED_FAMILY_PHONE = RegistrationConstants.COMPLEX_VALUE;
+        ApplicationConstants.SELECTED_FAMILY_PERSON_NAME = RegistrationConstants.COMPLEX_VALUE;
+        ApplicationConstants.SELECTED_FAMILY_NAME = RegistrationConstants.COMPLEX_VALUE;
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);

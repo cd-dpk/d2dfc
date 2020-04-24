@@ -66,6 +66,9 @@ public class PersonListActivity extends AppCompatActivity implements OnRecyclerV
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_person_list);
+        ApplicationConstants.SELECTED_FOLLOW_UP_DATE = TimeHandler.unixTimeNow();
+        ApplicationConstants.SELECTED_FAMILY_PERSON_NAME = RegistrationConstants.COMPLEX_VALUE;
+
         d2DFC_handler = new D2DFC_HANDLER(this);
         d2DFC_handler.setLanguageInApp();
         Log.d("LANG", ApplicationConstants.LANGUAGE_CODE);
@@ -159,24 +162,31 @@ public class PersonListActivity extends AppCompatActivity implements OnRecyclerV
         genderText.setText(personBasicInfoTable.getGender()+"");
 
         if (d2DFC_handler.isInsertedDailyFollowUPHeath(personID, TimeHandler.unixTimeNow())){
-            dailyCoronaFollowupButton.setBackgroundColor(getResources().getColor(R.color.grey));
+            dailyCoronaFollowupButton.setBackgroundColor(getResources().getColor(R.color.trans));
         }
         if (d2DFC_handler.isInsertedDailyContactTrace(personID, TimeHandler.unixTimeNow())){
-            dailyPersonContactTraceButton.setBackgroundColor(getResources().getColor(R.color.grey));
+            dailyPersonContactTraceButton.setBackgroundColor(getResources().getColor(R.color.trans));
         }
         if (d2DFC_handler.isInsertedHistory(personID)){
-            memberHealthTravelInfoButton.setBackgroundColor(getResources().getColor(R.color.grey));
+            memberHealthTravelInfoButton.setBackgroundColor(getResources().getColor(R.color.trans));
         }
         dailyCoronaFollowupButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Log.d("DPK", personID);
                 if (d2DFC_handler.isInsertedDailyFollowUPHeath(personID, TimeHandler.unixTimeNow())){
-                    Toast.makeText(PersonListActivity.this, "Inserted Today", Toast.LENGTH_LONG).show();
-                }
-                else {
+                    Toast.makeText(PersonListActivity.this, "Inserted Today!", Toast.LENGTH_LONG).show();
                     ApplicationConstants.SELECTED_FAMILY_PHONE = personBasicInfoTable.getFamilyPhone();
                     ApplicationConstants.SELECTED_FAMILY_PERSON_NAME = personBasicInfoTable.getName();
+                    ApplicationConstants.SELECTED_FOLLOW_UP_DATE = TimeHandler.unixTimeNow();
+                    Intent intent = new Intent(PersonListActivity.this, DailyFollowUpCoronaDetailsActivity.class);
+                    startActivity(intent);
+                }
+                else {
+                    Toast.makeText(PersonListActivity.this, "Inserting Today!", Toast.LENGTH_LONG).show();
+                    ApplicationConstants.SELECTED_FAMILY_PHONE = personBasicInfoTable.getFamilyPhone();
+                    ApplicationConstants.SELECTED_FAMILY_PERSON_NAME = personBasicInfoTable.getName();
+                    ApplicationConstants.SELECTED_FOLLOW_UP_DATE = TimeHandler.unixTimeNow();
                     Intent intent = new Intent(PersonListActivity.this, DailyCoronaFollowupHealthInfo.class);
                     startActivity(intent);
                 }
@@ -187,11 +197,18 @@ public class PersonListActivity extends AppCompatActivity implements OnRecyclerV
             public void onClick(View view) {
                 Log.d("DPK", personID);
                 if (d2DFC_handler.isInsertedDailyContactTrace(personID, TimeHandler.unixTimeNow())){
-                    Toast.makeText(PersonListActivity.this, "Inserted Today", Toast.LENGTH_LONG).show();
-                }
-                else {
+                    Toast.makeText(PersonListActivity.this, "Inserted Today!", Toast.LENGTH_LONG).show();
                     ApplicationConstants.SELECTED_FAMILY_PHONE = personBasicInfoTable.getFamilyPhone();
                     ApplicationConstants.SELECTED_FAMILY_PERSON_NAME = personBasicInfoTable.getName();
+                    ApplicationConstants.SELECTED_FOLLOW_UP_DATE = TimeHandler.unixTimeNow();
+                    Intent intent = new Intent(PersonListActivity.this, DailyFollowUpContactTraceActivity.class);
+                    startActivity(intent);
+                }
+                else {
+                    Toast.makeText(PersonListActivity.this, "Inserting Today!", Toast.LENGTH_LONG).show();
+                    ApplicationConstants.SELECTED_FAMILY_PHONE = personBasicInfoTable.getFamilyPhone();
+                    ApplicationConstants.SELECTED_FAMILY_PERSON_NAME = personBasicInfoTable.getName();
+                    ApplicationConstants.SELECTED_FOLLOW_UP_DATE = TimeHandler.unixTimeNow();
                     Intent intent = new Intent(PersonListActivity.this, MemberSearchActivity.class);
                     startActivity(intent);
                 }

@@ -28,6 +28,9 @@
         <activity
             android:name=".pages.PersonAddActivity"
             android:label="@string/page_person_add" />
+        <activity android:name=".pages.DailyFollowUpContactTraceActivity"
+            android:label="@string/page_daily_contact_trace"
+            android:parentActivityName=".pages.PersonListActivity"/>
         <activity
             android:name=".pages.AboutDevInfoActivity"
             android:label="@string/about_dev_info"

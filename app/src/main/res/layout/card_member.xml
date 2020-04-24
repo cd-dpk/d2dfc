@@ -73,6 +73,7 @@
             android:layout_width="match_parent"
             android:orientation="horizontal"
             android:weightSum="4"
+            android:paddingBottom="5dp"
             android:layout_height="wrap_content">
             <Button
                 android:id="@+id/button_card_member_daily_corona_followup"

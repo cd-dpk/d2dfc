@@ -4,6 +4,8 @@ import android.content.ContentValues;
 import android.database.Cursor;
 import android.util.Log;
 
+import org.dpk.d2dfc.utils.TimeHandler;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -140,7 +142,13 @@ public class DailyFollowUpContactPersonsTable implements ITable {
 
     @Override
     public String toJsonString() {
-        return null;
+        return "{CollectorPhone:"+reporterPhone+","+
+                "Entry:"+ TimeHandler.dateShortFromUnixTime(reportingDate) +","+
+                "FollowUpDate:"+TimeHandler.dateShortFromUnixTime(followUpDate)+","+
+                "person:{"+
+                "Family:"+new PersonBasicInfoTable().familyPhoneFromPersonID(personTwoPhone)+","+
+                "Name:"+new PersonBasicInfoTable().nameFromPersonID(personTwoPhone)+","+ "}}";
+
     }
 
     @Override

@@ -22,9 +22,6 @@ import org.dpk.d2dfc.data_models.dao.DailyFollowUpCoronaSymptomsTable;
 import org.dpk.d2dfc.data_models.dao.DailyFollowUpTravelInfoTable;
 import org.dpk.d2dfc.utils.TimeHandler;
 
-import java.sql.Time;
-import java.util.List;
-
 public class DailyCoronaFollowupHealthInfo extends AppCompatActivity implements IRegistration {
 
     CheckBox  personTraceOutOfAreaCheckBox, personTraceGoneToBazar,personTraceGoneToShop,personTraceOutForWork;
@@ -37,7 +34,7 @@ public class DailyCoronaFollowupHealthInfo extends AppCompatActivity implements 
 
     View progressView, errorMessageView;
     TextView errorMessageTextView;
-
+    TextView followUpDateText;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,6 +46,8 @@ public class DailyCoronaFollowupHealthInfo extends AppCompatActivity implements 
 
         checkRegistration(d2DFC_handler);
         //personTrace
+        followUpDateText = (TextView) findViewById(R.id.followup_date);
+        followUpDateText.setText(TimeHandler.dateFromUnixTime(ApplicationConstants.SELECTED_FOLLOW_UP_DATE).toString());
         personTraceOutOfAreaCheckBox = (CheckBox) findViewById(R.id.checkbox_person_trace_out_of_area);
         personTraceGoneToBazar = (CheckBox) findViewById(R.id.checkbox_person_trace_gone_to_bazar);
         personTraceGoneToShop = (CheckBox) findViewById(R.id.checkbox_person_trace_gone_to_shop);
@@ -93,7 +92,7 @@ public class DailyCoronaFollowupHealthInfo extends AppCompatActivity implements 
                     ApplicationConstants.SELECTED_FAMILY_PERSON_NAME);
             dailyFollowUpTravelInfoTable.setReporterPhone(d2DFC_handler.loadReporter().getPhone());
             dailyFollowUpTravelInfoTable.setReportingDate(TimeHandler.unixTimeNow());
-            dailyFollowUpTravelInfoTable.setFollowUpDate(TimeHandler.unixTimeNow());
+            dailyFollowUpTravelInfoTable.setFollowUpDate(ApplicationConstants.SELECTED_FOLLOW_UP_DATE);
             dailyFollowUpTravelInfoTable.setOut_of_area(Boolean.toString(personTraceOutOfAreaCheckBox.isChecked()));
             dailyFollowUpTravelInfoTable.setOut_for_work(Boolean.toString(personTraceOutForWork.isChecked()));
             dailyFollowUpTravelInfoTable.setGone_to_bazar(Boolean.toString(personTraceGoneToBazar.isChecked()));
@@ -104,7 +103,7 @@ public class DailyCoronaFollowupHealthInfo extends AppCompatActivity implements 
                     ApplicationConstants.SELECTED_FAMILY_PERSON_NAME);
             dailyFollowUpCoronaSymptomsTable.setReporterPhone(d2DFC_handler.loadReporter().getPhone());
             dailyFollowUpCoronaSymptomsTable.setReportingDate(TimeHandler.unixTimeNow());
-            dailyFollowUpCoronaSymptomsTable.setFollowUpDate(TimeHandler.unixTimeNow());
+            dailyFollowUpCoronaSymptomsTable.setFollowUpDate(ApplicationConstants.SELECTED_FOLLOW_UP_DATE);
             dailyFollowUpCoronaSymptomsTable.setAchesNPain(Boolean.toString(coronaSymptomsAchesAndPain.isChecked()));
             dailyFollowUpCoronaSymptomsTable.setChillis(Boolean.toString(coronaSymptomChillis.isChecked()));
             dailyFollowUpCoronaSymptomsTable.setCoughMucus(Boolean.toString(coronaSymptomsMucusCough.isChecked()));

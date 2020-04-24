@@ -511,11 +511,10 @@ public class D2DFC_HANDLER {
         Boolean isInserted = false;
         List<DailyFollowUpCoronaSymptomsTable> dailyFollowUpCoronaSymptomsTables = new ArrayList<DailyFollowUpCoronaSymptomsTable>();
         List<DailyFollowUpTravelInfoTable> dailyFollowUpTravelInfoTables = new ArrayList<DailyFollowUpTravelInfoTable>();
-        long time = TimeHandler.subtractDaysToUnixTime(today, 1);
 
         DailyFollowUpCoronaSymptomsTable dailyFollowUpCoronaSymptomsTable = new DailyFollowUpCoronaSymptomsTable();
-        dailyFollowUpCoronaSymptomsTable.setWhereClause(DailyFollowUpCoronaSymptomsTable.Variable.STRINGpersonID + "='" + personID + "'" + " and " +
-                DailyFollowUpCoronaSymptomsTable.Variable.STRINGreportingDate + " > " + time);
+        dailyFollowUpCoronaSymptomsTable.setWhereClause(DailyFollowUpCoronaSymptomsTable.Variable.STRINGpersonID + "='" +
+                personID + "'");
         Log.d("S-Q" + dailyFollowUpCoronaSymptomsTable.tableName(), dailyFollowUpCoronaSymptomsTable.toSelectString());
         List<ITable> iTables = dataBaseHelper.selectRows(dailyFollowUpCoronaSymptomsTable);
         dailyFollowUpCoronaSymptomsTables = dailyFollowUpCoronaSymptomsTable.toTablesFromITables(iTables);
@@ -523,8 +522,7 @@ public class D2DFC_HANDLER {
         Log.d("DPK", dailyFollowUpCoronaSymptomsTables.toString());
 
         DailyFollowUpTravelInfoTable dailyFollowUpTravelInfoTable = new DailyFollowUpTravelInfoTable();
-        dailyFollowUpTravelInfoTable.setWhereClause(DailyFollowUpTravelInfoTable.Variable.STRINGpersonID + "='" + personID + "'" + " and " +
-                DailyFollowUpTravelInfoTable.Variable.STRINGreportingDate + " > " + time);
+        dailyFollowUpTravelInfoTable.setWhereClause(DailyFollowUpTravelInfoTable.Variable.STRINGpersonID + "='" + personID + "'");
         Log.d("S-Q" + dailyFollowUpTravelInfoTable.tableName(), dailyFollowUpTravelInfoTable.toSelectString());
         List<ITable> iTables1 = dataBaseHelper.selectRows(dailyFollowUpTravelInfoTable);
         dailyFollowUpTravelInfoTables = dailyFollowUpTravelInfoTable.toTablesFromITables(iTables1);
@@ -534,15 +532,14 @@ public class D2DFC_HANDLER {
                 dailyFollowUpCoronaSymptomsTables) {
             if (TimeHandler.isSameDate(today, dfCST.getFollowUpDate())) {
                 isInserted = true;
-                break;
+                return true;
             }
         }
         for (DailyFollowUpTravelInfoTable dfTIT :
                 dailyFollowUpTravelInfoTables) {
-            if (isInserted) break;
             if (TimeHandler.isSameDate(today, dfTIT.getFollowUpDate())) {
                 isInserted = true;
-                break;
+                return true;
             }
         }
         return isInserted;
@@ -580,8 +577,7 @@ public class D2DFC_HANDLER {
         List<DailyFollowUpContactPersonsTable> dailyFollowUpContactPersonsTables = new ArrayList<DailyFollowUpContactPersonsTable>();
         DailyFollowUpContactPersonsTable dailyFollowUpContactPersonsTable = new DailyFollowUpContactPersonsTable();
         dailyFollowUpContactPersonsTable.setWhereClause(DailyFollowUpContactPersonsTable.Variable.STRINGpersonOnePhone +
-                "='" + personID + "'" + " and " +
-                DailyFollowUpContactPersonsTable.Variable.STRINGreportingDate + " > " + time);
+                "='" + personID + "'");
         dailyFollowUpContactPersonsTables = getDailyContactPersonsTables(dailyFollowUpContactPersonsTable.getWhereClause());
         if (dailyFollowUpContactPersonsTables.size() == 0) return false;
         for (DailyFollowUpContactPersonsTable dfCST :

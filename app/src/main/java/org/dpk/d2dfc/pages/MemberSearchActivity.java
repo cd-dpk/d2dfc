@@ -22,8 +22,6 @@ import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.android.material.snackbar.Snackbar;
-
 import org.dpk.d2dfc.D2DFC_HANDLER;
 import org.dpk.d2dfc.R;
 import org.dpk.d2dfc.adapter.RecyclerViewListAdapter;
@@ -34,7 +32,6 @@ import org.dpk.d2dfc.data_models.dao.DailyFollowUpContactPersonsTable;
 import org.dpk.d2dfc.data_models.dao.PersonBasicInfoTable;
 import org.dpk.d2dfc.utils.TimeHandler;
 
-import java.sql.Time;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -54,6 +51,7 @@ public class MemberSearchActivity extends AppCompatActivity implements OnRecycle
     private List<PersonBasicInfoTable> searchedPersons= new ArrayList<PersonBasicInfoTable>();
     View progressView, errorMessageView;
     TextView errorMessageTextView;
+    TextView followUpDateText;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -64,8 +62,8 @@ public class MemberSearchActivity extends AppCompatActivity implements OnRecycle
         Log.d("LANG", ApplicationConstants.LANGUAGE_CODE);
 
         checkRegistration(d2DFC_handler);
-        followupDateText =(TextView) findViewById(R.id.followup_date);
-        followupDateText.setText(TimeHandler.toDate());
+        followUpDateText = (TextView) findViewById(R.id.followup_date);
+        followUpDateText.setText(TimeHandler.dateFromUnixTime(ApplicationConstants.SELECTED_FOLLOW_UP_DATE).toString());
         selectedPersonsText = (TextView) findViewById(R.id.text_person_selected) ;
         closeSearchButton = (ImageButton) findViewById(R.id.image_search_close);
         searchText = (EditText) findViewById(R.id.edit_text_search);
@@ -173,7 +171,7 @@ public class MemberSearchActivity extends AppCompatActivity implements OnRecycle
                             ApplicationConstants.SELECTED_FAMILY_PERSON_NAME));
                     dailyFollowUpContactPersonsTable.setPersonTwoPhone(key);
                     dailyFollowUpContactPersonsTable.setReporterPhone(d2DFC_handler.loadReporter().getPhone());
-                    dailyFollowUpContactPersonsTable.setFollowUpDate(TimeHandler.unixTimeNow());
+                    dailyFollowUpContactPersonsTable.setFollowUpDate(ApplicationConstants.SELECTED_FOLLOW_UP_DATE);
                     dailyFollowUpContactPersonsTable.setReportingDate(TimeHandler.unixTimeNow());
                     dailyFollowUpContactPersonsTables.add(dailyFollowUpContactPersonsTable);
                 }
@@ -187,7 +185,7 @@ public class MemberSearchActivity extends AppCompatActivity implements OnRecycle
                         ApplicationConstants.SELECTED_FAMILY_PERSON_NAME));
                 dailyFollowUpContactPersonsTable.setPersonTwoPhone(new PersonBasicInfoTable().getPersonID(ApplicationConstants.SELECTED_FAMILY_PHONE,
                         ApplicationConstants.SELECTED_FAMILY_PERSON_NAME));
-                dailyFollowUpContactPersonsTable.setFollowUpDate(TimeHandler.unixTimeNow());
+                dailyFollowUpContactPersonsTable.setFollowUpDate(ApplicationConstants.SELECTED_FOLLOW_UP_DATE);
                 dailyFollowUpContactPersonsTable.setReportingDate(TimeHandler.unixTimeNow());
                 Toast.makeText(MemberSearchActivity .this, R.string.no_persons_selected, Toast.LENGTH_LONG).show();
                 dailyFollowUpContactPersonsTables.add(dailyFollowUpContactPersonsTable);
