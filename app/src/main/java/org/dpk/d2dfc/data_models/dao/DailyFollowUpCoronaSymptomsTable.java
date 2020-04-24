@@ -22,8 +22,7 @@ public class DailyFollowUpCoronaSymptomsTable implements ITable{
             diarrhea, other;
     private String whereClause="";
 
-    public long
-    getFollowUpDate() {
+    public long  getFollowUpDate() {
         return followUpDate;
     }
 
@@ -279,6 +278,10 @@ public class DailyFollowUpCoronaSymptomsTable implements ITable{
             dailyFollowUpCoronaSymptomsTable.soreThroat= cursor.getString(
                     cursor.getColumnIndex(DailyFollowUpCoronaSymptomsTable.Variable.STRINGsoreThroat));
         }
+        if (cursor.getColumnIndex(Variable.STRING_FOLLOW_UP_DATE)!=-1){
+            dailyFollowUpCoronaSymptomsTable.followUpDate= cursor.getLong(
+                    cursor.getColumnIndex(Variable.STRING_FOLLOW_UP_DATE));
+        }
         return dailyFollowUpCoronaSymptomsTable;
     }
 
@@ -304,9 +307,9 @@ public class DailyFollowUpCoronaSymptomsTable implements ITable{
 
     @Override
     public ITable toClone() {
-        DailyFollowUpCoronaSymptomsTable dailyFollowUpCoronaSymptomsTable= new DailyFollowUpCoronaSymptomsTable();
+                DailyFollowUpCoronaSymptomsTable dailyFollowUpCoronaSymptomsTable= new DailyFollowUpCoronaSymptomsTable();
 
-        dailyFollowUpCoronaSymptomsTable.reporterPhone = reporterPhone;
+                dailyFollowUpCoronaSymptomsTable.reporterPhone = reporterPhone;
                 dailyFollowUpCoronaSymptomsTable.reportingDate = reportingDate;
                 dailyFollowUpCoronaSymptomsTable.followUpDate = followUpDate;
                 dailyFollowUpCoronaSymptomsTable.personID = personID;

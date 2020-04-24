@@ -127,7 +127,6 @@ public class ExportingListActivity extends AppCompatActivity implements OnRecycl
 
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
         Intent intent = new Intent(ExportingListActivity.this, FamilyListActivity.class);
         startActivity(intent);
     }

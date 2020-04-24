@@ -78,7 +78,6 @@ public class DailyFollowUpCoronaDetailsActivity extends AppCompatActivity implem
                 this, R.layout.card_corona_daily_followup, dailyFollowUpCoronaSymptomsTables.size());
         dailyFollowupRecyclerView.setAdapter(reportsRecyclerViewListAdapter);
     }
-
 /*
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -97,7 +96,7 @@ public class DailyFollowUpCoronaDetailsActivity extends AppCompatActivity implem
                     TimeHandler.year(),
                     TimeHandler.month(),
                     TimeHandler.day());
-            datePickerDialog.setButton(DialogInterface.BUTTON_NEGATIVE, getString(R.string.cancel),
+            datePickerDialog.setButton(DialogInterface.BUTTON_NEGATIVE, getResources().getString(R.string.cancel),
                     new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {
@@ -107,8 +106,7 @@ public class DailyFollowUpCoronaDetailsActivity extends AppCompatActivity implem
 
         }
         return super.onOptionsItemSelected(item);
-    }
-*/
+    }*/
 
     @Override
     public void listenItem(View view, final int position) {
@@ -123,7 +121,8 @@ public class DailyFollowUpCoronaDetailsActivity extends AppCompatActivity implem
 
         memberCoronaTextView.setText(dailyFollowUpCoronaSymptomsTable.toJsonString());
         memberTravelTextView.setText(dailyFollowUpTravelInfoTable.toJsonString());
-        followupDateTextView.setText(TimeHandler.dateFromUnixTime(dailyFollowUpCoronaSymptomsTable.getFollowUpDate()).toString());
+        Log.d("TIME_F",dailyFollowUpCoronaSymptomsTable.getFollowUpDate()+"");
+        followupDateTextView.setText(TimeHandler.dateFromUnixTime(dailyFollowUpCoronaSymptomsTable.getFollowUpDate())+"");
     }
     @Override
     public void checkRegistration(D2DFC_HANDLER d2DFC_handler) {
@@ -136,7 +135,19 @@ public class DailyFollowUpCoronaDetailsActivity extends AppCompatActivity implem
     @Override
     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
         long followUpDate = TimeHandler.unixTimeFrom(dayOfMonth+"/"+(month+1)+"/"+year);
-        if (d2DFC_handler.isInsertedDailyFollowUPHeath(personID,followUpDate)){
+        Log.d("TIME",dayOfMonth+"/"+(month+1)+"/"+year+":"+followUpDate);
+        /*Toast.makeText(DailyFollowUpCoronaDetailsActivity.this,
+                dayOfMonth+"/"+(month+1)+"/"+year+":"+followUpDate, Toast.LENGTH_LONG).show();
+        */
+        boolean isInserted=false;
+        for (DailyFollowUpCoronaSymptomsTable dailyFollowUpCoronaSymptomsTable: dailyFollowUpCoronaSymptomsTables){
+            if (TimeHandler.isSameDate(followUpDate, dailyFollowUpCoronaSymptomsTable.getFollowUpDate())){
+                Log.d("TIME-C", followUpDate+":"+dailyFollowUpCoronaSymptomsTable.getFollowUpDate());
+                isInserted= true;
+                break;
+            }
+        }
+        if (isInserted){
             Toast.makeText(DailyFollowUpCoronaDetailsActivity.this,
                     getResources().getString(R.string.follow_up_date_constraint),
                             Toast.LENGTH_LONG).show();

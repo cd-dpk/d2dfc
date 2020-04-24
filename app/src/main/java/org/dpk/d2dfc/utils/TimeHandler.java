@@ -84,7 +84,7 @@ public class TimeHandler {
         localCalendar1.setTimeInMillis(time1 * factorMillisecond);
 
         Calendar localCalendar2 = Calendar.getInstance();
-        localCalendar1.setTimeInMillis(time2 * factorMillisecond);
+        localCalendar2.setTimeInMillis(time2 * factorMillisecond);
 
         if (localCalendar1.get(Calendar.YEAR) == localCalendar2.get(Calendar.YEAR) &&
                 localCalendar1.get(Calendar.MONTH) == localCalendar2.get(Calendar.MONTH) &&

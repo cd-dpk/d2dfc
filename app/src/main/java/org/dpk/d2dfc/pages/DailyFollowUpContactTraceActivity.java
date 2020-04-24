@@ -62,17 +62,17 @@ public class DailyFollowUpContactTraceActivity extends AppCompatActivity impleme
         // Data
         personID = new PersonBasicInfoTable().getPersonID(ApplicationConstants.SELECTED_FAMILY_PHONE,
                 ApplicationConstants.SELECTED_FAMILY_PERSON_NAME);
-        String whereClause = DailyFollowUpContactPersonsTable.Variable.STRINGpersonOnePhone+" = '"+
-                personID +"' and "+DailyFollowUpContactPersonsTable.Variable.STRINGpersonTwoPhone+" != '"+
-                personID+"' order by "+
-                DailyFollowUpContactPersonsTable.Variable.STRING_FOLLOW_UP_DATE+" desc";
+        String whereClause = DailyFollowUpContactPersonsTable.Variable.STRINGpersonOnePhone + " = '" +
+                personID + "' order by " +
+                DailyFollowUpContactPersonsTable.Variable.STRING_FOLLOW_UP_DATE + " desc";
         dailyFollowUpContactPersonsTables = d2DFC_handler.getDailyContactPersonsTables(whereClause);
         reportsRecyclerViewListAdapter = new RecyclerViewListAdapter(
                 this, R.layout.card_member_contact,
                 dailyFollowUpContactPersonsTables.size());
         dailyFollowupRecyclerView.setAdapter(reportsRecyclerViewListAdapter);
+
     }
-/*
+    /*
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_add, menu);
@@ -80,7 +80,7 @@ public class DailyFollowUpContactTraceActivity extends AppCompatActivity impleme
     }
 
     @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+    public boolean onOptionsItemSelected(@NonNull MenuItem item){
         int id = item.getItemId();
         //noinspection SimplifiableIfStatement
         if(id == R.id.menu_insert_add){
@@ -126,7 +126,17 @@ public class DailyFollowUpContactTraceActivity extends AppCompatActivity impleme
     @Override
     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
         long followUpDate = TimeHandler.unixTimeFrom(dayOfMonth+"/"+(month+1)+"/"+year);
-        if (d2DFC_handler.isInsertedDailyFollowUPHeath(personID,followUpDate)){
+        Log.d("TIME",dayOfMonth+"/"+(month+1)+"/"+year+":"+followUpDate);
+
+        boolean isInserted=false;
+        for (DailyFollowUpContactPersonsTable dailyFollowUpContactPersonsTable: dailyFollowUpContactPersonsTables){
+            if (TimeHandler.isSameDate(followUpDate, dailyFollowUpContactPersonsTable.getFollowUpDate())){
+                Log.d("TIME-C", followUpDate+":"+dailyFollowUpContactPersonsTable.getFollowUpDate());
+                isInserted= true;
+                break;
+            }
+        }
+        if (isInserted){
             Toast.makeText(DailyFollowUpContactTraceActivity.this,
                     getResources().getString(R.string.follow_up_date_constraint),
                             Toast.LENGTH_LONG).show();
