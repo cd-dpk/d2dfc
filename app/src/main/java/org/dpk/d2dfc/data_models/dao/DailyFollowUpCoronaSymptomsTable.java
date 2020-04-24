@@ -219,64 +219,67 @@ public class DailyFollowUpCoronaSymptomsTable implements ITable{
     public ITable toITableFromCursor(Cursor cursor) {
 
         DailyFollowUpCoronaSymptomsTable dailyFollowUpCoronaSymptomsTable = new DailyFollowUpCoronaSymptomsTable();
-        if (cursor.getColumnIndex(Variable.STRINGreporterPhone)!=-1){
+        if (cursor.getColumnIndex(DailyFollowUpCoronaSymptomsTable.Variable.STRINGreporterPhone)!=-1){
             dailyFollowUpCoronaSymptomsTable.reporterPhone= cursor.getString(
-                    cursor.getColumnIndex(Variable.STRINGreporterPhone));
+                    cursor.getColumnIndex(DailyFollowUpCoronaSymptomsTable.Variable.STRINGreporterPhone));
         }
-        if (cursor.getColumnIndex(Variable.STRING_FOLLOW_UP_DATE)!=-1){
-            dailyFollowUpCoronaSymptomsTable.followUpDate= cursor.getLong(
-                    cursor.getColumnIndex(Variable.STRING_FOLLOW_UP_DATE));
-        }
-        if (cursor.getColumnIndex(Variable.STRINGreportingDate)!=-1){
+        if (cursor.getColumnIndex(DailyFollowUpCoronaSymptomsTable.Variable.STRINGreportingDate)!=-1){
             dailyFollowUpCoronaSymptomsTable.reportingDate= cursor.getLong(
-                    cursor.getColumnIndex(Variable.STRINGreportingDate));
+                    cursor.getColumnIndex(DailyFollowUpCoronaSymptomsTable.Variable.STRINGreportingDate));
         }
-        if (cursor.getColumnIndex(Variable.STRINGpersonID)!=-1){
+        if (cursor.getColumnIndex(DailyFollowUpCoronaSymptomsTable.Variable.STRINGpersonID)!=-1){
             dailyFollowUpCoronaSymptomsTable.personID= cursor.getString(
-                    cursor.getColumnIndex(Variable.STRINGpersonID));
+                    cursor.getColumnIndex(DailyFollowUpCoronaSymptomsTable.Variable.STRINGpersonID));
         }
-        if (cursor.getColumnIndex(Variable.STRINGachesNPain)!=-1){
+        if (cursor.getColumnIndex(DailyFollowUpCoronaSymptomsTable.Variable.STRINGachesNPain)!=-1){
             dailyFollowUpCoronaSymptomsTable.achesNPain= cursor.getString(
-                    cursor.getColumnIndex(Variable.STRINGachesNPain));
+                    cursor.getColumnIndex(DailyFollowUpCoronaSymptomsTable.Variable.STRINGachesNPain));
         }
-        if (cursor.getColumnIndex(Variable.STRINGchillis)!=-1){
+        if (cursor.getColumnIndex(DailyFollowUpCoronaSymptomsTable.Variable.STRINGchillis)!=-1){
             dailyFollowUpCoronaSymptomsTable.chillis= cursor.getString(
-                    cursor.getColumnIndex(Variable.STRINGchillis));
+                    cursor.getColumnIndex(DailyFollowUpCoronaSymptomsTable.Variable.STRINGchillis));
         }
-        if (cursor.getColumnIndex(Variable.STRINGcoughMucus)!=-1){
+        if (cursor.getColumnIndex(DailyFollowUpCoronaSymptomsTable.Variable.STRINGcoughMucus)!=-1){
             dailyFollowUpCoronaSymptomsTable.coughMucus= cursor.getString(
-                    cursor.getColumnIndex(Variable.STRINGcoughMucus));
+                    cursor.getColumnIndex(DailyFollowUpCoronaSymptomsTable.Variable.STRINGcoughMucus));
         }
-        if (cursor.getColumnIndex(Variable.STRINGdiarrhea)!=-1){
+        if (cursor.getColumnIndex(DailyFollowUpCoronaSymptomsTable.Variable.STRINGdiarrhea)!=-1){
             dailyFollowUpCoronaSymptomsTable.diarrhea= cursor.getString(
-                    cursor.getColumnIndex(Variable.STRINGdiarrhea));
+                    cursor.getColumnIndex(DailyFollowUpCoronaSymptomsTable.Variable.STRINGdiarrhea));
         }
-        if (cursor.getColumnIndex(Variable.STRINGdryCough)!=-1){
+        if (cursor.getColumnIndex(DailyFollowUpCoronaSymptomsTable.Variable.STRINGdryCough)!=-1){
             dailyFollowUpCoronaSymptomsTable.dryCough= cursor.getString(
-                    cursor.getColumnIndex(Variable.STRINGdryCough));
+                    cursor.getColumnIndex(DailyFollowUpCoronaSymptomsTable.Variable.STRINGdryCough));
         }
-        if (cursor.getColumnIndex(Variable.STRINGfatigue)!=-1){
+        if (cursor.getColumnIndex(DailyFollowUpCoronaSymptomsTable.Variable.STRINGfatigue)!=-1){
             dailyFollowUpCoronaSymptomsTable.fatigue= cursor.getString(
-                    cursor.getColumnIndex(Variable.STRINGfatigue));
+                    cursor.getColumnIndex(DailyFollowUpCoronaSymptomsTable.Variable.STRINGfatigue));
         }
-        if (cursor.getColumnIndex(Variable.STRINGfever)!=-1){
+        if (cursor.getColumnIndex(DailyFollowUpCoronaSymptomsTable.Variable.STRINGfever)!=-1){
             dailyFollowUpCoronaSymptomsTable.fever= cursor.getString(
-                    cursor.getColumnIndex(Variable.STRINGfever));
+                    cursor.getColumnIndex(DailyFollowUpCoronaSymptomsTable.Variable.STRINGfever));
         }
-        if (cursor.getColumnIndex(Variable.STRINGnasalCongestion)!=-1){
+        if (cursor.getColumnIndex(DailyFollowUpCoronaSymptomsTable.Variable.STRINGnasalCongestion)!=-1){
             dailyFollowUpCoronaSymptomsTable.nasalCongestion= cursor.getString(
-                    cursor.getColumnIndex(Variable.STRINGnasalCongestion));
+                    cursor.getColumnIndex(DailyFollowUpCoronaSymptomsTable.Variable.STRINGnasalCongestion));
         }
-        if (cursor.getColumnIndex(Variable.STRINGnausea)!=-1){
+        if (cursor.getColumnIndex(DailyFollowUpCoronaSymptomsTable.Variable.STRINGnausea)!=-1){
             dailyFollowUpCoronaSymptomsTable.nausea= cursor.getString(
-                    cursor.getColumnIndex(Variable.STRINGnausea));
+                    cursor.getColumnIndex(DailyFollowUpCoronaSymptomsTable.Variable.STRINGnausea));
         }
-        if (cursor.getColumnIndex(Variable.STRINGother)!=-1){
+        if (cursor.getColumnIndex(DailyFollowUpCoronaSymptomsTable.Variable.STRINGother)!=-1){
             dailyFollowUpCoronaSymptomsTable.other= cursor.getString(
-                    cursor.getColumnIndex(Variable.STRINGother));
+                    cursor.getColumnIndex(DailyFollowUpCoronaSymptomsTable.Variable.STRINGother));
+        }
+        if (cursor.getColumnIndex(DailyFollowUpCoronaSymptomsTable.Variable.STRINGshortnessOfBreath)!=-1){
+            dailyFollowUpCoronaSymptomsTable.shortnessOfBreath= cursor.getString(
+                    cursor.getColumnIndex(DailyFollowUpCoronaSymptomsTable.Variable.STRINGshortnessOfBreath));
+        }
+        if (cursor.getColumnIndex(DailyFollowUpCoronaSymptomsTable.Variable.STRINGsoreThroat)!=-1){
+            dailyFollowUpCoronaSymptomsTable.soreThroat= cursor.getString(
+                    cursor.getColumnIndex(DailyFollowUpCoronaSymptomsTable.Variable.STRINGsoreThroat));
         }
         return dailyFollowUpCoronaSymptomsTable;
-
     }
 
     @Override

@@ -218,4 +218,5 @@
     <string name="card_member_contact">Contact Person</string>
     <string name="page_daily_contact_trace">Daily Contacts</string>
     <string name="concept">Concept</string>
+    <string name="action_info">Info</string>
 </resources>

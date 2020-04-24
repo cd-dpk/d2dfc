@@ -175,7 +175,7 @@ public class MemberSearchActivity extends AppCompatActivity implements OnRecycle
                     dailyFollowUpContactPersonsTable.setReportingDate(TimeHandler.unixTimeNow());
                     dailyFollowUpContactPersonsTables.add(dailyFollowUpContactPersonsTable);
                 }
-                Toast.makeText(MemberSearchActivity .this, dailyFollowUpContactPersonsTables.toString(), Toast.LENGTH_LONG).show();
+//                Toast.makeText(MemberSearchActivity .this, dailyFollowUpContactPersonsTables.toString(), Toast.LENGTH_LONG).show();
                 new ContactPersonsAddBackgroundTask(dailyFollowUpContactPersonsTables).execute();
             }
             else {
@@ -195,7 +195,7 @@ public class MemberSearchActivity extends AppCompatActivity implements OnRecycle
         return super.onOptionsItemSelected(item);
     }
     private void setPersonSelection() {
-        selectedPersonsText.setText(isSelectedPersons.keySet().size()+R.string.person_selected);
+        selectedPersonsText.setText(isSelectedPersons.keySet().size()+" "+getResources().getString(R.string.person_selected));
     }
 
     @Override

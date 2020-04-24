@@ -204,8 +204,8 @@ public class DailyFollowUpTravelInfoTable implements ITable{
                 "Name:"+new PersonBasicInfoTable().nameFromPersonID(personID)+","+
                 "Entry:"+ TimeHandler.dateShortFromUnixTime(reportingDate) +","+
                 "FollowUpDate:"+TimeHandler.dateShortFromUnixTime(followUpDate)+","+
-                "out_of_area:"+out_of_area+","+"gone_to_bazar:"+gone_to_bazar+","+"gone_to_shop:"+gone_to_shop
-                +","+ "out_for_work:"+out_for_work+","+"otherTravel:"+otherTravel+"}";
+                "OutOfArea:"+out_of_area+","+"GoneToBazar:"+gone_to_bazar+","+"GoneToShop:"+gone_to_shop
+                +","+ "OutForWork:"+out_for_work+","+"otherTravel:"+otherTravel+"}";
     }
 
     @Override

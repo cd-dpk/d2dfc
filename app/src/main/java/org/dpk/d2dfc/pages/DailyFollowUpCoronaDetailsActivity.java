@@ -110,7 +110,6 @@ public class DailyFollowUpCoronaDetailsActivity extends AppCompatActivity implem
     }
 */
 
-
     @Override
     public void listenItem(View view, final int position) {
         DailyFollowUpCoronaSymptomsTable dailyFollowUpCoronaSymptomsTable = dailyFollowUpCoronaSymptomsTables.get(position);

@@ -47,6 +47,23 @@ public class SettingsActivity extends AppCompatActivity {
     }
 
     @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        int checkedRadioButtonId = languageRadioGroup.getCheckedRadioButtonId();
+        if (checkedRadioButtonId == R.id.settings_rb_bangla){
+            d2DFC_handler.saveLanguage(ApplicationConstants.LANGUAGE_CODE_BANGLA);
+            ApplicationConstants.LANGUAGE_CODE = ApplicationConstants.LANGUAGE_CODE_BANGLA;
+        }
+        else if(checkedRadioButtonId == R.id.settings_rb_english){
+            d2DFC_handler.saveLanguage(ApplicationConstants.LANGUAGE_CODE_ENGLISH);
+            ApplicationConstants.LANGUAGE_CODE = ApplicationConstants.LANGUAGE_CODE_ENGLISH;
+        }
+        Log.d(ApplicationConstants.LANGUAGE_CODE_LABEL,ApplicationConstants.LANGUAGE_CODE);
+        Intent intent = new Intent(SettingsActivity.this, FamilyListActivity.class);
+        startActivity(intent);
+    }
+
+    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long

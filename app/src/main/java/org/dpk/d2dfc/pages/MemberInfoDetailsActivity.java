@@ -70,8 +70,7 @@ public class MemberInfoDetailsActivity extends AppCompatActivity implements IReg
 
         DailyFollowUpContactPersonsTable dailyFollowUpContactPersonsTable = new DailyFollowUpContactPersonsTable();
         dailyFollowUpContactPersonsTable.setWhereClause(DailyFollowUpContactPersonsTable.Variable.STRINGpersonOnePhone
-                +" = '"+personID+"'"+" or "+
-                DailyFollowUpContactPersonsTable.Variable.STRINGpersonTwoPhone +" = '"+personID+"'");
+                +" = '"+personID+"'"+" or "+ DailyFollowUpContactPersonsTable.Variable.STRINGpersonTwoPhone +" = '"+personID+"'");
 
         DailyFollowUpCoronaSymptomsTable dailyFollowUpCoronaSymptomsTable = new DailyFollowUpCoronaSymptomsTable();
         dailyFollowUpCoronaSymptomsTable.setWhereClause(DailyFollowUpCoronaSymptomsTable.Variable.STRINGpersonID +" = '"+personID+"'");

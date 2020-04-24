@@ -15,6 +15,7 @@
             android:layout_gravity="center"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
             android:text="@string/person_trace"/>
 
         <CheckBox
@@ -63,6 +64,7 @@
             android:layout_gravity="center"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
             android:text="@string/corona_symptoms"/>
         <CheckBox
             android:id="@+id/checkbox_corona_symptoms_fever"

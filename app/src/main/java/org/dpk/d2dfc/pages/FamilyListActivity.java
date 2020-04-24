@@ -237,8 +237,9 @@ public class FamilyListActivity extends AppCompatActivity implements
         rightArrowButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(FamilyListActivity.this, PersonListActivity.class);
                 ApplicationConstants.SELECTED_FAMILY_PHONE = familyInfoTable.getPhone();
+                ApplicationConstants.SELECTED_FAMILY_NAME = familyInfoTable.getName();
+                Intent intent = new Intent(FamilyListActivity.this, PersonListActivity.class);
                 startActivity(intent);
             }
         });
@@ -249,7 +250,6 @@ public class FamilyListActivity extends AppCompatActivity implements
                 ApplicationConstants.SELECTED_FAMILY_PHONE = familyInfoTable.getPhone();
                 ApplicationConstants.SELECTED_FAMILY_NAME = familyInfoTable.getName();
                 startActivity(intent);
-
             }
         });
     }

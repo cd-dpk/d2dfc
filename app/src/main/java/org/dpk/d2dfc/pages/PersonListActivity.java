@@ -162,13 +162,13 @@ public class PersonListActivity extends AppCompatActivity implements OnRecyclerV
         genderText.setText(personBasicInfoTable.getGender()+"");
 
         if (d2DFC_handler.isInsertedDailyFollowUPHeath(personID, TimeHandler.unixTimeNow())){
-            dailyCoronaFollowupButton.setBackgroundColor(getResources().getColor(R.color.trans));
+            dailyCoronaFollowupButton.setTextColor(getResources().getColor(R.color.black));
         }
         if (d2DFC_handler.isInsertedDailyContactTrace(personID, TimeHandler.unixTimeNow())){
-            dailyPersonContactTraceButton.setBackgroundColor(getResources().getColor(R.color.trans));
+            dailyPersonContactTraceButton.setTextColor(getResources().getColor(R.color.black));
         }
         if (d2DFC_handler.isInsertedHistory(personID)){
-            memberHealthTravelInfoButton.setBackgroundColor(getResources().getColor(R.color.trans));
+            memberHealthTravelInfoButton.setTextColor(getResources().getColor(R.color.black));
         }
         dailyCoronaFollowupButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -220,8 +220,13 @@ public class PersonListActivity extends AppCompatActivity implements OnRecyclerV
                 Log.d("DPK", personID);
                 if (d2DFC_handler.isInsertedHistory(personID)){
                     Toast.makeText(PersonListActivity.this, "Inserted Member History!", Toast.LENGTH_LONG).show();
+                    ApplicationConstants.SELECTED_FAMILY_PHONE = personBasicInfoTable.getFamilyPhone();
+                    ApplicationConstants.SELECTED_FAMILY_PERSON_NAME = personBasicInfoTable.getName();
+                    Intent intent = new Intent(PersonListActivity.this, MemberInfoDetailsActivity.class);
+                    startActivity(intent);
                 }
                 else {
+                    Toast.makeText(PersonListActivity.this, "Inserting Member History!", Toast.LENGTH_LONG).show();
                     ApplicationConstants.SELECTED_FAMILY_PHONE = personBasicInfoTable.getFamilyPhone();
                     ApplicationConstants.SELECTED_FAMILY_PERSON_NAME = personBasicInfoTable.getName();
                     Intent intent = new Intent(PersonListActivity.this, MemberTravelAndHeathHistory.class);

@@ -22,7 +22,6 @@ import org.dpk.d2dfc.data_models.dao.RecentCoronaRelatedIssuesTable;
 import org.dpk.d2dfc.data_models.dao.ReportingInfoTable;
 import org.dpk.d2dfc.data_models.dao.RespiratoryIssuesInfoTable;
 import org.dpk.d2dfc.data_models.dao.TravelHistoryInfoTable;
-import org.dpk.d2dfc.data_models.dao.Tuple;
 import org.dpk.d2dfc.utils.TimeHandler;
 
 import java.util.ArrayList;
@@ -418,11 +417,11 @@ public class D2DFC_HANDLER {
         return dailyFollowUpContactPersonsTables;
     }
 
-    public List<DailyFollowUpCoronaSymptomsTable> getDailyFollowUpCoronaSymptomsTables(String whereCaluse) {
+    public List<DailyFollowUpCoronaSymptomsTable> getDailyFollowUpCoronaSymptomsTables(String whereClause) {
         DataBaseHelper dataBaseHelper = new DataBaseHelper(context);
         List<DailyFollowUpCoronaSymptomsTable> dailyFollowUpCoronaSymptomsTables = new ArrayList<DailyFollowUpCoronaSymptomsTable>();
         DailyFollowUpCoronaSymptomsTable dailyFollowUpCoronaSymptomsTable = new DailyFollowUpCoronaSymptomsTable();
-        dailyFollowUpCoronaSymptomsTable.setWhereClause(whereCaluse);
+        dailyFollowUpCoronaSymptomsTable.setWhereClause(whereClause);
         Log.d("S-Q" + dailyFollowUpCoronaSymptomsTable.tableName(), dailyFollowUpCoronaSymptomsTable.toSelectString());
         List<ITable> iTables = dataBaseHelper.selectRows(dailyFollowUpCoronaSymptomsTable);
         dailyFollowUpCoronaSymptomsTables = dailyFollowUpCoronaSymptomsTable.toTablesFromITables(iTables);

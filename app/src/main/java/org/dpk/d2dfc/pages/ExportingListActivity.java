@@ -124,6 +124,14 @@ public class ExportingListActivity extends AppCompatActivity implements OnRecycl
         Log.d("TIME", exportingTimText.getText().toString());
 
     }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Intent intent = new Intent(ExportingListActivity.this, FamilyListActivity.class);
+        startActivity(intent);
+    }
+
     @Override
     public void checkRegistration(D2DFC_HANDLER d2DFC_handler) {
         if (!d2DFC_handler.isRegistered()) {
