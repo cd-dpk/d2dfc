@@ -59,7 +59,7 @@ public class SettingsActivity extends AppCompatActivity {
             ApplicationConstants.LANGUAGE_CODE = ApplicationConstants.LANGUAGE_CODE_ENGLISH;
         }
         Log.d(ApplicationConstants.LANGUAGE_CODE_LABEL,ApplicationConstants.LANGUAGE_CODE);
-        Intent intent = new Intent(SettingsActivity.this, FamilyListActivity.class);
+        Intent intent = new Intent(SettingsActivity.this, WelcomeActivity.class);
         startActivity(intent);
     }
 

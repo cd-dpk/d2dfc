@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">D2D Follow Corona</string>
+    <string name="app_name">ডিটুডি ফলো করোনা </string>
     <string name="action_settings">সেটিংস</string>
     <!-- Strings used for fragments for navigation -->
     <string name="first_fragment_label"> প্রথম ভাগ</string>
@@ -33,8 +33,8 @@
     <string name="warning_account_open_phone_entry"> অনুগ্রহ করে সঠিক ফোন নম্বর দিন!</string>
     <string name="warning_account_open_name_entry">\" অনুগ্রহ করে সঠিক নাম লিখুন!</string>
     <string name="warning_account_open_amount_entry">\" অনুগ্রহ করে সঠিক পরিমাণটি লিখুন!</string>
-    <string name="warning_email_mobile_name">সঠিক ই-মেইল, ফোন ও নাম লিখুন!</string>
-    <string name="warning_account_open_email_entry">এরিয়া ই-মেইল অ্যাড্রেসে সঠিকভাবে প্রবেশ করুন!</string>
+    <string name="warning_email_mobile_name">সঠিক এরিয়া, ফোন ও নাম লিখুন!</string>
+    <string name="warning_account_open_email_entry">এরিয়া সঠিকভাবে প্রবেশ করুন!</string>
     <string name="d2dfc_home">ডিটুডি ফলো করোনা</string>
 
     <string name="navigation_drawer_open">ওপেন নেভিগেশন ড্রওয়ার</string>
@@ -144,7 +144,7 @@
     <string name="family_list">পরিবারবর্গ </string>
     <string name="person_list">পরিবারবর্গ</string>
     <string name="family_attr_age">বয়স</string>
-    <string name="about_dev_info"> ডেভেলপার(স)</string>
+    <string name="about_dev_info">আমাদের সম্পর্কে</string>
     <string name="family_add_phone_hint"> পরিবারের ফোন নম্বরে প্রবেশ করুন</string>
     <string name="family_add_members_hint"> সদস্যের ফোন নম্বরে প্রবেশ করুন</string>
     <string name="done">সম্পন্ন</string>
@@ -166,7 +166,7 @@
     <string name="to_label">প্রাপক</string>
     <string name="to_value">ভ্যালু</string>
     <string name="menu_reporting_list">প্রতিবেদন</string>
-    <string name="page_exportings">প্রতিবেদনসমূহ</string>
+    <string name="page_exportings">এক্সপোর্টসমূহ</string>
     <string name="member_attr_gender">লিঙ্গ</string>
     <string name="corona_symptoms_other">অন্যান্য লক্ষণসমূহ</string>
     <string name="person_trace_other">অন্যান্য ক্ষেত্র</string>
@@ -180,43 +180,78 @@
     <string name="gender">লিঙ্গ</string>
     <string name="family_dashboard">ফ্যামিলি ড্যাশবোর্ড</string>
     <string name="follow_up_date">ফলো আপ ডেইট</string>
-    <string name="person_selected"> নির্বাচিত ব্যাক্তি(রা)</string>
+    <string name="person_selected"> নির্বাচিত ব্যাক্তি</string>
     <string name="generate">উৎপন্ন</string>
     <string name="same_time">একই সময়</string>
     <string name="time_interval_constraint">প্রেরনের সময় প্রাপকের সময় থেকে বড় হবে</string>
     <string name="files_creation_successful">ফাইলস ক্রিয়েটেড সাক্সেসফুলি!</string>
     <string name="files_creation_error">ফাইলস আর নট ক্রিয়েটেড সাক্সেসফুলি!</string>
-    <string name="daily_corona_followup">Daily Corona Followup</string>
-    <string name="daily_person_contact">Contacts Trace</string>
-    <string name="history">History</string>
-    <string name="info">Info</string>
-    <string name="menu_export_data">Export Data</string>
-    <string name="area_name_hint">Enter name of the area</string>
-    <string name="area_name">Area Name</string>
-    <string name="member_creation_family_constraint">Select Family First!</string>
-    <string name="family_add_members_guardian_hint">Enter Family Guardian Name</string>
-    <string name="warning_family_add_constraint">Name, Phone and Members Number are mandatory</string>
-    <string name="card_member_details">Member Details</string>
+    <string name="daily_corona_followup">প্রতিদিন করোনা অনুসরণ</string>
+    <string name="daily_person_contact">যোগাযোগ ট্রেস</string>
+    <string name="history">ইতিহাস</string>
+    <string name="info">তথ্য</string>
+    <string name="menu_export_data">এক্সপোর্ট ডাটা</string>
+    <string name="area_name_hint">এরিয়ার নাম লিখুন </string>
+    <string name="area_name">এরিয়ার নাম</string>
+    <string name="member_creation_family_constraint">আগে পরিবার নির্বাচন করুন!</string>
+    <string name="family_add_members_guardian_hint">পরিবারের অভিভাবকের নাম লিখুন</string>
+    <string name="warning_family_add_constraint">নাম, ফোন এবং সদস্যদের নাম্বার আবশ্যক</string>
+    <string name="card_member_details">সদস্য বিস্তারিত</string>
     <string name="card_member_bio">Bio</string>
-    <string name="card_member_corona_related_history">Corona Related History</string>
-    <string name="card_member_health">Health History</string>
-    <string name="card_member_travel">Travel History</string>
-    <string name="card_member_repitory">Respiratory Issues</string>
-    <string name="member_info">Member Info</string>
-    <string name="no_persons_selected">No Person Selected</string>
-    <string name="from_label_data_entry">Data Entry Time From</string>
-    <string name="to_label_data_entry">Data Entry Time To</string>
-    <string name="data_export_time_lable">Export Time</string>
-    <string name="export_data">Export Data</string>
-    <string name="export">Export</string>
-    <string name="external_storage_not_ready">External Storage Is Not Ready!</string>
-    <string name="card_member_corona_followup">Daily Corona Followup</string>
-    <string name="page_daily_corona_details">"Daily Corona FollowUp "</string>
-    <string name="add">Add</string>
-    <string name="follow_up_date_constraint">Already Data Inserted On That Day!</string>
-    <string name="card_member_follow_up_date">Follow Up Date</string>
-    <string name="card_member_contact">Contact Person</string>
-    <string name="page_daily_contact_trace">Daily Contacts</string>
-    <string name="concept">Concept</string>
-    <string name="action_info">Info</string>
+    <string name="card_member_corona_related_history">করোনা সংক্রান্ত ইতিহাস</string>
+    <string name="card_member_health">স্বাস্থ্য ইতিহাস</string>
+    <string name="card_member_travel">ভ্রমণ ইতিহাস</string>
+    <string name="card_member_repitory">শ্বাসকষ্ট সংক্রান্ত সমস্যা</string>
+    <string name="member_info">সদস্য তথ্য</string>
+    <string name="no_persons_selected">কোন ব্যক্তি নির্বাচিত হয় নি</string>
+    <string name="from_label_data_entry">ডাটা এন্ট্রি সময় থেকে</string>
+    <string name="to_label_data_entry">ডাটা এন্ট্রি সময়</string>
+    <string name="data_export_time_lable">এক্সপোর্ট টাইম</string>
+    <string name="export_data">এক্সপোর্ট ডাটা</string>
+    <string name="export">এক্সপোর্ট</string>
+    <string name="external_storage_not_ready">বাহ্যিক সংগ্রহস্থল প্রস্তুত নয়!</string>
+    <string name="card_member_corona_followup">প্রতিদিন করোনা অনুসরণ</string>
+    <string name="page_daily_corona_details">"প্রতিদিন করোনা অনুসরণ"</string>
+    <string name="add">যোগ করুন</string>
+    <string name="follow_up_date_constraint">ইতোমধ্যে ডাটা নেয়া হয়েছে সেদিন!</string>
+    <string name="card_member_follow_up_date">অনুসরণের তারিখ</string>
+    <string name="card_member_contact">কন্টাক্ট পারসন </string>
+    <string name="page_daily_contact_trace">প্রতিদিনের যোগাযোগ </string>
+    <string name="concept">ধারণা</string>
+    <string name="action_info">তথ্য</string>
+    <string name="sub_header">Sub Header</string>
+    <string name="d2dfc_concept">
+        <b>D2D Follow Corona</b>: It is a door-to-door data collection concept related with corona virus (COVID-19).
+        <ul>
+            <li>In this concept, one or two data collectors will go to every house of an assigned or a chosen small region (i.e. para or road)
+to collect data of every person in regular basis (i.e. every day or after every one day). The data ranges from each person\'s
+biological information (i.e. sex, age, etc.), travel history and heatlh history (i.e. presence of previously recorded deseases)
+to daily corona related symptoms, daily travel and contact trace. The collected data will be sent to an central board consiting
+of data scientists and specialized doctors. By analyzing daily data and person\'s previous bio information, they will be able to
+identify probable corona positive cases and take measures to test them quickly. This way will help to isolate the probable
+positive cases. As the contact traces are recorded, the contacts of a positive case can easily be identified.
+</li>
+    </ul></string>
+    <string name="d2dfc_concept_app">
+        Being traditional pen-n-paper data collection and processing is tedious and time consuming task, we develop mobile application
+D2D Follow Corona. A data collector can use this wonderfully developed tool for easy data collection.
+
+The application require a Data Collector to be registered. This registration takes three things, one: area- he/she is
+collecting data for a region, two: name- his/her name and three:mobile number- his/her mobile number. The mobile number is for
+verification and validation of collected data.
+
+The Data Collector will export daily as CSV files (.i.e. .csv) into \'Internal Shared Storage\' with folder named as \'d2dfc\'.
+Data Collector can send those CSV files to a designated authority to analyze and act accordingly.</string>
+    <string name="concept_app">Mobile App: D2D Follow Corona</string>
+    <string name="contributors">Contributors</string>
+    <string name="contributors_concept">Concept Contributors</string>
+    <string name="contributors_developers">Developers</string>
+    <string name="acknowldgements">Acknowledgements</string>
+    <string name="my_wife">My Beloved Wife!</string>
+    <string name="sheikh_digital_lab">Sheikh Rasel Digital Lab, Shahbazpur M.L. High School</string>
+    <string name="ashiq">Ashiquzzaman Ashiq, My Supervisor, MCC Limited</string>
+    <string name="iit_nstu">IIT, DU and IIT, NSTU</string>
+    <string name="information_sources">Information Sources</string>
+    <string name="info_src">corona.gov.bd;iedcr.gov.bd;vox.com;who.int;cdc.gov</string>
+    <string name="my_family">Beloved Family</string>
 </resources>

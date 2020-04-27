@@ -1,144 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     style="@style/AppTheme.GrayColorPrimary"
     tools:context=".pages.AboutDevInfoActivity">
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:orientation="vertical"
-        android:padding="5dp"
         android:layout_height="wrap_content">
-        <androidx.cardview.widget.CardView
-            xmlns:android="http://schemas.android.com/apk/res/android"
-            xmlns:card_view="http://schemas.android.com/apk/res-auto"
-            android:padding="5dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:elevation="2dp"
-            card_view:cardCornerRadius="@dimen/card_member_corner_radius">
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:orientation="vertical"
-                android:padding="5dp"
-                android:layout_height="wrap_content">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:textAppearance="@android:style/TextAppearance.Medium"
-                    android:text="@string/concept"/>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Mr. Kajal Chandra Das"/>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Assistant Teacher, Shahbazpur M.L. High School"/>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="kajaldassupro@gmail.com"/>
-            </LinearLayout>
-        </androidx.cardview.widget.CardView>
-        <androidx.cardview.widget.CardView
-            xmlns:android="http://schemas.android.com/apk/res/android"
-            xmlns:card_view="http://schemas.android.com/apk/res-auto"
-            android:layout_gravity="center"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:minHeight="@dimen/card_member_height"
-            android:elevation="2dp"
-            card_view:cardCornerRadius="@dimen/card_member_corner_radius">
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:orientation="vertical"
-                android:padding="5dp"
-                android:layout_height="wrap_content">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Mr. Ashish Chandra Das"/>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Lecturer, Dept. of Physics, Comilla University"/>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="ashishphysics.ju@gmail.com"/>
-            </LinearLayout>
-        </androidx.cardview.widget.CardView>
-        <androidx.cardview.widget.CardView
-            xmlns:android="http://schemas.android.com/apk/res/android"
-            xmlns:card_view="http://schemas.android.com/apk/res-auto"
-            android:layout_gravity="center"
-            android:padding="5dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:minHeight="@dimen/card_member_height"
-            android:elevation="2dp"
-            card_view:cardCornerRadius="@dimen/card_member_corner_radius">
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:padding="5dp"
-                android:orientation="vertical"
-                android:layout_height="wrap_content">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Mr. Dipok Chandra Das"/>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Lecturer, IIT, Noakhali Science and Technology University"/>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="dipok.iit.nstu@gmail.com"/>
-            </LinearLayout>
-        </androidx.cardview.widget.CardView>
-
-    </LinearLayout>
-    <androidx.cardview.widget.CardView
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:card_view="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/card_member_view"
-        android:layout_gravity="center"
-        android:padding="5dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:minHeight="@dimen/card_member_height"
-        android:elevation="2dp"
-        card_view:cardCornerRadius="@dimen/card_member_corner_radius">
         <LinearLayout
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:orientation="vertical">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="@android:style/TextAppearance.Medium"
-                android:layout_gravity="center"
-                android:text="Developers"/>
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/email_dipok"
-                android:background="@color/trans"
-                android:text="chandradasdipok@gmail.com" />
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/email_tahrim"
-                android:background="@color/trans"
-                android:text="tahrimkabir321@gmail.com" />
-
+            android:orientation="vertical"
+            android:padding="2dp"
+            android:layout_height="wrap_content">
+            <include layout="@layout/card_concept"/>
+            <include layout="@layout/card_concept_app"/>
+            <include layout="@layout/card_contributors"/>
+            <include layout="@layout/card_information_source"/>
+            <include layout="@layout/card_acknowledgement"/>
         </LinearLayout>
-    </androidx.cardview.widget.CardView>
+
+    </ScrollView>
 </LinearLayout>

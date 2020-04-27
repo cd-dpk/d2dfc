@@ -118,10 +118,10 @@ public class ExportDataActivity extends AppCompatActivity implements IRegistrati
                         TimeHandler.day());
                 datePickerDialog.setButton(DialogInterface.BUTTON_NEGATIVE, getString(R.string.cancel),
                         new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                    }
-                });
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                            }
+                        });
                 datePickerDialog.show();
             }
         });
@@ -306,15 +306,15 @@ public class ExportDataActivity extends AppCompatActivity implements IRegistrati
             d2DFC_handler.insertTableIntoDB(reportingInfoTable);
 
             if(  new FileHandler(d2DFC_handler).createCSVFileFromTableData(familyInfoTable)
-            && new FileHandler(d2DFC_handler).createCSVFileFromTableData(commonHealthIssuesInfoTable)
-            && new FileHandler(d2DFC_handler).createCSVFileFromTableData(dailyFollowUpContactPersonsTable)
-            && new FileHandler(d2DFC_handler).createCSVFileFromTableData(dailyFollowUpCoronaSymptomsTable)
-            && new FileHandler(d2DFC_handler).createCSVFileFromTableData(dailyFollowUpTravelInfoTable)
-            && new FileHandler(d2DFC_handler).createCSVFileFromTableData(personBasicInfoTable)
-            && new FileHandler(d2DFC_handler).createCSVFileFromTableData(recentCoronaRelatedIssuesTable)
-            && new FileHandler(d2DFC_handler).createCSVFileFromTableData(reportingInfoTable1)
-            && new FileHandler(d2DFC_handler).createCSVFileFromTableData(respiratoryIssuesInfoTable)
-            && new FileHandler(d2DFC_handler).createCSVFileFromTableData(travelHistoryInfoTable)){
+                    && new FileHandler(d2DFC_handler).createCSVFileFromTableData(commonHealthIssuesInfoTable)
+                    && new FileHandler(d2DFC_handler).createCSVFileFromTableData(dailyFollowUpContactPersonsTable)
+                    && new FileHandler(d2DFC_handler).createCSVFileFromTableData(dailyFollowUpCoronaSymptomsTable)
+                    && new FileHandler(d2DFC_handler).createCSVFileFromTableData(dailyFollowUpTravelInfoTable)
+                    && new FileHandler(d2DFC_handler).createCSVFileFromTableData(personBasicInfoTable)
+                    && new FileHandler(d2DFC_handler).createCSVFileFromTableData(recentCoronaRelatedIssuesTable)
+                    && new FileHandler(d2DFC_handler).createCSVFileFromTableData(reportingInfoTable1)
+                    && new FileHandler(d2DFC_handler).createCSVFileFromTableData(respiratoryIssuesInfoTable)
+                    && new FileHandler(d2DFC_handler).createCSVFileFromTableData(travelHistoryInfoTable)){
                 return Boolean.TRUE.toString();
             }
             else {
@@ -328,13 +328,13 @@ public class ExportDataActivity extends AppCompatActivity implements IRegistrati
             progressView.setVisibility(View.GONE);
             if (s.equals(Boolean.TRUE.toString())) {
                 errorMessageView.setVisibility(View.VISIBLE);
-                errorMessageView.setBackgroundColor(R.color.green);
-                errorMessageTextView.setText(R.string.files_creation_successful);
+                errorMessageView.setBackgroundColor(getResources().getColor(R.color.green));
+                errorMessageTextView.setText(getResources().getString(R.string.files_creation_successful));
 //                errorMessageView.setVisibility(View.GONE);
             }
             else {
                 errorMessageView.setVisibility(View.VISIBLE);
-                errorMessageTextView.setText(R.string.files_creation_error);
+                errorMessageTextView.setText(getResources().getString(R.string.files_creation_error));
 //                errorMessageView.setVisibility(View.GONE);
 
             }

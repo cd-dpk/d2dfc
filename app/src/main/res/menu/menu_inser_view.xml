@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/menu_insert_view"
+        android:title="@string/done"
+        android:icon="@drawable/baseline_visibility_white_48"
+        app:showAsAction="always"
+        />
+
+    <item
+        android:id="@+id/menu_insert_done"
+        android:title="@string/done"
+        android:icon="@drawable/baseline_done_white_48"
+        app:showAsAction="always"
+        />
+    <item
+        android:id="@+id/menu_insert_close"
+        android:title="@string/close"
+        android:icon="@drawable/baseline_close_white_48"
+        app:showAsAction="always" />
+</menu>

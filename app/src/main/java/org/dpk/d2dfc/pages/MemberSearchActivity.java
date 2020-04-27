@@ -52,6 +52,9 @@ public class MemberSearchActivity extends AppCompatActivity implements OnRecycle
     View progressView, errorMessageView;
     TextView errorMessageTextView;
     TextView followUpDateText;
+    TextView subHeaderText;
+    TextView horizontalLineText;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,9 +65,17 @@ public class MemberSearchActivity extends AppCompatActivity implements OnRecycle
         Log.d("LANG", ApplicationConstants.LANGUAGE_CODE);
 
         checkRegistration(d2DFC_handler);
+        subHeaderText = (TextView) findViewById(R.id.text_view_page_sub_header);
         followUpDateText = (TextView) findViewById(R.id.followup_date);
+        subHeaderText.setText(getResources().getString(R.string.daily_person_contact));
+
         followUpDateText.setText(TimeHandler.dateFromUnixTime(ApplicationConstants.SELECTED_FOLLOW_UP_DATE).toString());
         selectedPersonsText = (TextView) findViewById(R.id.text_person_selected) ;
+        selectedPersonsText.setText(getResources().getString(R.string.person_selected)+" : "+isSelectedPersons.keySet().size());
+
+        horizontalLineText = (TextView) findViewById(R.id.text_horizontal_line_text);
+        horizontalLineText.setText(getResources().getString(R.string.menu_members));
+
         closeSearchButton = (ImageButton) findViewById(R.id.image_search_close);
         searchText = (EditText) findViewById(R.id.edit_text_search);
         personRecyclerView = (RecyclerView) findViewById(R.id.recycler_view_member_search);
@@ -108,7 +119,6 @@ public class MemberSearchActivity extends AppCompatActivity implements OnRecycle
         progressView = (View) findViewById(R.id.contact_open_progress_view);
         errorMessageView = (View) findViewById(R.id.contact_error_message_view);
         errorMessageTextView = (TextView) errorMessageView.findViewById(R.id.text_view_error_message);
-
     }
 
 
@@ -145,11 +155,10 @@ public class MemberSearchActivity extends AppCompatActivity implements OnRecycle
                 setPersonSelection();
             }
         });
-
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_inser_into_table, menu);
+        getMenuInflater().inflate(R.menu.menu_inser_view, menu);
         return true;
     }
 
@@ -157,7 +166,11 @@ public class MemberSearchActivity extends AppCompatActivity implements OnRecycle
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
         //noinspection SimplifiableIfStatement
-        if(id == R.id.menu_insert_close){
+        if (id == R.id.menu_insert_view){
+            Intent intent = new Intent(MemberSearchActivity.this, DailyFollowUpContactTraceActivity.class);
+            startActivity(intent);
+        }
+        else if(id == R.id.menu_insert_close){
             Intent intent = new Intent(MemberSearchActivity.this, FamilyListActivity.class);
             startActivity(intent);
         }
@@ -168,7 +181,7 @@ public class MemberSearchActivity extends AppCompatActivity implements OnRecycle
                     DailyFollowUpContactPersonsTable dailyFollowUpContactPersonsTable = new DailyFollowUpContactPersonsTable();
                     dailyFollowUpContactPersonsTable.setPersonOnePhone(
                             new PersonBasicInfoTable().getPersonID(ApplicationConstants.SELECTED_FAMILY_PHONE,
-                            ApplicationConstants.SELECTED_FAMILY_PERSON_NAME));
+                                    ApplicationConstants.SELECTED_FAMILY_PERSON_NAME));
                     dailyFollowUpContactPersonsTable.setPersonTwoPhone(key);
                     dailyFollowUpContactPersonsTable.setReporterPhone(d2DFC_handler.loadReporter().getPhone());
                     dailyFollowUpContactPersonsTable.setFollowUpDate(ApplicationConstants.SELECTED_FOLLOW_UP_DATE);
@@ -191,16 +204,16 @@ public class MemberSearchActivity extends AppCompatActivity implements OnRecycle
                 dailyFollowUpContactPersonsTables.add(dailyFollowUpContactPersonsTable);
                 new ContactPersonsAddBackgroundTask(dailyFollowUpContactPersonsTables).execute();
             }
-            }
+        }
         return super.onOptionsItemSelected(item);
     }
     private void setPersonSelection() {
-        selectedPersonsText.setText(isSelectedPersons.keySet().size()+" "+getResources().getString(R.string.person_selected));
+        selectedPersonsText.setText(getResources().getString(R.string.person_selected)+" : "+isSelectedPersons.keySet().size());
     }
 
     @Override
     public void checkRegistration(D2DFC_HANDLER d2DFC_handler) {
-            if (!d2DFC_handler.isRegistered()) {
+        if (!d2DFC_handler.isRegistered()) {
             Intent intent = new Intent(MemberSearchActivity.this, WelcomeActivity.class);
             startActivity(intent);
         }

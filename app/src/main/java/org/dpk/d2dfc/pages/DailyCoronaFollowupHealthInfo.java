@@ -34,7 +34,7 @@ public class DailyCoronaFollowupHealthInfo extends AppCompatActivity implements 
 
     View progressView, errorMessageView;
     TextView errorMessageTextView;
-    TextView followUpDateText;
+    TextView followUpDateText, subHeaderText;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,7 +46,9 @@ public class DailyCoronaFollowupHealthInfo extends AppCompatActivity implements 
 
         checkRegistration(d2DFC_handler);
         //personTrace
+        subHeaderText = (TextView) findViewById(R.id.text_view_page_sub_header);
         followUpDateText = (TextView) findViewById(R.id.followup_date);
+        subHeaderText.setText(getResources().getString(R.string.daily_corona_followup));
         followUpDateText.setText(TimeHandler.dateFromUnixTime(ApplicationConstants.SELECTED_FOLLOW_UP_DATE).toString());
         personTraceOutOfAreaCheckBox = (CheckBox) findViewById(R.id.checkbox_person_trace_out_of_area);
         personTraceGoneToBazar = (CheckBox) findViewById(R.id.checkbox_person_trace_gone_to_bazar);
@@ -83,8 +85,12 @@ public class DailyCoronaFollowupHealthInfo extends AppCompatActivity implements 
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
         //noinspection SimplifiableIfStatement
-        if(id == R.id.menu_insert_close){
-            Intent intent = new Intent( DailyCoronaFollowupHealthInfo.this, FamilyListActivity.class);
+        if (id == R.id.menu_insert_view){
+            Intent intent = new Intent(DailyCoronaFollowupHealthInfo.this, DailyFollowUpCoronaDetailsActivity.class);
+            startActivity(intent);
+        }
+        else if(id == R.id.menu_insert_close){
+            Intent intent = new Intent(DailyCoronaFollowupHealthInfo.this, FamilyListActivity.class);
             startActivity(intent);
         }
         else if (id == R.id.menu_insert_done) {
@@ -126,7 +132,7 @@ public class DailyCoronaFollowupHealthInfo extends AppCompatActivity implements 
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_inser_into_table, menu);
+        getMenuInflater().inflate(R.menu.menu_inser_view, menu);
         return true;
     }
     private class DailyCoronaFollowupHealthInfoAddBackgroundTask extends AsyncTask<String, String, String> {
@@ -169,5 +175,4 @@ public class DailyCoronaFollowupHealthInfo extends AppCompatActivity implements 
             }
         }
     }
-
 }

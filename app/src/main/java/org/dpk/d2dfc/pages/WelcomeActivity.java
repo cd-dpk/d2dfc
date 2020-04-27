@@ -57,7 +57,11 @@ public class WelcomeActivity extends AppCompatActivity implements IRegistration 
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
         //noinspection SimplifiableIfStatement
-        if(id == R.id.menu_register){
+        if (id == R.id.menu_info){
+            Intent intent = new Intent(WelcomeActivity.this, AboutDevInfoActivity.class);
+            startActivity(intent);
+        }
+        else if(id == R.id.menu_register){
             reporter.setAreaEmail(emailText.getText().toString());
             reporter.setPhone(phoneText.getText().toString());
             reporter.setName(nameText.getText().toString());
