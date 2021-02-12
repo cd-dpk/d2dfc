@@ -15,4 +15,4 @@ daily as CSV files (.i.e. .csv) into <b>Internal Shared Storage</b> with folder 
 Data Collector can send those CSV files to a designated authority to analyze and act accordingly.
 </p>
 
-Click <a href="https://github.com/cd-dpk/d2dfc/blob/alpha/app/release/app-release.apk">here</a> to download the app.
+Click <a href="https://github.com/cd-dpk/d2dfc/blob/alpha/app/release/app-release.apk?raw=true">here</a> to download the app.
