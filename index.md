@@ -14,3 +14,5 @@ This registration takes three things, one: <i>area</i>- he/she is collecting dat
 daily as CSV files (.i.e. .csv) into <b>Internal Shared Storage</b> with folder named as <b>d2dfc</b>.
 Data Collector can send those CSV files to a designated authority to analyze and act accordingly.
 </p>
+
+Click <a href="https://github.com/cd-dpk/d2dfc/blob/alpha/app/release/app-release.apk">here</a> to download the app.
